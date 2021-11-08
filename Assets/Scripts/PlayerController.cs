@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    NavMeshAgent m_navMeshAgent;
+    private NavMeshAgent m_navMeshAgent;
 
     // Start is called before the first frame update
     void Start()
