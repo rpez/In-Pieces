@@ -1,0 +1,16 @@
+The Nose: I have a cool dialogue line! {SET m_talkedWithEars TRUE}
+    The Ears: We talked already, stop talking to me! {IF m_talkedWithEars}
+        The Nose: Why you bully me?
+            The Ears: I don't bully you! Goodbye!
+                {END}
+    The Ears: Hello, this is the introduction line.
+        The Nose: Nice to meet you!
+            The Ears: The pleasure is mine. Now go away!
+                {LINE 5 CHILDREN}
+        The Nose: Oh well, you suck!
+            {END}
+        {LINE 3}
+
+# can add checks to tree leaves -> have to have a {COMMAND}
+# can add check to make sure there is at least one {END}
+# other characters than the player should have at least one unconditional response
