@@ -19,6 +19,8 @@ public class DialogueParser
 
         foreach (string line in File.ReadLines(filename))
         {
+            if (string.IsNullOrWhiteSpace(line)) continue; // empty line
+
             string trimmed = line.Trim();
 
             if (trimmed.Substring(0, 1) == "#") continue; // comment line
