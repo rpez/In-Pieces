@@ -1,4 +1,4 @@
-The Nose: I have a cool dialogue line! {SET m_talkedWithEars TRUE}
+The Nose: I have a cool dialogue line! {SET m_talkedWithEars TRUE} [+2 IF m_talkedWithEars]
     The Ears: We talked already, stop talking to me! {IF m_talkedWithEars}
         The Nose: Why you bully me?
             The Ears: I don't bully you! Goodbye!
@@ -6,7 +6,7 @@ The Nose: I have a cool dialogue line! {SET m_talkedWithEars TRUE}
     The Ears: Hello, this is the introduction line.
         The Nose: Nice to meet you!
             The Ears: The pleasure is mine. Now go away!
-                {LINE 5 CHILDREN}
+                {LINE 6 CHILDREN}
         The Nose: Oh well, you suck!
             {END}
         {LINE 3}
