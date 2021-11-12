@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{ddc69b49-417e-49bb-aea6-2ae8305e88ce}">
+		<property name="assetPath">
+			<value>How to get rid of stinky, smelly feet.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>130.69061224489795</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a0c06b38-eafc-44b9-911f-91d086279baa}</destination>
+		</relationship>
+	</object>
+</objects>

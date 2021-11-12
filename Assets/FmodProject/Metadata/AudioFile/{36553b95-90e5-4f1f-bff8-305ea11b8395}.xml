@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{36553b95-90e5-4f1f-bff8-305ea11b8395}">
+		<property name="assetPath">
+			<value>Ambiences 2021-11-12 1527.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>61.090916666666665</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a0c06b38-eafc-44b9-911f-91d086279baa}</destination>
+		</relationship>
+	</object>
+</objects>
