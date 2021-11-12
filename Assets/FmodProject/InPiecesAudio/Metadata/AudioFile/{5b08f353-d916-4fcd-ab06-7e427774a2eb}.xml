@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{5b08f353-d916-4fcd-ab06-7e427774a2eb}">
+		<property name="assetPath">
+			<value>Ambience_rainDogHorn.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>61.090916666666665</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{57584211-d4fd-4f7b-8738-7d5a33ddb1bc}</destination>
+		</relationship>
+	</object>
+</objects>
