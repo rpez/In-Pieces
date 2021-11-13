@@ -1,15 +1,50 @@
-The Nose: I have a cool dialogue line! {SET m_talkedWithEars TRUE} [+2 IF m_talkedWithEars]
-    The Ears: We talked already, stop talking to me! {IF m_talkedWithEars}
+The Nose: I have a cool dialogue line! [SET TALKED_WITH_EARS TRUE]
+    The Ears: We talked already, stop talking to me! {IF TALKED_WITH_EARS}
         The Nose: Why you bully me?
             The Ears: I don't bully you! Goodbye!
                 {END}
     The Ears: Hello, this is the introduction line.
-        The Nose: Nice to meet you!
-            The Ears: The pleasure is mine. Now go away!
+        The Nose: Nice to meet you! {IF NOT THE_EARS_BONUS}
+            The Ears: You're very nice! I like you! [SET THE_EARS_BONUS TRUE, SET THE_EARS_ATTITUDE +2]
                 {LINE 6 CHILDREN}
         The Nose: Oh well, you suck!
             {END}
         {LINE 3}
+    The Ears: Let's roll the dice! {IF NOT TALKED_WITH_EARS} [ROLL THE_EARS 6/12]
+        The Ears: You won! {IF ROLL_SUCCESS}
+            The Nose: Cool! Tell me a story!
+                The Ears: I have a loooooong story for you...
+                    {CONTINUE}
+                        The Ears: It continues like this...
+                            {CONTINUE}
+                                The Ears: Cool! That's it!
+                                    {LINE 1 CHILDREN}
+        The Ears: You suck! {IF ROLL_FAIL}
+            The Nose: What? Unfair!
+                {LINE 6 CHILDREN}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # can add checks to tree leaves -> have to have a {COMMAND}
 # can add check to make sure there is at least one {END}
