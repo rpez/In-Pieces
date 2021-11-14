@@ -7,13 +7,10 @@ public class PlayerController : MonoBehaviour
 {
     NavMeshAgent m_navMeshAgent;
 
-    private DialogueParser dp;
-
     // Start is called before the first frame update
     void Start()
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
-        dp = new DialogueParser();
     }
 
     // Update is called once per frame

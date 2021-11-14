@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class DialogueTree
 {
-    private readonly TreeNode<Dialogue> _rootNode;
+    private readonly TreeNode<IDialogue> _rootNode;
 
-    public TreeNode<Dialogue> Root { get { return _rootNode; } }
-    public TreeNode<Dialogue> Current { get; set; }
+    public TreeNode<IDialogue> Root { get { return _rootNode; } }
+    public TreeNode<IDialogue> Current { get; set; }
 
-    public DialogueTree(TreeNode<Dialogue> rootNode)
+    public DialogueTree(TreeNode<IDialogue> rootNode)
     {
         _rootNode = rootNode;
         Current = rootNode;
     }
 
-    public ReadOnlyCollection<TreeNode<Dialogue>> SelectOption(int x)
+    public ReadOnlyCollection<TreeNode<IDialogue>> SelectOption(int x)
     {
         if (x < 0 || x > Current.Children.Count - 1)
         {
@@ -28,7 +28,7 @@ public class DialogueTree
         return Current.Children;
     }
 
-    private TreeNode<Dialogue> FindById(int id, TreeNode<Dialogue> currentNode = null)
+    private TreeNode<IDialogue> FindById(int id, TreeNode<IDialogue> currentNode = null)
     {
         currentNode ??= Root;
 
