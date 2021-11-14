@@ -5,8 +5,11 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
+    public string hit;
+
     private NavMeshAgent m_navMeshAgent;
     private Interactable m_currentTargetInteractable;
+    private Interactable m_currentHovered;
 
     public void OnTargetInteractableReached()
     {
@@ -24,6 +27,23 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit))
         {
+            if (hit.transform.tag == "Interactable")
+            {
+                if (m_currentHovered != null && m_currentHovered.gameObject != hit.transform.gameObject)
+                {
+                    CancelCurrentHover();
+                }
+                if (m_currentHovered == null)
+                {
+                    Interactable script = hit.transform.GetComponent<Interactable>();
+                    script.OnHoverEnter();
+                    m_currentHovered = script;
+                }
+            }
+            else if (m_currentHovered != null)
+            {
+                CancelCurrentHover();
+            }
             if (Input.GetMouseButtonDown(1))
             {
                 m_navMeshAgent.SetDestination(hit.point);
@@ -35,11 +55,11 @@ public class PlayerController : MonoBehaviour
                 {
                     CancelCurrentInteractionTarget();
 
-                    Interactable obj = hit.transform.GetComponent<Interactable>();
-                    obj.OnClicked();
-                    m_navMeshAgent.SetDestination(obj.m_interactionPoint.transform.position);
+                    Interactable script = hit.transform.GetComponent<Interactable>();
+                    script.OnClicked();
+                    m_navMeshAgent.SetDestination(script.m_interactionPoint.transform.position);
 
-                    m_currentTargetInteractable = obj;
+                    m_currentTargetInteractable = script;
                 }
             }
         }
@@ -51,6 +71,14 @@ public class PlayerController : MonoBehaviour
         {
             m_currentTargetInteractable.CancelClicked();
             m_currentTargetInteractable = null;
+        }
+    }
+    private void CancelCurrentHover()
+    {
+        if (m_currentHovered != null)
+        {
+            m_currentHovered.OnHoverExit();
+            m_currentHovered = null;
         }
     }
 }
