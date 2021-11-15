@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using UnityEngine;
 
 public class DialogueTree
 {
-    private readonly TreeNode<IDialogue> _rootNode;
-
-    public TreeNode<IDialogue> Root { get { return _rootNode; } }
+    public TreeNode<IDialogue> Root { get; }
     public TreeNode<IDialogue> Current { get; set; }
 
     public DialogueTree(TreeNode<IDialogue> rootNode)
     {
-        _rootNode = rootNode;
+        Root = rootNode;
         Current = rootNode;
+    }
+
+    public List<IDialogue> ToList()
+    {
+        return Root.Flatten().ToList();
     }
 
     public ReadOnlyCollection<TreeNode<IDialogue>> SelectOption(int x)

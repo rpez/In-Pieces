@@ -4,12 +4,12 @@ using System.Linq;
 
 public interface IDialogue
 {
-    public string ToString(); 
+    public string ToString();
 }
 
 public interface IConditionalDialogue : IDialogue
 {
-    public ICondition Condition { get; }
+    public IDialogueCondition Condition { get; }
 }
 
 public class ActorDialogue : IConditionalDialogue
@@ -18,11 +18,11 @@ public class ActorDialogue : IConditionalDialogue
 
     public string Line { get; }
 
-    public ICondition Condition { get; }
+    public IDialogueCondition Condition { get; }
 
     public List<string> Actions { get; }
 
-    public ActorDialogue(string actor, string line, ICondition condition = null, List<string> actions = null)
+    public ActorDialogue(string actor, string line, IDialogueCondition condition = null, List<string> actions = null)
     {
         Actor = actor;
         Line = line;
@@ -50,11 +50,11 @@ public class PlayerDialogue : IConditionalDialogue
 
     public string Line { get; }
 
-    public ICondition Condition { get; }
+    public IDialogueCondition Condition { get; }
 
     public List<string> Actions { get; }
 
-    public PlayerDialogue(string bodyPart, string line, ICondition condition = null, List<string> actions = null)
+    public PlayerDialogue(string bodyPart, string line, IDialogueCondition condition = null, List<string> actions = null)
     {
         Line = line;
         BodyPart = bodyPart;
@@ -85,33 +85,41 @@ public class RefDialogue : IDialogue
     }
 }
 
-public interface ICondition
+public interface IDialogueCondition
 {
+    public bool Negator { get; }
     public string Variable { get; }
+    public string ToString();
 }
 
-public class BoolCondition : ICondition
+public class BoolDialogueCondition : IDialogueCondition
 {
+    public bool Negator { get; }
     public string Variable { get; }
 
-    public BoolCondition(string variable)
+    public BoolDialogueCondition(bool negator, string variable)
     {
+        Negator = negator;
         Variable = variable;
     }
+
+    public override string ToString() => Negator ? string.Format("NOT {0}", Variable) : Variable;
 }
 
-public class IntCondition : ICondition
+public class IntDialogueCondition : IDialogueCondition
 {
+    public bool Negator { get; }
     public string Variable { get; }
     public string Operator { get; }
     public int Value { get; }
 
-    public IntCondition(string variable, string op, string valueAsString)
+    public IntDialogueCondition(bool negator, string variable, string op, int val)
     {
+        Negator = negator;
+        Variable = variable;
         Operator = op;
-
-        int val;
-        int.TryParse(valueAsString, out val);
         Value = val;
     }
+
+    public override string ToString() => Negator ? "NOT" : "" + string.Format("{0} {1} {2}", Variable, Operator, Value);
 }

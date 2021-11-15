@@ -4,99 +4,82 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+/*  DialogueManager usage example:
+
+    // Get GameManager
+    GameManager gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
+
+    // Assume AllDialogue exists, get the DialogueTree for file "sketch_dialogue.dlg"
+    DialogueTree dt = AllDialogue["sketch_dialogue"];
+
+    // Get a list of all dialogues in this DialogueTree
+    List<IDialogue> dialogues = dt.ToList();
+
+    // Modify GameState directly like this
+    gameManager.SetStateValue("TUTORIAL_COUNT_SENSES", 3);
+
+    // Check the values of each Condition like this
+    foreach (IDialogue d in dialogues)
+    {
+        if (d is IConditionalDialogue dialogue)
+        {
+            bool? cond = DialogueAvailable(dialogue, gameManager);
+            if (cond != null)
+                Debug.Log(dialogue.Condition + " " + cond);
+        }
+    }
+*/
 public class DialogueManager : Singleton<DialogueManager>
 {
     private DialogueFileReader _dfr;
     
-    public Dictionary<string, DialogueTree> DialogueTrees { get; private set; }
+    public Dictionary<string, DialogueTree> AllDialogue { get; private set; }
 
     void Start()
     {
         _dfr = new DialogueFileReader();
-        DialogueTrees = _dfr.ReadAllDialogueFiles();
+        AllDialogue = _dfr.ReadAllDialogueFiles();
     }
 
-    /*  Usage example:
+    /*  This function is used to check if a dialogue line should be available to the player or not.
 
-        DialogueTree dt = DialogueTrees["sketch_dialogue"];
-        List<IDialogue> dialogues = dt.Root.Flatten().ToList();
+        It checks the status of the dialogue line Condition from GameManager.State
 
-        foreach (IDialogue d in dialogues)
-        {
-            if (typeof(IConditionalDialogue).IsAssignableFrom(d.GetType()))
-            {
-                IConditionalDialogue dialogue = (IConditionalDialogue) d;
-
-                if (ConditionIsTrue(dialogue) != null)
-                    Debug.Log(dialogue.Condition + " " + ConditionIsTrue(dialogue));
-            }
-        }
+        Returns a nullable boolean.
+            => This function *should* return null only if
+                1) there was no DialogueCondition provided or
+                2) there was no equivalent property to DialogueCondition in GameManager.State
     */
-    public bool? ConditionIsTrue(IConditionalDialogue dialogue)
+    public bool? DialogueAvailable(IConditionalDialogue dialogue, GameManager gameManager)
     {
-        if (string.IsNullOrWhiteSpace(dialogue.Condition)) return null;
+        if (dialogue.Condition == null) return null;
 
-        GameManager gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
-
-        Match boolMatch = IsBoolCondition(dialogue.Condition);
-        Match intMatch = IsIntCondition(dialogue.Condition);
-
-        if (boolMatch.Success)
+        if (dialogue.Condition is BoolDialogueCondition boolCond)
         {
-            string stateVariable = boolMatch.Groups[3].Value;
-            bool returnable = gameManager.GetStateValue<bool>(stateVariable);
+            bool returnable = gameManager.GetStateValue<bool>(boolCond.Variable);
 
-            return boolMatch.Groups[2].Value == "NOT" ? !returnable : returnable;
+            return boolCond.Negator ? !returnable : returnable;
         }
-        else if (intMatch.Success)
+        else if (dialogue.Condition is IntDialogueCondition intCond)
         {
-            string stateVariable = intMatch.Groups[3].Value;
-            string op = intMatch.Groups[4].Value;
-            int checkAgainstVal;
-            int.TryParse(intMatch.Groups[5].Value, out checkAgainstVal);
-
-            int val = gameManager.GetStateValue<int>(stateVariable);
+            int val = gameManager.GetStateValue<int>(intCond.Variable);
             bool returnable;
 
-            if (op.Equals("=="))
-                returnable = val == checkAgainstVal;
-            else if (op.Equals("<"))
-                returnable = val < checkAgainstVal;
-            else if (op.Equals(">"))
-                returnable = val > checkAgainstVal;
-            else if (op.Equals("<="))
-                returnable = val <= checkAgainstVal;
+            if (intCond.Operator.Equals("=="))
+                returnable = val == intCond.Value;
+            else if (intCond.Operator.Equals("<"))
+                returnable = val < intCond.Value;
+            else if (intCond.Operator.Equals(">"))
+                returnable = val > intCond.Value;
+            else if (intCond.Operator.Equals("<="))
+                returnable = val <= intCond.Value;
             else
-                returnable = val >= checkAgainstVal;
+                returnable = val >= intCond.Value;
 
-            return intMatch.Groups[2].Value == "NOT" ? !returnable : returnable;
+            return intCond.Negator ? !returnable : returnable;
         }
-        
+
         Debug.LogError(string.Format("DialogueError: Bad syntax in condition '{0}'", dialogue.Condition));
         return null;
-    }
-
-    private Match IsBoolCondition(string condition)
-    {
-        /*  Match group 1: "IF"
-            Match group 2: "NOT" (optional)
-            Match group 3: variable
-        */
-        Regex boolRegex = new Regex(@"^(IF)(?: (NOT))? (\w+)$", RegexOptions.Singleline);
-
-        return boolRegex.Match(condition);
-    }
-
-    private Match IsIntCondition(string condition)
-    {
-        /*  Match group 1: "IF"
-            Match group 2: "NOT" (optional)
-            Match group 3: variable
-            Match group 4: operator
-            Match group 5: integer
-        */
-        Regex intRegex = new Regex(@"^(IF)(?: (NOT))? (\w+) (>=|==|<=|<|>) (\d+)$", RegexOptions.Singleline);
-
-        return intRegex.Match(condition);
     }
 }

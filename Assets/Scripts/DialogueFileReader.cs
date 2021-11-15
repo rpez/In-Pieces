@@ -32,7 +32,8 @@ public class DialogueFileReader
         Regex playerRegex = new Regex(@"^(?:<(NOSE|EARS|LEGS|HAND|EYES))?> ([\w ,.!'""-?]+)(?: \{([\w =><\d+]+)\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline);
 
         // Condition and Actions regex
-        Regex conditionRegex = new Regex(@"^IF(?: NOT)? \w+(?: (?:>=|==|<=|<|>) \d+)?$", RegexOptions.Singleline);
+        Regex boolConditionRegex = new Regex(@"^(IF)(?: (NOT))? (\w+)$", RegexOptions.Singleline);
+        Regex intConditionRegex = new Regex(@"^(IF)(?: (NOT))? (\w+) (>=|==|<=|<|>) (\d+)$", RegexOptions.Singleline);
         Regex actionsRegex = new Regex(@"^SET \w+ (?:TRUE|FALSE)|ADD \w+ [+-]?\d+|ROLL \d+\/\d+$", RegexOptions.Singleline);
 
         foreach (string fullPath in Directory.GetFiles(dialogueFolder))
@@ -43,7 +44,8 @@ public class DialogueFileReader
 
             string[] allLines = File.ReadAllLines(fullPath);
 
-            allDialogueTrees.Add(_filename, ReadDialogueFile(allLines, endRegex, refRegex, actorRegex, playerRegex, actionsRegex, conditionRegex));
+            allDialogueTrees.Add(_filename,
+                ReadDialogueFile(allLines, endRegex, refRegex, actorRegex, playerRegex, boolConditionRegex, intConditionRegex, actionsRegex));
         }
 
         return allDialogueTrees;
@@ -62,7 +64,8 @@ public class DialogueFileReader
 
         WARNING!!! The validation has not been tested and therefore is likely to not be foolproof. DON'T blindly rely on it! */
     private DialogueTree ReadDialogueFile(string[] allLines,
-        Regex endRegex, Regex refRegex, Regex actorRegex, Regex playerRegex, Regex actionsRegex, Regex conditionRegex)
+        Regex endRegex, Regex refRegex, Regex actorRegex, Regex playerRegex,
+        Regex boolConditionRegex, Regex intConditionRegex, Regex actionsRegex)
     {
         _hasEndKeyword = false;
         _dialogueTree = null;
@@ -102,9 +105,9 @@ public class DialogueFileReader
             else if (refMatch.Success)     // this line is a RefDialogue line
                 dialogue = HandleRefDialogue(refMatch);
             else if (actorMatch.Success)   // this line is an ActorDialogue line
-                dialogue = HandleActorDialogue(actorMatch, actionsRegex, conditionRegex);
+                dialogue = HandleActorDialogue(actorMatch, boolConditionRegex, intConditionRegex, actionsRegex);
             else if (playerMatch.Success)  // this line is a PlayerDialogue line
-                dialogue = HandlePlayerDialogue(playerMatch, actionsRegex, conditionRegex);
+                dialogue = HandlePlayerDialogue(playerMatch, boolConditionRegex, intConditionRegex, actionsRegex);
             else                           // error, bad syntax in this line
             {
                 Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + " didn't match the dialogue syntax.", _filename));
@@ -152,10 +155,10 @@ public class DialogueFileReader
         }
     }
 
-    private IDialogue HandleActorDialogue(Match match, Regex actionsRegex, Regex conditionRegex)
+    private IDialogue HandleActorDialogue(Match match, Regex boolConditionRegex, Regex intConditionRegex, Regex actionsRegex)
     {
         List<string> actions = SplitAndValidateActions(match.Groups[4].Value, actionsRegex);
-        string condition = ValidateCondition(match.Groups[3].Value, conditionRegex);
+        IDialogueCondition condition = ValidateCondition(match.Groups[3].Value, boolConditionRegex, intConditionRegex);
 
         return new ActorDialogue(
             match.Groups[1].Value,  // Actor
@@ -171,10 +174,11 @@ public class DialogueFileReader
         return new EndDialogue();
     }
 
-    private IDialogue HandlePlayerDialogue(Match match, Regex actionsRegex, Regex conditionRegex)
+    // TO-DO: Some copy-paste here... cleanup
+    private IDialogue HandlePlayerDialogue(Match match, Regex boolConditionRegex, Regex intConditionRegex, Regex actionsRegex)
     {
         List<string> actions = SplitAndValidateActions(match.Groups[4].Value, actionsRegex);
-        string condition = ValidateCondition(match.Groups[3].Value, conditionRegex);
+        IDialogueCondition condition = ValidateCondition(match.Groups[3].Value, boolConditionRegex, intConditionRegex);
 
         return new PlayerDialogue(
             match.Groups[1].Value,  // BodyPart
@@ -231,18 +235,30 @@ public class DialogueFileReader
         return actions;
     }
 
-    private string ValidateCondition(String condition, Regex conditionRegex)
+    private IDialogueCondition ValidateCondition(String condition, Regex boolConditionRegex, Regex intConditionRegex)
     {
         if (string.IsNullOrWhiteSpace(condition)) return null;
 
-        Match conditionMatch = conditionRegex.Match(condition);
+        Match boolMatch = boolConditionRegex.Match(condition);
+        Match intMatch = intConditionRegex.Match(condition);
 
-        if (!conditionMatch.Success)
+        bool negator = condition.Contains("NOT");
+
+        if (intMatch.Success)
         {
-            Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad Condition syntax.", _filename));
-            return null;
+            string variable = intMatch.Groups[3].Value;
+            string op = intMatch.Groups[4].Value;
+            int val;
+            int.TryParse(intMatch.Groups[5].Value, out val);
+            return new IntDialogueCondition(negator, variable, op, val);
+        }
+        else if (boolMatch.Success)
+        {
+            string variable = boolMatch.Groups[3].Value;
+            return new BoolDialogueCondition(negator, variable);
         }
 
-        return condition;
+        Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad Condition syntax.", _filename));
+        return null;
     }
 }
