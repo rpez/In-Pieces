@@ -16,25 +16,26 @@ public class DialogueFileReader
     private int _prevIndentation;
     private string _filename;
 
+    // used for validation
+    private Dictionary<string, Regex> _regexes = new Dictionary<string, Regex>
+    {
+        { "endRegex", new Regex(@"^\{END\}$", RegexOptions.Singleline) },
+        { "refRegex", new Regex(@"^\{(LINE) (\d+)(?: (CHILDREN))?\}$", RegexOptions.Singleline) },
+        { "actorRegex", new Regex(@"^((?:[\w ()]+)+): ([\w ,.!'""-?]+)(?: \{([\w =><\d+])+\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline) },
+        { "playerRegex", new Regex(@"^(?:<(NOSE|EARS|LEGS|HAND|EYES))?> ([\w ,.!'""-?]+)(?: \{([\w =><\d+]+)\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline) },
+        { "boolConditionRegex", new Regex(@"^(IF)(?: (NOT))? (\w+)$", RegexOptions.Singleline) },
+        { "intConditionRegex", new Regex(@"^(IF)(?: (NOT))? (\w+) (>=|==|<=|<|>) (\d+)$", RegexOptions.Singleline) },
+        { "actionsRegex", new Regex(@"^SET \w+ (?:TRUE|FALSE)|ADD \w+ [+-]?\d+|ROLL \d+\/\d+$", RegexOptions.Singleline) },
+    };
+
     public DialogueFileReader() {}
 
     public Dictionary<string, DialogueTree> ReadAllDialogueFiles()
     {
-        Dictionary<string, DialogueTree> allDialogueTrees = new Dictionary<string, DialogueTree>();
+        Dictionary<string, DialogueTree> allDialogue = new Dictionary<string, DialogueTree>();
 
         // Dialogue files should be located in "Assets/Dialogues/"
         string dialogueFolder = Path.Combine(Application.dataPath, "Dialogues");
-
-        // Regexes that correspond to the different Dialogue classes
-        Regex endRegex = new Regex(@"^\{END\}$", RegexOptions.Singleline);
-        Regex refRegex = new Regex(@"^\{(LINE) (\d+)(?: (CHILDREN))?\}$", RegexOptions.Singleline);
-        Regex actorRegex = new Regex(@"^((?:[\w ()]+)+): ([\w ,.!'""-?]+)(?: \{([\w =><\d+])+\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline);
-        Regex playerRegex = new Regex(@"^(?:<(NOSE|EARS|LEGS|HAND|EYES))?> ([\w ,.!'""-?]+)(?: \{([\w =><\d+]+)\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline);
-
-        // Condition and Actions regex
-        Regex boolConditionRegex = new Regex(@"^(IF)(?: (NOT))? (\w+)$", RegexOptions.Singleline);
-        Regex intConditionRegex = new Regex(@"^(IF)(?: (NOT))? (\w+) (>=|==|<=|<|>) (\d+)$", RegexOptions.Singleline);
-        Regex actionsRegex = new Regex(@"^SET \w+ (?:TRUE|FALSE)|ADD \w+ [+-]?\d+|ROLL \d+\/\d+$", RegexOptions.Singleline);
 
         foreach (string fullPath in Directory.GetFiles(dialogueFolder))
         {
@@ -44,11 +45,11 @@ public class DialogueFileReader
 
             string[] allLines = File.ReadAllLines(fullPath);
 
-            allDialogueTrees.Add(_filename,
-                ReadDialogueFile(allLines, endRegex, refRegex, actorRegex, playerRegex, boolConditionRegex, intConditionRegex, actionsRegex));
+            allDialogue.Add(_filename,
+                ReadDialogueFile(allLines));
         }
 
-        return allDialogueTrees;
+        return allDialogue;
     }
 
 
@@ -63,9 +64,7 @@ public class DialogueFileReader
             4) EndDialogue ends the dialogue.
 
         WARNING!!! The validation has not been tested and therefore is likely to not be foolproof. DON'T blindly rely on it! */
-    private DialogueTree ReadDialogueFile(string[] allLines,
-        Regex endRegex, Regex refRegex, Regex actorRegex, Regex playerRegex,
-        Regex boolConditionRegex, Regex intConditionRegex, Regex actionsRegex)
+    private DialogueTree ReadDialogueFile(string[] allLines)
     {
         _hasEndKeyword = false;
         _dialogueTree = null;
@@ -95,19 +94,19 @@ public class DialogueFileReader
 
             IDialogue dialogue;
 
-            Match endMatch = endRegex.Match(trimmed);
-            Match refMatch = refRegex.Match(trimmed);
-            Match actorMatch = actorRegex.Match(trimmed);
-            Match playerMatch = playerRegex.Match(trimmed);
+            Match endMatch = _regexes["endRegex"].Match(trimmed);
+            Match refMatch = _regexes["refRegex"].Match(trimmed);
+            Match actorMatch = _regexes["actorRegex"].Match(trimmed);
+            Match playerMatch = _regexes["playerRegex"].Match(trimmed);
             
             if (endMatch.Success)
                 dialogue = HandleEndDialogue(endMatch);
             else if (refMatch.Success)     // this line is a RefDialogue line
                 dialogue = HandleRefDialogue(refMatch);
             else if (actorMatch.Success)   // this line is an ActorDialogue line
-                dialogue = HandleActorDialogue(actorMatch, boolConditionRegex, intConditionRegex, actionsRegex);
+                dialogue = HandleActorDialogue(actorMatch);
             else if (playerMatch.Success)  // this line is a PlayerDialogue line
-                dialogue = HandlePlayerDialogue(playerMatch, boolConditionRegex, intConditionRegex, actionsRegex);
+                dialogue = HandlePlayerDialogue(playerMatch);
             else                           // error, bad syntax in this line
             {
                 Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + " didn't match the dialogue syntax.", _filename));
@@ -155,10 +154,10 @@ public class DialogueFileReader
         }
     }
 
-    private IDialogue HandleActorDialogue(Match match, Regex boolConditionRegex, Regex intConditionRegex, Regex actionsRegex)
+    private IDialogue HandleActorDialogue(Match match)
     {
-        List<string> actions = SplitAndValidateActions(match.Groups[4].Value, actionsRegex);
-        IDialogueCondition condition = ValidateCondition(match.Groups[3].Value, boolConditionRegex, intConditionRegex);
+        List<string> actions = SplitAndValidateActions(match.Groups[4].Value);
+        IDialogueCondition condition = ValidateCondition(match.Groups[3].Value);
 
         return new ActorDialogue(
             match.Groups[1].Value,  // Actor
@@ -175,10 +174,10 @@ public class DialogueFileReader
     }
 
     // TO-DO: Some copy-paste here... cleanup
-    private IDialogue HandlePlayerDialogue(Match match, Regex boolConditionRegex, Regex intConditionRegex, Regex actionsRegex)
+    private IDialogue HandlePlayerDialogue(Match match)
     {
-        List<string> actions = SplitAndValidateActions(match.Groups[4].Value, actionsRegex);
-        IDialogueCondition condition = ValidateCondition(match.Groups[3].Value, boolConditionRegex, intConditionRegex);
+        List<string> actions = SplitAndValidateActions(match.Groups[4].Value);
+        IDialogueCondition condition = ValidateCondition(match.Groups[3].Value);
 
         return new PlayerDialogue(
             match.Groups[1].Value,  // BodyPart
@@ -201,7 +200,7 @@ public class DialogueFileReader
         return new RefDialogue(refLineNumber - 1);
     }
 
-    private List<string> SplitAndValidateActions(String actionsString, Regex actionsRegex)
+    private List<string> SplitAndValidateActions(String actionsString)
     {
         if (string.IsNullOrWhiteSpace(actionsString)) return null;
 
@@ -223,7 +222,7 @@ public class DialogueFileReader
         foreach (string a in actions)
         {
             // note: disadvantages of using regex: currently not checking if e.g. in 'ROLL 12/4' the denominator is smaller then the nominator
-            Match actionsMatch = actionsRegex.Match(a);
+            Match actionsMatch = _regexes["actionsRegex"].Match(a);
 
             if (!actionsMatch.Success)
             {
@@ -235,12 +234,12 @@ public class DialogueFileReader
         return actions;
     }
 
-    private IDialogueCondition ValidateCondition(String condition, Regex boolConditionRegex, Regex intConditionRegex)
+    private IDialogueCondition ValidateCondition(String condition)
     {
         if (string.IsNullOrWhiteSpace(condition)) return null;
 
-        Match boolMatch = boolConditionRegex.Match(condition);
-        Match intMatch = intConditionRegex.Match(condition);
+        Match boolMatch = _regexes["boolConditionRegex"].Match(condition);
+        Match intMatch = _regexes["intConditionRegex"].Match(condition);
 
         bool negator = condition.Contains("NOT");
 
