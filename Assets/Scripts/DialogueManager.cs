@@ -20,7 +20,7 @@ using UnityEngine;
     {
         if (d is IConditionalDialogue dialogue)
         {
-            bool? cond = DialogueAvailable(dialogue, gameManager);
+            bool cond = DialogueAvailable(dialogue, gameManager);
             if (cond != null)
                 Debug.Log(dialogue.Condition + " " + cond);
             PerformActions(dialogue, gameManager);  // Perform actions inside the Dialogue
@@ -32,7 +32,7 @@ using UnityEngine;
     {
         if (d is IConditionalDialogue dialogue)
         {
-            bool? cond = DialogueAvailable(dialogue, gameManager);
+            bool cond = DialogueAvailable(dialogue, gameManager);
             if (cond != null)
                 Debug.Log(dialogue.Condition + " " + cond);
         }
@@ -72,17 +72,10 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
     /*  This function is used to check if a dialogue line should be available to the player or not.
-
-        It checks the status of the dialogue line Condition from GameManager.State
-
-        Returns a nullable boolean.
-            => This function *should* return null only if
-                1) there was no DialogueCondition provided or
-                2) there was no equivalent property to DialogueCondition in GameManager.State
-    */
-    public bool? DialogueAvailable(IConditionalDialogue dialogue, GameManager gameManager)
+        It checks the status of the dialogue line Condition in GameManager.State */
+    public bool DialogueAvailable(IConditionalDialogue dialogue, GameManager gameManager)
     {
-        if (dialogue.Condition == null) return null;
+        if (dialogue.Condition == null) return true;
 
         if (dialogue.Condition is BoolDialogueCondition boolCond)
         {
@@ -108,9 +101,6 @@ public class DialogueManager : Singleton<DialogueManager>
 
             return intCond.Negator ? !returnable : returnable;
         }
-
-        Debug.LogError(string.Format("DialogueError: Bad syntax in condition '{0}'", dialogue.Condition));
-        return null;
     }
 
     public void PerformActions(IConditionalDialogue dialogue, GameManager gameManager)
