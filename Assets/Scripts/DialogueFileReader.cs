@@ -25,7 +25,10 @@ public class DialogueFileReader
         { "playerRegex", new Regex(@"^(?:<(NOSE|EARS|LEGS|HAND|EYES))?> ([\w ,.!'""-?]+)(?: \{([\w =><\d+]+)\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline) },
         { "boolConditionRegex", new Regex(@"^(IF)(?: (NOT))? (\w+)$", RegexOptions.Singleline) },
         { "intConditionRegex", new Regex(@"^(IF)(?: (NOT))? (\w+) (>=|==|<=|<|>) (\d+)$", RegexOptions.Singleline) },
-        { "actionsRegex", new Regex(@"^SET \w+ (?:TRUE|FALSE)|ADD \w+ [+-]?\d+|ROLL \d+\/\d+$", RegexOptions.Singleline) },
+        { "setActionRegex", new Regex(@"^(SET) (\w+) ((?:TRUE|FALSE))$", RegexOptions.Singleline) },
+        { "addActionRegex", new Regex(@"^(ADD) (\w+) ([+-]?\d+)$", RegexOptions.Singleline) },
+        { "rollActionRegex", new Regex(@"^(ROLL) (\d+)\/(\d+)$", RegexOptions.Singleline) },
+        { "bodyPartRegex", new Regex(@"^NOSE|EARS|LEGS|HAND|EYES$", RegexOptions.Singleline) },
     };
 
     public DialogueFileReader() {}
@@ -63,7 +66,7 @@ public class DialogueFileReader
             3) ReferenceDialogue references dialogue lines. They are used to jump back in conversation.
             4) EndDialogue ends the dialogue.
 
-        WARNING!!! The validation has not been tested and therefore is likely to not be foolproof. DON'T blindly rely on it! */
+        WARNING!!! There are no tests for the validation: it's likely to not be foolproof. DON'T blindly rely on it! */
     private DialogueTree ReadDialogueFile(string[] allLines)
     {
         _hasEndKeyword = false;
@@ -156,7 +159,7 @@ public class DialogueFileReader
 
     private IDialogue HandleActorDialogue(Match match)
     {
-        List<string> actions = SplitAndValidateActions(match.Groups[4].Value);
+        List<IDialogueAction> actions = SplitAndValidateActions(match.Groups[4].Value);
         IDialogueCondition condition = ValidateCondition(match.Groups[3].Value);
 
         return new ActorDialogue(
@@ -176,7 +179,7 @@ public class DialogueFileReader
     // TO-DO: Some copy-paste here... cleanup
     private IDialogue HandlePlayerDialogue(Match match)
     {
-        List<string> actions = SplitAndValidateActions(match.Groups[4].Value);
+        List<IDialogueAction> actions = SplitAndValidateActions(match.Groups[4].Value, match.Groups[1].Value);
         IDialogueCondition condition = ValidateCondition(match.Groups[3].Value);
 
         return new PlayerDialogue(
@@ -200,35 +203,66 @@ public class DialogueFileReader
         return new RefDialogue(refLineNumber - 1);
     }
 
-    private List<string> SplitAndValidateActions(String actionsString)
+    private List<IDialogueAction> SplitAndValidateActions(string actionsString, string bodyPart = null)
     {
-        if (string.IsNullOrWhiteSpace(actionsString)) return null;
+        List<string> actionStringList = new List<string>();
+        List<IDialogueAction> actions = new List<IDialogueAction>();
 
-        List<string> actions = null;
+        if (string.IsNullOrWhiteSpace(actionsString)) return actions;
 
         // Split actions into a list
         try
         {
-            actions = actionsString.Split(',').Select(s => s.Trim()).ToList();
+            actionStringList = actionsString.Split(',').Select(s => s.Trim()).ToList();
         }
         catch
         {
             Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Cannot split Actions.", _filename));
         }
 
-        if (actions == null) return actions;
-
         // Validate each action with regex
-        foreach (string a in actions)
+        foreach (string a in actionStringList)
         {
-            // note: disadvantages of using regex: currently not checking if e.g. in 'ROLL 12/4' the denominator is smaller then the nominator
-            Match actionsMatch = _regexes["actionsRegex"].Match(a);
+            Match setMatch = _regexes["setActionRegex"].Match(a);
+            Match addMatch = _regexes["addActionRegex"].Match(a);
 
-            if (!actionsMatch.Success)
+            Match rollMatch = _regexes["rollActionRegex"].Match(a);
+            Match bodyPartMatch = _regexes["bodyPartRegex"].Match(bodyPart);
+
+            if (setMatch.Success)
             {
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad Actions syntax.", _filename));
-                actions.Remove(a);
+                bool boolValue;
+                bool.TryParse(setMatch.Groups[3].Value, out boolValue);
+
+                actions.Add(new SetDialogueAction(setMatch.Groups[2].Value, boolValue));
             }
+            else if (addMatch.Success)
+            {
+                int val;
+                int.TryParse(addMatch.Groups[3].Value, out val);
+
+                actions.Add(new AddDialogueAction(addMatch.Groups[2].Value, val));
+            }
+            else if (rollMatch.Success)
+            {
+                if (!bodyPartMatch.Success)
+                {
+                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad body part value in RollAction syntax.", _filename));
+                    continue;
+                }
+
+                int numerator;
+                int denominator;
+                int.TryParse(rollMatch.Groups[2].Value, out numerator);
+                int.TryParse(rollMatch.Groups[3].Value, out denominator);
+
+                if (numerator <= denominator && numerator >= 0 && denominator > 0)
+                    actions.Add(new RollDialogueAction(numerator, denominator));
+                else
+                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad roll values in RollAction syntax.", _filename));
+            }
+            else
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad Actions syntax.", _filename));
         }
 
         return actions;

@@ -10,6 +10,7 @@ public interface IDialogue
 public interface IConditionalDialogue : IDialogue
 {
     public IDialogueCondition Condition { get; }
+    public List<IDialogueAction> Actions { get; }
 }
 
 public class ActorDialogue : IConditionalDialogue
@@ -20,9 +21,9 @@ public class ActorDialogue : IConditionalDialogue
 
     public IDialogueCondition Condition { get; }
 
-    public List<string> Actions { get; }
+    public List<IDialogueAction> Actions { get; }
 
-    public ActorDialogue(string actor, string line, IDialogueCondition condition = null, List<string> actions = null)
+    public ActorDialogue(string actor, string line, IDialogueCondition condition = null, List<IDialogueAction> actions = null)
     {
         Actor = actor;
         Line = line;
@@ -52,9 +53,9 @@ public class PlayerDialogue : IConditionalDialogue
 
     public IDialogueCondition Condition { get; }
 
-    public List<string> Actions { get; }
+    public List<IDialogueAction> Actions { get; }
 
-    public PlayerDialogue(string bodyPart, string line, IDialogueCondition condition = null, List<string> actions = null)
+    public PlayerDialogue(string bodyPart, string line, IDialogueCondition condition = null, List<IDialogueAction> actions = null)
     {
         Line = line;
         BodyPart = bodyPart;
@@ -122,4 +123,51 @@ public class IntDialogueCondition : IDialogueCondition
     }
 
     public override string ToString() => Negator ? "NOT" : "" + string.Format("{0} {1} {2}", Variable, Operator, Value);
+}
+
+public interface IDialogueAction
+{
+    public string ToString();
+}
+
+public class SetDialogueAction : IDialogueAction
+{
+    public string Variable { get; }
+    public bool Value { get; }
+
+    public SetDialogueAction(string variable, bool val)
+    {
+        Variable = variable;
+        Value = val;
+    }
+
+    public override string ToString() => string.Format("SET {0} {1}", Variable, Value);
+}
+
+public class AddDialogueAction : IDialogueAction
+{
+    public string Variable { get; }
+    public int Value { get; }
+
+    public AddDialogueAction(string variable, int val)
+    {
+        Variable = variable;
+        Value = val;
+    }
+
+    public override string ToString() => string.Format("ADD {0} {1}", Variable, Value);
+}
+
+public class RollDialogueAction : IDialogueAction
+{
+    public int Numerator { get; }
+    public int Denominator { get; }
+
+    public RollDialogueAction(int numerator, int denominator)
+    {
+        Numerator = numerator;
+        Denominator = denominator;
+    }
+
+    public override string ToString() => string.Format("ROLL {0}/{1}", Numerator, Denominator);
 }
