@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a0c6b45f-2633-4651-9a1c-d4251e10a534}">
+		<property name="assetPath">
+			<value>rainoutside.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>17.843499999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a0c06b38-eafc-44b9-911f-91d086279baa}</destination>
+		</relationship>
+	</object>
+</objects>

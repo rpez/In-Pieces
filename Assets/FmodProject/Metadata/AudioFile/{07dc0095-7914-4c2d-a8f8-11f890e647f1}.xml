@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{07dc0095-7914-4c2d-a8f8-11f890e647f1}">
+		<property name="assetPath">
+			<value>car horn loop.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>52.363645833333337</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a0c06b38-eafc-44b9-911f-91d086279baa}</destination>
+		</relationship>
+	</object>
+</objects>
