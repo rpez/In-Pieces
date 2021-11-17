@@ -24,16 +24,12 @@ public class Dialog : MonoBehaviour
 
         m_dialogOptions.makeItem = dialogOptionUXML.CloneTree;
         m_dialogOptions.bindItem = (elem, index) => {
-            Character chara = m_characters[index];
-            AssetCard card = new AssetCard(
-                elem,
-                onHovered: null,
-                onClicked: () => {
-                    ChangeTab(m_completableList);
-                    UpdateCompletableList(chara.name);
-                },
-                onDoubleClicked: null);
-            card.Bind(chara);
+            string str = MOCKDIALOG[index];
+            DialogOption option = new DialogOption(
+                str,
+                () => {
+                    Debug.Log("The action: " + str + " was chosen.");
+                });
         };
         m_dialogOptions.itemHeight = 200;
         m_dialogOptions.itemsSource = MOCKDIALOG;
