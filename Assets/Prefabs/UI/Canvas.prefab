@@ -300,6 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1538939737}
+  - component: {fileID: 1845917701926581919}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -326,6 +327,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1845917701926581919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538939736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 1
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1600353376
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +509,7 @@ GameObject:
   - component: {fileID: 9212562899224619577}
   - component: {fileID: 9212562899224619576}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DialogText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -618,6 +645,7 @@ GameObject:
   - component: {fileID: 9212562899343336523}
   - component: {fileID: 9212562899343336522}
   - component: {fileID: 9212562899343336521}
+  - component: {fileID: 669217737}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -706,6 +734,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &669217737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9212562899343336520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff34b12a2d9203468c976a1a2a76111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueWindow: {fileID: 9212562900979098610}
+  m_dialogueText: {fileID: 9212562899224619576}
+  m_dialogueOptionContainer: {fileID: 1538939736}
+  m_dialogueOptionPrefab: {fileID: 7383222517551790622, guid: 5ac1509723aec05478336e0b0e085918, type: 3}
 --- !u!1 &9212562899471797045
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,7 +863,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 100}
+  m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &9212562900979098613
 CanvasRenderer:
