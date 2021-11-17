@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="left: 20%; top: 80%; right: 20%; bottom: 5%; position: absolute; background-color: rgba(0, 0, 0, 0.25); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+        <ui:Label text="Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text! Hi, I am dialogue text!&#10;&#10;Hi, I am dialogue text! " display-tooltip-when-elided="true" name="Label" style="white-space: normal;" />
+        <ui:ListView focusable="true" name="dialog-options" />
+    </ui:VisualElement>
+</ui:UXML>
