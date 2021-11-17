@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{c55043cb-fcc5-42cc-83cf-8d6333b03afc}">
+		<property name="name">
+			<value>CdLoop</value>
+		</property>
+		<relationship name="folder">
+			<destination>{52350b3f-446e-4411-bc02-5f04cd706a0c}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{1992a660-79a7-4e1f-aa42-5b96c0f76f2f}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{1992a660-79a7-4e1f-aa42-5b96c0f76f2f}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
