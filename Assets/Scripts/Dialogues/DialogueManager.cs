@@ -11,7 +11,7 @@ public class DialogueManager : Singleton<DialogueManager>
     public Dictionary<string, DialogueTree> AllDialogue { get; private set; }
     public DialogueTree CurrentDialogue { get; set; }
 
-    void Start()
+    void Awake()
     {
         _dfr = new DialogueFileReader();
         AllDialogue = _dfr.ReadAllDialogueFiles();

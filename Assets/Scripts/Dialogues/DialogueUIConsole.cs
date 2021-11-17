@@ -15,23 +15,23 @@ public class DialogueUIConsole : MonoBehaviour
         m_gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
         m_dialogueManager = (DialogueManager) FindObjectOfType(typeof(DialogueManager));
 
-        StartConversation();
+        //StartConversation();
     }
 
     // Update is called once per frame
     void Update()
     {
         // Numbers from 1 to 9 control the conversation options
-        if (Input.anyKey)
-        {
-            int x;
-            bool isNumber = int.TryParse(Input.inputString, out x);
+        //if (Input.anyKey)
+        //{
+        //    int x;
+        //    bool isNumber = int.TryParse(Input.inputString, out x);
 
-            if (isNumber && x > 0 && x < 10)
-            {
-                SelectConversationOption(x - 1);
-            }
-        }
+        //    if (isNumber && x > 0 && x < 10)
+        //    {
+        //        SelectConversationOption(x - 1);
+        //    }
+        //}
     }
 
     private void StartConversation()
