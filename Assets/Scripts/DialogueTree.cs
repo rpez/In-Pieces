@@ -7,12 +7,13 @@ using UnityEngine;
 public class DialogueTree
 {
     public TreeNode<IDialogue> Root { get; }
-    public TreeNode<IDialogue> Current { get; set; }
+    public TreeNode<IDialogue> CurrentLine { get; set; }
+    public List<TreeNode<IDialogue>> Options { get; set; }
 
     public DialogueTree(TreeNode<IDialogue> rootNode)
     {
         Root = rootNode;
-        Current = rootNode;
+        CurrentLine = rootNode;
     }
 
     public List<IDialogue> ToList()
@@ -20,29 +21,20 @@ public class DialogueTree
         return Root.Flatten().ToList();
     }
 
-    public ReadOnlyCollection<TreeNode<IDialogue>> SelectOption(int x)
+    public TreeNode<IDialogue> FindById(int id)
     {
-        if (x < 0 || x > Current.Children.Count - 1)
+        Stack<TreeNode<IDialogue>> stack = new Stack<TreeNode<IDialogue>>();
+        stack.Push(Root);
+
+        while (stack.Count > 0)
         {
-            Debug.LogError("ConversationError: Selected option out of bounds.");
-            return null;
+            TreeNode<IDialogue> currentNode = stack.Pop();
+
+            if (currentNode.Id == id) return currentNode;
+
+            foreach (var child in currentNode.Children)
+                stack.Push(child);
         }
-
-        Current = Current.Children[x];
-        return Current.Children;
-    }
-
-    private TreeNode<IDialogue> FindById(int id, TreeNode<IDialogue> currentNode = null)
-    {
-        currentNode ??= Root;
-
-        if (currentNode.Id == id)
-        {
-            return currentNode;
-        }
-
-        foreach (var child in currentNode.Children)
-            return FindById(id, child);
 
         return null;
     }

@@ -20,6 +20,7 @@ public class DialogueFileReader
     private Dictionary<string, Regex> _regexes = new Dictionary<string, Regex>
     {
         { "endRegex", new Regex(@"^\{END\}$", RegexOptions.Singleline) },
+        { "continueRegex", new Regex(@"^\{CONTINUE\}$", RegexOptions.Singleline) },
         { "refRegex", new Regex(@"^\{(LINE) (\d+)(?: (CHILDREN))?\}$", RegexOptions.Singleline) },
         { "actorRegex", new Regex(@"^((?:[\w ()]+)+): ([\w ,.!'""-?]+)(?: \{([\w =><\d+])+\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline) },
         { "playerRegex", new Regex(@"^(?:<(NOSE|EARS|LEGS|HAND|EYES))?> ([\w ,.!'""-?]+)(?: \{([\w =><\d+]+)\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline) },
@@ -67,7 +68,7 @@ public class DialogueFileReader
             4) EndDialogue ends the dialogue.
 
         WARNING!!! There are no tests for the validation: it's likely to not be foolproof. DON'T blindly rely on it! */
-    private DialogueTree ReadDialogueFile(string[] allLines)
+    public DialogueTree ReadDialogueFile(string[] allLines)
     {
         _hasEndKeyword = false;
         _dialogueTree = null;
@@ -89,7 +90,7 @@ public class DialogueFileReader
 
             if ((_indentation - _prevIndentation) % 4 != 0)
             {
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}': Indentation in dialogue files should be 4.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': Indentation in dialogue files should be exactly 4.", _filename));
                 break;
             }
 
@@ -98,12 +99,15 @@ public class DialogueFileReader
             IDialogue dialogue;
 
             Match endMatch = _regexes["endRegex"].Match(trimmed);
+            Match continueMatch = _regexes["continueRegex"].Match(trimmed);
             Match refMatch = _regexes["refRegex"].Match(trimmed);
             Match actorMatch = _regexes["actorRegex"].Match(trimmed);
             Match playerMatch = _regexes["playerRegex"].Match(trimmed);
             
-            if (endMatch.Success)
+            if (endMatch.Success)          // this line is an EndDialogue line
                 dialogue = HandleEndDialogue(endMatch);
+            else if (continueMatch.Success)     // this line is a ContinueDialogue line
+                dialogue = new ContinueDialogue();
             else if (refMatch.Success)     // this line is a RefDialogue line
                 dialogue = HandleRefDialogue(refMatch);
             else if (actorMatch.Success)   // this line is an ActorDialogue line
@@ -112,7 +116,7 @@ public class DialogueFileReader
                 dialogue = HandlePlayerDialogue(playerMatch);
             else                           // error, bad syntax in this line
             {
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + " didn't match the dialogue syntax.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + " didn't match the dialogue syntax.", _filename));
                 continue;
             }
 
@@ -124,7 +128,7 @@ public class DialogueFileReader
 
         if (!_hasEndKeyword)
         {
-            Debug.LogError(string.Format("DialogueError: Error when reading '{0}': {END} command missing.", _filename));
+            Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': {END} command missing.", _filename));
             return null;
         }
 
@@ -137,24 +141,16 @@ public class DialogueFileReader
         {
             _dialogueTree = new DialogueTree(new TreeNode<IDialogue>(id: _lineNumber, dialogue));
             _currentNode = _dialogueTree.Root;
+            return;
         }
-        else if (_indentation > _prevIndentation)  // We went one level lower in the tree. Add child and set it to be the current node.
+
+        while (_currentNode.Parent != null && _indentation <= _prevIndentation)
         {
-            _currentNode = _currentNode.AddChild(id: _lineNumber, dialogue);
+            _prevIndentation -= 4;
+            _currentNode = _currentNode.Parent;
         }
-        else if (_indentation == _prevIndentation)  // We are at the same level in the tree. Add child, don't touch the current node.
-        {
-            _currentNode.AddChild(id: _lineNumber, dialogue);
-        }
-        else  // We are n levels higher in the tree. Go up as much as we have to, then add child and set it to be the current node.
-        {
-            while (_currentNode.Parent != null && _indentation <= _prevIndentation)
-            {
-                _prevIndentation -= 4;
-                _currentNode = _currentNode.Parent;
-            }
-            _currentNode = _currentNode.AddChild(id: _lineNumber, dialogue);
-        }
+        
+        _currentNode = _currentNode.AddChild(id: _lineNumber, dialogue);
     }
 
     private IDialogue HandleActorDialogue(Match match)
@@ -195,12 +191,7 @@ public class DialogueFileReader
         int refLineNumber;
         int.TryParse(match.Groups[2].Value, out refLineNumber);
 
-        if (match.Groups[3].Value == "CHILDREN")
-        {
-            return new RefDialogue(refLineNumber);
-        }
-
-        return new RefDialogue(refLineNumber - 1);
+        return new RefDialogue(refLineNumber);
     }
 
     private List<IDialogueAction> SplitAndValidateActions(string actionsString, string bodyPart = null)
@@ -217,7 +208,7 @@ public class DialogueFileReader
         }
         catch
         {
-            Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Cannot split Actions.", _filename));
+            Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Cannot split Actions.", _filename));
         }
 
         // Validate each action with regex
@@ -247,7 +238,7 @@ public class DialogueFileReader
             {
                 if (!bodyPartMatch.Success)
                 {
-                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad body part value in RollAction syntax.", _filename));
+                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad body part value in RollAction syntax.", _filename));
                     continue;
                 }
 
@@ -259,10 +250,10 @@ public class DialogueFileReader
                 if (numerator <= denominator && numerator >= 0 && denominator > 0)
                     actions.Add(new RollDialogueAction(numerator, denominator));
                 else
-                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad roll values in RollAction syntax.", _filename));
+                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad roll values in RollAction syntax.", _filename));
             }
             else
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad Actions syntax.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad Actions syntax.", _filename));
         }
 
         return actions;
@@ -291,7 +282,7 @@ public class DialogueFileReader
             return new BoolDialogueCondition(negator, variable);
         }
 
-        Debug.LogError(string.Format("DialogueError: Error when reading '{0}': line " + _lineNumber + ". Bad Condition syntax.", _filename));
+        Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad Condition syntax.", _filename));
         return null;
     }
 }

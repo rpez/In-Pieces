@@ -9,7 +9,6 @@ public class GameState
     public bool ROLL_SUCCESS { get; set; } = false;
 
     // Bedroom tutorial scene
-    public bool TUTORIAL_LISTEN { get; set; } = false;
     public bool TUTORIAL_OPEN_EYES { get; set; } = false;
     public bool TUTORIAL_GET_UP { get; set; } = false;
 
@@ -23,5 +22,6 @@ public class GameState
     public int LEGS { get; set; } = 0;
 
     // Bedroom tutorial scene
+    public int TUTORIAL_LISTEN { get; set; } = 0;
     public int TUTORIAL_COUNT_SENSES { get; set; } = 0;
 }

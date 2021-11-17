@@ -4,90 +4,156 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-/*  DialogueManager usage example:
-
-    // Get GameManager
-    GameManager gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
-
-    // Assume AllDialogue exists, get the DialogueTree for file "sketch_dialogue.dlg"
-    DialogueTree dt = AllDialogue["sketch_dialogue"];
-
-    // Get a list of all dialogues in this DialogueTree
-    List<IDialogue> dialogues = dt.ToList();
-
-    // Check the values of each Condition like this
-    foreach (IDialogue d in dialogues)
-    {
-        if (d is IConditionalDialogue dialogue)
-        {
-            bool cond = DialogueAvailable(dialogue, gameManager);
-            if (cond != null)
-                Debug.Log(dialogue.Condition + " " + cond);
-            PerformActions(dialogue, gameManager);  // Perform actions inside the Dialogue
-        }
-    }
-
-    // Check the values of each Condition like this
-    foreach (IDialogue d in dialogues)
-    {
-        if (d is IConditionalDialogue dialogue)
-        {
-            bool cond = DialogueAvailable(dialogue, gameManager);
-            if (cond != null)
-                Debug.Log(dialogue.Condition + " " + cond);
-        }
-    }
-*/
 public class DialogueManager : Singleton<DialogueManager>
 {
     private DialogueFileReader _dfr;
     
     public Dictionary<string, DialogueTree> AllDialogue { get; private set; }
+    public DialogueTree CurrentDialogue { get; set; }
 
     void Start()
     {
         _dfr = new DialogueFileReader();
         AllDialogue = _dfr.ReadAllDialogueFiles();
+    }
 
-        // Get GameManager
-        GameManager gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
+    /*  Start conversation.
+        Return the next conversation line to be drawn on the screen. */
+    public IDialogue StartDialogue(string dialogueFile, GameManager gameManager)
+    {
+        DialogueTree dialogueTree;
 
-        // Assume AllDialogue exists, get the DialogueTree for file "sketch_dialogue.dlg"
-        DialogueTree dt = AllDialogue["sketch_dialogue"];
-
-        // Get a list of all dialogues in this DialogueTree
-        List<IDialogue> dialogues = dt.ToList();
-
-        // Check the values of each Condition like this
-        foreach (IDialogue d in dialogues)
+        if (AllDialogue.TryGetValue(dialogueFile, out dialogueTree))
         {
-            if (d is IConditionalDialogue dialogue)
-            {
-                bool? cond = DialogueAvailable(dialogue, gameManager);
-                if (cond != null)
-                    Debug.Log(dialogue.Condition + " " + cond);
-                PerformActions(dialogue, gameManager);  // Perform actions inside the Dialogue
-            }
+            CurrentDialogue = dialogueTree;
+            IDialogue dialogue = CurrentDialogue.CurrentLine.Value;
+
+            PerformActions(dialogue, gameManager);
+            return dialogue;
         }
+
+        Debug.LogError(string.Format("ConversationError: Couldn't find dialogue file '{0}'", dialogueFile));
+        return null;
+    }
+
+    public void StopDialogue()
+    {
+        CurrentDialogue.CurrentLine = CurrentDialogue.Root;
+        CurrentDialogue = null;
+    }
+
+    /* Returns a list of currently available options for the player to interact with. */
+    public List<IDialogue> ListOptions(GameManager gameManager)
+    {
+        if (CurrentDialogue == null) return null;
+
+        TreeNode<IDialogue> firstChild = CurrentDialogue.CurrentLine.Children[0];
+
+        if (firstChild.Value is RefDialogue refDialogue)
+            CurrentDialogue.Options = AvailableChildren(CurrentDialogue.FindById(refDialogue.Ref), gameManager);
+        else
+            CurrentDialogue.Options = AvailableChildren(CurrentDialogue.CurrentLine, gameManager);
+
+        return CurrentDialogue.Options.Select(x => x.Value).ToList();
+    }
+
+    /*  This function is used to select a conversation option in dialogue.
+        Return the next conversation line to be drawn on the screen. */
+    public IDialogue SelectOption(int x, GameManager gameManager)
+    {
+        if (CurrentDialogue == null) return null;
+
+        // is selected option out of bounds?
+        if (x < 0 || x > CurrentDialogue.Options.Count - 1)
+            return null;
+
+        TreeNode<IDialogue> selectedOption = CurrentDialogue.Options[x];
+
+        // end conversation
+        if (selectedOption.Value is EndDialogue)
+        {
+            StopDialogue();
+            return null;
+        }
+        else if (selectedOption.Value is PlayerDialogue ||
+                 selectedOption.Value is ContinueDialogue)
+        {
+            PerformActions(selectedOption.Value, gameManager);
+
+            TreeNode<IDialogue> nextLine = null;
+
+            foreach (TreeNode<IDialogue> node in selectedOption.Children)
+            {
+                IDialogue dialogue = node.Value;
+
+                if (DialogueAvailable(dialogue, gameManager))
+                {
+                    nextLine = node;
+                    break;
+                }
+            }
+
+            if (nextLine.Value is EndDialogue endDialogue)
+            {
+                StopDialogue();
+                return null;
+            }
+            else if (nextLine.Value is RefDialogue refDialogue)
+                nextLine = CurrentDialogue.FindById(refDialogue.Ref);
+            else if (nextLine == null)
+            {
+                Debug.LogError("DialogueError: Couldn't find the next dialogue line!");
+                return null;
+            }
+
+            CurrentDialogue.CurrentLine = nextLine;
+            PerformActions(CurrentDialogue.CurrentLine.Value, gameManager);
+        }
+        else
+            Debug.LogError("DialogueError: Shouldn't be able to select an ActorDialogue!");
+
+        return CurrentDialogue.CurrentLine.Value;
+    }
+
+    private List<TreeNode<IDialogue>> AvailableChildren(TreeNode<IDialogue> parentNode, GameManager gameManager)
+    {
+        List<TreeNode<IDialogue>> availableChildren = new List<TreeNode<IDialogue>>();
+
+        foreach (TreeNode<IDialogue> node in parentNode.Children)
+        {
+            TreeNode<IDialogue> potentialNode = node;
+
+            if (node.Value is RefDialogue refDialogue)
+                potentialNode = CurrentDialogue.FindById(refDialogue.Ref);
+
+            if (DialogueAvailable(potentialNode.Value, gameManager))
+                availableChildren.Add(potentialNode);
+        }
+
+        return availableChildren;
     }
 
     /*  This function is used to check if a dialogue line should be available to the player or not.
         It checks the status of the dialogue line Condition in GameManager.State */
-    public bool DialogueAvailable(IConditionalDialogue dialogue, GameManager gameManager)
+    private bool DialogueAvailable(IDialogue dialogue, GameManager gameManager)
     {
-        if (dialogue.Condition == null) return true;
+        if (!(dialogue is IConditionalDialogue))
+            return true;
 
-        if (dialogue.Condition is BoolDialogueCondition boolCond)
+        IConditionalDialogue condDialogue = (IConditionalDialogue) dialogue;
+
+        if (condDialogue.Condition is BoolDialogueCondition boolCond)
         {
             bool returnable = gameManager.GetStateValue<bool>(boolCond.Variable);
 
             return boolCond.Negator ? !returnable : returnable;
         }
-        else if (dialogue.Condition is IntDialogueCondition intCond)
+        else if (condDialogue.Condition is IntDialogueCondition intCond)
         {
             int val = gameManager.GetStateValue<int>(intCond.Variable);
             bool returnable;
 
+            // if there's a better way to do this, would be cool to know!
             if (intCond.Operator.Equals("=="))
                 returnable = val == intCond.Value;
             else if (intCond.Operator.Equals("<"))
@@ -101,11 +167,18 @@ public class DialogueManager : Singleton<DialogueManager>
 
             return intCond.Negator ? !returnable : returnable;
         }
+
+        return true;
     }
 
-    public void PerformActions(IConditionalDialogue dialogue, GameManager gameManager)
+    private void PerformActions(IDialogue dialogue, GameManager gameManager)
     {
-        foreach (IDialogueAction action in dialogue.Actions)
+        if (!(dialogue is IConditionalDialogue))
+            return;
+
+        IConditionalDialogue condDialogue = (IConditionalDialogue) dialogue;
+
+        foreach (IDialogueAction action in condDialogue.Actions)
         {
             if (action is SetDialogueAction setAction)
                 gameManager.SetStateValue<bool>(setAction.Variable, setAction.Value);
@@ -121,17 +194,22 @@ public class DialogueManager : Singleton<DialogueManager>
                 else
                     gameManager.SetStateValue<int>(addAction.Variable, prevValue + addAction.Value);
             }
-            else if (action is RollDialogueAction rollAction && dialogue is PlayerDialogue playerDialogue)
+            else if (action is RollDialogueAction rollAction && condDialogue is PlayerDialogue playerDialogue)
             {
-                int attitude = gameManager.GetStateValue<int>(playerDialogue.BodyPart);
                 int result = UnityEngine.Random.Range(1, rollAction.Denominator + 1); // roll the dice
+                int attitude = gameManager.GetStateValue<int>(playerDialogue.BodyPart);
+                int checkAgainst = rollAction.Denominator - rollAction.Numerator;
 
-                if (result + attitude > rollAction.Denominator - rollAction.Numerator)
+                if (result + attitude > checkAgainst)
                 {
                     gameManager.SetStateValue<bool>("ROLL_SUCCESS", true);
+                    Debug.Log(string.Format("<color=green>SUCCESS</color><color=white>: Rolled a {0} + {1} vs. {2}</color>", result, attitude, checkAgainst));
                 }
                 else
+                {
                     gameManager.SetStateValue<bool>("ROLL_SUCCESS", false);
+                    Debug.Log(string.Format("<color=red>FAILURE</color><color=white>: Rolled a {0} + {1} vs. {2}</color>", result, attitude, checkAgainst));
+                }
             }
         }
     }

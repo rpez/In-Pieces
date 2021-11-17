@@ -37,6 +37,14 @@ public class ActorDialogue : IConditionalDialogue
     }
 }
 
+public class ContinueDialogue : IDialogue
+{
+    public override string ToString()
+    {
+        return "Continue";
+    }
+}
+
 public class EndDialogue : IDialogue
 {
     public override string ToString()
@@ -71,18 +79,16 @@ public class PlayerDialogue : IConditionalDialogue
 
 public class RefDialogue : IDialogue
 {
-    private readonly int _lineNumber;
-
-    public int Ref { get => _lineNumber; }
+    public int Ref { get; }
 
     public RefDialogue(int lineNumber)
     {
-        _lineNumber = lineNumber;
+        Ref = lineNumber;
     }
 
     public override string ToString()
     {
-        return string.Format("{{REF {0}}}", _lineNumber);
+        return string.Format("{{REF {0}}}", Ref);
     }
 }
 

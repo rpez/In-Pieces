@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
+        DialogueUIConsole m_exampleUIConsole = gameObject.AddComponent<DialogueUIConsole>();
     }
 
     // Update is called once per frame
