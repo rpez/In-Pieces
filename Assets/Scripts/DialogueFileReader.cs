@@ -22,8 +22,8 @@ public class DialogueFileReader
         { "endRegex", new Regex(@"^\{END\}$", RegexOptions.Singleline) },
         { "continueRegex", new Regex(@"^\{CONTINUE\}$", RegexOptions.Singleline) },
         { "refRegex", new Regex(@"^\{(LINE) (\d+)(?: (CHILDREN))?\}$", RegexOptions.Singleline) },
-        { "actorRegex", new Regex(@"^((?:[\w ()]+)+): ([\w ,.!'""-?]+)(?: \{([\w =><\d+])+\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline) },
-        { "playerRegex", new Regex(@"^(?:<(NOSE|EARS|LEGS|HAND|EYES))?> ([\w ,.!'""-?]+)(?: \{([\w =><\d+]+)\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline) },
+        { "actorRegex", new Regex(@"^((?:[\w ()]+)+): ([\w ,.!'""-?]+)(?: \{(IF [\w =><\d+]+)\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline) },
+        { "playerRegex", new Regex(@"^(?:<(NOSE|EARS|LEGS|HAND|EYES))?> ([\w ,.!'""-?]+)(?: \{(IF [\w =><\d+]+)\})?(?: \[([\w >=<,+\-\/]+)\])?$", RegexOptions.Singleline) },
         { "boolConditionRegex", new Regex(@"^(IF)(?: (NOT))? (\w+)$", RegexOptions.Singleline) },
         { "intConditionRegex", new Regex(@"^(IF)(?: (NOT))? (\w+) (>=|==|<=|<|>) (\d+)$", RegexOptions.Singleline) },
         { "setActionRegex", new Regex(@"^(SET) (\w+) ((?:TRUE|FALSE))$", RegexOptions.Singleline) },
@@ -194,7 +194,7 @@ public class DialogueFileReader
         return new RefDialogue(refLineNumber);
     }
 
-    private List<IDialogueAction> SplitAndValidateActions(string actionsString, string bodyPart = null)
+    private List<IDialogueAction> SplitAndValidateActions(string actionsString, string bodyPart = "")
     {
         List<string> actionStringList = new List<string>();
         List<IDialogueAction> actions = new List<IDialogueAction>();
@@ -216,9 +216,7 @@ public class DialogueFileReader
         {
             Match setMatch = _regexes["setActionRegex"].Match(a);
             Match addMatch = _regexes["addActionRegex"].Match(a);
-
             Match rollMatch = _regexes["rollActionRegex"].Match(a);
-            Match bodyPartMatch = _regexes["bodyPartRegex"].Match(bodyPart);
 
             if (setMatch.Success)
             {
@@ -236,6 +234,8 @@ public class DialogueFileReader
             }
             else if (rollMatch.Success)
             {
+                Match bodyPartMatch = _regexes["bodyPartRegex"].Match(bodyPart);
+
                 if (!bodyPartMatch.Success)
                 {
                     Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad body part value in RollAction syntax.", _filename));
