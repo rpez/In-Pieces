@@ -92,6 +92,14 @@ public class RefDialogue : IDialogue
     }
 }
 
+public class RootDialogue : IDialogue
+{
+    public override string ToString()
+    {
+        return "{ROOT}";
+    }
+}
+
 public interface IDialogueCondition
 {
     public bool Negator { get; }

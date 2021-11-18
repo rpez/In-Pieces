@@ -71,8 +71,8 @@ public class DialogueFileReader
     public DialogueTree ReadDialogueFile(string[] allLines)
     {
         _hasEndKeyword = false;
-        _dialogueTree = null;
-        _currentNode = null;
+        _dialogueTree = new DialogueTree();
+        _currentNode = _dialogueTree.Root;
         _lineNumber = 1;
         _indentation = 0;
 
@@ -88,9 +88,10 @@ public class DialogueFileReader
             _prevIndentation = _indentation;
             _indentation = line.TakeWhile(c => c.Equals(' ')).Count();
 
-            if ((_indentation - _prevIndentation) % 4 != 0)
+            if (((_indentation - _prevIndentation) % 4 != 0) ||
+                (_indentation > _prevIndentation && _indentation - _prevIndentation != 4))
             {
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': Indentation in dialogue files should be exactly 4.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + " Indentation in dialogue files should be exactly 4.", _filename));
                 break;
             }
 
@@ -137,18 +138,14 @@ public class DialogueFileReader
 
     private void AddNodeToDialogueTree(IDialogue dialogue)
     {
-        if (_dialogueTree == null)  // Create a new DialogueTree if one doesn't exist yet.
-        {
-            _dialogueTree = new DialogueTree(new TreeNode<IDialogue>(id: _lineNumber, dialogue));
-            _currentNode = _dialogueTree.Root;
-            return;
-        }
-
-        while (_currentNode.Parent != null && _indentation <= _prevIndentation)
+        while (_currentNode.Parent != null &&
+               _indentation <= _prevIndentation)
         {
             _prevIndentation -= 4;
             _currentNode = _currentNode.Parent;
         }
+
+        /*Debug.Log(String.Concat(Enumerable.Repeat(" ", _indentation)) + "PARENT: " + _currentNode.Value + ", CHILD: " + dialogue);*/
         
         _currentNode = _currentNode.AddChild(id: _lineNumber, dialogue);
     }
