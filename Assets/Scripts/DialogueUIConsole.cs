@@ -36,7 +36,7 @@ public class DialogueUIConsole : MonoBehaviour
 
     private void StartConversation()
     {
-        Debug.Log(m_dialogueManager.StartDialogue("sketch_dialogue", m_gameManager));  // Prints the first conversation node
+        Debug.Log(m_dialogueManager.StartDialogue("ears_dialogue", m_gameManager));  // Prints the first conversation node
         PrintConversationOptions();
     }
 
