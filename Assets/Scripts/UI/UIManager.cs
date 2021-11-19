@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour
         m_dialogueManager = (DialogueManager)FindObjectOfType(typeof(DialogueManager));
     }
 
+    // Starts (or continues) dialogue
+    // dialogueName indicates the .dlg file name
+    // onEndCallback is called when the dialogue ends
     public void StartConversation(string dialogueName, Action onEndCallback)
     {
         m_onEnd = onEndCallback;
@@ -36,11 +39,14 @@ public class UIManager : MonoBehaviour
         DisplayConversationOptions();
     }
 
+    // Updates the dialogue text
     private void DisplayConversation(IDialogue dialogue)
     {
         m_dialogueText.text = dialogue.ToString();
     }
 
+    // Selects a conversation option with index x
+    // Then updates the window
     private void SelectConversationOption(int x)
     {
         var selected = m_dialogueManager.SelectOption(x, m_gameManager);  // Prints the next conversation node
@@ -57,6 +63,7 @@ public class UIManager : MonoBehaviour
         }  
     }
 
+    // Shows the possible dialogue options for the player
     private void DisplayConversationOptions()
     {
         ClearDialogueOptions();
@@ -98,6 +105,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // Clears the dialogue options from the scroll list container
+    // If this isn't done, old options would stay in the list
     private void ClearDialogueOptions()
     {
         foreach(Transform child in m_dialogueOptionContainer.transform)
@@ -106,6 +115,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // Called when conversation ends
+    // Calls the provided callback
     private void EndConversation()
     {
         m_onEnd.Invoke();

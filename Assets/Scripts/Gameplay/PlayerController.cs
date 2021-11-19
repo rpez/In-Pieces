@@ -35,11 +35,13 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit))
         {
+            // Movement only
             if (Input.GetMouseButtonDown(1))
             {
                 m_navMeshAgent.SetDestination(hit.point);
                 CancelCurrentInteractionTarget();
             }
+            // Interaction
             else if (Input.GetMouseButtonDown(0))
             {
                 if (hit.transform.tag == "Interactable")
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Called when player clicks something else to cancecl current pathing towards interaction target
     private void CancelCurrentInteractionTarget()
     {
         if (m_currentTargetInteractable != null)
