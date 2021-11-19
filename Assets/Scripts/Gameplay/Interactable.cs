@@ -5,6 +5,9 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public GameObject m_interactionPoint;
+    public string m_dialogueIdentifier;
+
+    private UIManager m_UI;
 
     public void OnClicked()
     {
@@ -20,7 +23,7 @@ public class Interactable : MonoBehaviour
 
     public void OnInteract(GameObject actor)
     {
-        Debug.Log("Hi, " + actor.name + ", I am " + gameObject.name + ". You just interacted with me.");
+        m_UI.StartConversation(m_dialogueIdentifier);
     }
 
     public void OnExitInteraction()
@@ -31,12 +34,6 @@ public class Interactable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        m_UI = (UIManager)FindObjectOfType(typeof(UIManager));
     }
 }

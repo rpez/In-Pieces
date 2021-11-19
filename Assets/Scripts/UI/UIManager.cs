@@ -6,12 +6,15 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    // These references are set in editor, they are children of the canvas
     public GameObject m_dialogueWindow;
     public TMP_Text m_dialogueText;
     public GameObject m_dialogueOptionContainer;
 
+    // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
 
+    // These references will be set in Start()
     private GameManager m_gameManager;
     private DialogueManager m_dialogueManager;
 
@@ -20,19 +23,12 @@ public class UIManager : MonoBehaviour
     {
         m_gameManager = (GameManager)FindObjectOfType(typeof(GameManager));
         m_dialogueManager = (DialogueManager)FindObjectOfType(typeof(DialogueManager));
-
-        StartConversation();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartConversation(string dialogueName)
     {
-        
-    }
-
-    private void StartConversation()
-    {
-        DisplayConversation(m_dialogueManager.StartDialogue("ears_dialogue", m_gameManager));
+        m_dialogueWindow.SetActive(true);
+        DisplayConversation(m_dialogueManager.StartDialogue(dialogueName, m_gameManager));
         DisplayConversationOptions();
     }
 
@@ -52,7 +48,9 @@ public class UIManager : MonoBehaviour
             DisplayConversationOptions();    // Prints options for the player to choose
         }
         else
-            Debug.Log("Ended the conversation.");
+        {
+            EndConversation();
+        }  
     }
 
     private void DisplayConversationOptions()
@@ -102,5 +100,11 @@ public class UIManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    private void EndConversation()
+    {
+        Debug.Log("Ended the conversation.");
+        m_dialogueWindow.SetActive(false);
     }
 }
