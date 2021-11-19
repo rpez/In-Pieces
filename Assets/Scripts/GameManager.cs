@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     public GameState State { get; set; }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         State = new GameState();
     }
