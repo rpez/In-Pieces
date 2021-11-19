@@ -10,10 +10,9 @@ public class DialogueTree
     public TreeNode<IDialogue> CurrentLine { get; set; }
     public List<TreeNode<IDialogue>> Options { get; set; }
 
-    public DialogueTree(TreeNode<IDialogue> rootNode)
+    public DialogueTree()
     {
-        Root = rootNode;
-        CurrentLine = rootNode;
+        Root = new TreeNode<IDialogue>(0, new RootDialogue());
     }
 
     public List<IDialogue> ToList()

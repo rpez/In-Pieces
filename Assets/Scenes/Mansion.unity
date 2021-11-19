@@ -989,9 +989,53 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 524427854, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 524427854, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 524427854, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538939737, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00012207031
+      objectReference: {fileID: 0}
+    - target: {fileID: 1600353377, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212562899224619575, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212562899224619576, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212562899224619576, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 9212562899343336520, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212562899343336522, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212562899343336522, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212562899343336522, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9212562899343336524, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
       propertyPath: m_Pivot.x
@@ -1076,6 +1120,14 @@ PrefabInstance:
     - target: {fileID: 9212562899343336524, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212562900979098611, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212562900979098611, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ public class DialogueManager : Singleton<DialogueManager>
         if (AllDialogue.TryGetValue(dialogueFile, out dialogueTree))
         {
             CurrentDialogue = dialogueTree;
+            CurrentDialogue.CurrentLine = FirstAvailableChild(CurrentDialogue.Root, gameManager);
             IDialogue dialogue = CurrentDialogue.CurrentLine.Value;
 
             PerformActions(dialogue, gameManager);
@@ -82,6 +84,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
             TreeNode<IDialogue> nextLine = null;
 
+            // NOTE: Replace this with FirstAvailableChild?
             foreach (TreeNode<IDialogue> node in selectedOption.Children)
             {
                 IDialogue dialogue = node.Value;
@@ -102,7 +105,7 @@ public class DialogueManager : Singleton<DialogueManager>
                 nextLine = CurrentDialogue.FindById(refDialogue.Ref);
             else if (nextLine == null)
             {
-                Debug.LogError("DialogueError: Couldn't find the next dialogue line!");
+                Debug.LogError("DialogueError: Couldn't find an available dialogue line!");
                 return null;
             }
 
@@ -113,6 +116,18 @@ public class DialogueManager : Singleton<DialogueManager>
             Debug.LogError("DialogueError: Shouldn't be able to select an ActorDialogue!");
 
         return CurrentDialogue.CurrentLine.Value;
+    }
+
+    private TreeNode<IDialogue> FirstAvailableChild(TreeNode<IDialogue> parentNode, GameManager gameManager)
+    {
+        try {
+            return AvailableChildren(parentNode, gameManager)[0];
+        }
+        catch (IndexOutOfRangeException)
+        {
+            Debug.LogError("DialogueError: Couldn't find an available dialogue line!");
+            return null;
+        }
     }
 
     private List<TreeNode<IDialogue>> AvailableChildren(TreeNode<IDialogue> parentNode, GameManager gameManager)

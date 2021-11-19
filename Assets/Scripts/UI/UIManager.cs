@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
 
     private void StartConversation()
     {
-        DisplayConversation(m_dialogueManager.StartDialogue("sketch_dialogue", m_gameManager));
+        DisplayConversation(m_dialogueManager.StartDialogue("ears_dialogue", m_gameManager));
         DisplayConversationOptions();
     }
 
@@ -51,6 +51,8 @@ public class UIManager : MonoBehaviour
             DisplayConversation(selected);
             DisplayConversationOptions();    // Prints options for the player to choose
         }
+        else
+            Debug.Log("Ended the conversation.");
     }
 
     private void DisplayConversationOptions()
