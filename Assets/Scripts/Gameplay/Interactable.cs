@@ -31,7 +31,7 @@ public class Interactable : MonoBehaviour
     {
         m_interactor = actor;
         m_interactor.SetMovementActive(false);
-        m_UI.StartConversation(m_dialogueIdentifier);
+        m_UI.StartConversation(m_dialogueIdentifier, OnExitInteraction);
     }
 
     // Called when interaction end, disables the trigger

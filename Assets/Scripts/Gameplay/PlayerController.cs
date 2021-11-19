@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent m_navMeshAgent;
     private Interactable m_currentTargetInteractable;
 
-    private bool m_movementEnabled;
+    private bool m_movementEnabled = true;
 
     public void OnTargetInteractableReached()
     {

@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     private GameManager m_gameManager;
     private DialogueManager m_dialogueManager;
 
+    // Callback for the dialogue end
+    private Action m_onEnd;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +28,9 @@ public class UIManager : MonoBehaviour
         m_dialogueManager = (DialogueManager)FindObjectOfType(typeof(DialogueManager));
     }
 
-    public void StartConversation(string dialogueName)
+    public void StartConversation(string dialogueName, Action onEndCallback)
     {
+        m_onEnd = onEndCallback;
         m_dialogueWindow.SetActive(true);
         DisplayConversation(m_dialogueManager.StartDialogue(dialogueName, m_gameManager));
         DisplayConversationOptions();
@@ -64,7 +68,7 @@ public class UIManager : MonoBehaviour
             DialogueOption script = button.GetComponent<DialogueOption>();
 
             // This is a little error prone atm, will add some failsafe later
-            string text = "Placeholder dailogue, very bad if you see this :D";
+            string text = "Placeholder dialogue, very bad if you see this :D";
             Action callback = () => { };
 
             if (option is EndDialogue)
@@ -104,7 +108,7 @@ public class UIManager : MonoBehaviour
 
     private void EndConversation()
     {
-        Debug.Log("Ended the conversation.");
+        m_onEnd.Invoke();
         m_dialogueWindow.SetActive(false);
     }
 }
