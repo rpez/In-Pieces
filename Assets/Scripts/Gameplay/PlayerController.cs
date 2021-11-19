@@ -8,9 +8,17 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent m_navMeshAgent;
     private Interactable m_currentTargetInteractable;
 
+    private bool m_movementEnabled;
+
     public void OnTargetInteractableReached()
     {
         m_navMeshAgent.SetDestination(transform.position);
+    }
+
+    // Sets a flag that determines whether the player is registering movement commands
+    public void SetMovementActive(bool active)
+    {
+        m_movementEnabled = active;
     }
 
     // Start is called before the first frame update
@@ -22,6 +30,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If movement is disabled, return
+        if (!m_movementEnabled) return;
+
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit))
         {
             if (Input.GetMouseButtonDown(1))

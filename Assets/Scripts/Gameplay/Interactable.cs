@@ -4,30 +4,41 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    // Set in editor
     public GameObject m_interactionPoint;
     public string m_dialogueIdentifier;
 
+    private PlayerController m_interactor;
+
     private UIManager m_UI;
 
+    // Called when this object is set as navigation target, enables the interaction trigger
     public void OnClicked()
     {
-        Debug.Log(gameObject.name + " clicked");
         m_interactionPoint.SetActive(true);
     }
 
+    // Called when this object is the navigation target, but the navigation is cancelled
+    // Disables the interaction trigger
     public void CancelClicked()
     {
-        Debug.Log(gameObject.name + " un-clicked");
         m_interactionPoint.SetActive(false);
     }
 
-    public void OnInteract(GameObject actor)
+    // Called by the interaction trigger when player enters it
+    // Initiates whatever will happen when interacted with
+    public void OnInteract(PlayerController actor)
     {
+        m_interactor = actor;
+        m_interactor.SetMovementActive(false);
         m_UI.StartConversation(m_dialogueIdentifier);
     }
 
+    // Called when interaction end, disables the trigger
     public void OnExitInteraction()
     {
+        m_interactor.SetMovementActive(true);
+        m_interactor = null;
         m_interactionPoint.SetActive(false);
     }
 
