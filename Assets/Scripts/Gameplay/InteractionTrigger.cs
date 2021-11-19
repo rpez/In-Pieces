@@ -11,7 +11,7 @@ public class InteractionTrigger : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             other.transform.GetComponent<PlayerController>().OnTargetInteractableReached();
-            parent.OnInteract(other.gameObject);
+            parent.OnInteract(other.GetComponent<PlayerController>());
         }
     }
 
