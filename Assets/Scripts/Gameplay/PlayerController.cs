@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent m_navMeshAgent;
     private Interactable m_currentTargetInteractable;
 
+    private Animator m_animator;
+
     private bool m_movementEnabled = true;
 
     public void OnTargetInteractableReached()
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     // Sets a flag that determines whether the player is registering movement commands
     public void SetMovementActive(bool active)
     {
+        SetWalkingAnimation(false);
         m_movementEnabled = active;
     }
 
@@ -25,11 +28,23 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
+        m_animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!m_navMeshAgent.pathPending)
+        {
+            if (m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance)
+            {
+                if (!m_navMeshAgent.hasPath || m_navMeshAgent.velocity.sqrMagnitude == 0f)
+                {
+                    SetWalkingAnimation(false);
+                }
+            }
+        }
+
         // If movement is disabled, return
         if (!m_movementEnabled) return;
 
@@ -40,6 +55,8 @@ public class PlayerController : MonoBehaviour
             {
                 m_navMeshAgent.SetDestination(hit.point);
                 CancelCurrentInteractionTarget();
+
+                SetWalkingAnimation(true);
             }
             // Interaction
             else if (Input.GetMouseButtonDown(0))
@@ -53,8 +70,22 @@ public class PlayerController : MonoBehaviour
                     m_navMeshAgent.SetDestination(obj.m_interactionPoint.transform.position);
 
                     m_currentTargetInteractable = obj;
+
+                    SetWalkingAnimation(true);
                 }
             }
+        }
+    }
+
+    private void SetWalkingAnimation(bool active)
+    {
+        if (active)
+        {
+            m_animator.Play("Walk");
+        }
+        else
+        {
+            m_animator.Play("Idle");
         }
     }
 
