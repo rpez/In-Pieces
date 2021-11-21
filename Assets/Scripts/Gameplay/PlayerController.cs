@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         SetWalkingAnimation(false);
         m_movementEnabled = active;
-        m_navMeshAgent.enabled = true;
+        m_navMeshAgent.enabled = active;
     }
 
     public void TravelToWaypoint(Vector3 location)
@@ -47,13 +47,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!m_navMeshAgent.pathPending)
+        if (m_navMeshAgent.enabled)
         {
-            if (m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance)
+            if (!m_navMeshAgent.pathPending)
             {
-                if (!m_navMeshAgent.hasPath || m_navMeshAgent.velocity.sqrMagnitude == 0f)
+                if (m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance)
                 {
-                    SetWalkingAnimation(false);
+                    if (!m_navMeshAgent.hasPath || m_navMeshAgent.velocity.sqrMagnitude == 0f)
+                    {
+                        SetWalkingAnimation(false);
+                    }
                 }
             }
         }

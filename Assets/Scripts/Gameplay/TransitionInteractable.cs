@@ -23,13 +23,18 @@ public class TransitionInteractable : Interactable
     // Called when interaction end, disables the trigger
     public override void OnExitInteraction()
     {
-        base.OnExitInteraction();
-
         if (m_currentState != GameManager.Instance.State.UPSTAIRS)
         {
             m_currentState = GameManager.Instance.State.UPSTAIRS;
-            m_actor.TravelToWaypoint(m_waypoint.position);
-            m_actor = null;
+            LevelManager.Instance.InitiateTransition(() =>
+            {
+                m_actor.TravelToWaypoint(m_waypoint.position);
+            },
+            () =>
+            {
+                base.OnExitInteraction();
+                m_actor = null;
+            });
         }
     }
 }

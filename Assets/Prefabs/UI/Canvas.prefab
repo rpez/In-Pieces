@@ -472,6 +472,7 @@ GameObject:
   - component: {fileID: 1794543153}
   - component: {fileID: 1794543155}
   - component: {fileID: 1794543154}
+  - component: {fileID: 8225276563429248433}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -595,6 +596,25 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!95 &8225276563429248433
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794543152}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1969712498
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,13 +662,14 @@ GameObject:
   - component: {fileID: 40641667982437218}
   - component: {fileID: 1789017406422616666}
   - component: {fileID: 4415618398795736696}
+  - component: {fileID: 9212562899802658690}
   m_Layer: 5
   m_Name: TransitionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &40641667982437218
 RectTransform:
   m_ObjectHideFlags: 0
@@ -707,6 +728,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &9212562899802658690
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267720333759991540}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9212562899224619574
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,6 +897,7 @@ GameObject:
   - component: {fileID: 9212562899343336521}
   - component: {fileID: 669217737}
   - component: {fileID: 5688811774845303625}
+  - component: {fileID: 1444406553}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -960,6 +1001,7 @@ MonoBehaviour:
   m_dialogueWindow: {fileID: 9212562900979098610}
   m_dialogueText: {fileID: 9212562899224619576}
   m_dialogueOptionContainer: {fileID: 1538939736}
+  m_director: {fileID: 5688811774845303625}
   m_dialogueOptionPrefab: {fileID: 7383222517551790622, guid: 5ac1509723aec05478336e0b0e085918, type: 3}
 --- !u!320 &5688811774845303625
 PlayableDirector:
@@ -971,13 +1013,64 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: fe11d835ef085d746b70d17a14580589, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
-  m_SceneBindings: []
+  m_SceneBindings:
+  - key: {fileID: -5318744385764036971, guid: fe11d835ef085d746b70d17a14580589, type: 2}
+    value: {fileID: 9212562899802658690}
+  - key: {fileID: -3791020990137838549, guid: fe11d835ef085d746b70d17a14580589, type: 2}
+    value: {fileID: 8225276563429248433}
+  - key: {fileID: -5367214433289498002, guid: fe11d835ef085d746b70d17a14580589, type: 2}
+    value: {fileID: 1444406553}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &1444406553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9212562899343336520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 76ce18c506aa5d34bbebcb4303a2c87e, type: 2}
+    - {fileID: 11400000, guid: cb8ad9f12c1e07f4e90d40d78eb34ef3, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 669217737}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: TransitionMidwayTrigger
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 669217737}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: TransitionEndTrigger
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &9212562899471797045
 GameObject:
   m_ObjectHideFlags: 0
