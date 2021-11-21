@@ -36,13 +36,13 @@ public class DialogueUIConsole : MonoBehaviour
 
     private void StartConversation()
     {
-        Debug.Log(m_dialogueManager.StartDialogue("sketch_dialogue", m_gameManager));  // Prints the first conversation node
+        Debug.Log(m_dialogueManager.StartDialogue("sketch_dialogue"));  // Prints the first conversation node
         PrintConversationOptions();
     }
 
     private void SelectConversationOption(int x)
     {
-        var selected = m_dialogueManager.SelectOption(x, m_gameManager);  // Prints the next conversation node
+        var selected = m_dialogueManager.SelectOption(x);  // Prints the next conversation node
         
         // need to check for null here, we might click on something that is out of bounds of this conversation
         if (selected != null)
@@ -56,7 +56,7 @@ public class DialogueUIConsole : MonoBehaviour
     {
         int i = 1;
 
-        foreach (IDialogue option in m_dialogueManager.ListOptions(m_gameManager))
+        foreach (IDialogue option in m_dialogueManager.ListOptions())
             if (option is EndDialogue)
                 Debug.Log("<color=white>{END}</color>");       // here we would make the UI draw an End Dialogue button
             else if (option is ContinueDialogue)

@@ -16,10 +16,6 @@ public class UIManager : MonoBehaviour
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
 
-    // These references will be set in Start()
-    private GameManager m_gameManager;
-    private DialogueManager m_dialogueManager;
-
     // For storing callbacks
     private Action m_onDialogueEnd;
     private Action m_onTransitionMid;
@@ -28,9 +24,6 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_gameManager = (GameManager)FindObjectOfType(typeof(GameManager));
-        m_dialogueManager = (DialogueManager)FindObjectOfType(typeof(DialogueManager));
-
         m_director = GetComponent<PlayableDirector>();
     }
 
@@ -41,7 +34,7 @@ public class UIManager : MonoBehaviour
     {
         m_onDialogueEnd = onEndCallback;
         m_dialogueWindow.SetActive(true);
-        DisplayConversation(m_dialogueManager.StartDialogue(dialogueName, m_gameManager));
+        DisplayConversation(DialogueManager.Instance.StartDialogue(dialogueName));
         DisplayConversationOptions();
     }
 
@@ -55,7 +48,7 @@ public class UIManager : MonoBehaviour
     // Then updates the window
     private void SelectConversationOption(int x)
     {
-        var selected = m_dialogueManager.SelectOption(x, m_gameManager);  // Prints the next conversation node
+        var selected = DialogueManager.Instance.SelectOption(x);  // Prints the next conversation node
 
         // need to check for null here, we might click on something that is out of bounds of this conversation
         if (selected != null)
@@ -75,7 +68,7 @@ public class UIManager : MonoBehaviour
         ClearDialogueOptions();
         int i = 1;
 
-        foreach (IDialogue option in m_dialogueManager.ListOptions(m_gameManager))
+        foreach (IDialogue option in DialogueManager.Instance.ListOptions())
         {
             GameObject button = GameObject.Instantiate(m_dialogueOptionPrefab, m_dialogueOptionContainer.transform);
             DialogueOption script = button.GetComponent<DialogueOption>();

@@ -20,17 +20,17 @@ public class DialogueManager : Singleton<DialogueManager>
 
     /*  Start conversation.
         Return the next conversation line to be drawn on the screen. */
-    public IDialogue StartDialogue(string dialogueFile, GameManager gameManager)
+    public IDialogue StartDialogue(string dialogueFile)
     {
         DialogueTree dialogueTree;
 
         if (AllDialogue.TryGetValue(dialogueFile, out dialogueTree))
         {
             CurrentDialogue = dialogueTree;
-            CurrentDialogue.CurrentLine = FirstAvailableChild(CurrentDialogue.Root, gameManager);
+            CurrentDialogue.CurrentLine = FirstAvailableChild(CurrentDialogue.Root);
             IDialogue dialogue = CurrentDialogue.CurrentLine.Value;
 
-            PerformActions(dialogue, gameManager);
+            PerformActions(dialogue);
             return dialogue;
         }
 
@@ -45,23 +45,23 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
     /* Returns a list of currently available options for the player to interact with. */
-    public List<IDialogue> ListOptions(GameManager gameManager)
+    public List<IDialogue> ListOptions()
     {
         if (CurrentDialogue == null) return null;
 
         TreeNode<IDialogue> firstChild = CurrentDialogue.CurrentLine.Children[0];
 
         if (firstChild.Value is RefDialogue refDialogue)
-            CurrentDialogue.Options = AvailableChildren(CurrentDialogue.FindById(refDialogue.Ref), gameManager);
+            CurrentDialogue.Options = AvailableChildren(CurrentDialogue.FindById(refDialogue.Ref));
         else
-            CurrentDialogue.Options = AvailableChildren(CurrentDialogue.CurrentLine, gameManager);
+            CurrentDialogue.Options = AvailableChildren(CurrentDialogue.CurrentLine);
 
         return CurrentDialogue.Options.Select(x => x.Value).ToList();
     }
 
     /*  This function is used to select a conversation option in dialogue.
         Return the next conversation line to be drawn on the screen. */
-    public IDialogue SelectOption(int x, GameManager gameManager)
+    public IDialogue SelectOption(int x)
     {
         if (CurrentDialogue == null) return null;
 
@@ -80,7 +80,7 @@ public class DialogueManager : Singleton<DialogueManager>
         else if (selectedOption.Value is PlayerDialogue ||
                  selectedOption.Value is ContinueDialogue)
         {
-            PerformActions(selectedOption.Value, gameManager);
+            PerformActions(selectedOption.Value);
 
             TreeNode<IDialogue> nextLine = null;
 
@@ -89,7 +89,7 @@ public class DialogueManager : Singleton<DialogueManager>
             {
                 IDialogue dialogue = node.Value;
 
-                if (DialogueAvailable(dialogue, gameManager))
+                if (DialogueAvailable(dialogue))
                 {
                     nextLine = node;
                     break;
@@ -110,7 +110,7 @@ public class DialogueManager : Singleton<DialogueManager>
             }
 
             CurrentDialogue.CurrentLine = nextLine;
-            PerformActions(CurrentDialogue.CurrentLine.Value, gameManager);
+            PerformActions(CurrentDialogue.CurrentLine.Value);
         }
         else
             Debug.LogError("DialogueError: Shouldn't be able to select an ActorDialogue!");
@@ -118,10 +118,10 @@ public class DialogueManager : Singleton<DialogueManager>
         return CurrentDialogue.CurrentLine.Value;
     }
 
-    private TreeNode<IDialogue> FirstAvailableChild(TreeNode<IDialogue> parentNode, GameManager gameManager)
+    private TreeNode<IDialogue> FirstAvailableChild(TreeNode<IDialogue> parentNode)
     {
         try {
-            return AvailableChildren(parentNode, gameManager)[0];
+            return AvailableChildren(parentNode)[0];
         }
         catch (IndexOutOfRangeException)
         {
@@ -130,7 +130,7 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
-    private List<TreeNode<IDialogue>> AvailableChildren(TreeNode<IDialogue> parentNode, GameManager gameManager)
+    private List<TreeNode<IDialogue>> AvailableChildren(TreeNode<IDialogue> parentNode)
     {
         List<TreeNode<IDialogue>> availableChildren = new List<TreeNode<IDialogue>>();
 
@@ -141,7 +141,7 @@ public class DialogueManager : Singleton<DialogueManager>
             if (node.Value is RefDialogue refDialogue)
                 potentialNode = CurrentDialogue.FindById(refDialogue.Ref);
 
-            if (DialogueAvailable(potentialNode.Value, gameManager))
+            if (DialogueAvailable(potentialNode.Value))
                 availableChildren.Add(potentialNode);
         }
 
@@ -150,7 +150,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     /*  This function is used to check if a dialogue line should be available to the player or not.
         It checks the status of the dialogue line Condition in GameManager.State */
-    private bool DialogueAvailable(IDialogue dialogue, GameManager gameManager)
+    private bool DialogueAvailable(IDialogue dialogue)
     {
         if (!(dialogue is IConditionalDialogue))
             return true;
@@ -159,13 +159,13 @@ public class DialogueManager : Singleton<DialogueManager>
 
         if (condDialogue.Condition is BoolDialogueCondition boolCond)
         {
-            bool returnable = gameManager.GetStateValue<bool>(boolCond.Variable);
+            bool returnable = GameManager.Instance.GetStateValue<bool>(boolCond.Variable);
 
             return boolCond.Negator ? !returnable : returnable;
         }
         else if (condDialogue.Condition is IntDialogueCondition intCond)
         {
-            int val = gameManager.GetStateValue<int>(intCond.Variable);
+            int val = GameManager.Instance.GetStateValue<int>(intCond.Variable);
             bool returnable;
 
             // if there's a better way to do this, would be cool to know!
@@ -186,7 +186,7 @@ public class DialogueManager : Singleton<DialogueManager>
         return true;
     }
 
-    private void PerformActions(IDialogue dialogue, GameManager gameManager)
+    private void PerformActions(IDialogue dialogue)
     {
         if (!(dialogue is IConditionalDialogue))
             return;
@@ -196,33 +196,33 @@ public class DialogueManager : Singleton<DialogueManager>
         foreach (IDialogueAction action in condDialogue.Actions)
         {
             if (action is SetDialogueAction setAction)
-                gameManager.SetStateValue<bool>(setAction.Variable, setAction.Value);
+                GameManager.Instance.SetStateValue<bool>(setAction.Variable, setAction.Value);
             else if (action is AddDialogueAction addAction)
             {
-                int prevValue = gameManager.GetStateValue<int>(addAction.Variable);
+                int prevValue = GameManager.Instance.GetStateValue<int>(addAction.Variable);
 
                 // Is the variable we're trying to change a body part attitude? Clamp it between [-3, 3]
                 List<string> bodyPartVariables = new List<string>{ "NOSE", "EYES", "EARS", "HAND", "LEGS" };
 
                 if (bodyPartVariables.Contains(addAction.Variable))
-                    gameManager.SetStateValue<int>(addAction.Variable, Mathf.Clamp(prevValue + addAction.Value, -3, 3));
+                    GameManager.Instance.SetStateValue<int>(addAction.Variable, Mathf.Clamp(prevValue + addAction.Value, -3, 3));
                 else
-                    gameManager.SetStateValue<int>(addAction.Variable, prevValue + addAction.Value);
+                    GameManager.Instance.SetStateValue<int>(addAction.Variable, prevValue + addAction.Value);
             }
             else if (action is RollDialogueAction rollAction && condDialogue is PlayerDialogue playerDialogue)
             {
                 int result = UnityEngine.Random.Range(1, rollAction.Denominator + 1); // roll the dice
-                int attitude = gameManager.GetStateValue<int>(playerDialogue.BodyPart);
+                int attitude = GameManager.Instance.GetStateValue<int>(playerDialogue.BodyPart);
                 int checkAgainst = rollAction.Denominator - rollAction.Numerator;
 
                 if (result + attitude > checkAgainst)
                 {
-                    gameManager.SetStateValue<bool>("ROLL_SUCCESS", true);
+                    GameManager.Instance.SetStateValue<bool>("ROLL_SUCCESS", true);
                     Debug.Log(string.Format("<color=green>SUCCESS</color><color=white>: Rolled a {0} + {1} vs. {2}</color>", result, attitude, checkAgainst));
                 }
                 else
                 {
-                    gameManager.SetStateValue<bool>("ROLL_SUCCESS", false);
+                    GameManager.Instance.SetStateValue<bool>("ROLL_SUCCESS", false);
                     Debug.Log(string.Format("<color=red>FAILURE</color><color=white>: Rolled a {0} + {1} vs. {2}</color>", result, attitude, checkAgainst));
                 }
             }
