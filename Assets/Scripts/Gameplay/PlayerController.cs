@@ -28,10 +28,12 @@ public class PlayerController : MonoBehaviour
     {
         SetWalkingAnimation(false);
         m_movementEnabled = active;
+        m_navMeshAgent.enabled = true;
     }
 
     public void TravelToWaypoint(Vector3 location)
     {
+        m_navMeshAgent.enabled = false;
         transform.position = location;
     }
 
