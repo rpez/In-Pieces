@@ -5,6 +5,12 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
+    // The meshes for different body parts, set in editor
+    public GameObject m_eyesMesh;
+    public GameObject m_earsMesh;
+    public GameObject m_handsMesh;
+    public GameObject m_legsMesh;
+
     private NavMeshAgent m_navMeshAgent;
     private Interactable m_currentTargetInteractable;
 
@@ -87,6 +93,14 @@ public class PlayerController : MonoBehaviour
         {
             m_animator.Play("Idle");
         }
+    }
+
+    private void UpdateBodyParts()
+    {
+        m_eyesMesh.SetActive(GameManager.Instance.GetPropertyValue<bool>("HAS_EYES"));
+        m_earsMesh.SetActive(GameManager.Instance.GetPropertyValue<bool>("HAS_EARS"));
+        m_handsMesh.SetActive(GameManager.Instance.GetPropertyValue<bool>("HAS_HAND"));
+        m_legsMesh.SetActive(GameManager.Instance.GetPropertyValue<bool>("HAS_LEGS"));
     }
 
     // Called when player clicks something else to cancecl current pathing towards interaction target
