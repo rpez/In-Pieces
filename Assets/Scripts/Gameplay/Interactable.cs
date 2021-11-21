@@ -8,9 +8,9 @@ public class Interactable : MonoBehaviour
     public GameObject m_interactionPoint;
     public string m_dialogueIdentifier;
 
-    private PlayerController m_interactor;
+    protected PlayerController m_interactor;
 
-    private UIManager m_UI;
+    protected UIManager m_UI;
 
     // Called when this object is set as navigation target, enables the interaction trigger
     public void OnClicked()
@@ -27,7 +27,7 @@ public class Interactable : MonoBehaviour
 
     // Called by the interaction trigger when player enters it
     // Initiates whatever will happen when interacted with
-    public void OnInteract(PlayerController actor)
+    virtual public void OnInteract(PlayerController actor)
     {
         m_interactor = actor;
         m_interactor.SetMovementActive(false);
@@ -35,7 +35,7 @@ public class Interactable : MonoBehaviour
     }
 
     // Called when interaction end, disables the trigger
-    public void OnExitInteraction()
+    virtual public void OnExitInteraction()
     {
         m_interactor.SetMovementActive(true);
         m_interactor = null;

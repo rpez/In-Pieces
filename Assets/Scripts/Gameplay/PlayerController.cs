@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
         m_movementEnabled = active;
     }
 
+    public void TravelToWaypoint(Vector3 location)
+    {
+        transform.position = location;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

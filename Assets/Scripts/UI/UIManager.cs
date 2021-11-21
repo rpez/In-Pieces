@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.Playables;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject m_dialogueWindow;
     public TMP_Text m_dialogueText;
     public GameObject m_dialogueOptionContainer;
+    public PlayableDirector m_director;
 
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
@@ -18,14 +20,18 @@ public class UIManager : MonoBehaviour
     private GameManager m_gameManager;
     private DialogueManager m_dialogueManager;
 
-    // Callback for the dialogue end
-    private Action m_onEnd;
+    // For storing callbacks
+    private Action m_onDialogueEnd;
+    private Action m_onTransitionMid;
+    private Action m_onTransitionEnd;
 
     // Start is called before the first frame update
     void Start()
     {
         m_gameManager = (GameManager)FindObjectOfType(typeof(GameManager));
         m_dialogueManager = (DialogueManager)FindObjectOfType(typeof(DialogueManager));
+
+        m_director = GetComponent<PlayableDirector>();
     }
 
     // Starts (or continues) dialogue
@@ -33,7 +39,7 @@ public class UIManager : MonoBehaviour
     // onEndCallback is called when the dialogue ends
     public void StartConversation(string dialogueName, Action onEndCallback)
     {
-        m_onEnd = onEndCallback;
+        m_onDialogueEnd = onEndCallback;
         m_dialogueWindow.SetActive(true);
         DisplayConversation(m_dialogueManager.StartDialogue(dialogueName, m_gameManager));
         DisplayConversationOptions();
@@ -119,7 +125,28 @@ public class UIManager : MonoBehaviour
     // Calls the provided callback
     private void EndConversation()
     {
-        m_onEnd.Invoke();
+        m_onDialogueEnd.Invoke();
         m_dialogueWindow.SetActive(false);
+    }
+
+    public void AnimateFadeTransition(Action onMid, Action onEnd)
+    {
+        m_onTransitionMid = onMid;
+        m_onTransitionEnd = onEnd;
+
+        m_director.time = 0;
+        m_director.Play();
+    }
+
+    public void TransitionMidwayTrigger()
+    {
+        if (m_onTransitionMid != null) m_onTransitionMid.Invoke();
+        m_onTransitionMid = null;
+    }
+
+    public void TransitionEndTrigger()
+    {
+        if (m_onTransitionEnd != null) m_onTransitionEnd.Invoke();
+        m_onTransitionEnd = null;
     }
 }

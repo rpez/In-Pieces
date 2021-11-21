@@ -10,7 +10,7 @@ public class GameState
     public bool HAS_EYES { get; set; } = false;
     public bool HAS_EARS { get; set; } = false;
     public bool HAS_HAND { get; set; } = false;
-    public bool HAS_LEGS { get; set; } = false;
+    public bool HAS_LEGS { get; set; } = true;
 
     // BODY PART ATTITUDES
     public int NOSE { get; set; } = 0;
@@ -20,6 +20,7 @@ public class GameState
     public int LEGS { get; set; } = 0;
 
     // MANOR STATES
+    public bool UPSTAIRS { get; set; } = false;
     public bool STEREO_IS_ON { get; set; } = false;
 
     // Bedroom tutorial scene
