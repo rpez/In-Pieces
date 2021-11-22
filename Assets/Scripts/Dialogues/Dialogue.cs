@@ -2,16 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+// Generic interface for all Dialogue
 public interface IDialogue
 {
     public string ToString();
 }
 
+/* Represents Dialogue that has:
+    1) Conditions    if these are met, make the Dialogue appear to the player
+    2) Actions       these can modify the game state */
 public interface IConditionalDialogue : IDialogue
 {
-    public IDialogueCondition Condition { get; }
+    public List<IDialogueCondition> Conditions { get; }
     public List<IDialogueAction> Actions { get; }
 }
+
+// Represents Dialogue that the player can select in the conversation screen
+public interface ISelectableDialogue : IDialogue {}
 
 public class ActorDialogue : IConditionalDialogue
 {
@@ -19,15 +26,15 @@ public class ActorDialogue : IConditionalDialogue
 
     public string Line { get; }
 
-    public IDialogueCondition Condition { get; }
+    public List<IDialogueCondition> Conditions { get; }
 
     public List<IDialogueAction> Actions { get; }
 
-    public ActorDialogue(string actor, string line, IDialogueCondition condition = null, List<IDialogueAction> actions = null)
+    public ActorDialogue(string actor, string line, List<IDialogueCondition> conditions = null, List<IDialogueAction> actions = null)
     {
         Actor = actor;
         Line = line;
-        Condition = condition;
+        Conditions = conditions;
         Actions = actions;
     }
 
@@ -37,7 +44,7 @@ public class ActorDialogue : IConditionalDialogue
     }
 }
 
-public class ContinueDialogue : IDialogue
+public class ContinueDialogue : ISelectableDialogue
 {
     public override string ToString()
     {
@@ -45,7 +52,7 @@ public class ContinueDialogue : IDialogue
     }
 }
 
-public class EndDialogue : IDialogue
+public class EndDialogue : ISelectableDialogue
 {
     public override string ToString()
     {
@@ -53,21 +60,21 @@ public class EndDialogue : IDialogue
     }
 }
 
-public class PlayerDialogue : IConditionalDialogue
+public class PlayerDialogue : IConditionalDialogue, ISelectableDialogue
 {
     public string BodyPart { get; }
 
     public string Line { get; }
 
-    public IDialogueCondition Condition { get; }
+    public List<IDialogueCondition> Conditions { get; }
 
     public List<IDialogueAction> Actions { get; }
 
-    public PlayerDialogue(string bodyPart, string line, IDialogueCondition condition = null, List<IDialogueAction> actions = null)
+    public PlayerDialogue(string bodyPart, string line, List<IDialogueCondition> conditions = null, List<IDialogueAction> actions = null)
     {
         Line = line;
         BodyPart = bodyPart;
-        Condition = condition;
+        Conditions = conditions;
         Actions = actions;
     }
 
@@ -80,15 +87,17 @@ public class PlayerDialogue : IConditionalDialogue
 public class RefDialogue : IDialogue
 {
     public int Ref { get; }
+    public bool RefChildren { get; }
 
-    public RefDialogue(int lineNumber)
+    public RefDialogue(int lineNumber, bool refChildren = false)
     {
         Ref = lineNumber;
+        RefChildren = refChildren;
     }
 
     public override string ToString()
     {
-        return string.Format("{{REF {0}}}", Ref);
+        return RefChildren ? string.Format("{{REF {0} CHILDREN}}", Ref) : string.Format("{{REF {0}}}", Ref);
     }
 }
 
@@ -100,6 +109,7 @@ public class RootDialogue : IDialogue
     }
 }
 
+/* Dialogue Conditions */
 public interface IDialogueCondition
 {
     public bool Negator { get; }
@@ -139,6 +149,7 @@ public class IntDialogueCondition : IDialogueCondition
     public override string ToString() => Negator ? "NOT" : "" + string.Format("{0} {1} {2}", Variable, Operator, Value);
 }
 
+/* Dialogue Actions */
 public interface IDialogueAction
 {
     public string ToString();

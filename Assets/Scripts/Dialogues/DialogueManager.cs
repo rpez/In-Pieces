@@ -8,6 +8,7 @@ using UnityEngine;
 public class DialogueManager : Singleton<DialogueManager>
 {
     private DialogueFileReader _dfr;
+    private string _filename;
     
     public Dictionary<string, DialogueTree> AllDialogue { get; private set; }
     public DialogueTree CurrentDialogue { get; set; }
@@ -26,21 +27,24 @@ public class DialogueManager : Singleton<DialogueManager>
 
         if (AllDialogue.TryGetValue(dialogueFile, out dialogueTree))
         {
+            _filename = dialogueFile;
             CurrentDialogue = dialogueTree;
-            CurrentDialogue.CurrentLine = FirstAvailableChild(CurrentDialogue.Root);
-            IDialogue dialogue = CurrentDialogue.CurrentLine.Value;
+            CurrentDialogue.CurrentLine = GetNextActorDialogue(CurrentDialogue.Root);
 
+            IDialogue dialogue = CurrentDialogue.CurrentLine.Value;
             PerformActions(dialogue);
+
             return dialogue;
         }
 
-        Debug.LogError(string.Format("ConversationError: Couldn't find dialogue file '{0}'", dialogueFile));
+        Debug.LogError(string.Format("DialogueError: Couldn't find dialogue file '{0}'", _filename));
         return null;
     }
 
+    /* Stop conversation */
     public void StopDialogue()
     {
-        CurrentDialogue.CurrentLine = CurrentDialogue.Root;
+        CurrentDialogue.CurrentLine = null;
         CurrentDialogue = null;
     }
 
@@ -49,12 +53,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         if (CurrentDialogue == null) return null;
 
-        TreeNode<IDialogue> firstChild = CurrentDialogue.CurrentLine.Children[0];
-
-        if (firstChild.Value is RefDialogue refDialogue)
-            CurrentDialogue.Options = AvailableChildren(CurrentDialogue.FindById(refDialogue.Ref));
-        else
-            CurrentDialogue.Options = AvailableChildren(CurrentDialogue.CurrentLine);
+        CurrentDialogue.Options = AvailableChildren(CurrentDialogue.CurrentLine);
 
         return CurrentDialogue.Options.Select(x => x.Value).ToList();
     }
@@ -71,121 +70,136 @@ public class DialogueManager : Singleton<DialogueManager>
 
         TreeNode<IDialogue> selectedOption = CurrentDialogue.Options[x];
 
-        // end conversation
-        if (selectedOption.Value is EndDialogue)
+        if (!(selectedOption.Value is ISelectableDialogue))
+        {
+            int lineNumber = CurrentDialogue.CurrentLine.Id;
+            Debug.LogError(string.Format("DialogueError: Error in '{0}'.dlg: line {1} children. Trying to select an unselectable option!", _filename, lineNumber));
+            return null;
+        }
+
+        PerformActions(selectedOption.Value);
+
+        if (selectedOption.Value is EndDialogue || selectedOption.Children[0].Value is EndDialogue)
         {
             StopDialogue();
             return null;
         }
-        else if (selectedOption.Value is PlayerDialogue ||
-                 selectedOption.Value is ContinueDialogue)
-        {
-            PerformActions(selectedOption.Value);
 
-            TreeNode<IDialogue> nextLine = null;
-
-            // NOTE: Replace this with FirstAvailableChild?
-            foreach (TreeNode<IDialogue> node in selectedOption.Children)
-            {
-                IDialogue dialogue = node.Value;
-
-                if (DialogueAvailable(dialogue))
-                {
-                    nextLine = node;
-                    break;
-                }
-            }
-
-            if (nextLine.Value is EndDialogue endDialogue)
-            {
-                StopDialogue();
-                return null;
-            }
-            else if (nextLine.Value is RefDialogue refDialogue)
-                nextLine = CurrentDialogue.FindById(refDialogue.Ref);
-            else if (nextLine == null)
-            {
-                Debug.LogError("DialogueError: Couldn't find an available dialogue line!");
-                return null;
-            }
-
-            CurrentDialogue.CurrentLine = nextLine;
-            PerformActions(CurrentDialogue.CurrentLine.Value);
-        }
-        else
-            Debug.LogError("DialogueError: Shouldn't be able to select an ActorDialogue!");
+        CurrentDialogue.CurrentLine = GetNextActorDialogue(selectedOption);
+        PerformActions(CurrentDialogue.CurrentLine.Value);
 
         return CurrentDialogue.CurrentLine.Value;
     }
 
-    private TreeNode<IDialogue> FirstAvailableChild(TreeNode<IDialogue> parentNode)
+    private TreeNode<IDialogue> GetNextActorDialogue(TreeNode<IDialogue> parentNode)
     {
         try {
-            return AvailableChildren(parentNode)[0];
+            TreeNode<IDialogue> firstChild = AvailableChildren(parentNode)[0];
+
+            // make sure this is actually an ActorDialogue
+            _ = (ActorDialogue) firstChild.Value;
+
+            return firstChild;
         }
-        catch (IndexOutOfRangeException)
+        catch (Exception e) when (e is IndexOutOfRangeException || e is InvalidCastException)
         {
-            Debug.LogError("DialogueError: Couldn't find an available dialogue line!");
+            int lineNumber = parentNode.Id;
+            Debug.LogError(string.Format("DialogueError: Error in '{0}.dlg': line {1} children. Couldn't find next available ActorDialogue!", _filename, lineNumber));
             return null;
         }
     }
 
-    private List<TreeNode<IDialogue>> AvailableChildren(TreeNode<IDialogue> parentNode)
+    private List<TreeNode<IDialogue>> AvailableChildren(TreeNode<IDialogue> parentNode, int refFollowCount = 0)
     {
         List<TreeNode<IDialogue>> availableChildren = new List<TreeNode<IDialogue>>();
 
-        foreach (TreeNode<IDialogue> node in parentNode.Children)
+        foreach (TreeNode<IDialogue> child in parentNode.Children)
         {
-            TreeNode<IDialogue> potentialNode = node;
+            TreeNode<IDialogue> node = child;
 
-            if (node.Value is RefDialogue refDialogue)
-                potentialNode = CurrentDialogue.FindById(refDialogue.Ref);
+            if (node.Value is RefDialogue refDialogue && refDialogue.RefChildren)
+            {
+                if (refFollowCount >= 5)
+                {
+                    int lineNumber = node.Id;
+                    Debug.LogError(string.Format("DialogueError: Error in '{0}.dlg': line {1}. Nested references limit reached!", _filename, lineNumber));
+                    return null;
+                }
 
-            if (DialogueAvailable(potentialNode.Value))
-                availableChildren.Add(potentialNode);
+                List<TreeNode<IDialogue>> refChildren = AvailableChildren(CurrentDialogue.FindById(refDialogue.Ref), refFollowCount + 1);
+                availableChildren = availableChildren.Concat(refChildren).ToList();
+            }
+            else
+            {
+                if (node.Value is RefDialogue refDialogueLine)
+                    node = CurrentDialogue.FindById(refDialogueLine.Ref);
+
+                if (DialogueAvailable(node.Value))
+                    availableChildren.Add(node);
+            }
+        }
+
+        // Check that we don't mix and match different Dialogue types
+        bool allActorDialogue = availableChildren.All(x => x.Value is ActorDialogue);
+        bool allSelectableDialogue = availableChildren.All(x => x.Value is ISelectableDialogue);
+
+        if (!(allActorDialogue || allSelectableDialogue))
+        {
+            int lineNumber = parentNode.Id;
+            Debug.LogError(string.Format("DialogueError: Error in '{0}.dlg': line {1} children. Can't mix ActorDialogue and SelectableDialogue types!", _filename, lineNumber));
+            return null;
         }
 
         return availableChildren;
     }
 
     /*  This function is used to check if a dialogue line should be available to the player or not.
-        It checks the status of the dialogue line Condition in GameManager.State */
+        It checks the status of the dialogue line Conditions in GameManager.State */
     private bool DialogueAvailable(IDialogue dialogue)
     {
-        if (!(dialogue is IConditionalDialogue))
-            return true;
-
-        IConditionalDialogue condDialogue = (IConditionalDialogue) dialogue;
-
-        if (condDialogue.Condition is BoolDialogueCondition boolCond)
+        if (dialogue is PlayerDialogue playerDialogue && !string.IsNullOrWhiteSpace(playerDialogue.BodyPart))
         {
-            bool returnable = GameManager.Instance.GetStateValue<bool>(boolCond.Variable);
-
-            return boolCond.Negator ? !returnable : returnable;
-        }
-        else if (condDialogue.Condition is IntDialogueCondition intCond)
-        {
-            int val = GameManager.Instance.GetStateValue<int>(intCond.Variable);
-            bool returnable;
-
-            // if there's a better way to do this, would be cool to know!
-            if (intCond.Operator.Equals("=="))
-                returnable = val == intCond.Value;
-            else if (intCond.Operator.Equals("<"))
-                returnable = val < intCond.Value;
-            else if (intCond.Operator.Equals(">"))
-                returnable = val > intCond.Value;
-            else if (intCond.Operator.Equals("<="))
-                returnable = val <= intCond.Value;
-            else
-                returnable = val >= intCond.Value;
-
-            return intCond.Negator ? !returnable : returnable;
+            bool hasBodyPart = GameManager.Instance.GetStateValue<bool>("HAS_" + playerDialogue.BodyPart);
+            if (!hasBodyPart) return false;
         }
 
+        if (dialogue is IConditionalDialogue condDialogue)
+            return condDialogue.Conditions.All(x => ConditionIsTrue(x));
         return true;
     }
 
+    /* Check if a single Condition is true */
+    private bool ConditionIsTrue(IDialogueCondition condition)
+    {
+        bool returnable;
+
+        if (condition is BoolDialogueCondition boolCond)
+        {
+            returnable = GameManager.Instance.GetStateValue<bool>(boolCond.Variable);
+
+            return boolCond.Negator ? !returnable : returnable;
+        }
+
+        IntDialogueCondition intCond = (IntDialogueCondition) condition;
+        
+        int val = GameManager.Instance.GetStateValue<int>(intCond.Variable);
+
+        // if there's a better way to do this, would be cool to know!
+        if (intCond.Operator.Equals("=="))
+            returnable = val == intCond.Value;
+        else if (intCond.Operator.Equals("<"))
+            returnable = val < intCond.Value;
+        else if (intCond.Operator.Equals(">"))
+            returnable = val > intCond.Value;
+        else if (intCond.Operator.Equals("<="))
+            returnable = val <= intCond.Value;
+        else
+            returnable = val >= intCond.Value;
+
+        return intCond.Negator ? !returnable : returnable;
+    }
+
+    /* Perform all actions. Actions can modify game state. */
     private void PerformActions(IDialogue dialogue)
     {
         if (!(dialogue is IConditionalDialogue))

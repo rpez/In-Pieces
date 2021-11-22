@@ -91,7 +91,7 @@ public class DialogueFileReader
             if (((_indentation - _prevIndentation) % 4 != 0) ||
                 (_indentation > _prevIndentation && _indentation - _prevIndentation != 4))
             {
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + " Indentation in dialogue files should be exactly 4.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Indentation in dialogue files should be exactly 4.", _filename, _lineNumber));
                 break;
             }
 
@@ -117,7 +117,7 @@ public class DialogueFileReader
                 dialogue = HandlePlayerDialogue(playerMatch);
             else                           // error, bad syntax in this line
             {
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + " didn't match the dialogue syntax.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1} didn't match the dialogue syntax.", _filename, _lineNumber));
                 continue;
             }
 
@@ -144,8 +144,6 @@ public class DialogueFileReader
             _prevIndentation -= 4;
             _currentNode = _currentNode.Parent;
         }
-
-        /*Debug.Log(String.Concat(Enumerable.Repeat(" ", _indentation)) + "PARENT: " + _currentNode.Value + ", CHILD: " + dialogue);*/
         
         _currentNode = _currentNode.AddChild(id: _lineNumber, dialogue);
     }
@@ -153,12 +151,12 @@ public class DialogueFileReader
     private IDialogue HandleActorDialogue(Match match)
     {
         List<IDialogueAction> actions = SplitAndValidateActions(match.Groups[4].Value);
-        IDialogueCondition condition = ValidateCondition(match.Groups[3].Value);
+        List<IDialogueCondition> conditions = SplitAndValidateConditions(match.Groups[3].Value);
 
         return new ActorDialogue(
             match.Groups[1].Value,  // Actor
             match.Groups[2].Value,  // Line
-            condition,              // Condition
+            conditions,             // Conditions
             actions                 // Actions
         );
     }
@@ -173,12 +171,12 @@ public class DialogueFileReader
     private IDialogue HandlePlayerDialogue(Match match)
     {
         List<IDialogueAction> actions = SplitAndValidateActions(match.Groups[4].Value, match.Groups[1].Value);
-        IDialogueCondition condition = ValidateCondition(match.Groups[3].Value);
+        List<IDialogueCondition> conditions = SplitAndValidateConditions(match.Groups[3].Value);
 
         return new PlayerDialogue(
             match.Groups[1].Value,  // BodyPart
             match.Groups[2].Value,  // Line
-            condition,              // Condition
+            conditions,             // Conditions
             actions                 // Actions
         );
     }
@@ -188,32 +186,31 @@ public class DialogueFileReader
         int refLineNumber;
         int.TryParse(match.Groups[2].Value, out refLineNumber);
 
+        // Does this Ref reference children?
+        if (match.Groups[3].Success)
+            return new RefDialogue(refLineNumber, refChildren: true);
+
+        // Reference a single line
         return new RefDialogue(refLineNumber);
     }
 
     private List<IDialogueAction> SplitAndValidateActions(string actionsString, string bodyPart = "")
     {
-        List<string> actionStringList = new List<string>();
         List<IDialogueAction> actions = new List<IDialogueAction>();
 
         if (string.IsNullOrWhiteSpace(actionsString)) return actions;
 
-        // Split actions into a list
-        try
-        {
-            actionStringList = actionsString.Split(',').Select(s => s.Trim()).ToList();
-        }
-        catch
-        {
-            Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Cannot split Actions.", _filename));
-        }
+        // Split Actions into a list
+        List<string> splitActions = actionsString.Split(',')
+                                                 .Select(s => s.Trim())
+                                                 .ToList();
 
-        // Validate each action with regex
-        foreach (string a in actionStringList)
+        // Validate each Action with regex
+        foreach (string action in splitActions)
         {
-            Match setMatch = _regexes["setActionRegex"].Match(a);
-            Match addMatch = _regexes["addActionRegex"].Match(a);
-            Match rollMatch = _regexes["rollActionRegex"].Match(a);
+            Match setMatch = _regexes["setActionRegex"].Match(action);
+            Match addMatch = _regexes["addActionRegex"].Match(action);
+            Match rollMatch = _regexes["rollActionRegex"].Match(action);
 
             if (setMatch.Success)
             {
@@ -235,7 +232,7 @@ public class DialogueFileReader
 
                 if (!bodyPartMatch.Success)
                 {
-                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad body part value in RollAction syntax.", _filename));
+                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Bad body part value in Actions syntax.", _filename, _lineNumber));
                     continue;
                 }
 
@@ -247,39 +244,53 @@ public class DialogueFileReader
                 if (numerator <= denominator && numerator >= 0 && denominator > 0)
                     actions.Add(new RollDialogueAction(numerator, denominator));
                 else
-                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad roll values in RollAction syntax.", _filename));
+                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Bad dice roll values in Actions syntax.", _filename, _lineNumber));
             }
             else
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad Actions syntax.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Bad Actions syntax.", _filename, _lineNumber));
         }
 
         return actions;
     }
 
-    private IDialogueCondition ValidateCondition(String condition)
+    private List<IDialogueCondition> SplitAndValidateConditions(string conditionsString)
     {
-        if (string.IsNullOrWhiteSpace(condition)) return null;
+        List<IDialogueCondition> conditions = new List<IDialogueCondition>();
 
-        Match boolMatch = _regexes["boolConditionRegex"].Match(condition);
-        Match intMatch = _regexes["intConditionRegex"].Match(condition);
+        if (string.IsNullOrWhiteSpace(conditionsString)) return conditions;
 
-        bool negator = condition.Contains("NOT");
+        // Split Conditions into a list. Concatenate "IF " to all but the first Condition
+        List<string> splitConditions = conditionsString.Split(new string[] { " AND " }, StringSplitOptions.None)
+                                                       .Select((s, i) => i == 0 ? s.Trim() : "IF " + s.Trim())
+                                                       .ToList();
 
-        if (intMatch.Success)
+        // Validate each Condition with regex
+        foreach (string condition in splitConditions)
         {
-            string variable = intMatch.Groups[3].Value;
-            string op = intMatch.Groups[4].Value;
-            int val;
-            int.TryParse(intMatch.Groups[5].Value, out val);
-            return new IntDialogueCondition(negator, variable, op, val);
-        }
-        else if (boolMatch.Success)
-        {
-            string variable = boolMatch.Groups[3].Value;
-            return new BoolDialogueCondition(negator, variable);
+            Match boolMatch = _regexes["boolConditionRegex"].Match(condition);
+            Match intMatch = _regexes["intConditionRegex"].Match(condition);
+
+            if (intMatch.Success)
+            {
+                bool negator = intMatch.Groups[2].Success;
+                string variable = intMatch.Groups[3].Value;
+                string op = intMatch.Groups[4].Value;
+                int val;
+                int.TryParse(intMatch.Groups[5].Value, out val);
+
+                conditions.Add(new IntDialogueCondition(negator, variable, op, val));
+            }
+            else if (boolMatch.Success)
+            {
+                bool negator = boolMatch.Groups[2].Success;
+                string variable = boolMatch.Groups[3].Value;
+
+                conditions.Add(new BoolDialogueCondition(negator, variable));
+            }
+            else
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Bad Conditions syntax.", _filename, _lineNumber));
         }
 
-        Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad Condition syntax.", _filename));
-        return null;
+        return conditions;
     }
 }

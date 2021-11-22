@@ -1,5 +1,5 @@
 The Eyes: You see The Ears. They are curled up in an almost fetal position. {IF EARS_TALKED_WITH}
-    > Try to figure out what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3}
+    > Try to figure out what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3 AND NOT EARS_QUEST_LEARNED_OF_STEREO}
         The Ears: You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_WORM TRUE]
             {CONTINUE}
                 The Nose: "You know, there's a worm inside there!!"
@@ -39,11 +39,11 @@ The Eyes: You see The Ears. They are curled up in an almost fetal position. {IF 
                                                         The Right Eye (Katie): "Are you totally *brainless*???? Obviously we need a *helping hand* for this..."
                                                             {CONTINUE}
                                                                 The Right Eye (Katie): "Come on, use The Hand instead!" {IF HAS_HAND}
-                                                                    {LINE 32 CHILDREN}
+                                                                    {LINE 24 CHILDREN}
                                                                 The Left Eye (Jon): "Yeah, we desperately need *a hand-up*!"
                                                                     {LINE 1 CHILDREN}
                                             > Don't pick up The Ears.
-                                                {LINE 1 CHILDREN}
+                                                {LINE 1}
     > Turn what off? {IF EARS_QUEST_MADE_CONTACT == 2}
         The Ears: When asking yourself that question, you suddenly realize not everything is right with The Ears. You now *see* clearly the tremors, *feel* the whimpers... It seems like they're suffering from some kind of bout of insanity. [ADD EARS_QUEST_LEARNED_OF_SHIVERS +1, ADD EARS_QUEST_MADE_CONTACT +1]
             {LINE 1 CHILDREN}
@@ -95,23 +95,15 @@ The Eyes: You see The Ears. They are curled up in an almost fetal position. {IF 
                                 The Hand: "I could pluck it out!"
                                     {LINE 1 CHILDREN}
                         The Right Eye (Katie): "Wow... it looks like it's starving! I wonder why that is?" {IF NOT EARS_QUEST_LEARNED_OF_STEREO}
-                            {CONTINUE}
-                                The Right Eye (Katie): "If we had a hand, we could pluck it out!" {IF NOT HAS_HAND}
-                                    {LINE 1 CHILDREN}
-                                The Hand: "I could pluck it out!"
-                                    {LINE 1 CHILDREN}
+                            {LINE 92}
                         The Right Eye (Katie): "Wow... it looks like it's close to death! I think turning that stereo off almost killed it!" {IF NOT STEREO_IS_ON}
-                            {CONTINUE}
-                                The Right Eye (Katie): "If we had a hand, we could pluck it out!" {IF NOT HAS_HAND}
-                                    {LINE 1 CHILDREN}
-                                The Hand: "I could pluck it out!"
-                                    {LINE 1 CHILDREN}
+                            {LINE 92}
     <NOSE> Sniff The Ears. {IF NOT EARS_QUEST_NOSE_SNIFFED} [ROLL 5/12]
         The Nose: There is something wrong with the odour you sense from The Ears. It smells foul and alien, a smell you could imagine coming from a nasty, slimy rainforest slug. {IF ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
             {LINE 1 CHILDREN}
         The Nose: You poke your nose in and sniffle, but it seems like your attempt is fizzled. {IF NOT ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE]
             {LINE 1 CHILDREN}
-    {LINE 127}
+    {LINE 119}
 The Eyes: You see a pair of small, curious, crescent-shaped <INSERT_A_TINY_AMOUNT_OF_MORE_DESCRIPTION_HERE> lying on the carpet. They look like they are curled up in an almost fetal position.
     > Make contact with The Ears. [SET EARS_TALKED_WITH TRUE]
         The Nose: "Uh, hello?"
