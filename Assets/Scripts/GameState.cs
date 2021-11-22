@@ -7,7 +7,8 @@ public class GameState
     public bool ROLL_SUCCESS { get; set; } = false;
 
     // BODY PART OWNERSHIP
-    public bool HAS_EYES { get; set; } = false;
+    public bool HAS_NOSE { get; set; } = true;
+    public bool HAS_EYES { get; set; } = true;
     public bool HAS_EARS { get; set; } = false;
     public bool HAS_HAND { get; set; } = false;
     public bool HAS_LEGS { get; set; } = true;

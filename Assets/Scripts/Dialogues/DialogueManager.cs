@@ -157,6 +157,12 @@ public class DialogueManager : Singleton<DialogueManager>
         It checks the status of the dialogue line Conditions in GameManager.State */
     private bool DialogueAvailable(IDialogue dialogue)
     {
+        if (dialogue is PlayerDialogue playerDialogue && !string.IsNullOrWhiteSpace(playerDialogue.BodyPart))
+        {
+            bool hasBodyPart = GameManager.Instance.GetStateValue<bool>("HAS_" + playerDialogue.BodyPart);
+            if (!hasBodyPart) return false;
+        }
+
         if (dialogue is IConditionalDialogue condDialogue)
             return condDialogue.Conditions.All(x => ConditionIsTrue(x));
         return true;
