@@ -154,43 +154,46 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
     /*  This function is used to check if a dialogue line should be available to the player or not.
-        It checks the status of the dialogue line Condition in GameManager.State */
+        It checks the status of the dialogue line Conditions in GameManager.State */
     private bool DialogueAvailable(IDialogue dialogue)
     {
-        if (!(dialogue is IConditionalDialogue))
-            return true;
-
-        IConditionalDialogue condDialogue = (IConditionalDialogue) dialogue;
-
-        if (condDialogue.Condition is BoolDialogueCondition boolCond)
-        {
-            bool returnable = GameManager.Instance.GetStateValue<bool>(boolCond.Variable);
-
-            return boolCond.Negator ? !returnable : returnable;
-        }
-        else if (condDialogue.Condition is IntDialogueCondition intCond)
-        {
-            int val = GameManager.Instance.GetStateValue<int>(intCond.Variable);
-            bool returnable;
-
-            // if there's a better way to do this, would be cool to know!
-            if (intCond.Operator.Equals("=="))
-                returnable = val == intCond.Value;
-            else if (intCond.Operator.Equals("<"))
-                returnable = val < intCond.Value;
-            else if (intCond.Operator.Equals(">"))
-                returnable = val > intCond.Value;
-            else if (intCond.Operator.Equals("<="))
-                returnable = val <= intCond.Value;
-            else
-                returnable = val >= intCond.Value;
-
-            return intCond.Negator ? !returnable : returnable;
-        }
-
+        if (dialogue is IConditionalDialogue condDialogue)
+            return condDialogue.Conditions.All(x => ConditionIsTrue(x));
         return true;
     }
 
+    /* Check if a single Condition is true */
+    private bool ConditionIsTrue(IDialogueCondition condition)
+    {
+        bool returnable;
+
+        if (condition is BoolDialogueCondition boolCond)
+        {
+            returnable = GameManager.Instance.GetStateValue<bool>(boolCond.Variable);
+
+            return boolCond.Negator ? !returnable : returnable;
+        }
+
+        IntDialogueCondition intCond = (IntDialogueCondition) condition;
+        
+        int val = GameManager.Instance.GetStateValue<int>(intCond.Variable);
+
+        // if there's a better way to do this, would be cool to know!
+        if (intCond.Operator.Equals("=="))
+            returnable = val == intCond.Value;
+        else if (intCond.Operator.Equals("<"))
+            returnable = val < intCond.Value;
+        else if (intCond.Operator.Equals(">"))
+            returnable = val > intCond.Value;
+        else if (intCond.Operator.Equals("<="))
+            returnable = val <= intCond.Value;
+        else
+            returnable = val >= intCond.Value;
+
+        return intCond.Negator ? !returnable : returnable;
+    }
+
+    /* Perform all actions. Actions can modify game state. */
     private void PerformActions(IDialogue dialogue)
     {
         if (!(dialogue is IConditionalDialogue))

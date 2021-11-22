@@ -13,7 +13,7 @@ public interface IDialogue
     2) Actions       these can modify the game state */
 public interface IConditionalDialogue : IDialogue
 {
-    public IDialogueCondition Condition { get; }
+    public List<IDialogueCondition> Conditions { get; }
     public List<IDialogueAction> Actions { get; }
 }
 
@@ -26,15 +26,15 @@ public class ActorDialogue : IConditionalDialogue
 
     public string Line { get; }
 
-    public IDialogueCondition Condition { get; }
+    public List<IDialogueCondition> Conditions { get; }
 
     public List<IDialogueAction> Actions { get; }
 
-    public ActorDialogue(string actor, string line, IDialogueCondition condition = null, List<IDialogueAction> actions = null)
+    public ActorDialogue(string actor, string line, List<IDialogueCondition> conditions = null, List<IDialogueAction> actions = null)
     {
         Actor = actor;
         Line = line;
-        Condition = condition;
+        Conditions = conditions;
         Actions = actions;
     }
 
@@ -66,15 +66,15 @@ public class PlayerDialogue : IConditionalDialogue, ISelectableDialogue
 
     public string Line { get; }
 
-    public IDialogueCondition Condition { get; }
+    public List<IDialogueCondition> Conditions { get; }
 
     public List<IDialogueAction> Actions { get; }
 
-    public PlayerDialogue(string bodyPart, string line, IDialogueCondition condition = null, List<IDialogueAction> actions = null)
+    public PlayerDialogue(string bodyPart, string line, List<IDialogueCondition> conditions = null, List<IDialogueAction> actions = null)
     {
         Line = line;
         BodyPart = bodyPart;
-        Condition = condition;
+        Conditions = conditions;
         Actions = actions;
     }
 
