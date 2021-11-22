@@ -1,5 +1,5 @@
 Johnny: You feel a sudden twitch, an involuntary contraction. The sensation of falling. Gravity is dragging you down, slamming you in an infinite loop, endless spirals in an impossible staircase...
-    > "Wh-..."
+    > "Wha-..."
         Johnny: The force feels very familiar to you. You've been here before. This time it seems like it knows of no boundaries, there is no reining it in. The sparks light up, the ignition follows, and all there is to do is to ride the expanding wave...
             > "I don-..."
                 Johnny: No. You don't. There is no escape. You have chosen this path. This is where we must begin.
@@ -7,9 +7,9 @@ Johnny: You feel a sudden twitch, an involuntary contraction. The sensation of f
                         Johnny: "W-... wh-... wh-... wh-... what... what... what... wher-... where... where am I?"
                             {CONTINUE}
                                 Johnny: You feel something familiar that over the past years has become very recognizable to you. A pure feeling of silky smooth comfort. Balanced support for the body and the soul. Plush, but firm. Seven energy centers of spinal conformity. Engineered, extravagant, extraordinary, ergonomical, endless perfection.
-                                    > "I'm on the bed?"
+                                    > I'm on the bed?
                                         Johnny: This is all too familiar to you. You are on the queen-sized bed in the king-sized mansion.
-                                            > "How do I know that?" {IF TUTORIAL_LISTEN == 1} [ADD TUTORIAL_LISTEN +1]
+                                            > How do I know that? {IF TUTORIAL_LISTEN == 1} [ADD TUTORIAL_LISTEN +1]
                                                 Johnny: Somehow you are certain that your sense of smell has heightened. You recognize the slightly overbearing chemical detergent in the linen. The lovely odor of a happily perspiring young man beside you. The musty old dampness of a Victorian-era wooden house. But above them all, the reek of old booze flying low overcast.
                                                     {LINE 11 CHILDREN}
                                             > Open your eyes. {IF NOT TUTORIAL_OPEN_EYES} [SET TUTORIAL_OPEN_EYES TRUE, ADD TUTORIAL_COUNT_SENSES +1]
