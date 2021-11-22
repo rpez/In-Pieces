@@ -91,7 +91,7 @@ public class DialogueFileReader
             if (((_indentation - _prevIndentation) % 4 != 0) ||
                 (_indentation > _prevIndentation && _indentation - _prevIndentation != 4))
             {
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + " Indentation in dialogue files should be exactly 4.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Indentation in dialogue files should be exactly 4.", _filename, _lineNumber));
                 break;
             }
 
@@ -117,7 +117,7 @@ public class DialogueFileReader
                 dialogue = HandlePlayerDialogue(playerMatch);
             else                           // error, bad syntax in this line
             {
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + " didn't match the dialogue syntax.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1} didn't match the dialogue syntax.", _filename, _lineNumber));
                 continue;
             }
 
@@ -188,6 +188,11 @@ public class DialogueFileReader
         int refLineNumber;
         int.TryParse(match.Groups[2].Value, out refLineNumber);
 
+        // Does this Ref reference children?
+        if (match.Groups[3].Success)
+            return new RefDialogue(refLineNumber, refChildren: true);
+
+        // Reference a single line
         return new RefDialogue(refLineNumber);
     }
 
@@ -205,7 +210,7 @@ public class DialogueFileReader
         }
         catch
         {
-            Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Cannot split Actions.", _filename));
+            Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Cannot split Actions.", _filename, _lineNumber));
         }
 
         // Validate each action with regex
@@ -235,7 +240,7 @@ public class DialogueFileReader
 
                 if (!bodyPartMatch.Success)
                 {
-                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad body part value in RollAction syntax.", _filename));
+                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Bad body part value in RollAction syntax.", _filename, _lineNumber));
                     continue;
                 }
 
@@ -247,10 +252,10 @@ public class DialogueFileReader
                 if (numerator <= denominator && numerator >= 0 && denominator > 0)
                     actions.Add(new RollDialogueAction(numerator, denominator));
                 else
-                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad roll values in RollAction syntax.", _filename));
+                    Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Bad roll values in RollAction syntax.", _filename, _lineNumber));
             }
             else
-                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad Actions syntax.", _filename));
+                Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Bad Actions syntax.", _filename, _lineNumber));
         }
 
         return actions;
@@ -279,7 +284,7 @@ public class DialogueFileReader
             return new BoolDialogueCondition(negator, variable);
         }
 
-        Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line " + _lineNumber + ". Bad Condition syntax.", _filename));
+        Debug.LogError(string.Format("DialogueError: Error when reading '{0}.dlg': line {1}. Bad Conditions syntax.", _filename, _lineNumber));
         return null;
     }
 }
