@@ -105,7 +105,7 @@ The Eyes: You see The Ears. They are curled up in an almost fetal position. {IF 
             {LINE 1 CHILDREN}
     {LINE 119}
 The Eyes: You see a pair of small, curious, crescent-shaped <INSERT_A_TINY_AMOUNT_OF_MORE_DESCRIPTION_HERE> lying on the carpet. They look like they are curled up in an almost fetal position.
-    > Make contact with The Ears. [SET EARS_TALKED_WITH TRUE]
+    > Approach The Ears. [SET EARS_TALKED_WITH TRUE]
         The Nose: "Uh, hello?"
             {CONTINUE}
                 The Ears: .
