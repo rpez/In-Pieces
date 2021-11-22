@@ -36,5 +36,10 @@ public class TransitionInteractable : Interactable
                 m_actor = null;
             });
         }
+        else
+        {
+            base.OnExitInteraction();
+            m_actor = null;
+        }
     }
 }
