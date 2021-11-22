@@ -39,7 +39,7 @@ The Eyes: You see The Ears. They are curled up in an almost fetal position. {IF 
                                                         The Right Eye (Katie): "Are you totally *brainless*???? Obviously we need a *helping hand* for this..."
                                                             {CONTINUE}
                                                                 The Right Eye (Katie): "Come on, use The Hand instead!" {IF HAS_HAND}
-                                                                    {LINE 32 CHILDREN}
+                                                                    {LINE 24 CHILDREN}
                                                                 The Left Eye (Jon): "Yeah, we desperately need *a hand-up*!"
                                                                     {LINE 1 CHILDREN}
                                             > Don't pick up The Ears.
