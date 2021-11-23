@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text m_dialogueText;
     public GameObject m_dialogueOptionContainer;
     public PlayableDirector m_director;
+    public TMP_Text m_actor;
 
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
@@ -42,6 +43,7 @@ public class UIManager : MonoBehaviour
     private void DisplayConversation(IDialogue dialogue)
     {
         m_dialogueText.text = dialogue.ToString();
+        m_actor.text = (dialogue as ActorDialogue).Actor;
     }
 
     // Selects a conversation option with index x
