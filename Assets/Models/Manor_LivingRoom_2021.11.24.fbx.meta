@@ -3,7 +3,22 @@ guid: ebc5d06905324b74ead30a5f203a794b
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fureniture
+    second: {fileID: 2100000, guid: 917df507db895c34fae253ca485149dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mansion
+    second: {fileID: 2100000, guid: a4d29d0b158357a41afd8ce179cefb67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props
+    second: {fileID: 2100000, guid: c7495b5659ee27548997b087c5cf281f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
