@@ -43,7 +43,12 @@ public class UIManager : MonoBehaviour
     private void DisplayConversation(IDialogue dialogue)
     {
         m_dialogueText.text = dialogue.ToString();
-        m_actor.text = (dialogue as ActorDialogue).Actor;
+        // Check if the dailogue has an actor, if yes, update it to UI
+        if (dialogue.GetType() == typeof(ActorDialogue))
+            m_actor.text = (dialogue as ActorDialogue).Actor;
+        else
+            m_actor.text = "";
+
     }
 
     // Selects a conversation option with index x
