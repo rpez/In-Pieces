@@ -42,10 +42,11 @@ public class UIManager : MonoBehaviour
     // Updates the dialogue text
     private void DisplayConversation(IDialogue dialogue)
     {
-        m_dialogueText.text = dialogue.ToString();
+        if (dialogue is IConditionalDialogue condDialogue)
+            m_dialogueText.text = condDialogue.Line;
         // Check if the dailogue has an actor, if yes, update it to UI
-        if (dialogue.GetType() == typeof(ActorDialogue))
-            m_actor.text = (dialogue as ActorDialogue).Actor;
+        if (dialogue is ActorDialogue actorDialogue && !actorDialogue.Actor.Equals("DESCRIPTION"))
+            m_actor.text = actorDialogue.Actor;
         else
             m_actor.text = "";
 
@@ -96,7 +97,7 @@ public class UIManager : MonoBehaviour
             }
             else if (option is PlayerDialogue)
             {
-                text = string.Format("<color=white>{0}. {1}</color>", i, option);
+                text = string.Format("<color=white>{0}</color>", option);
                 int index = i - 1;
                 callback = () => SelectConversationOption(index);
                 i++;

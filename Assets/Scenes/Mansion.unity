@@ -900,6 +900,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4408303358184814297, guid: 371a29fcbd98c604a99fd529da14c114, type: 3}
+      propertyPath: m_dialogueIdentifier
+      value: stereo_dialogue
+      objectReference: {fileID: 0}
     - target: {fileID: 4408303358184814300, guid: 371a29fcbd98c604a99fd529da14c114, type: 3}
       propertyPath: m_Name
       value: stereo

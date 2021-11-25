@@ -29,6 +29,13 @@ public class GameManager : Singleton<GameManager>
     {
         State.SetPropertyValue<T>(propertyName, val);
     }
+
+    public void ToggleStateValue(string propertyName)
+    {
+        Debug.Log(GetStateValue<bool>(propertyName));
+        SetStateValue<bool>(propertyName, !GetStateValue<bool>(propertyName));
+        Debug.Log(GetStateValue<bool>(propertyName));
+    }
 }
 
 public static class ExtensionMethods

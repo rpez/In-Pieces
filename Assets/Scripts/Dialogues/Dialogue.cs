@@ -13,6 +13,7 @@ public interface IDialogue
     2) Actions       these can modify the game state */
 public interface IConditionalDialogue : IDialogue
 {
+    public string Line { get; }
     public List<IDialogueCondition> Conditions { get; }
     public List<IDialogueAction> Actions { get; }
 }
@@ -167,6 +168,18 @@ public class SetDialogueAction : IDialogueAction
     }
 
     public override string ToString() => string.Format("SET {0} {1}", Variable, Value);
+}
+
+public class ToggleDialogueAction : IDialogueAction
+{
+    public string Variable { get; }
+
+    public ToggleDialogueAction(string variable)
+    {
+        Variable = variable;
+    }
+
+    public override string ToString() => string.Format("TGL {0}", Variable);
 }
 
 public class AddDialogueAction : IDialogueAction
