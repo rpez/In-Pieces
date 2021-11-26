@@ -18,6 +18,7 @@ public class SoundManager : Singleton<SoundManager>
     // This function gets called every time a dialog action is taken
     public void UpdateSounds()
     {
+        // The m_musicPlaying boolean is to ensure that the music won't start on top of already playing music
         if (!m_musicPlaying && GameManager.Instance.GetStateValue<bool>("STEREO_IS_ON"))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/metalSalsa");
