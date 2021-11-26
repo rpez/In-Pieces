@@ -45,7 +45,7 @@ public class GameState
     public int EARS_QUEST_LEARNED_OF_SHIVERS { get; set; } = 0;
 
     // Stereo scene
-    public bool STEREO_IS_ON { get; set; } = true;
+    public bool STEREO_IS_ON { get; set; } = false;
     public bool STEREO_BASS_BOOST { get; set; } = false;
     public bool STEREO_IS_PLAYING { get; set; } = false;
 

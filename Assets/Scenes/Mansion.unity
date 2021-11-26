@@ -255,9 +255,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1687258585}
   - component: {fileID: 1687258584}
-  - component: {fileID: 1687258582}
   - component: {fileID: 1687258586}
   - component: {fileID: 1687258583}
+  - component: {fileID: 1687258582}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -265,14 +265,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1687258582
-AudioListener:
+--- !u!114 &1687258582
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!114 &1687258583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,6 +917,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 371a29fcbd98c604a99fd529da14c114, type: 3}
+--- !u!1 &4408303357772619782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4408303358184814300, guid: 371a29fcbd98c604a99fd529da14c114, type: 3}
+  m_PrefabInstance: {fileID: 4408303357772619781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4408303357772619783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408303357772619782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -310944053
+      Data2: 1146061879
+      Data3: -1750453353
+      Data4: 978644154
+    Path: event:/metalSalsa
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &4659871883466023488
 PrefabInstance:
   m_ObjectHideFlags: 0
