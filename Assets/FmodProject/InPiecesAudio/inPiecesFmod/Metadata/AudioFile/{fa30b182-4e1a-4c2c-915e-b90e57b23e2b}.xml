@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{fa30b182-4e1a-4c2c-915e-b90e57b23e2b}">
+		<property name="assetPath">
+			<value>cdsearching.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>7.8367346938775508</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{68732cb8-8879-4c49-85f8-bec1bf1477f5}</destination>
+		</relationship>
+	</object>
+</objects>

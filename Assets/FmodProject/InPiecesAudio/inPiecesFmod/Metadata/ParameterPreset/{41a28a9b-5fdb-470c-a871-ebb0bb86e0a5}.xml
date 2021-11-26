@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{41a28a9b-5fdb-470c-a871-ebb0bb86e0a5}">
+		<property name="name">
+			<value>Stereo_ON_OFF</value>
+		</property>
+		<relationship name="folder">
+			<destination>{df027a71-9947-4f6a-a657-66268396116b}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{9642ee32-7c86-4d5c-bd13-4d9bbec09a16}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{9642ee32-7c86-4d5c-bd13-4d9bbec09a16}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
