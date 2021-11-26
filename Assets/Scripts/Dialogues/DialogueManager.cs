@@ -243,5 +243,7 @@ public class DialogueManager : Singleton<DialogueManager>
                 }
             }
         }
+
+        SoundManager.Instance.UpdateSounds();
     }
 }
