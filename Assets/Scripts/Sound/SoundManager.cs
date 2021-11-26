@@ -7,6 +7,9 @@ public class SoundManager : Singleton<SoundManager>
     // This function gets called every time a dialog action is taken
     public void UpdateSounds()
     {
-        Debug.Log("Sounds updated");
+        if (GameManager.Instance.GetStateValue<bool>("EARS_QUEST_LEARNED_OF_STEREO"))
+        {
+
+        }
     }
 }
