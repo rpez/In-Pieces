@@ -5,11 +5,12 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     // Set in editor
+    public GameObject m_mesh;
     public GameObject m_interactionPoint;
     public string m_dialogueIdentifier;
 
     protected PlayerController m_interactor;
-
+    protected int m_defaultLayer;
     protected UIManager m_UI;
 
     // Called when this object is set as navigation target, enables the interaction trigger
@@ -42,9 +43,39 @@ public class Interactable : MonoBehaviour
         m_interactionPoint.SetActive(false);
     }
 
+    public void OnHoverEnter()
+    {
+        SetLayerRecursively(m_mesh, 6);
+    }
+
+    public void OnHoverExit()
+    {
+        SetLayerRecursively(m_mesh, m_defaultLayer);
+    }
+
+    private void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (null == obj)
+        {
+            return;
+        }
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (null == child)
+            {
+                continue;
+            }
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         m_UI = (UIManager)FindObjectOfType(typeof(UIManager));
+        m_defaultLayer = gameObject.layer;
     }
 }

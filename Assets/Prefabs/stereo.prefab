@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 4408303357631863153}
   - component: {fileID: 4408303357631863158}
   - component: {fileID: 4408303357631863159}
+  - component: {fileID: 1474532361}
   m_Layer: 0
   m_Name: stereo
   m_TagString: Untagged
@@ -139,6 +140,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1474532361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408303357631863156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1639921001e718e4c9ca5df78835169d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storeInTexcoordChannel: 1
+  cospatialVertexDistance: 0.01
 --- !u!1 &4408303358184814300
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +165,7 @@ GameObject:
   - component: {fileID: 4408303358184814303}
   - component: {fileID: 4408303358184814302}
   - component: {fileID: 4408303358184814297}
+  - component: {fileID: 4408303357772619783}
   m_Layer: 0
   m_Name: stereo
   m_TagString: Interactable
@@ -198,5 +214,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72dceb89de6fa2468eb458932e55525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mesh: {fileID: 4408303357631863156}
   m_interactionPoint: {fileID: 4408303357317668093}
-  m_dialogueIdentifier: sketch_dialogue
+  m_dialogueIdentifier: stereo_dialogue
+--- !u!114 &4408303357772619783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408303358184814300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -310944053
+      Data2: 1146061879
+      Data3: -1750453353
+      Data4: 978644154
+    Path: event:/metalSalsa
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
