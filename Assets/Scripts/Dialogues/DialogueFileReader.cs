@@ -28,6 +28,7 @@ public class DialogueFileReader
         { "intConditionRegex", new Regex(@"^(IF)(?: (NOT))? (\w+) (>=|==|<=|<|>) (\d+)$", RegexOptions.Singleline) },
         { "setActionRegex", new Regex(@"^(SET) (\w+) ((?:TRUE|FALSE))$", RegexOptions.Singleline) },
         { "addActionRegex", new Regex(@"^(ADD) (\w+) ([+-]?\d+)$", RegexOptions.Singleline) },
+        { "toggleActionRegex", new Regex(@"^(TGL) (\w+)$", RegexOptions.Singleline) },
         { "rollActionRegex", new Regex(@"^(ROLL) (\d+)\/(\d+)$", RegexOptions.Singleline) },
         { "bodyPartRegex", new Regex(@"^NOSE|EARS|LEGS|HAND|EYES$", RegexOptions.Singleline) },
     };
@@ -209,6 +210,7 @@ public class DialogueFileReader
         foreach (string action in splitActions)
         {
             Match setMatch = _regexes["setActionRegex"].Match(action);
+            Match toggleMatch = _regexes["toggleActionRegex"].Match(action);
             Match addMatch = _regexes["addActionRegex"].Match(action);
             Match rollMatch = _regexes["rollActionRegex"].Match(action);
 
@@ -218,6 +220,10 @@ public class DialogueFileReader
                 bool.TryParse(setMatch.Groups[3].Value, out boolValue);
 
                 actions.Add(new SetDialogueAction(setMatch.Groups[2].Value, boolValue));
+            }
+            else if (toggleMatch.Success)
+            {
+                actions.Add(new ToggleDialogueAction(toggleMatch.Groups[2].Value));
             }
             else if (addMatch.Success)
             {

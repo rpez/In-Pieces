@@ -22,7 +22,6 @@ public class GameState
 
     // MANOR STATES
     public bool UPSTAIRS { get; set; } = false;
-    public bool STEREO_IS_ON { get; set; } = false;
 
     // Bedroom tutorial scene
     public bool TUTORIAL_OPEN_EYES { get; set; } = false;
@@ -44,4 +43,17 @@ public class GameState
     public int EARS_QUEST_MADE_CONTACT { get; set; } = 0;
     public int EARS_QUEST_EXAMINATIONS { get; set; } = 0;
     public int EARS_QUEST_LEARNED_OF_SHIVERS { get; set; } = 0;
+
+    // Stereo scene
+    public bool STEREO_IS_ON { get; set; } = false;
+    public bool STEREO_BASS_BOOST { get; set; } = false;
+    public bool STEREO_IS_PLAYING { get; set; } = false;
+
+    public bool STEREO_TALKED_WITH { get; set; } = false;
+    public bool STEREO_LEARNED_OF_BUTTONS { get; set; } = false;
+    public bool STEREO_LEARNED_OF_DYSLEXIA { get; set; } = false;
+
+    public bool SPEAKER_EYES_EXAMINED { get; set; } = false;
+    public bool SPEAKER_NOSE_SNIFFED { get; set; } = false;
+    public bool CD_PLAYER_EYES_EXAMINED { get; set; } = false;
 }

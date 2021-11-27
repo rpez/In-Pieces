@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text m_dialogueText;
     public GameObject m_dialogueOptionContainer;
     public PlayableDirector m_director;
+    public TMP_Text m_actor;
 
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
@@ -41,7 +42,14 @@ public class UIManager : MonoBehaviour
     // Updates the dialogue text
     private void DisplayConversation(IDialogue dialogue)
     {
-        m_dialogueText.text = dialogue.ToString();
+        if (dialogue is IConditionalDialogue condDialogue)
+            m_dialogueText.text = condDialogue.Line;
+        // Check if the dailogue has an actor, if yes, update it to UI
+        if (dialogue is ActorDialogue actorDialogue && !actorDialogue.Actor.Equals("DESCRIPTION"))
+            m_actor.text = actorDialogue.Actor;
+        else
+            m_actor.text = "";
+
     }
 
     // Selects a conversation option with index x
@@ -89,7 +97,7 @@ public class UIManager : MonoBehaviour
             }
             else if (option is PlayerDialogue)
             {
-                text = string.Format("<color=white>{0}. {1}</color>", i, option);
+                text = string.Format("<color=white>{0}</color>", option);
                 int index = i - 1;
                 callback = () => SelectConversationOption(index);
                 i++;

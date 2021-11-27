@@ -211,6 +211,8 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             if (action is SetDialogueAction setAction)
                 GameManager.Instance.SetStateValue<bool>(setAction.Variable, setAction.Value);
+            else if (action is ToggleDialogueAction toggleAction)
+                GameManager.Instance.ToggleStateValue(toggleAction.Variable);
             else if (action is AddDialogueAction addAction)
             {
                 int prevValue = GameManager.Instance.GetStateValue<int>(addAction.Variable);
@@ -241,5 +243,7 @@ public class DialogueManager : Singleton<DialogueManager>
                 }
             }
         }
+
+        SoundManager.Instance.UpdateSounds();
     }
 }
