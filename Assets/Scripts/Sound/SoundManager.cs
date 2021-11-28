@@ -5,30 +5,74 @@ using UnityEngine;
 public class SoundManager : Singleton<SoundManager>
 {
     private FMOD.Studio.EventInstance m_stereoInstance;
-
     private bool m_musicPlaying;
+
+    
 
     void Start()
     {
         // fmod stereo Music instance
-        //m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Stereo");
+        m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
+
 
     }
 
-    // This function gets called every time a dialog action is taken
+    // MUSIC PLAYS OR NOT
     public void UpdateSounds()
     {
         // The m_musicPlaying boolean is to ensure that the music won't start on top of already playing music
-        if (!m_musicPlaying && GameManager.Instance.GetStateValue<bool>("STEREO_IS_ON"))
+        if (!m_musicPlaying && GameManager.Instance.GetStateValue<bool>("STEREO_IS_PLAYING"))
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/metalSalsa");
+            m_stereoInstance.start ();
             m_musicPlaying = true;
         }
             
-        if (m_musicPlaying && !GameManager.Instance.GetStateValue<bool>("STEREO_IS_ON"))
+        if (m_musicPlaying && !GameManager.Instance.GetStateValue<bool>("STEREO_IS_PLAYING"))
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/StereoOff");
+            m_stereoInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            // m_stereoInstance.release();
             m_musicPlaying = false;
         }
+
+
+        // ON and OFF Power Switch Stereo
+        if (GameManager.Instance.GetStateValue<bool>("STEREO_IS_ON"))
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/StereoON");
+        }
+        else 
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/StereoOff");
+        }
+
+
+        // BASS BOOST
+        if (GameManager.Instance.GetStateValue<bool>("STEREO_BASS_BOOST"))
+        {
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 1);
+        }
+        else
+        {
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 0);
+        }
+
+
+
+
+
+
     }
 }
+
+
+/*   NOTES LUCIEN
+ * // public bool STEREO_IS_ON { get; set; } = false;
+        // public bool STEREO_BASS_BOOST { get; set; } = false;
+        // public bool STEREO_IS_PLAYING { get; set; } = false;
+
+
+
+
+
+
+     */

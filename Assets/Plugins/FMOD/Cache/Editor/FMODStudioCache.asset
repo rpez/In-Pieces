@@ -1,5 +1,107 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8618923196728146243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/StereoSpeakerMusic/BassBoost
+  m_EditorClassIdentifier: 
+  Name: BassBoost
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
+--- !u!114 &-8603618575009890912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/New Event
+  m_EditorClassIdentifier: 
+  Path: event:/New Event
+  Guid:
+    Data1: 130646876
+    Data2: 1104839534
+    Data3: -1308682865
+    Data4: -363232667
+  Banks: []
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 18048
+--- !u!114 &-7168298971315773304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/StereoSpeakerMusic
+  m_EditorClassIdentifier: 
+  Path: event:/StereoSpeakerMusic
+  Guid:
+    Data1: 441615399
+    Data2: 1170265295
+    Data3: 1894649481
+    Data4: -829233717
+  Banks:
+  - {fileID: 487207874396254028}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -4183216499006367143}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 156020
+--- !u!114 &-4183216499006367143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/StereoSpeakerMusic/BassBoost
+  m_EditorClassIdentifier: 
+  Name: BassBoost
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-3655425426209141423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,6 +142,30 @@ MonoBehaviour:
   - Name: Desktop
     Value: 229664
   Exists: 1
+--- !u!114 &-883720427658820831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BassBoost
+  m_EditorClassIdentifier: 
+  Name: BassBoost
+  StudioPath: parameter:/BassBoost
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1660165178
+    data2: 4028583680
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-809424824418564820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,17 +197,68 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -3655425426209141423}
-  - {fileID: -809424824418564820}
+  - {fileID: 6459877115531654582}
+  - {fileID: 487207874396254028}
   EditorEvents:
-  - {fileID: 3046907960214519250}
-  EditorParameters: []
+  - {fileID: 6670408892664124910}
+  - {fileID: -7168298971315773304}
+  - {fileID: 4390024006803023191}
+  - {fileID: 2382253934363538807}
+  EditorParameters:
+  - {fileID: -883720427658820831}
   MasterBanks:
-  - {fileID: -809424824418564820}
+  - {fileID: 487207874396254028}
   StringsBanks:
-  - {fileID: -3655425426209141423}
-  cacheTime: 637735511694040684
+  - {fileID: 6459877115531654582}
+  cacheTime: 637737317930000000
   cacheVersion: 9
+--- !u!114 &487207874396254028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/inPiecesFmod/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637737317930000000
+  FileSizes:
+  - Name: Desktop
+    Value: 5210304
+  Exists: 1
+--- !u!114 &2382253934363538807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/StereoOff
+  m_EditorClassIdentifier: 
+  Path: event:/StereoOff
+  Guid:
+    Data1: 1056067459
+    Data2: 1109833550
+    Data3: 1239200133
+    Data4: 720387657
+  Banks:
+  - {fileID: 487207874396254028}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 509
 --- !u!114 &3046907960214519250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +306,80 @@ MonoBehaviour:
   - Name: Desktop
     Value: 760
   Exists: 1
+--- !u!114 &4390024006803023191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/StereoOn
+  m_EditorClassIdentifier: 
+  Path: event:/StereoOn
+  Guid:
+    Data1: -1607973545
+    Data2: 1265788348
+    Data3: 1179093693
+    Data4: 1975278179
+  Banks:
+  - {fileID: 487207874396254028}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 555
+--- !u!114 &6459877115531654582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/inPiecesFmod/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637737317930000000
+  FileSizes:
+  - Name: Desktop
+    Value: 966
+  Exists: 1
+--- !u!114 &6670408892664124910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/RainEndlessLoop
+  m_EditorClassIdentifier: 
+  Path: event:/RainEndlessLoop
+  Guid:
+    Data1: 130646876
+    Data2: 1104839534
+    Data3: -1308682865
+    Data4: -363232667
+  Banks:
+  - {fileID: 487207874396254028}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 106581
 --- !u!114 &9094831700482222979
 MonoBehaviour:
   m_ObjectHideFlags: 0
