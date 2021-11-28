@@ -1,0 +1,62 @@
+Best friend: "Aw come OOOOOONNNN maaan!! You're leaving tomorrow! We GOTTA celebrate tonight, eh?"
+    {CONTINUE}
+        Best friend: "I mean - you'll be stuck in that Northern piece of... err... whatever-it-was country for a full year!"
+            {CONTINUE}
+                Best friend: "How're ya gonna survive a YEAR without me anyways, eh?? Come on buddy... I'll buy ya a beer!"
+                    > Celebrate.
+                        Johnny: "Yeah, I'm a-... I'm a bit, uh... tipsy but..."
+                            {CONTINUE}
+                                Best friend: "Yeah, man, fill yer boots!! Chug it up, buddy!"
+                                    {CONTINUE}
+                                        {LINE 22}
+                    > Don't celebrate.
+                        Johnny: "I, uh... I'm so drunk-"
+                            {CONTINUE}
+                                Best friend: "Don't be a sook, buddy! Just give'er!"
+                                    {LINE 10}
+                    > Look around. {IF NOT INTRO_LOOKED_AROUND} [SET INTRO_LOOKED_AROUND TRUE]
+                        DESCRIPTION: Your favourite hangout is about the size of your bachelor apartment. The noise level in the bar is unmistakable, it's Friday all right.
+                            {CONTINUE}
+                                Best friend: "What're ya at? Let's get a beer already!"
+                                    {LINE 5 CHILDREN}
+Best friend: "Who would've... uh... who'd have thunk it ya had the balls to go on an exchange anyway? In that remote... er... uhh... place too?"
+    {CONTINUE}
+        Best friend: "I mean, I... I get it... all the, uh... grea-... uh... ya know, ALL the GREAT metal bands come from THERE!"
+            {CONTINUE}
+                Best friend: "Maybe ya'll join a band there? Uh... ya will, uh... be the best drummer in the... great country of... ahh man... need another drink..."
+                        > Celebrate.
+                            Johnny: "I, uh... I feel like I'm about to *explode*, but..."
+                                {CONTINUE}
+                                    Best friend: Yeah, you're not heading 'er! Let's give'er, buddy!
+                                        {CONTINUE}
+                                            {LINE 43}
+                        > Don't celebrate.
+                            Johnny: "I uh... man... I feel like I'm about to *explode*..."
+                                {CONTINUE}
+                                    Best friend: "Oh come OOONNNN buddy! What you sayin'? Let's hit it!"
+                                        {LINE 31}
+                        > Heavy metal? {IF NOT INTRO_HEAVY_METAL} [SET INTRO_HEAVY_METAL TRUE]
+                            DESCRIPTION: You *love* heavy metal since an early age. You've always wanted to become the FASTEST, the LOUDEST, the most CREATIVE, the BEST DRUMMER in the world.
+                                {CONTINUE}
+                                    DESCRIPTION: Portnoy? Lombardo? Ulrich? Who are those no-names compared to YOU? This is your destiny. You'll get right back to it after finishing your degree in commerce...
+                                        {LINE 26 CHILDREN}
+Best friend: "Ya know.. uh... my parents are out tonight... Come to *THE MANSION*, eh?"
+    {CONTINUE}
+        Best friend: "I, uh... found this Cuban rum... 'magine! It's AGES OLD man! Uh... it's prolly my granddad's or somethin'..."
+            {CONTINUE}
+                Best friend: "It's called, uh... umm... LA SEPARATISTA! It's like, um... like... eh... THE SEPARATOR or what, eh? Such a COOL name!!!
+                    {CONTINUE}
+                        Best friend: Come on man! Ya leaving tomorrow already, man! Let's celebrate!!"
+                            > Celebrate.
+                                Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow... but..."
+                                    {CONTINUE}
+                                        Best friend: "Maannn... your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?"
+                                            {END}
+                            > Don't celebrate.
+                                Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow...""
+                                    {CONTINUE}
+                                        Best friend: "Stop bein' a waste, man! Your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?"
+                                            {LINE 54}
+                            > The Mansion? {IF NOT INTRO_THE_MANSION} [SET INTRO_THE_MANSION TRUE]
+                                DESCRIPTION: Your friend is the grandson of *the* rich Cuban immigrants. Monopoly on housekeeping business in the region, all that happy jazz. You've been to The Mansion a million times.
+                                    {LINE 47 CHILDREN}
