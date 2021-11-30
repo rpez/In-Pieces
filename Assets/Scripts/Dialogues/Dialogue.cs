@@ -71,15 +71,6 @@ public class PlayerDialogue : IConditionalDialogue, ISelectableDialogue
 
     public List<IDialogueAction> Actions { get; }
 
-    private Dictionary<string, string> _bodyPartEmojis = new Dictionary<string, string>()
-    {
-        { "NOSE", "👃" },
-        { "EARS", "👂" },
-        { "LEGS", "🦵" },
-        { "HAND", "✋" },
-        { "EYES", "👀" },
-    };
-
     public PlayerDialogue(string bodyPart, string line, List<IDialogueCondition> conditions = null, List<IDialogueAction> actions = null)
     {
         Line = line;
@@ -90,7 +81,7 @@ public class PlayerDialogue : IConditionalDialogue, ISelectableDialogue
 
     public override string ToString()
     {
-        return string.IsNullOrWhiteSpace(BodyPart) ? Line : string.Format("{0} {1}", _bodyPartEmojis[BodyPart], Line);
+        return string.IsNullOrWhiteSpace(BodyPart) ? Line : string.Format("<{0}> {1}", BodyPart, Line);
     }
 }
 

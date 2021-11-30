@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
 
+    public Sprite[] m_bodypartImages;
+    private Dictionary<string, int> m_bodypartNameToImageIndex = new Dictionary<string, int>();
+
     // For storing callbacks
     private Action m_onDialogueEnd;
     private Action m_onTransitionMid;
@@ -26,6 +29,14 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         m_director = GetComponent<PlayableDirector>();
+
+        m_bodypartNameToImageIndex.Add("EYES", 0);
+        m_bodypartNameToImageIndex.Add("EARS", 1);
+        m_bodypartNameToImageIndex.Add("LEGS", 2);
+        m_bodypartNameToImageIndex.Add("HAND", 3);
+        m_bodypartNameToImageIndex.Add("NOSE", 4);
+        m_bodypartNameToImageIndex.Add("", 5);
+
     }
 
     // Starts (or continues) dialogue
@@ -78,7 +89,9 @@ public class UIManager : MonoBehaviour
 
         foreach (IDialogue option in DialogueManager.Instance.ListOptions())
         {
-            GameObject button = GameObject.Instantiate(m_dialogueOptionPrefab, m_dialogueOptionContainer.transform);
+            GameObject button = GameObject.Instantiate(
+                m_dialogueOptionPrefab,
+                m_dialogueOptionContainer.transform);
             DialogueOption script = button.GetComponent<DialogueOption>();
 
             // This is a little error prone atm, will add some failsafe later
@@ -95,9 +108,9 @@ public class UIManager : MonoBehaviour
                 text = "<color=white>{CONTINUE}</color>";
                 callback = () => SelectConversationOption(0);
             }
-            else if (option is PlayerDialogue)
+            else if (option is PlayerDialogue playerOption)
             {
-                text = string.Format("<color=white>{0}</color>", option);
+                text = string.Format("<color=white>{0}</color>", playerOption.Line);
                 int index = i - 1;
                 callback = () => SelectConversationOption(index);
                 i++;
@@ -108,7 +121,14 @@ public class UIManager : MonoBehaviour
                 callback = () => SelectConversationOption(0);
             }
 
-            script.Initialize(text, callback);
+            if (option is PlayerDialogue)
+            {
+                script.Initialize(text, callback, m_bodypartImages[m_bodypartNameToImageIndex[(option as PlayerDialogue).BodyPart]]);
+            }
+            else
+            {
+                script.Initialize(text, callback);
+            }
         }
     }
 
