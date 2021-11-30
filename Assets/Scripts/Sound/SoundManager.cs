@@ -15,6 +15,7 @@ public class SoundManager : Singleton<SoundManager>
         // m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
     }
 
+    // BOOLS
     // MUSIC PLAYS OR NOT
     public void UpdateSoundsBoolean(string parameterName, bool boolValue)
     {
@@ -57,6 +58,7 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 
+    // INTS
     public void UpdateSoundsInteger(string parameterName, int intValue)
     {
         if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
