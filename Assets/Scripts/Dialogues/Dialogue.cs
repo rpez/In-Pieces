@@ -90,7 +90,7 @@ public class PlayerDialogue : IConditionalDialogue, ISelectableDialogue
 
     public override string ToString()
     {
-        return string.IsNullOrWhiteSpace(BodyPart) ? Line : string.Format("<{0}> {1}", _bodyPartEmojis[BodyPart], Line);
+        return string.IsNullOrWhiteSpace(BodyPart) ? Line : string.Format("{0} {1}", _bodyPartEmojis[BodyPart], Line);
     }
 }
 
