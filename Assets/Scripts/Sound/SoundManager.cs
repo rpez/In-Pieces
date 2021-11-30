@@ -1,68 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD;
+using FMODUnity;
 
 public class SoundManager : Singleton<SoundManager>
 {
     private FMOD.Studio.EventInstance m_stereoInstance;
     private bool m_musicPlaying;
 
-    
-
     void Start()
     {
         // fmod stereo Music instance
-        m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
-
-
+        // m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
     }
 
     // MUSIC PLAYS OR NOT
-    public void UpdateSounds()
+    public void UpdateSounds(string parameterName, bool boolValue)
     {
-        // The m_musicPlaying boolean is to ensure that the music won't start on top of already playing music
-        if (!m_musicPlaying && GameManager.Instance.GetStateValue<bool>("STEREO_IS_PLAYING"))
+        if (!m_musicPlaying &&
+            parameterName.Equals("STEREO_IS_PLAYING") &&
+            boolValue)
         {
-            m_stereoInstance.start ();
+            UnityEngine.Debug.Log("1");
+            m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
+            m_stereoInstance.start();
             m_musicPlaying = true;
         }
-            
-        if (m_musicPlaying && !GameManager.Instance.GetStateValue<bool>("STEREO_IS_PLAYING"))
+        else if (m_musicPlaying &&
+                 parameterName.Equals("STEREO_IS_PLAYING") &&
+                 !boolValue)
         {
+            UnityEngine.Debug.Log("2");
             m_stereoInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            // m_stereoInstance.release();
             m_musicPlaying = false;
         }
-
-
-        // ON and OFF Power Switch Stereo
-        if (GameManager.Instance.GetStateValue<bool>("STEREO_IS_ON"))
+        else if (parameterName.Equals("STEREO_IS_ON") && boolValue)
         {
+            UnityEngine.Debug.Log("3");
             FMODUnity.RuntimeManager.PlayOneShot("event:/StereoON");
-            Debug.Log("stereo on pls?");
         }
-        else 
+        else if (parameterName.Equals("STEREO_IS_ON") && !boolValue)
         {
+            UnityEngine.Debug.Log("4");
             FMODUnity.RuntimeManager.PlayOneShot("event:/StereoOff");
-            Debug.Log("stereo off pls?");
         }
-
-
-        // BASS BOOST
-        if (GameManager.Instance.GetStateValue<bool>("STEREO_BASS_BOOST"))
+        else if (parameterName.Equals("STEREO_BASS_BOOST") && boolValue)
         {
+            UnityEngine.Debug.Log("5");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 1);
         }
-        else
+        else if (parameterName.Equals("STEREO_BASS_BOOST") && !boolValue)
         {
+            UnityEngine.Debug.Log("6");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 0);
         }
-
-
-
-
-
-
+        else
+            UnityEngine.Debug.Log("lol");
     }
 }
 
