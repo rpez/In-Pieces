@@ -5,7 +5,7 @@
 			<value>StereoSpeakerMusic</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{ad60cb83-96f0-4038-818c-bdbd07cc7a14}</destination>
@@ -173,7 +173,6 @@
 	<object class="MixerBusEffectChain" id="{16944bb8-7a1a-46f4-b0be-40a3225f239f}">
 		<relationship name="effects">
 			<destination>{f289f08e-55d0-4875-b3eb-c64e5257715c}</destination>
-			<destination>{aaed6b00-3580-43ed-9377-74fefdc2baa1}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{9df2e42e-bb4a-4f51-bdaa-fc1313a59d39}" />
@@ -208,7 +207,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{197c8945-817c-4053-846f-3ad54a93707a}" />
 	<object class="MixerBusFader" id="{f289f08e-55d0-4875-b3eb-c64e5257715c}" />
-	<object class="SpatialiserEffect" id="{aaed6b00-3580-43ed-9377-74fefdc2baa1}" />
 	<object class="AutomationPoint" id="{6a1d2fa8-edc6-4dd0-a81d-af60425d0da4}">
 		<property name="position">
 			<value>2.3939029920911494</value>
