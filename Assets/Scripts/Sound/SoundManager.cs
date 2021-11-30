@@ -39,10 +39,12 @@ public class SoundManager : Singleton<SoundManager>
         if (GameManager.Instance.GetStateValue<bool>("STEREO_IS_ON"))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/StereoON");
+            Debug.Log("stereo on pls?");
         }
         else 
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/StereoOff");
+            Debug.Log("stereo off pls?");
         }
 
 
