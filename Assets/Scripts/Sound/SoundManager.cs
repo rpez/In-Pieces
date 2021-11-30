@@ -16,7 +16,7 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     // MUSIC PLAYS OR NOT
-    public void UpdateSounds(string parameterName, bool boolValue)
+    public void UpdateSoundsBoolean(string parameterName, bool boolValue)
     {
         if (!m_musicPlaying &&
             parameterName.Equals("STEREO_IS_PLAYING") &&
@@ -54,6 +54,20 @@ public class SoundManager : Singleton<SoundManager>
         {
             UnityEngine.Debug.Log("Fmod: Stereo Bass Boost Off");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 0);
+        }
+    }
+
+    public void UpdateSoundsInteger(string parameterName, int intValue)
+    {
+        if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
+        {
+            UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 1");
+            // FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 1);
+        }
+        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 2)
+        {
+            UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
+            // FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 0);
         }
     }
 }

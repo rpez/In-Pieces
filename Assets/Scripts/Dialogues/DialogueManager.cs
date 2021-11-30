@@ -212,12 +212,12 @@ public class DialogueManager : Singleton<DialogueManager>
             if (action is SetDialogueAction setAction)
             {
                 GameManager.Instance.SetStateValue<bool>(setAction.Variable, setAction.Value);
-                SoundManager.Instance.UpdateSounds(setAction.Variable, setAction.Value);
+                SoundManager.Instance.UpdateSoundsBoolean(setAction.Variable, setAction.Value);
             }
             else if (action is ToggleDialogueAction toggleAction)
             {
                 bool newValue = GameManager.Instance.ToggleStateValue(toggleAction.Variable);
-                SoundManager.Instance.UpdateSounds(toggleAction.Variable, newValue);
+                SoundManager.Instance.UpdateSoundsBoolean(toggleAction.Variable, newValue);
             }
             else if (action is AddDialogueAction addAction)
             {
@@ -227,9 +227,17 @@ public class DialogueManager : Singleton<DialogueManager>
                 List<string> bodyPartVariables = new List<string>{ "NOSE", "EYES", "EARS", "HAND", "LEGS" };
 
                 if (bodyPartVariables.Contains(addAction.Variable))
-                    GameManager.Instance.SetStateValue<int>(addAction.Variable, Mathf.Clamp(prevValue + addAction.Value, -3, 3));
+                {
+                    int clampedValue = Mathf.Clamp(prevValue + addAction.Value, -3, 3);
+                    GameManager.Instance.SetStateValue<int>(addAction.Variable, clampedValue);
+                    SoundManager.Instance.UpdateSoundsInteger(addAction.Variable, clampedValue);
+                }
                 else
-                    GameManager.Instance.SetStateValue<int>(addAction.Variable, prevValue + addAction.Value);
+                {
+                    int newValue = prevValue + addAction.Value;
+                    GameManager.Instance.SetStateValue<int>(addAction.Variable, newValue);
+                    SoundManager.Instance.UpdateSoundsInteger(addAction.Variable, newValue);
+                }
             }
             else if (action is RollDialogueAction rollAction && condDialogue is PlayerDialogue playerDialogue)
             {
