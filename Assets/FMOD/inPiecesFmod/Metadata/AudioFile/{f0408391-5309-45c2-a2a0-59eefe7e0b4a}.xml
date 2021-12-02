@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f0408391-5309-45c2-a2a0-59eefe7e0b4a}">
+		<property name="assetPath">
+			<value>baraudio.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>335.09877551020406</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{65c25536-d33f-45db-9fae-9647c0415bda}</destination>
+		</relationship>
+	</object>
+</objects>

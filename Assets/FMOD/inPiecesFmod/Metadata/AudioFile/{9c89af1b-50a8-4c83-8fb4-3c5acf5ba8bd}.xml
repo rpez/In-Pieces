@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{9c89af1b-50a8-4c83-8fb4-3c5acf5ba8bd}">
+		<property name="assetPath">
+			<value>383604-CD-Player-Turn_On-Turn_Off-01-02.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>8.4685520833333339</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{65c25536-d33f-45db-9fae-9647c0415bda}</destination>
+		</relationship>
+	</object>
+</objects>
