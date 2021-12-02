@@ -24,22 +24,22 @@ Best friend: "Who would've... uh... who'd have thunk it ya had the balls to go o
         Best friend: "I mean, I... I get it... all the, uh... grea-... uh... ya know, ALL the GREAT metal bands come from THERE!"
             {CONTINUE}
                 Best friend: "Maybe ya'll join a band there? Uh... ya will, uh... be the best drummer in the... great country of... ahh man... need another drink..."
-                        > Celebrate.
-                            Johnny: "I, uh... I feel like I'm about to *explode*, but..."
-                                {CONTINUE}
-                                    Best friend: Yeah, you're not heading 'er! Let's give'er, buddy!
-                                        {CONTINUE}
-                                            {LINE 43}
-                        > Don't celebrate.
-                            Johnny: "I uh... man... I feel like I'm about to *explode*..."
-                                {CONTINUE}
-                                    Best friend: "Oh come OOONNNN buddy! What you sayin'? Let's hit it!"
-                                        {LINE 31}
-                        > Heavy metal? {IF NOT INTRO_HEAVY_METAL} [SET INTRO_HEAVY_METAL TRUE]
-                            DESCRIPTION: You *love* heavy metal since an early age. You've always wanted to become the FASTEST, the LOUDEST, the most CREATIVE, the BEST DRUMMER in the world.
-                                {CONTINUE}
-                                    DESCRIPTION: Portnoy? Lombardo? Ulrich? Who are those no-names compared to YOU? This is your destiny. You'll get right back to it after finishing your degree in commerce...
-                                        {LINE 26 CHILDREN}
+                    > Celebrate.
+                        Johnny: "I, uh... I feel like I'm about to *explode*, but..."
+                            {CONTINUE}
+                                Best friend: Yeah, you're not heading 'er! Let's give'er, buddy!
+                                    {CONTINUE}
+                                        {LINE 43}
+                    > Don't celebrate.
+                        Johnny: "I uh... man... I feel like I'm about to *explode*..."
+                            {CONTINUE}
+                                Best friend: "Oh come OOONNNN buddy! What you sayin'? Let's hit it!"
+                                    {LINE 31}
+                    > Heavy metal? {IF NOT INTRO_HEAVY_METAL} [SET INTRO_HEAVY_METAL TRUE]
+                        DESCRIPTION: You *love* heavy metal since an early age. You've always wanted to become the FASTEST, the LOUDEST, the most CREATIVE, the BEST DRUMMER in the world.
+                            {CONTINUE}
+                                DESCRIPTION: Portnoy? Lombardo? Ulrich? Who are those no-names compared to YOU? This is your destiny. You'll get right back to it after finishing your degree in commerce...
+                                    {LINE 26 CHILDREN}
 Best friend: "Ya know.. uh... my parents are out tonight... Come to *THE MANSION*, eh?"
     {CONTINUE}
         Best friend: "I, uh... found this Cuban rum... 'magine! It's AGES OLD man! Uh... it's prolly my granddad's or somethin'..."
