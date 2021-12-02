@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private NavMeshAgent m_navMeshAgent;
     private Interactable m_currentTargetInteractable;
+    private Interactable m_currentHovered;
 
     private Animator m_animator;
 
@@ -66,6 +67,23 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit))
         {
+            if (hit.transform.tag == "Interactable")
+            {
+                if (m_currentHovered != null && m_currentHovered.gameObject != hit.transform.gameObject)
+                {
+                    CancelCurrentHover();
+                }
+                if (m_currentHovered == null)
+                {
+                    Interactable script = hit.transform.GetComponent<Interactable>();
+                    script.OnHoverEnter();
+                    m_currentHovered = script;
+                }
+            }
+            else if (m_currentHovered != null)
+            {
+                CancelCurrentHover();
+            }
             // Movement only
             if (Input.GetMouseButtonDown(1))
             {
@@ -120,6 +138,15 @@ public class PlayerController : MonoBehaviour
         {
             m_currentTargetInteractable.CancelClicked();
             m_currentTargetInteractable = null;
+        }
+    }
+
+    private void CancelCurrentHover()
+    {
+        if (m_currentHovered != null)
+        {
+            m_currentHovered.OnHoverExit();
+            m_currentHovered = null;
         }
     }
 }
