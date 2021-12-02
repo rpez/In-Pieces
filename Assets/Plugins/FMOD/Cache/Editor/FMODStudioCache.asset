@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Assets/FmodProject/InPiecesAudio/Build/Desktop/Master.strings.bank
   Name: Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637735511694040684
+  lastModified: 637721540737678429
   FileSizes:
   - Name: 
     Value: 760
@@ -55,7 +55,7 @@ MonoBehaviour:
   Path: Assets/FmodProject/InPiecesAudio/Build/Desktop/Master.bank
   Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 637735511694035720
+  lastModified: 637721540737668433
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -80,7 +80,7 @@ MonoBehaviour:
   - {fileID: -809424824418564820}
   StringsBanks:
   - {fileID: -3655425426209141423}
-  cacheTime: 637735511694040684
+  cacheTime: 637721540737678429
   cacheVersion: 9
 --- !u!114 &3046907960214519250
 MonoBehaviour:

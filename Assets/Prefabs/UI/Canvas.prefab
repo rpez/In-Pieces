@@ -1217,7 +1217,15 @@ MonoBehaviour:
   m_dialogueText: {fileID: 2441941803383247616}
   m_dialogueOptionContainer: {fileID: 1538939736}
   m_director: {fileID: 5688811774845303625}
+  m_actor: {fileID: 1756581995644054713}
   m_dialogueOptionPrefab: {fileID: 7383222517551790622, guid: 5ac1509723aec05478336e0b0e085918, type: 3}
+  m_bodypartImages:
+  - {fileID: 21300000, guid: 249fe65a8fe58664db072a51b2dbd6d5, type: 3}
+  - {fileID: 21300000, guid: 1552987b30eb42146bd52de349569c09, type: 3}
+  - {fileID: 21300000, guid: 7541784f6d2e4a64686ea024542a4dea, type: 3}
+  - {fileID: 21300000, guid: ef1a6c5d789e7c34fbcfee23d4594f75, type: 3}
+  - {fileID: 21300000, guid: 6644c9efc5ee8c04cb2a6a7fbe129035, type: 3}
+  - {fileID: 0}
 --- !u!320 &5688811774845303625
 PlayableDirector:
   m_ObjectHideFlags: 0
