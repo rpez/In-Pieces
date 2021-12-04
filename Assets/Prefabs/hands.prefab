@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1958971140163023442}
   - component: {fileID: 1958971140163023440}
-  - component: {fileID: 1958971140163023441}
+  - component: {fileID: 1559559997}
   m_Layer: 0
   m_Name: hands
   m_TagString: Interactable
@@ -104,7 +104,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.3839383, y: 0.67819214, z: 0.6078295}
   m_Center: {x: -0.04079366, y: 0.05323042, z: 0.19608578}
---- !u!114 &1958971140163023441
+--- !u!114 &1559559997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,12 +113,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1958971140163023443}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d72dceb89de6fa2468eb458932e55525, type: 3}
+  m_Script: {fileID: 11500000, guid: 6827125a71b6b3d4b8a63f51ac1ce424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_mesh: {fileID: 1724526877489945998}
   m_interactionPoint: {fileID: 1958971138239016291}
   m_dialogueIdentifier: hands_dialogue
+  m_trackedState: HAS_HAND
 --- !u!1001 &1958971138279989471
 PrefabInstance:
   m_ObjectHideFlags: 0

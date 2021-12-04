@@ -141,6 +141,14 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateBodyParts()
     {
+        if (m_currentTargetInteractable != null)
+        {
+            if (m_currentTargetInteractable is CollectableInteractable interactable)
+            {
+                interactable.OnInteractionEvent();
+            }
+        }
+
         if (GameManager.Instance.GetStateValue<bool>("HAS_EYES"))
             m_postProcessing.profile = m_defaultPPP;
         else

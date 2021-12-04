@@ -17,15 +17,15 @@ public class TransitionInteractable : Interactable
         base.OnInteract(actor);
         m_actor = actor;
 
-        m_currentState = GameManager.Instance.State.UPSTAIRS;
+        m_currentState = GameManager.Instance.GetStateValue<bool>(m_trackedState);
     }
 
     // Called when interaction end, disables the trigger
     public override void OnExitInteraction()
     {
-        if (m_currentState != GameManager.Instance.State.UPSTAIRS)
+        if (m_currentState != GameManager.Instance.GetStateValue<bool>(m_trackedState))
         {
-            m_currentState = GameManager.Instance.State.UPSTAIRS;
+            m_currentState = GameManager.Instance.GetStateValue<bool>(m_trackedState);
             LevelManager.Instance.InitiateTransition(() =>
             {
                 m_actor.TravelToWaypoint(m_waypoint.position);

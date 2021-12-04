@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 881619181929690496}
   - component: {fileID: 881619181929690502}
-  - component: {fileID: 881619181929690503}
+  - component: {fileID: 2095521163}
   m_Layer: 0
   m_Name: legs
   m_TagString: Interactable
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.9693159, y: 1.9140904, z: 1.5618773}
   m_Center: {x: 0.08726845, y: 0.4570451, z: -0.0073722205}
---- !u!114 &881619181929690503
+--- !u!114 &2095521163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,12 +56,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 881619181929690497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d72dceb89de6fa2468eb458932e55525, type: 3}
+  m_Script: {fileID: 11500000, guid: 6827125a71b6b3d4b8a63f51ac1ce424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_mesh: {fileID: 71294705224839197}
   m_interactionPoint: {fileID: 881619183677409205}
   m_dialogueIdentifier: legs_dialogue
+  m_trackedState: HAS_LEGS
 --- !u!1 &881619183677409205
 GameObject:
   m_ObjectHideFlags: 0

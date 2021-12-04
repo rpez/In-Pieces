@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3276204653564966264}
   - component: {fileID: 3276204653564966265}
-  - component: {fileID: 3276204653564966270}
+  - component: {fileID: 392614803}
   m_Layer: 0
   m_Name: eyes
   m_TagString: Interactable
@@ -104,7 +104,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8983308, y: 1.2858231, z: 2.5525434}
   m_Center: {x: 0.01409757, y: -0.05590469, z: 0.03680563}
---- !u!114 &3276204653564966270
+--- !u!114 &392614803
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,12 +113,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3276204653564966271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d72dceb89de6fa2468eb458932e55525, type: 3}
+  m_Script: {fileID: 11500000, guid: 6827125a71b6b3d4b8a63f51ac1ce424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_mesh: {fileID: 2429132449591972386}
   m_interactionPoint: {fileID: 3276204652897467245}
   m_dialogueIdentifier: eyes_dialogue
+  m_trackedState: HAS_EYES
 --- !u!1001 &3276204653213183859
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5648451007331753245}
   - component: {fileID: 7222383111495896603}
-  - component: {fileID: 4659871881878434267}
+  - component: {fileID: 1699992605}
   m_Layer: 0
   m_Name: ears
   m_TagString: Interactable
@@ -104,7 +104,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0163417, y: 0.13697666, z: 0.31933054}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4659871881878434267
+--- !u!114 &1699992605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,26 +113,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4983379150615381927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d72dceb89de6fa2468eb458932e55525, type: 3}
+  m_Script: {fileID: 11500000, guid: 6827125a71b6b3d4b8a63f51ac1ce424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_mesh: {fileID: 5506311455792023352}
   m_interactionPoint: {fileID: 4659871882317629444}
   m_dialogueIdentifier: ears_dialogue
---- !u!114 &1535793388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5506311455792023352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1639921001e718e4c9ca5df78835169d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  storeInTexcoordChannel: 1
-  cospatialVertexDistance: 0.01
+  m_trackedState: HAS_EARS
 --- !u!1001 &4659871881659742825
 PrefabInstance:
   m_ObjectHideFlags: 0
