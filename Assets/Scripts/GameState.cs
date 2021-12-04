@@ -21,7 +21,7 @@ public class GameState
     public int LEGS { get; set; } = 0;
 
     // MANOR STATES
-    public bool UPSTAIRS { get; set; } = false;
+    public bool UPSTAIRS { get; set; } = true;
 
     // Intro bar scene
     public bool INTRO_LOOKED_AROUND { get; set; } = false;

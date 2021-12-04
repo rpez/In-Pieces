@@ -1,6 +1,0 @@
-The Stairs: *They descent into the darkness.*
-    > Go down the stairs. [SET UPSTAIRS FALSE]
-        The Nose: Maybe if I just carefully roll... AAAAAAAAARRRGGGGGHH!
-            {END}
-    > Leave.
-        {END}

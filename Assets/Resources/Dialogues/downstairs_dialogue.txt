@@ -1,6 +1,0 @@
-The Stairs: *They rise up high, seemingly endless ascend as far as the eye see.*
-    > Climb up the stairs. {IF HAS_LEGS} [SET UPSTAIRS TRUE]
-        The Legs: Hmph, easy enough.
-            {END}
-    > Leave.
-        {END}

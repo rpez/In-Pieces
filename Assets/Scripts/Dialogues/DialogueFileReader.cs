@@ -39,19 +39,18 @@ public class DialogueFileReader
     {
         Dictionary<string, DialogueTree> allDialogue = new Dictionary<string, DialogueTree>();
 
-        Debug.Log("gamer2");
         // Dialogue files should be located in "Assets/Dialogues/"
-        //string dialogueFolder = Path.Combine(Application.dataPath, "Resources/Dialogues");
+        string dialogueFolder = Path.Combine(Application.streamingAssetsPath, "Dialogues");
 
-        foreach (TextAsset dlg in Resources.LoadAll<TextAsset>("Dialogues"))
+        foreach (string fullPath in Directory.GetFiles(dialogueFolder))
         {
-            //if (Path.GetExtension(fullPath) != ".dlg") continue;
+            if (Path.GetExtension(fullPath) != ".dlg") continue;
 
-            //_filename = Path.GetFileNameWithoutExtension(fullPath);
-            Debug.Log("gamer");
-            string[] allLines = dlg.text.Split('\n');
+            _filename = Path.GetFileNameWithoutExtension(fullPath);
 
-            allDialogue.Add(dlg.name,
+            string[] allLines = File.ReadAllLines(fullPath);
+
+            allDialogue.Add(_filename,
                 ReadDialogueFile(allLines));
         }
 
