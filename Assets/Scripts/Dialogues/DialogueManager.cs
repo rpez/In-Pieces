@@ -13,10 +13,14 @@ public class DialogueManager : Singleton<DialogueManager>
     public Dictionary<string, DialogueTree> AllDialogue { get; private set; }
     public DialogueTree CurrentDialogue { get; set; }
 
+    private PlayerController player;
+
     void Awake()
     {
         _dfr = new DialogueFileReader();
         AllDialogue = _dfr.ReadAllDialogueFiles();
+
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     /*  Start conversation.
@@ -213,11 +217,13 @@ public class DialogueManager : Singleton<DialogueManager>
             {
                 GameManager.Instance.SetStateValue<bool>(setAction.Variable, setAction.Value);
                 SoundManager.Instance.UpdateSoundsBoolean(setAction.Variable, setAction.Value);
+                player.UpdateBodyParts();
             }
             else if (action is ToggleDialogueAction toggleAction)
             {
                 bool newValue = GameManager.Instance.ToggleStateValue(toggleAction.Variable);
                 SoundManager.Instance.UpdateSoundsBoolean(toggleAction.Variable, newValue);
+                player.UpdateBodyParts();
             }
             else if (action is AddDialogueAction addAction)
             {

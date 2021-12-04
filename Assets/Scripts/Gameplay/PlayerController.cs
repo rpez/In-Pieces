@@ -123,12 +123,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpdateBodyParts()
+    public void UpdateBodyParts()
     {
-        m_eyesMesh.SetActive(GameManager.Instance.GetPropertyValue<bool>("HAS_EYES"));
-        m_earsMesh.SetActive(GameManager.Instance.GetPropertyValue<bool>("HAS_EARS"));
-        m_handsMesh.SetActive(GameManager.Instance.GetPropertyValue<bool>("HAS_HAND"));
-        m_legsMesh.SetActive(GameManager.Instance.GetPropertyValue<bool>("HAS_LEGS"));
+        m_eyesMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_EYES"));
+        m_earsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_EARS"));
+        m_handsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_HAND"));
+        m_legsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_LEGS"));
     }
 
     // Called when player clicks something else to cancecl current pathing towards interaction target

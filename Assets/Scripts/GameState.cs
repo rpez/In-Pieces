@@ -8,10 +8,10 @@ public class GameState
 
     // BODY PART OWNERSHIP
     public bool HAS_NOSE { get; set; } = true;
-    public bool HAS_EYES { get; set; } = true;
+    public bool HAS_EYES { get; set; } = false;
     public bool HAS_EARS { get; set; } = false;
     public bool HAS_HAND { get; set; } = false;
-    public bool HAS_LEGS { get; set; } = true;
+    public bool HAS_LEGS { get; set; } = false;
 
     // BODY PART ATTITUDES
     public int NOSE { get; set; } = 0;

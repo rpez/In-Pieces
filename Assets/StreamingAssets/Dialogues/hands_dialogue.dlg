@@ -1,0 +1,6 @@
+The Hands: Need a hand?
+    > In fact, I do. [SET HAS_HAND TRUE]
+        The Hands: Let's shake on that then!
+            {END}
+    > No.
+        {END}
