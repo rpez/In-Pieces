@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject m_handsMesh;
     public GameObject m_legsMesh;
 
+    public GameObject m_moveIndicator;
     public Volume m_postProcessing;
     public VolumeProfile m_defaultPPP;
     public VolumeProfile m_nearSightedPPP;
@@ -103,6 +104,8 @@ public class PlayerController : MonoBehaviour
             // Movement only
             if (Input.GetMouseButtonDown(1))
             {
+                GameObject indicator = GameObject.Instantiate(m_moveIndicator, hit.transform.position, Quaternion.identity);
+                Destroy(indicator, 2f);
                 m_navMeshAgent.SetDestination(hit.point);
                 CancelCurrentInteractionTarget();
 
