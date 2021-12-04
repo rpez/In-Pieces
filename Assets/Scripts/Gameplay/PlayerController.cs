@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour
 {
     // The meshes for different body parts, set in editor
+    public GameObject m_noseMesh;
     public GameObject m_eyesMesh;
     public GameObject m_earsMesh;
     public GameObject m_handsMesh;
@@ -15,6 +16,10 @@ public class PlayerController : MonoBehaviour
     public Volume m_postProcessing;
     public VolumeProfile m_defaultPPP;
     public VolumeProfile m_nearSightedPPP;
+
+    // Offset positions for the armature with and without legs
+    private Vector3 m_nosePosition;
+    private Vector3 m_nosePositionWithoutLegs;
 
     private NavMeshAgent m_navMeshAgent;
     private Interactable m_currentTargetInteractable;
@@ -48,6 +53,10 @@ public class PlayerController : MonoBehaviour
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<Animator>();
+
+        // Save offsets
+        m_nosePosition = m_noseMesh.transform.localPosition;
+        m_nosePositionWithoutLegs = m_nosePosition - Vector3.up * 2f;
 
         UpdateBodyParts();
     }
@@ -136,6 +145,10 @@ public class PlayerController : MonoBehaviour
             m_postProcessing.profile = m_defaultPPP;
         else
             m_postProcessing.profile = m_nearSightedPPP;
+        if (GameManager.Instance.GetStateValue<bool>("HAS_LEGS"))
+            m_noseMesh.transform.localPosition = m_nosePosition;
+        else
+            m_noseMesh.transform.localPosition = m_nosePositionWithoutLegs;
         m_eyesMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_EYES"));
         m_earsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_EARS"));
         m_handsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_HAND"));
