@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class PlayerController : MonoBehaviour
     public GameObject m_earsMesh;
     public GameObject m_handsMesh;
     public GameObject m_legsMesh;
+
+    public Volume m_postProcessing;
+    public VolumeProfile m_defaultPPP;
+    public VolumeProfile m_nearSightedPPP;
 
     private NavMeshAgent m_navMeshAgent;
     private Interactable m_currentTargetInteractable;
@@ -43,6 +48,8 @@ public class PlayerController : MonoBehaviour
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<Animator>();
+
+        UpdateBodyParts();
     }
 
     // Update is called once per frame
@@ -125,6 +132,10 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateBodyParts()
     {
+        if (GameManager.Instance.GetStateValue<bool>("HAS_EYES"))
+            m_postProcessing.profile = m_defaultPPP;
+        else
+            m_postProcessing.profile = m_nearSightedPPP;
         m_eyesMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_EYES"));
         m_earsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_EARS"));
         m_handsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_HAND"));

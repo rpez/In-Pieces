@@ -339,6 +339,9 @@ MonoBehaviour:
   m_earsMesh: {fileID: 6776788474096705070}
   m_handsMesh: {fileID: 884624921657659985}
   m_legsMesh: {fileID: 8919234374358173306}
+  m_postProcessing: {fileID: 0}
+  m_defaultPPP: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+  m_nearSightedPPP: {fileID: 11400000, guid: e171c2c597f9d43429e4baede7a30933, type: 2}
 --- !u!54 &134029401
 Rigidbody:
   m_ObjectHideFlags: 0
