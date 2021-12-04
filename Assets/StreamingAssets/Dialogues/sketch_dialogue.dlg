@@ -1,0 +1,47 @@
+DESCRIPTION: You feel a sudden twitch, an involuntary contraction. The sensation of falling. Gravity is dragging you down, slamming you in an infinite loop, endless spirals in an impossible staircase...
+    > Wha-...
+        DESCRIPTION: The force feels very familiar to you. You've been here before. This time it seems like it knows of no boundaries, there is no reining it in. The sparks light up, the ignition follows, and all there is to do is to ride the expanding wave...
+            > I don-...
+                DESCRIPTION: No. You don't. There is no escape. You have chosen this path. This is where we must begin.
+                    {CONTINUE}
+                        DESCRIPTION: "W-... wh-... wh-... wh-... what... what... what... wher-... where... where am I?"
+                            {CONTINUE}
+                                DESCRIPTION: You feel something familiar that over the past years has become very recognizable to you. A pure feeling of silky smooth comfort. Balanced support for the body and the soul. Plush, but firm. Seven energy centers of spinal conformity. Engineered, extravagant, extraordinary, ergonomical, endless perfection.
+                                    > I'm on the bed?
+                                        DESCRIPTION: This is all too familiar to you. You are on the queen-sized bed in the king-sized mansion.
+                                            > How do I know that? {IF TUTORIAL_LISTEN == 1} [ADD TUTORIAL_LISTEN +1]
+                                                DESCRIPTION: Somehow you are certain that your sense of smell has heightened. You recognize the slightly overbearing chemical detergent in the linen. The lovely odor of a happily perspiring young man beside you. The musty old dampness of a Victorian-era wooden house. But above them all, the reek of old booze flying low overcast.
+                                                    {LINE 11 CHILDREN}
+                                            > Open your eyes. {IF NOT TUTORIAL_OPEN_EYES} [SET TUTORIAL_OPEN_EYES TRUE, ADD TUTORIAL_COUNT_SENSES +1]
+                                                DESCRIPTION: It's still dark in here. Something is off. Opening your eyes should be easy, right? Are you sure you're awake?
+                                                    {LINE 11 CHILDREN}
+                                            > Listen to your surroundings. {IF TUTORIAL_LISTEN == 0} [ADD TUTORIAL_LISTEN +1, ADD TUTORIAL_COUNT_SENSES +1]
+                                                DESCRIPTION: There is nothing. Absolutely nothing. You're certain you still somehow FEEL that there is someone or something nearby.
+                                                    {LINE 11 CHILDREN}
+                                            > Get up. {IF NOT TUTORIAL_GET_UP} [SET TUTORIAL_GET_UP TRUE, ADD TUTORIAL_COUNT_SENSES +1]
+                                                DESCRIPTION: You send the signal, but there is only static on the line. Is this how it feels to lucid dream? No wait, did I even get to that chapter the last time? Maybe I only read up until sleep paralysis?
+                                                    {LINE 11 CHILDREN}
+                                            > Roll around the bed. {IF TUTORIAL_COUNT_SENSES >= 3}
+                                                DESCRIPTION: Something is moving around. Is it I? Is it you? Woe is me! To be or not to be?
+                                                    > ROLL AROUND THE BED.
+                                                        Bob: "AAAAAAAAAAAAAHHHH! Stop fidgeting around so much! We're trying to catch some shut-eye here, man!"
+                                                            > B-b-but...
+                                                                Bob: "No! STOP it there! Is it because it's so dark around here? You scared of sleeping in the dark? Is that it, huh?"
+                                                                    > I, I...
+                                                                        Bob: "Come on man! You're gonna wake up Katie too. Fine, enough! All right then, I'll light you up..."
+                                                                            {CONTINUE}
+                                                                                The Left Eye (Bob): "There! There you go! Now, was there a problem or could we just you know, get back to sleep?" [SET HAS_EYES TRUE]
+                                                                                    > I - I'M A NOSE?
+                                                                                        The Left Eye (Bob): "No man... you're *The Nose*. Waaaaaaiit. That's kinda weird isn't it?"
+                                                                                            > IT IS?
+                                                                                                The Left Eye (Bob): "We aren't supposed to be separate like this... Not me... not you... not Katie... something has gone wrong here..."
+                                                                                                    {CONTINUE}
+                                                                                                        The Left Eye (Bob): "Can you remember anything from last night? Did anything smell fishy in here?"
+                                                                                                            <NOSE> Sniff the air, search for clues. [ROLL 12/12]
+                                                                                                                {END}
+                                                                    > ROLLIN', ROLLIN', ROLLIN' ON THE RIVER
+                                                                        {LINE 31}
+                                                            > I LIKE TO ROLL IT, ROLL IT
+                                                                {LINE 29}
+                                                    > Panic?
+                                                        {LINE 27}
