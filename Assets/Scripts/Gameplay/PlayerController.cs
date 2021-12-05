@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 m_nosePosition;
     private Vector3 m_nosePositionWithoutLegs;
 
+    private GameObject m_currentIndicator;
+
     private NavMeshAgent m_navMeshAgent;
     private Interactable m_currentTargetInteractable;
     private Interactable m_currentHovered;
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
                     if (!m_navMeshAgent.hasPath || m_navMeshAgent.velocity.sqrMagnitude == 0f)
                     {
                         SetWalkingAnimation(false);
+                        SpawnIndicator(Vector3.zero, true);
                     }
                 }
             }
@@ -104,8 +107,7 @@ public class PlayerController : MonoBehaviour
             // Movement only
             if (Input.GetMouseButtonDown(1))
             {
-                GameObject indicator = GameObject.Instantiate(m_moveIndicator, hit.transform.position, Quaternion.identity);
-                Destroy(indicator, 2f);
+                SpawnIndicator(hit.point);
                 m_navMeshAgent.SetDestination(hit.point);
                 CancelCurrentInteractionTarget();
 
@@ -116,6 +118,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.transform.tag == "Interactable")
                 {
+                    SpawnIndicator(hit.point);
                     CancelCurrentInteractionTarget();
 
                     Interactable obj = hit.transform.GetComponent<Interactable>();
@@ -164,6 +167,12 @@ public class PlayerController : MonoBehaviour
         m_earsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_EARS"));
         m_handsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_HAND"));
         m_legsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_LEGS"));
+    }
+
+    private void SpawnIndicator(Vector3 point, bool cancel = false)
+    {
+        if (m_currentIndicator != null) Destroy(m_currentIndicator);
+        if (!cancel) m_currentIndicator = GameObject.Instantiate(m_moveIndicator, point, Quaternion.identity);
     }
 
     // Called when player clicks something else to cancecl current pathing towards interaction target
