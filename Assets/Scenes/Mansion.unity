@@ -738,6 +738,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 71294705224839197, guid: 9149fcdcaa405b2429899683b4d405ce, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 71294705224839197, guid: 9149fcdcaa405b2429899683b4d405ce, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 881619181929690496, guid: 9149fcdcaa405b2429899683b4d405ce, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -795,6 +803,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1724526877489945998, guid: 7a4b0b8e87e4a7c44b60b9b052e2a5d0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724526877489945998, guid: 7a4b0b8e87e4a7c44b60b9b052e2a5d0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1958971140163023442, guid: 7a4b0b8e87e4a7c44b60b9b052e2a5d0, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -917,6 +933,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2429132449591972386, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429132449591972386, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3276204653564966264, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1034,6 +1058,14 @@ PrefabInstance:
     - target: {fileID: 4983379150615381927, guid: 61289fc1de34cd543956f66e3d21b9b6, type: 3}
       propertyPath: m_Name
       value: ears
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506311455792023352, guid: 61289fc1de34cd543956f66e3d21b9b6, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506311455792023352, guid: 61289fc1de34cd543956f66e3d21b9b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5648451007331753245, guid: 61289fc1de34cd543956f66e3d21b9b6, type: 3}
       propertyPath: m_RootOrder

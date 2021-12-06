@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private Interactable m_currentHovered;
 
     private Animator m_animator;
+    private Collider m_collider;
 
     private bool m_movementEnabled = true;
 
@@ -56,12 +57,21 @@ public class PlayerController : MonoBehaviour
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<Animator>();
+        m_collider = gameObject.GetComponent<Collider>();
 
         // Save offsets
         m_nosePosition = m_noseMesh.transform.localPosition;
         m_nosePositionWithoutLegs = m_nosePosition - Vector3.up * 2f;
 
         UpdateBodyParts();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Interactable")
+        {
+            Physics.IgnoreCollision(collision.collider, m_collider);
+        }
     }
 
     // Update is called once per frame
