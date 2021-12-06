@@ -1644,6 +1644,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2360877036632062227, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7490196
+      objectReference: {fileID: 0}
     - target: {fileID: 9212562899343336520, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
       propertyPath: m_Name
       value: Canvas

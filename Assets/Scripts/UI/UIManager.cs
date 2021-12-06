@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
     private Action m_onTransitionMid;
     private Action m_onTransitionEnd;
 
+    private string m_rollResult;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,24 +56,28 @@ public class UIManager : MonoBehaviour
     private void DisplayConversation(IDialogue dialogue)
     {
         if (dialogue is IConditionalDialogue condDialogue)
-            m_dialogueText.text = condDialogue.Line;
-        // Check if the dailogue has an actor, if yes, update it to UI
+        {
+            m_dialogueText.text = m_rollResult + condDialogue.Line;
+            m_rollResult = "";
+        }
+
+        // Check if the dialogue has an actor, if yes, update it to UI
         if (dialogue is ActorDialogue actorDialogue && !actorDialogue.Actor.Equals("DESCRIPTION"))
             m_actor.text = actorDialogue.Actor;
         else
-            m_actor.text = "";
-
+            m_actor.gameObject.SetActive(false);
     }
 
     // Selects a conversation option with index x
     // Then updates the window
-    private void SelectConversationOption(int x)
+    private void SelectConversationOption(int x, string extra = "")
     {
         var selected = DialogueManager.Instance.SelectOption(x);  // Prints the next conversation node
 
         // need to check for null here, we might click on something that is out of bounds of this conversation
         if (selected != null)
         {
+            m_rollResult = extra;
             DisplayConversation(selected);
             DisplayConversationOptions();    // Prints options for the player to choose
         }
@@ -98,6 +104,8 @@ public class UIManager : MonoBehaviour
             string text = "Placeholder dialogue, very bad if you see this :D";
             Action callback = () => { };
 
+            
+
             if (option is EndDialogue)
             {
                 text = "<color=white>{END}</color>";
@@ -112,7 +120,33 @@ public class UIManager : MonoBehaviour
             {
                 text = string.Format("<color=white>{0}</color>", playerOption.Line);
                 int index = i - 1;
-                callback = () => SelectConversationOption(index);
+                string extra = "";
+
+                if (option is IConditionalDialogue cOption)
+                {
+                    foreach (IDialogueAction action in cOption.Actions)
+                    {
+                        if (action is RollDialogueAction rollAction && cOption is PlayerDialogue playerDialogue)
+                        {
+                            int result = UnityEngine.Random.Range(1, rollAction.Denominator + 1); // roll the dice
+                            int attitude = GameManager.Instance.GetStateValue<int>(playerDialogue.BodyPart);
+                            int checkAgainst = rollAction.Denominator - rollAction.Numerator;
+
+                            if (result + attitude > checkAgainst)
+                            {
+                                GameManager.Instance.SetStateValue<bool>("ROLL_SUCCESS", true);
+                                extra = string.Format("<color=green>SUCCESS</color><color=white>: ");
+                            }
+                            else
+                            {
+                                GameManager.Instance.SetStateValue<bool>("ROLL_SUCCESS", false);
+                                extra = string.Format("<color=red>FAILURE</color><color=white>: ");
+                            }
+                        }
+                    }
+                }
+
+                callback = () => SelectConversationOption(index, extra);
                 i++;
             }
             else
