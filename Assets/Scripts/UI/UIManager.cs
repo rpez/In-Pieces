@@ -10,9 +10,12 @@ public class UIManager : MonoBehaviour
     // These references are set in editor, they are children of the canvas
     public GameObject m_dialogueWindow;
     public TMP_Text m_dialogueText;
+    public TMP_Text m_descriptionText;
     public GameObject m_dialogueOptionContainer;
     public PlayableDirector m_director;
     public TMP_Text m_actor;
+    public GameObject m_dialogView;
+    public GameObject m_descriptionView;
 
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
@@ -55,17 +58,28 @@ public class UIManager : MonoBehaviour
     // Updates the dialogue text
     private void DisplayConversation(IDialogue dialogue)
     {
-        if (dialogue is IConditionalDialogue condDialogue)
-        {
-            m_dialogueText.text = m_rollResult + condDialogue.Line;
-            m_rollResult = "";
-        }
+        TMP_Text dialogText;
 
         // Check if the dialogue has an actor, if yes, update it to UI
         if (dialogue is ActorDialogue actorDialogue && !actorDialogue.Actor.Equals("DESCRIPTION"))
+        {
+            m_dialogView.SetActive(true);
+            m_descriptionView.SetActive(false);
+            dialogText = m_dialogueText;
             m_actor.text = actorDialogue.Actor;
+        }
         else
-            m_actor.gameObject.SetActive(false);
+        {
+            m_dialogView.SetActive(false);
+            m_descriptionView.SetActive(true);
+            dialogText = m_descriptionText;
+        }
+
+        if (dialogue is IConditionalDialogue condDialogue)
+        {
+            dialogText.text = m_rollResult + condDialogue.Line;
+            m_rollResult = "";
+        }
     }
 
     // Selects a conversation option with index x

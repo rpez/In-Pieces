@@ -638,6 +638,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1797840402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 210656010011986674, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+  m_PrefabInstance: {fileID: 9212562899802658688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,9 +1655,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2360877036632062227, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
-      propertyPath: m_Color.a
-      value: 0.7490196
+    - target: {fileID: 669217737, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_descriptionText
+      value: 
+      objectReference: {fileID: 1797840402}
+    - target: {fileID: 6985728019456460676, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Name
+      value: DescriptionText
       objectReference: {fileID: 0}
     - target: {fileID: 9212562899343336520, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
       propertyPath: m_Name
