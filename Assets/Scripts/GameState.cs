@@ -28,6 +28,8 @@ public class GameState
     public bool INTRO_HEAVY_METAL { get; set; } = false;
     public bool INTRO_THE_MANSION { get; set; } = false;
 
+    public int INTRO_DRUNKENNESS_LEVEL { get; set; } = 0;
+
     // Bedroom tutorial scene
     public bool TUTORIAL_OPEN_EYES { get; set; } = false;
     public bool TUTORIAL_GET_UP { get; set; } = false;

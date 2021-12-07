@@ -7,19 +7,6 @@ using FMODUnity;
 
 public class Hallway : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")

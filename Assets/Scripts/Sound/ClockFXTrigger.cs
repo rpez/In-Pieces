@@ -12,13 +12,6 @@ public class ClockFXTrigger : MonoBehaviour
     {
         oldClock = FMODUnity.RuntimeManager.CreateInstance("event:/tickingClock");
         oldClock.start();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void OnTriggerStay(Collider other)
@@ -26,9 +19,7 @@ public class ClockFXTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             //changing global parameter in fmod. you have to check global paramter in fmod edit paramter window
-            
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("TaxiTrigger", 1);
-
         }
     }
 }

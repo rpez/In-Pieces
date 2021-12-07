@@ -12,13 +12,10 @@ public class SoundManager : Singleton<SoundManager>
     void Start()
     {
         // fmod stereo Music instance
-        // m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
-        
-
+        m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
     }
 
     // BOOLS
-    // MUSIC PLAYS OR NOT
     public void UpdateSoundsBoolean(string parameterName, bool boolValue)
     {
         if (!m_musicPlaying &&
@@ -26,8 +23,6 @@ public class SoundManager : Singleton<SoundManager>
             boolValue)
         {
             UnityEngine.Debug.Log("Fmod: Stereo Music Start");
-           
-            m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
             m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
             m_stereoInstance.start();
             m_musicPlaying = true;
@@ -62,11 +57,10 @@ public class SoundManager : Singleton<SoundManager>
         }
         else if (parameterName.Equals("HAS_EARS") && boolValue)
         {
+            UnityEngine.Debug.Log("Fmod: Got Ears");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("hasEars", 1);
         }
     }
-
-
 
     // INTS
     public void UpdateSoundsInteger(string parameterName, int intValue)
@@ -88,16 +82,3 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 }
-
-
-/*   NOTES LUCIEN
- * // public bool STEREO_IS_ON { get; set; } = false;
-        // public bool STEREO_BASS_BOOST { get; set; } = false;
-        // public bool STEREO_IS_PLAYING { get; set; } = false;
-
-
-
-
-
-
-     */

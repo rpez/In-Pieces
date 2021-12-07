@@ -27,16 +27,6 @@ public class AudTaxiArrivingTrigger : MonoBehaviour
         {
             //changing global parameter in fmod. you have to check global paramter in fmod edit paramter window
             TaxiArraving.start();
-
-            UnityEngine.Debug.Log("TaxiArrived");
         }
     }
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag == "Player")
-    //    {
-    //        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("inFunnel", 0);
-    //    }
-    //}
 }

@@ -17,8 +17,6 @@ public class WindowRain : MonoBehaviour
         distance = 20;
         instance = FMODUnity.RuntimeManager.CreateInstance("event:/WindowRain");
         instance.start();
-       
-
     }
 
     // Update is called once per frame

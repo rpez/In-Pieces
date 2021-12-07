@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public VolumeProfile m_defaultPPP;
     public VolumeProfile m_nearSightedPPP;
 
+    public LayerMask m_layerMask;
+
     // Offset positions for the armature with and without legs
     private Vector3 m_nosePosition;
     private Vector3 m_nosePositionWithoutLegs;
@@ -29,8 +31,9 @@ public class PlayerController : MonoBehaviour
     private Interactable m_currentHovered;
 
     private Animator m_animator;
+    private Collider m_collider;
 
-    private bool m_movementEnabled = true;
+    public bool m_movementEnabled = true;
 
     public void OnTargetInteractableReached()
     {
@@ -42,13 +45,14 @@ public class PlayerController : MonoBehaviour
     {
         SetWalkingAnimation(false);
         m_movementEnabled = active;
-        m_navMeshAgent.enabled = active;
     }
 
     public void TravelToWaypoint(Vector3 location)
     {
-        m_navMeshAgent.enabled = false;
+        // This transform position thing is required for some reason :D
+        // Probably causes the player to leave the trigger or something
         transform.position = location;
+        m_navMeshAgent.Warp(location);
     }
 
     // Start is called before the first frame update
@@ -56,12 +60,21 @@ public class PlayerController : MonoBehaviour
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<Animator>();
+        m_collider = gameObject.GetComponent<Collider>();
 
         // Save offsets
         m_nosePosition = m_noseMesh.transform.localPosition;
         m_nosePositionWithoutLegs = m_nosePosition - Vector3.up * 2f;
 
         UpdateBodyParts();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Interactable")
+        {
+            Physics.IgnoreCollision(collision.collider, m_collider);
+        }
     }
 
     // Update is called once per frame
@@ -85,7 +98,7 @@ public class PlayerController : MonoBehaviour
         // If movement is disabled, return
         if (!m_movementEnabled) return;
 
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 100.0f, m_layerMask))
         {
             if (hit.transform.tag == "Interactable")
             {
@@ -108,7 +121,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 SpawnIndicator(hit.point);
-                m_navMeshAgent.SetDestination(hit.point);
+                m_navMeshAgent.SetDestination(new Vector3(hit.point.x, transform.position.y, hit.point.z));
                 CancelCurrentInteractionTarget();
 
                 SetWalkingAnimation(true);

@@ -4,15 +4,21 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     // These references are set in editor, they are children of the canvas
     public GameObject m_dialogueWindow;
     public TMP_Text m_dialogueText;
+    public TMP_Text m_descriptionText;
     public GameObject m_dialogueOptionContainer;
     public PlayableDirector m_director;
     public TMP_Text m_actor;
+    public GameObject m_dialogView;
+    public GameObject m_descriptionView;
+    public TMP_Text m_transitionText;
+    public GameObject m_introPanel;
 
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
@@ -25,6 +31,8 @@ public class UIManager : MonoBehaviour
     private Action m_onTransitionMid;
     private Action m_onTransitionEnd;
 
+    private string m_rollResult;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +44,6 @@ public class UIManager : MonoBehaviour
         m_bodypartNameToImageIndex.Add("HAND", 3);
         m_bodypartNameToImageIndex.Add("NOSE", 4);
         m_bodypartNameToImageIndex.Add("", 5);
-
     }
 
     // Starts (or continues) dialogue
@@ -53,25 +60,40 @@ public class UIManager : MonoBehaviour
     // Updates the dialogue text
     private void DisplayConversation(IDialogue dialogue)
     {
-        if (dialogue is IConditionalDialogue condDialogue)
-            m_dialogueText.text = condDialogue.Line;
-        // Check if the dailogue has an actor, if yes, update it to UI
-        if (dialogue is ActorDialogue actorDialogue && !actorDialogue.Actor.Equals("DESCRIPTION"))
-            m_actor.text = actorDialogue.Actor;
-        else
-            m_actor.text = "";
+        TMP_Text dialogText;
 
+        // Check if the dialogue has an actor, if yes, update it to UI
+        if (dialogue is ActorDialogue actorDialogue && !actorDialogue.Actor.Equals("DESCRIPTION"))
+        {
+            m_dialogView.SetActive(true);
+            m_descriptionView.SetActive(false);
+            dialogText = m_dialogueText;
+            m_actor.text = actorDialogue.Actor;
+        }
+        else
+        {
+            m_dialogView.SetActive(false);
+            m_descriptionView.SetActive(true);
+            dialogText = m_descriptionText;
+        }
+
+        if (dialogue is IConditionalDialogue condDialogue)
+        {
+            dialogText.text = m_rollResult + condDialogue.Line;
+            m_rollResult = "";
+        }
     }
 
     // Selects a conversation option with index x
     // Then updates the window
-    private void SelectConversationOption(int x)
+    private void SelectConversationOption(int x, string extra = "")
     {
         var selected = DialogueManager.Instance.SelectOption(x);  // Prints the next conversation node
 
         // need to check for null here, we might click on something that is out of bounds of this conversation
         if (selected != null)
         {
+            m_rollResult = extra;
             DisplayConversation(selected);
             DisplayConversationOptions();    // Prints options for the player to choose
         }
@@ -98,6 +120,8 @@ public class UIManager : MonoBehaviour
             string text = "Placeholder dialogue, very bad if you see this :D";
             Action callback = () => { };
 
+            
+
             if (option is EndDialogue)
             {
                 text = "<color=white>{END}</color>";
@@ -112,7 +136,33 @@ public class UIManager : MonoBehaviour
             {
                 text = string.Format("<color=white>{0}</color>", playerOption.Line);
                 int index = i - 1;
-                callback = () => SelectConversationOption(index);
+                string extra = "";
+
+                if (option is IConditionalDialogue cOption)
+                {
+                    foreach (IDialogueAction action in cOption.Actions)
+                    {
+                        if (action is RollDialogueAction rollAction && cOption is PlayerDialogue playerDialogue)
+                        {
+                            int result = UnityEngine.Random.Range(1, rollAction.Denominator + 1); // roll the dice
+                            int attitude = GameManager.Instance.GetStateValue<int>(playerDialogue.BodyPart);
+                            int checkAgainst = rollAction.Denominator - rollAction.Numerator;
+
+                            if (result + attitude > checkAgainst)
+                            {
+                                GameManager.Instance.SetStateValue<bool>("ROLL_SUCCESS", true);
+                                extra = string.Format("<color=green>SUCCESS</color><color=white>: ");
+                            }
+                            else
+                            {
+                                GameManager.Instance.SetStateValue<bool>("ROLL_SUCCESS", false);
+                                extra = string.Format("<color=red>FAILURE</color><color=white>: ");
+                            }
+                        }
+                    }
+                }
+
+                callback = () => SelectConversationOption(index, extra);
                 i++;
             }
             else
@@ -150,8 +200,34 @@ public class UIManager : MonoBehaviour
         m_dialogueWindow.SetActive(false);
     }
 
-    public void AnimateFadeTransition(Action onMid, Action onEnd)
+    public void StartCutcene(string startText, string endText, string dialogueName, Action onMidEnd, Action onEndEnd)
     {
+        m_introPanel.SetActive(true);
+        m_introPanel.GetComponent<Image>().color = Color.black;
+        AnimateFadeTransition(
+            startText,
+            () => {
+                m_introPanel.GetComponent<Image>().color = Color.red;
+            },
+            () => {
+                StartConversation(
+                    dialogueName,
+                    () => {
+                    AnimateFadeTransition(
+                        endText,
+                        () => {
+                            m_introPanel.SetActive(false);
+                            onMidEnd.Invoke();
+                        },
+                        onEndEnd);
+                    });
+            });
+    }
+
+    public void AnimateFadeTransition(string transitionText, Action onMid, Action onEnd)
+    {
+        m_transitionText.text = transitionText;
+
         m_onTransitionMid = onMid;
         m_onTransitionEnd = onEnd;
 

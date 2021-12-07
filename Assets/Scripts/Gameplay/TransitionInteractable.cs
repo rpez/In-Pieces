@@ -6,6 +6,7 @@ public class TransitionInteractable : Interactable
 {
     public string m_trackedState;
     public Transform m_waypoint;
+    public string m_transitionText;
 
     private PlayerController m_actor;
     private bool m_currentState;
@@ -26,15 +27,17 @@ public class TransitionInteractable : Interactable
         if (m_currentState != GameManager.Instance.GetStateValue<bool>(m_trackedState))
         {
             m_currentState = GameManager.Instance.GetStateValue<bool>(m_trackedState);
-            LevelManager.Instance.InitiateTransition(() =>
-            {
-                m_actor.TravelToWaypoint(m_waypoint.position);
-            },
-            () =>
-            {
-                base.OnExitInteraction();
-                m_actor = null;
-            });
+            CutsceneManager.Instance.InitiateTransition(
+                m_transitionText,
+                () =>
+                {
+                    m_actor.TravelToWaypoint(m_waypoint.position);
+                },
+                () =>
+                {
+                    base.OnExitInteraction();
+                    m_actor = null;
+                });
         }
         else
         {
