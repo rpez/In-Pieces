@@ -989,6 +989,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: eyes
       objectReference: {fileID: 0}
+    - target: {fileID: 3276204653564966271, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
 --- !u!1001 &4408303357772619781
