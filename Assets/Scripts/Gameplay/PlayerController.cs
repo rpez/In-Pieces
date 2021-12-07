@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public VolumeProfile m_defaultPPP;
     public VolumeProfile m_nearSightedPPP;
 
+    public LayerMask m_layerMask;
+
     // Offset positions for the armature with and without legs
     private Vector3 m_nosePosition;
     private Vector3 m_nosePositionWithoutLegs;
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private Animator m_animator;
     private Collider m_collider;
 
-    private bool m_movementEnabled = true;
+    public bool m_movementEnabled = true;
 
     public void OnTargetInteractableReached()
     {
@@ -96,7 +98,7 @@ public class PlayerController : MonoBehaviour
         // If movement is disabled, return
         if (!m_movementEnabled) return;
 
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 100.0f, m_layerMask))
         {
             if (hit.transform.tag == "Interactable")
             {
