@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 SpawnIndicator(hit.point);
-                m_navMeshAgent.SetDestination(hit.point);
+                m_navMeshAgent.SetDestination(new Vector3(hit.point.x, transform.position.y, hit.point.z));
                 CancelCurrentInteractionTarget();
 
                 SetWalkingAnimation(true);
