@@ -74,12 +74,17 @@ public class SoundManager : Singleton<SoundManager>
         if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 1");
-            // FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 1);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 1);
         }
         else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 2)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
-            // FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 0);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 2);
+        }
+        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 3)
+        {
+            UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 3);
         }
     }
 }

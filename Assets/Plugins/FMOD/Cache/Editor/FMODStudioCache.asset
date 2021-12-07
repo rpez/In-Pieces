@@ -123,9 +123,9 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 6297993765001094704}
-  - {fileID: -611062129017465312}
-  - {fileID: 3421501780924303418}
+  - {fileID: 8136298933351662013}
+  - {fileID: 6287758548284142981}
+  - {fileID: -5830729435109933746}
   MinDistance: 1
   MaxDistance: 15
   Length: 314000
@@ -465,6 +465,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &-8569548871792677321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/InBathroom
+  m_EditorClassIdentifier: 
+  Name: InBathroom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
 --- !u!114 &-8541258115545955738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +728,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-8336246115734345244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,7 +969,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 2333717603198529032}
+  - {fileID: 1883429558988710777}
   MinDistance: 1
   MaxDistance: 20
   Length: 335046
@@ -973,6 +997,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &-8003951745986365255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Clicking
+  m_EditorClassIdentifier: 
+  Path: event:/Clicking
+  Guid:
+    Data1: 755760556
+    Data2: 1291170245
+    Data3: 849101721
+    Data4: -375912432
+  Banks:
+  - {fileID: -2223415278162348132}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7990453464645132517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,6 +1747,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &-7010849406357552285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/InBathroom
+  m_EditorClassIdentifier: 
+  Name: InBathroom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-6882547736825624461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2082,7 +2157,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-6480459395469288786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,6 +2207,30 @@ MonoBehaviour:
   Labels: []
   Exists: 0
 --- !u!114 &-6438814198863814272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TickingClock/TaxiTrigger
+  m_EditorClassIdentifier: 
+  Name: TaxiTrigger
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
+--- !u!114 &-6402724478763051542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2432,6 +2531,30 @@ MonoBehaviour:
   m_Name: parameter:/TickingClock/TaxiTrigger
   m_EditorClassIdentifier: 
   Name: TaxiTrigger
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-5830729435109933746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/StereoSpeakerMusic/inBedroom
+  m_EditorClassIdentifier: 
+  Name: inBedroom
   StudioPath: 
   Min: 0
   Max: 1
@@ -2779,6 +2902,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &-5355254119950568463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindowRain/PlayerToWindowDist
+  m_EditorClassIdentifier: 
+  Name: PlayerToWindowDist
+  StudioPath: 
+  Min: 0
+  Max: 15
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-5351511470422108671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2888,6 +3035,30 @@ MonoBehaviour:
   m_Name: parameter:/RainEndlessLoop/inBedroom
   m_EditorClassIdentifier: 
   Name: inBedroom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
+--- !u!114 &-5226478214391635236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/inHallway
+  m_EditorClassIdentifier: 
+  Name: inHallway
   StudioPath: 
   Min: 0
   Max: 1
@@ -3011,6 +3182,30 @@ MonoBehaviour:
   StudioPath: 
   Min: 0
   Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
+--- !u!114 &-5024317868466632877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindowRain/PlayerToWindowDist
+  m_EditorClassIdentifier: 
+  Name: PlayerToWindowDist
+  StudioPath: 
+  Min: 0
+  Max: 15
   Default: 0
   ID:
     data1: 0
@@ -3547,7 +3742,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -6528337601171899813}
+  - {fileID: -578447793339017892}
   MinDistance: 1
   MaxDistance: 20
   Length: 172000
@@ -3839,6 +4034,30 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 0
+--- !u!114 &-4008347465463880971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/StereoSpeakerMusic/inBedroom
+  m_EditorClassIdentifier: 
+  Name: inBedroom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
 --- !u!114 &-3998002252302963839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3887,6 +4106,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &-3940727460146961943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/inBedroom
+  m_EditorClassIdentifier: 
+  Name: inBedroom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-3896366987951857449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4343,6 +4586,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &-3610232073953838847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindowRain/inBedroom
+  m_EditorClassIdentifier: 
+  Name: inBedroom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-3601423015397030667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4559,6 +4826,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-3291321036580361170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/hasEars
+  m_EditorClassIdentifier: 
+  Name: hasEars
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
 --- !u!114 &-3275432594094320988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4774,7 +5065,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-3034644574878661938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4871,6 +5162,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &-2906250285740368046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/inLivingRoom
+  m_EditorClassIdentifier: 
+  Name: inLivingRoom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-2882731451810775063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5630,10 +5945,10 @@ MonoBehaviour:
   Path: Assets/FMOD/inPiecesFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637744929680000000
+  lastModified: 637745084300000000
   FileSizes:
   - Name: Desktop
-    Value: 13995008
+    Value: 14003200
   Exists: 1
 --- !u!114 &-2221779379143879343
 MonoBehaviour:
@@ -5850,7 +6165,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1861533741165017202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6019,6 +6334,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-1409327335294941329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindowRain/inBedroom
+  m_EditorClassIdentifier: 
+  Name: inBedroom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
 --- !u!114 &-1334507382842637712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6186,7 +6525,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1224034087872285821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6954,7 +7293,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-596858399499778739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7003,6 +7342,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &-578447793339017892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TickingClock/TaxiTrigger
+  m_EditorClassIdentifier: 
+  Name: TaxiTrigger
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-540756194527674551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7632,6 +7995,7 @@ MonoBehaviour:
   - {fileID: -4351843333446359485}
   - {fileID: -6631343833050620867}
   - {fileID: -284245346475073227}
+  - {fileID: -8003951745986365255}
   EditorParameters:
   - {fileID: 8992213351592866072}
   - {fileID: 4835101692860057016}
@@ -7645,7 +8009,7 @@ MonoBehaviour:
   - {fileID: -2223415278162348132}
   StringsBanks:
   - {fileID: 7523608877411424197}
-  cacheTime: 637744929680000000
+  cacheTime: 637745084300000000
   cacheVersion: 9
 --- !u!114 &100597457637265349
 MonoBehaviour:
@@ -7959,8 +8323,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -1230084007075060740}
-  - {fileID: -8357605285096727065}
+  - {fileID: -5355254119950568463}
+  - {fileID: -3610232073953838847}
   MinDistance: 1
   MaxDistance: 20
   Length: 130441
@@ -8060,6 +8424,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &708622753390960599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/hasEars
+  m_EditorClassIdentifier: 
+  Name: hasEars
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &737641610949489295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8324,11 +8712,11 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 6441340679276623481}
-  - {fileID: -3044119337170012866}
-  - {fileID: 9023990502488434497}
-  - {fileID: -1880133867622911758}
-  - {fileID: 1508205821088681161}
+  - {fileID: -2906250285740368046}
+  - {fileID: 708622753390960599}
+  - {fileID: -7010849406357552285}
+  - {fileID: -3940727460146961943}
+  - {fileID: 8997944218432397180}
   MinDistance: 1
   MaxDistance: 20
   Length: 216581
@@ -8575,7 +8963,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &1534031193242314579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8888,6 +9276,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &1883429558988710777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Intro/Chug
+  m_EditorClassIdentifier: 
+  Name: Chug
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1890352325261159583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9079,7 +9491,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 0
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &2338433755327978504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9970,7 +10382,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &3437404373124586285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10176,6 +10588,30 @@ MonoBehaviour:
   m_Name: parameter:/RainEndlessLoop/inLivingRoom
   m_EditorClassIdentifier: 
   Name: inLivingRoom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
+--- !u!114 &3708958370586550019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/StereoSpeakerMusic/inHallway
+  m_EditorClassIdentifier: 
+  Name: inHallway
   StudioPath: 
   Min: 0
   Max: 1
@@ -10427,6 +10863,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &3950655736702043719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Intro/Chug
+  m_EditorClassIdentifier: 
+  Name: Chug
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 0
 --- !u!114 &3975291423593249315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10440,6 +10900,30 @@ MonoBehaviour:
   m_Name: parameter:/WindowRain/inBedroom
   m_EditorClassIdentifier: 
   Name: inBedroom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
+--- !u!114 &3988471349350386228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/StereoSpeakerMusic/BassBoost
+  m_EditorClassIdentifier: 
+  Name: BassBoost
   StudioPath: 
   Min: 0
   Max: 1
@@ -11315,6 +11799,30 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &5057942232236423197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/inLivingRoom
+  m_EditorClassIdentifier: 
+  Name: inLivingRoom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
 --- !u!114 &5070174981014666864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12301,6 +12809,30 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 0
+--- !u!114 &6287758548284142981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/StereoSpeakerMusic/inHallway
+  m_EditorClassIdentifier: 
+  Name: inHallway
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &6291282901979199981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12348,7 +12880,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &6318046524827583143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12492,7 +13024,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &6458230072993345097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13471,10 +14003,10 @@ MonoBehaviour:
   Path: Assets/FMOD/inPiecesFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637744929680000000
+  lastModified: 637745084300000000
   FileSizes:
   - Name: Desktop
-    Value: 1620
+    Value: 1660
   Exists: 1
 --- !u!114 &7608939290487441062
 MonoBehaviour:
@@ -14004,6 +14536,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 0
+--- !u!114 &8136298933351662013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/StereoSpeakerMusic/BassBoost
+  m_EditorClassIdentifier: 
+  Name: BassBoost
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &8145894730843681974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14796,6 +15352,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &8997944218432397180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/inHallway
+  m_EditorClassIdentifier: 
+  Name: inHallway
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &9023990502488434497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14819,7 +15399,31 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
-  Exists: 1
+  Exists: 0
+--- !u!114 &9038819777760540662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RainEndlessLoop/inBedroom
+  m_EditorClassIdentifier: 
+  Name: inBedroom
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 0
 --- !u!114 &9125344148540622446
 MonoBehaviour:
   m_ObjectHideFlags: 0
