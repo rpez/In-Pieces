@@ -1550,22 +1550,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: upstairs
       objectReference: {fileID: 0}
-    - target: {fileID: 2037435519248868, guid: 0e545d402b48460478d58404243c1b62, type: 3}
-      propertyPath: m_Size.x
-      value: 0.03036684
-      objectReference: {fileID: 0}
-    - target: {fileID: 2037435519248868, guid: 0e545d402b48460478d58404243c1b62, type: 3}
-      propertyPath: m_Size.z
-      value: 0.036697034
-      objectReference: {fileID: 0}
-    - target: {fileID: 2037435519248868, guid: 0e545d402b48460478d58404243c1b62, type: 3}
-      propertyPath: m_Center.x
-      value: -0.000030730964
-      objectReference: {fileID: 0}
-    - target: {fileID: 2037435519248868, guid: 0e545d402b48460478d58404243c1b62, type: 3}
-      propertyPath: m_Center.z
-      value: 0.0018696539
-      objectReference: {fileID: 0}
     - target: {fileID: 2037435519248870, guid: 0e545d402b48460478d58404243c1b62, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1676,30 +1660,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 40641667982437218, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1.9999969
-      objectReference: {fileID: 0}
-    - target: {fileID: 40641667982437218, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 40641667982437218, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 40641667982437218, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267720333759991540, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4415618398795736696, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9212562899343336520, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
       propertyPath: m_Name
       value: Canvas

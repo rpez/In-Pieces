@@ -12,9 +12,9 @@ public class CutsceneManager : Singleton<CutsceneManager>
 
     }
 
-    public void InitiateTransition(Action midTransitionCallback, Action transitionEndCallback)
+    public void InitiateTransition(string transitionText, Action midTransitionCallback, Action transitionEndCallback)
     {
-        m_UI.AnimateFadeTransition(midTransitionCallback, transitionEndCallback);
+        m_UI.AnimateFadeTransition(transitionText, midTransitionCallback, transitionEndCallback);
     }
 
     // Start is called before the first frame update

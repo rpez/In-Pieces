@@ -246,6 +246,7 @@ MonoBehaviour:
   m_dialogueIdentifier: upstairs_dialogue
   m_trackedState: UPSTAIRS
   m_waypoint: {fileID: 2037434946682897}
+  m_transitionText: Going downstairs...
 --- !u!65 &2037435519248868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -257,8 +258,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.028263878, y: 0.028864244, z: 0.03141994}
-  m_Center: {x: -0.0001493883, y: 0.0036430573, z: -0.00076890015}
+  m_Size: {x: 0.03036684, y: 0.028864244, z: 0.036697034}
+  m_Center: {x: -0.000030730964, y: 0.0036430573, z: 0.0018696539}
 --- !u!1 &2037435617333817
 GameObject:
   m_ObjectHideFlags: 0

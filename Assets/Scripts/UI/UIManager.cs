@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text m_actor;
     public GameObject m_dialogView;
     public GameObject m_descriptionView;
+    public TMP_Text m_transitionText;
 
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
@@ -197,8 +198,26 @@ public class UIManager : MonoBehaviour
         m_dialogueWindow.SetActive(false);
     }
 
-    public void AnimateFadeTransition(Action onMid, Action onEnd)
+    public void CutceneFadeIn(Action onEnd)
     {
+        m_onTransitionEnd = onEnd;
+
+        m_director.time = 0;
+        m_director.Play();
+    }
+
+    public void CutceneFadeOut(Action onEnd)
+    {
+        m_onTransitionEnd = onEnd;
+
+        m_director.time = 0;
+        m_director.Play();
+    }
+
+    public void AnimateFadeTransition(string transitionText, Action onMid, Action onEnd)
+    {
+        m_transitionText.text = transitionText;
+
         m_onTransitionMid = onMid;
         m_onTransitionEnd = onEnd;
 
