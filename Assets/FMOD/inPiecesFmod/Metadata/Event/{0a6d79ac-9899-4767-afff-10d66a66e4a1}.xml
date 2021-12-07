@@ -142,6 +142,7 @@
 		<relationship name="modules">
 			<destination>{c782b3db-0bee-43d9-aae7-f32999c4f8a7}</destination>
 			<destination>{7bd8b2e9-cbfc-48e9-b27a-9292540004d7}</destination>
+			<destination>{68c8db70-8f80-45c2-aefc-f85031c278e3}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{ec715412-f689-4e78-9ca2-aa4d1fcf3d32}</destination>
@@ -189,6 +190,7 @@
 			<destination>{7bd8b2e9-cbfc-48e9-b27a-9292540004d7}</destination>
 			<destination>{7a061792-7986-43b6-a863-0f55be715305}</destination>
 			<destination>{192c714b-af95-4480-bd63-e217f89c755a}</destination>
+			<destination>{68c8db70-8f80-45c2-aefc-f85031c278e3}</destination>
 		</relationship>
 		<relationship name="preset">
 			<destination>{5fe31513-0dd8-48b2-86b3-88928ba7196d}</destination>
@@ -565,6 +567,9 @@
 		<property name="startOffset">
 			<value>12.5</value>
 		</property>
+		<property name="pitch">
+			<value>-5</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{745ee0b3-3e21-4cd5-b24f-a52fec81f250}</destination>
 		</relationship>
@@ -578,6 +583,9 @@
 		</property>
 		<property name="startOffset">
 			<value>12.5</value>
+		</property>
+		<property name="pitch">
+			<value>-3</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{745ee0b3-3e21-4cd5-b24f-a52fec81f250}</destination>
@@ -650,6 +658,23 @@
 		</relationship>
 		<relationship name="audioFile">
 			<destination>{cca55acd-44ec-492e-a188-e53149b845bc}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{68c8db70-8f80-45c2-aefc-f85031c278e3}">
+		<property name="start">
+			<value>0.70000000000000007</value>
+		</property>
+		<property name="length">
+			<value>0.5</value>
+		</property>
+		<property name="volume">
+			<value>-8.5</value>
+		</property>
+		<property name="pitch">
+			<value>-3.20000005</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{1bd8a0da-4468-4599-820e-52636eb38c03}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{ec715412-f689-4e78-9ca2-aa4d1fcf3d32}">
@@ -1104,6 +1129,9 @@
 	<object class="MultibandEqEffect" id="{ded0f802-10b8-477c-a47b-a988f65cc00a}">
 		<property name="filterTypeA">
 			<value>3</value>
+		</property>
+		<property name="qualityA">
+			<value>0.634002209</value>
 		</property>
 		<relationship name="automators">
 			<destination>{2d3e5500-7bee-4d69-8d4d-f3d6df005067}</destination>
@@ -2045,7 +2073,7 @@
 			<value>0.10000000000000001</value>
 		</property>
 		<property name="value">
-			<value>18000</value>
+			<value>19212.3398</value>
 		</property>
 		<property name="curveShape">
 			<value>-0.0134675745</value>
@@ -2056,7 +2084,7 @@
 			<value>3</value>
 		</property>
 		<property name="value">
-			<value>600</value>
+			<value>636.370239</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{da475354-b594-4523-98b3-e1dc7400461d}">
@@ -2064,7 +2092,7 @@
 			<value>2.5</value>
 		</property>
 		<property name="value">
-			<value>600</value>
+			<value>636.370239</value>
 		</property>
 		<property name="curveShape">
 			<value>1</value>
@@ -2075,7 +2103,7 @@
 			<value>1.9878048780487807</value>
 		</property>
 		<property name="value">
-			<value>450</value>
+			<value>486.37027</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{be880753-5801-4bbb-ada4-039f3436df90}">
@@ -2083,7 +2111,7 @@
 			<value>1.6000000000000001</value>
 		</property>
 		<property name="value">
-			<value>600</value>
+			<value>636.370239</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{abd433f5-38b3-4097-8692-b462cf5d0602}">
@@ -2091,7 +2119,7 @@
 			<value>0.90000000000000002</value>
 		</property>
 		<property name="value">
-			<value>4000</value>
+			<value>4297.57471</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{65c86a6b-9baf-4b55-a11f-66a5937e4bbf}">
