@@ -15,8 +15,10 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayIntroDialogueClickSound()
     {
-        // Add randomness here or do it inside FMOD?
-        FMODUnity.RuntimeManager.PlayOneShot("event:/CheersClicking");
+        if (RandomEvent(0.2f)) // 20 % chance to succeed
+            FMODUnity.RuntimeManager.PlayOneShot("event:/CheersClicking");
+        else
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Clicking");
     }
 
     public void PlayDialogueClickSound()
@@ -98,5 +100,12 @@ public class SoundManager : Singleton<SoundManager>
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 3);
         }
+    }
+
+    private bool RandomEvent(float successPercentage)
+    {
+        if (UnityEngine.Random.Range(0.0f, 1.0f) <= successPercentage)
+            return true;
+        return false;
     }
 }
