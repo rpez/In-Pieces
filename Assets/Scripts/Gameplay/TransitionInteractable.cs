@@ -26,7 +26,7 @@ public class TransitionInteractable : Interactable
         if (m_currentState != GameManager.Instance.GetStateValue<bool>(m_trackedState))
         {
             m_currentState = GameManager.Instance.GetStateValue<bool>(m_trackedState);
-            LevelManager.Instance.InitiateTransition(() =>
+            CutsceneManager.Instance.InitiateTransition(() =>
             {
                 m_actor.TravelToWaypoint(m_waypoint.position);
             },

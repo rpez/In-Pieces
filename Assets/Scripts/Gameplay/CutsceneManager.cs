@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : Singleton<LevelManager>
+public class CutsceneManager : Singleton<CutsceneManager>
 {
     private UIManager m_UI;
+
+    public void PlayCutscene()
+    {
+
+    }
 
     public void InitiateTransition(Action midTransitionCallback, Action transitionEndCallback)
     {
