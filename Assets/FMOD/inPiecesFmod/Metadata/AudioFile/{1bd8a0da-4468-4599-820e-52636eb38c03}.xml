@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{1bd8a0da-4468-4599-820e-52636eb38c03}">
+		<property name="assetPath">
+			<value>41902-FOLEY_GLASS_BOTTLE_CHEERS_TOAST_01.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.53065759637188203</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{65c25536-d33f-45db-9fae-9647c0415bda}</destination>
+		</relationship>
+	</object>
+</objects>
