@@ -12,11 +12,10 @@ public class SoundManager : Singleton<SoundManager>
     void Start()
     {
         // fmod stereo Music instance
-        // m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
+        m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
     }
 
     // BOOLS
-    // MUSIC PLAYS OR NOT
     public void UpdateSoundsBoolean(string parameterName, bool boolValue)
     {
         if (!m_musicPlaying &&
@@ -24,7 +23,7 @@ public class SoundManager : Singleton<SoundManager>
             boolValue)
         {
             UnityEngine.Debug.Log("Fmod: Stereo Music Start");
-            m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
+            m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
             m_stereoInstance.start();
             m_musicPlaying = true;
         }
@@ -56,6 +55,11 @@ public class SoundManager : Singleton<SoundManager>
             UnityEngine.Debug.Log("Fmod: Stereo Bass Boost Off");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 0);
         }
+        else if (parameterName.Equals("HAS_EARS") && boolValue)
+        {
+            UnityEngine.Debug.Log("Fmod: Got Ears");
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("hasEars", 1);
+        }
     }
 
     // INTS
@@ -64,25 +68,17 @@ public class SoundManager : Singleton<SoundManager>
         if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 1");
-            // FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 1);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 1);
         }
         else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 2)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
-            // FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 0);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 2);
+        }
+        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 3)
+        {
+            UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 3);
         }
     }
 }
-
-
-/*   NOTES LUCIEN
- * // public bool STEREO_IS_ON { get; set; } = false;
-        // public bool STEREO_BASS_BOOST { get; set; } = false;
-        // public bool STEREO_IS_PLAYING { get; set; } = false;
-
-
-
-
-
-
-     */

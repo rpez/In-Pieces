@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{a7cbf0d5-c2e9-40ac-8de4-29adc04a68ea}">
+		<property name="name">
+			<value>TaxiTrigger</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d0367dc3-fef4-4b7f-bce9-bda6ec0f0bc5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{d16372d2-d77f-4a23-88d5-3a062b266d51}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{d16372d2-d77f-4a23-88d5-3a062b266d51}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
