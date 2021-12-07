@@ -20,13 +20,13 @@ public class GameManager : Singleton<GameManager>
         CutsceneManager.Instance.PlayCutscene("The night before...",
             "The morning after...",
             "intro_dialogue",
-            () =>
-            {
+            () => {
                 
             },
-            () =>
-            {
-                player.SetMovementActive(true);
+            () => {
+                CutsceneManager.Instance.StartForcedDialogue("sketch_dialogue", () => {
+                    player.SetMovementActive(true);
+                });
             }
         );
     }

@@ -17,6 +17,11 @@ public class CutsceneManager : Singleton<CutsceneManager>
         m_UI.StartCutcene(startText, endText, dialoguename, midEndTransitionCallback, transitionEndEndCallback);
     }
 
+    public void StartForcedDialogue(string dialogueName, Action onEnd)
+    {
+        m_UI.StartConversation(dialogueName, onEnd);
+    }
+
     public void InitiateTransition(string transitionText, Action midTransitionCallback, Action transitionEndCallback)
     {
         m_UI.AnimateFadeTransition(transitionText, midTransitionCallback, transitionEndCallback);
