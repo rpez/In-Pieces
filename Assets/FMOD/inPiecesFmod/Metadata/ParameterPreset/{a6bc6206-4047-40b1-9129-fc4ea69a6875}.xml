@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{a6bc6206-4047-40b1-9129-fc4ea69a6875}">
+		<property name="name">
+			<value>inHallway</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d0367dc3-fef4-4b7f-bce9-bda6ec0f0bc5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{9cc2effb-2c3f-4dc7-ab09-0c407db1a729}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{9cc2effb-2c3f-4dc7-ab09-0c407db1a729}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.12999999523162842</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
