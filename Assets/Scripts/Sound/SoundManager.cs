@@ -11,8 +11,6 @@ public class SoundManager : Singleton<SoundManager>
 
     void Start()
     {
-        // fmod stereo Music instance
-        m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
     }
 
     // BOOLS
@@ -23,6 +21,7 @@ public class SoundManager : Singleton<SoundManager>
             boolValue)
         {
             UnityEngine.Debug.Log("Fmod: Stereo Music Start");
+            m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
             m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
             m_stereoInstance.start();
             m_musicPlaying = true;
