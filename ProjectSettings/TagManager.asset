@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Interactable
   - InteractionTrigger
+  - AudioTrigger
   layers:
   - Default
   - TransparentFX

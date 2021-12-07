@@ -13,6 +13,8 @@ public class SoundManager : Singleton<SoundManager>
     {
         // fmod stereo Music instance
         // m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
+        
+
     }
 
     // BOOLS
@@ -56,7 +58,13 @@ public class SoundManager : Singleton<SoundManager>
             UnityEngine.Debug.Log("Fmod: Stereo Bass Boost Off");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BassBoost", 0);
         }
+        else if (parameterName.Equals("HAS_EARS") && boolValue)
+        {
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("hasEars", 1);
+        }
     }
+
+
 
     // INTS
     public void UpdateSoundsInteger(string parameterName, int intValue)
