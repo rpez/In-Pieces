@@ -43,13 +43,14 @@ public class PlayerController : MonoBehaviour
     {
         SetWalkingAnimation(false);
         m_movementEnabled = active;
-        m_navMeshAgent.enabled = active;
     }
 
     public void TravelToWaypoint(Vector3 location)
     {
-        m_navMeshAgent.enabled = false;
+        // This transform position thing is required for some reason :D
+        // Probably causes the player to leave the trigger or something
         transform.position = location;
+        m_navMeshAgent.Warp(location);
     }
 
     // Start is called before the first frame update

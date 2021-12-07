@@ -41,7 +41,6 @@ public class UIManager : MonoBehaviour
         m_bodypartNameToImageIndex.Add("HAND", 3);
         m_bodypartNameToImageIndex.Add("NOSE", 4);
         m_bodypartNameToImageIndex.Add("", 5);
-
     }
 
     // Starts (or continues) dialogue
