@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour
     public GameObject m_dialogView;
     public GameObject m_descriptionView;
     public TMP_Text m_transitionText;
+    public GameObject m_introPanel;
 
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
@@ -198,20 +200,23 @@ public class UIManager : MonoBehaviour
         m_dialogueWindow.SetActive(false);
     }
 
-    public void CutceneFadeIn(Action onEnd)
+    public void StartCutcene(string startText, string endText, string dialogueName, Action onMidEnd, Action onEndEnd)
     {
-        m_onTransitionEnd = onEnd;
-
-        m_director.time = 0;
-        m_director.Play();
-    }
-
-    public void CutceneFadeOut(Action onEnd)
-    {
-        m_onTransitionEnd = onEnd;
-
-        m_director.time = 0;
-        m_director.Play();
+        m_introPanel.SetActive(true);
+        m_introPanel.GetComponent<Image>().color = Color.black;
+        AnimateFadeTransition(
+            startText,
+            () =>
+            {
+                m_introPanel.GetComponent<Image>().color = Color.red;
+            },
+            () =>
+            {
+                StartConversation(dialogueName, () => {
+                    m_introPanel.SetActive(false);
+                    AnimateFadeTransition(endText, onMidEnd, onEndEnd);
+                    });
+            });
     }
 
     public void AnimateFadeTransition(string transitionText, Action onMid, Action onEnd)

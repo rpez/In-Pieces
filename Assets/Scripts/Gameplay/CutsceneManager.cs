@@ -7,9 +7,14 @@ public class CutsceneManager : Singleton<CutsceneManager>
 {
     private UIManager m_UI;
 
-    public void PlayCutscene()
+    public void PlayCutscene(
+        string startText,
+        string endText,
+        string dialoguename,
+        Action midEndTransitionCallback,
+        Action transitionEndEndCallback)
     {
-
+        m_UI.StartCutcene(startText, endText, dialoguename, midEndTransitionCallback, transitionEndEndCallback);
     }
 
     public void InitiateTransition(string transitionText, Action midTransitionCallback, Action transitionEndCallback)

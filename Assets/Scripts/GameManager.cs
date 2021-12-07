@@ -14,6 +14,23 @@ public class GameManager : Singleton<GameManager>
         State = new GameState();
     }
 
+    private void Start()
+    {
+        PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
+        CutsceneManager.Instance.PlayCutscene("The night before...",
+            "The morning after...",
+            "intro_dialogue",
+            () =>
+            {
+                
+            },
+            () =>
+            {
+                player.SetMovementActive(true);
+            }
+        );
+    }
+
     // Update is called once per frame
     void Update()
     {
