@@ -1724,6 +1724,22 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -5235595432724343354, guid: ba8b8ccd80a474d17a74a4840eb4b68e, type: 2}
+    - target: {fileID: 7780585985912725746, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Color.a
+      value: 0.9411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780585985912725746, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780585985912725746, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780585985912725746, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9212562899343336520, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
       propertyPath: m_Name
       value: Canvas
