@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{4217bb2b-a7a4-4eaa-b440-55ca9b8f783a}">
+		<property name="name">
+			<value>inBedroom</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d0367dc3-fef4-4b7f-bce9-bda6ec0f0bc5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{795b6ec7-742d-4e1e-9efb-ce3c84777f4e}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{795b6ec7-742d-4e1e-9efb-ce3c84777f4e}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.20999999344348907</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

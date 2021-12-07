@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{3019428c-6107-41cf-9848-59851ceb8cda}">
+		<property name="name">
+			<value>PlayerToWindowDist</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d0367dc3-fef4-4b7f-bce9-bda6ec0f0bc5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{85638adb-1dd4-4b16-b48c-df5010c9e2db}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{85638adb-1dd4-4b16-b48c-df5010c9e2db}">
+		<property name="maximum">
+			<value>15</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>4.3500001430511475</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
