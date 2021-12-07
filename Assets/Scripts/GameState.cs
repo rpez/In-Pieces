@@ -7,7 +7,7 @@ public class GameState
     public bool ROLL_SUCCESS { get; set; } = false;
 
     // BODY PART OWNERSHIP
-    public bool HAS_NOSE { get; set; } = true;
+    public bool HAS_NOSE { get; set; } = false;
     public bool HAS_EYES { get; set; } = false;
     public bool HAS_EARS { get; set; } = false;
     public bool HAS_HAND { get; set; } = false;
@@ -27,6 +27,7 @@ public class GameState
     public bool INTRO_LOOKED_AROUND { get; set; } = false;
     public bool INTRO_HEAVY_METAL { get; set; } = false;
     public bool INTRO_THE_MANSION { get; set; } = false;
+    public bool INTRO_FINISHED { get; set; } = false;
 
     public int INTRO_DRUNKENNESS_LEVEL { get; set; } = 0;
 

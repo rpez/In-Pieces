@@ -13,6 +13,17 @@ public class SoundManager : Singleton<SoundManager>
     {
     }
 
+    public void PlayIntroDialogueClickSound()
+    {
+        // Add randomness here or do it inside FMOD?
+        FMODUnity.RuntimeManager.PlayOneShot("event:/CheersClicking");
+    }
+
+    public void PlayDialogueClickSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Clicking");
+    }
+
     // BOOLS
     public void UpdateSoundsBoolean(string parameterName, bool boolValue)
     {
@@ -58,6 +69,14 @@ public class SoundManager : Singleton<SoundManager>
         {
             UnityEngine.Debug.Log("Fmod: Got Ears");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("hasEars", 1);
+        }
+        else if (parameterName.Equals("INTRO_FINISHED") && boolValue)
+        {
+            // Player has clicked the last conversation option in intro cutscene.
+        }
+        else if (parameterName.Equals("HAS_NOSE") && boolValue)
+        {
+            // The bedroom dialogue has started.
         }
     }
 
