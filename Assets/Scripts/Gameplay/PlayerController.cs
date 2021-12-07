@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private Animator m_animator;
     private Collider m_collider;
 
-    public bool m_movementEnabled = true;
+    public bool m_movementEnabled = false;
 
     public void OnTargetInteractableReached()
     {
