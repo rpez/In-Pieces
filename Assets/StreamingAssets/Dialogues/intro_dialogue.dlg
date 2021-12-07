@@ -58,7 +58,7 @@ Best friend: "Ya know.. uh... my parents are out tonight... Come to *THE MANSION
                             > Celebrate.
                                 Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow... but..."
                                     {CONTINUE}
-                                        Best friend: "Maannn... your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?"
+                                        Best friend: "Maannn... your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?" [SET INTRO_FINISHED TRUE]
                                             {END}
                             > Don't celebrate.
                                 Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow...""
@@ -68,7 +68,7 @@ Best friend: "Ya know.. uh... my parents are out tonight... Come to *THE MANSION
                             > The Mansion? {IF NOT INTRO_THE_MANSION} [SET INTRO_THE_MANSION TRUE]
                                 DESCRIPTION: Your friend is the grandson of *the* rich Cuban immigrants. Monopoly on housekeeping business in the region, all that happy jazz.
                                     {CONTINUE}
-                                        DESCRIPTION: You've been to The Mansion a million times... mostly to partake in - *AHEM* - common interests...
+                                        DESCRIPTION: You've been to The Mansion a million times... mostly to partake in some - *AHEM* - common interests...
                                             {CONTINUE}
-                                                DESCRIPTION: ... like smoking some pot, listening to heavy metal, and playing vidya games.
+                                                DESCRIPTION: ... like smoking pot, listening to heavy metal, and playing vidya games.
                                                     {LINE 57 CHILDREN}
