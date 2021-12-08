@@ -76,15 +76,15 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                                 The Hand: "I could pluck it out!"
                                     {LINE 1 CHILDREN}
                         The Right Eye (Katie): "Wow... it looks like it's starving! I wonder why that is?" {IF NOT EARS_QUEST_LEARNED_OF_STEREO}
-                            {LINE 96}
+                            {LINE 73}
                         The Right Eye (Katie): "Wow... it looks like it's close to death! I think turning that stereo off almost killed it!" {IF NOT STEREO_IS_ON}
-                            {LINE 96}
+                            {LINE 73}
     <NOSE> Sniff The Ears. {IF NOT EARS_QUEST_NOSE_SNIFFED} [ROLL 5/12]
         DESCRIPTION: *SUCCESS* There is something wrong with the odour you sense from The Ears. It smells foul and alien, a smell you could imagine coming from a nasty, slimy rainforest slug. {IF ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
             {LINE 1 CHILDREN}
         DESCRIPTION: *FAILURE* You poke your nose in and sniffle, but it seems like your attempt is fizzled. [SET EARS_QUEST_NOSE_SNIFFED TRUE]
             {LINE 1 CHILDREN}
-    {LINE 123}
+    {LINE 100}
 DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the carpet. They look like they are curled up in an almost fetal position.
     > Approach The Ears. [SET EARS_TALKED_WITH TRUE]
         The Nose: "SNNNRRFFT?"
