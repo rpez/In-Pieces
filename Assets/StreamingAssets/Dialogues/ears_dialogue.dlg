@@ -1,15 +1,4 @@
 DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {IF EARS_TALKED_WITH}
-    <NOSE> Sniff around, deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3 AND NOT EARS_QUEST_LEARNED_OF_STEREO}
-        DESCRIPTION: *SUCCESS* You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_WORM TRUE]
-            {CONTINUE}
-                > There's a worm inside there!
-                    {CONTINUE}
-                        The Left Eye (Jon): "What are you on about? Are you kidding me?"
-                            {CONTINUE}
-                                DESCRIPTION: You are most definitely *not* joking around. Maybe you should take a peek inside?
-                                    {LINE 1 CHILDREN}
-        DESCRIPTION: *FAILURE* You try to sniffle extra hard, but can't think of any reason for the behavior. Maybe you could try asking them directly?
-            {LINE 1 CHILDREN}
     > Ask what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3}
         The Right Eye (Katie): "We still haven't turned off that stereo, have we? Let's go and do it!" {IF EARS_QUEST_LEARNED_OF_STEREO}
             {LINE 1 CHILDREN}
@@ -61,6 +50,17 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                     {LINE 1 CHILDREN}
     > Shout at The Ears. {IF NOT EARS_QUEST_SHOUTED} [SET EARS_QUEST_SHOUTED TRUE]
         DESCRIPTION: You try shouting at the top of your lungs, but all you can feel is the warm air along with a small amount of discharge dripping out from your nostrils. Maybe it would help if you actually *HAD* lungs?
+            {LINE 1 CHILDREN}
+    <NOSE> Sniff around, deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3 AND NOT EARS_QUEST_LEARNED_OF_STEREO}
+        DESCRIPTION: *SUCCESS* You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_WORM TRUE]
+            {CONTINUE}
+                > There's a worm inside there!
+                    {CONTINUE}
+                        The Left Eye (Jon): "What are you on about? Are you kidding me?"
+                            {CONTINUE}
+                                DESCRIPTION: You are most definitely *not* joking around. Maybe you should take a peek inside?
+                                    {LINE 1 CHILDREN}
+        DESCRIPTION: *FAILURE* You try to sniffle extra hard, but can't think of any reason for the behavior. Maybe you could try asking them directly?
             {LINE 1 CHILDREN}
     <HAND> Pluck out the earworm. {IF EARS_QUEST_EYES_SAW_WORM}
         The Hand: "Yo Jon, Katie! Gimme some light, I'm going in!"
