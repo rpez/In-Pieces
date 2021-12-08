@@ -5,13 +5,12 @@ using UnityEngine;
 public class ClockFXTrigger : MonoBehaviour
 {
     
-    private FMOD.Studio.EventInstance oldClock;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        oldClock = FMODUnity.RuntimeManager.CreateInstance("event:/tickingClock");
-        oldClock.start();
+       
     }
 
     void OnTriggerStay(Collider other)

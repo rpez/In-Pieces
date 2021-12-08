@@ -138,7 +138,7 @@
 			<value>127.8024918576283</value>
 		</property>
 		<property name="length">
-			<value>20.508043232357153</value>
+			<value>18.197508142371703</value>
 		</property>
 		<property name="timelockedOffset">
 			<value>0.4375</value>
@@ -271,7 +271,7 @@
 			<value>691.389343</value>
 		</property>
 		<property name="qualityA">
-			<value>0.486691207</value>
+			<value>0.402513534</value>
 		</property>
 		<relationship name="automators">
 			<destination>{8b842cdf-152a-4b86-adaf-4f1321682a00}</destination>
@@ -348,7 +348,7 @@
 			<value>126.78973669815747</value>
 		</property>
 		<property name="value">
-			<value>1200</value>
+			<value>550.48114</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{6055bd3e-9a03-457d-901f-ba9c2cf2fbe1}">
@@ -356,7 +356,7 @@
 			<value>148</value>
 		</property>
 		<property name="value">
-			<value>22000</value>
+			<value>10016.4902</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{5346532a-5f99-43ad-9c64-e1a93779679d}">

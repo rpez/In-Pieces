@@ -151,10 +151,12 @@ public class PlayerController : MonoBehaviour
         if (active)
         {
             m_animator.Play("Walk");
+            SoundManager.Instance.PlayWalkingAnimationSound();
         }
         else
         {
             m_animator.Play("Idle");
+            SoundManager.Instance.StopWalkingAnimationSound();
         }
     }
 

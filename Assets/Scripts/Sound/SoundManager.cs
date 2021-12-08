@@ -6,16 +6,31 @@ using FMODUnity;
 
 public class SoundManager : Singleton<SoundManager>
 {
+    // Fmod Event instances
     private FMOD.Studio.EventInstance m_stereoInstance;
+    private FMOD.Studio.EventInstance AmbienceMain;
+    private FMOD.Studio.EventInstance IntroAmbience;
+    private FMOD.Studio.EventInstance oldClock;
+    private FMOD.Studio.EventInstance walkingFmod;
+    private FMOD.Studio.EventInstance idleFmod;
+
     private bool m_musicPlaying;
 
     void Start()
     {
+        walkingFmod = FMODUnity.RuntimeManager.CreateInstance("event:/walkingNose");
+        idleFmod = FMODUnity.RuntimeManager.CreateInstance("event:/idleNose");
+
+        // create main ambience instance
+        m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
+        m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
     }
 
+    // clicking sounds
     public void PlayIntroDialogueClickSound()
     {
-        if (RandomEvent(0.2f)) // 20 % chance to succeed
+        if (RandomEvent(0.4f)) // 40 % chance to succeed
             FMODUnity.RuntimeManager.PlayOneShot("event:/CheersClicking");
         else
             FMODUnity.RuntimeManager.PlayOneShot("event:/Clicking");
@@ -26,7 +41,18 @@ public class SoundManager : Singleton<SoundManager>
         FMODUnity.RuntimeManager.PlayOneShot("event:/Clicking");
     }
 
-    // BOOLS
+    public void PlayWalkingAnimationSound()
+    {
+        walkingFmod.start();
+    }
+
+    public void StopWalkingAnimationSound()
+    {
+        walkingFmod.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        idleFmod.start();
+    }
+
+    // GamesState-BOOLS
     public void UpdateSoundsBoolean(string parameterName, bool boolValue)
     {
         if (!m_musicPlaying &&
@@ -34,8 +60,7 @@ public class SoundManager : Singleton<SoundManager>
             boolValue)
         {
             UnityEngine.Debug.Log("Fmod: Stereo Music Start");
-            m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
-            m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+          
             m_stereoInstance.start();
             m_musicPlaying = true;
         }
@@ -74,15 +99,32 @@ public class SoundManager : Singleton<SoundManager>
         }
         else if (parameterName.Equals("INTRO_FINISHED") && boolValue)
         {
-            // Player has clicked the last conversation option in intro cutscene.
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("IntroFinished", 1);
         }
+        // Intro ambience starting
+        else if (parameterName.Equals("INTRO_START") && boolValue)
+        {
+            IntroAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/IntroAmbience");
+            IntroAmbience.start();
+        }
+
+
+
+
         else if (parameterName.Equals("HAS_NOSE") && boolValue)
         {
             // The bedroom dialogue has started.
+            AmbienceMain = FMODUnity.RuntimeManager.CreateInstance("event:/AmbienceMain");
+            AmbienceMain.start();
+
+            oldClock = FMODUnity.RuntimeManager.CreateInstance("event:/tickingClock");
+            oldClock.start();
+
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BedroomStarts", 1);
         }
     }
 
-    // INTS
+    // GamesState-INTS
     public void UpdateSoundsInteger(string parameterName, int intValue)
     {
         if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
@@ -97,7 +139,7 @@ public class SoundManager : Singleton<SoundManager>
         }
         else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 3)
         {
-            UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
+            UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 3");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 3);
         }
     }
@@ -109,3 +151,5 @@ public class SoundManager : Singleton<SoundManager>
         return false;
     }
 }
+
+

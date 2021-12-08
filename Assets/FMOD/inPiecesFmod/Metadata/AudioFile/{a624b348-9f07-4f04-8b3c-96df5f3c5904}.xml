@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a624b348-9f07-4f04-8b3c-96df5f3c5904}">
+		<property name="assetPath">
+			<value>idle.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.5175833333333335</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{65c25536-d33f-45db-9fae-9647c0415bda}</destination>
+		</relationship>
+	</object>
+</objects>

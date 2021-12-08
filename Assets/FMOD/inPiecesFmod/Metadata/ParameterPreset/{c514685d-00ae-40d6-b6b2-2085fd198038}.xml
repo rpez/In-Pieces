@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{c514685d-00ae-40d6-b6b2-2085fd198038}">
+		<property name="name">
+			<value>IntroFinished</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d0367dc3-fef4-4b7f-bce9-bda6ec0f0bc5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{b3b31907-3612-457a-b7d4-f5284224affa}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{b3b31907-3612-457a-b7d4-f5284224affa}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.079999998211860657</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
