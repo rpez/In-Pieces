@@ -34,9 +34,13 @@ public class GameState
     // Bedroom tutorial scene
     public bool TUTORIAL_OPEN_EYES { get; set; } = false;
     public bool TUTORIAL_GET_UP { get; set; } = false;
+    public bool TUTORIAL_ASKED_ABOUT_WHADUP { get; set; } = false;
+    public bool TUTORIAL_ASKED_ABOUT_FRIEND { get; set; } = false;
+    public bool TUTORIAL_ASKED_ABOUT_EXCHANGE { get; set; } = false;
 
     public int TUTORIAL_LISTEN { get; set; } = 0;
     public int TUTORIAL_COUNT_SENSES { get; set; } = 0;
+    public int TUTORIAL_COUNT_QUESTIONS { get; set; } = 0;
 
     // Ears Quest
     public bool EARS_TALKED_WITH { get; set; } = false;
