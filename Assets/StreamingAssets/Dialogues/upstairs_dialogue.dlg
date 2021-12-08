@@ -39,7 +39,7 @@ DESCRIPTION: You recognize a familiar musty, wooden scent... {IF NOT STAIRCASE_T
 
 # Returning to the dialogue with no eyes
 DESCRIPTION: You approach the staircase, refreshing all those bad memories. {IF NOT HAS_EYES}
-    {LINE 9}
+    {LINE 8}
 
 # Returning to the dialogue with eyes
 DESCRIPTION: You see the staircase.
@@ -49,7 +49,7 @@ DESCRIPTION: You see the staircase.
     <NOSE> Hop down, step by step.
         DESCRIPTION: Step by step, little by little... AAAAAAAAARRRGGGGGHH!!! [SET UPSTAIRS FALSE]
             {LINE 46}
-    {LINE 16}
+    {LINE 18}
 
 # Note: This conversation could be a death trigger, if it seems funny enough. Although then the player shouldn't have to go through the intro again...
 
