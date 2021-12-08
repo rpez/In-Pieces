@@ -17,7 +17,6 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
-        player.SetMovementActive(false);
 
         bool DEBUG_SKIP_INTRO_CUTSCENE = true;
 
@@ -31,8 +30,10 @@ public class GameManager : Singleton<GameManager>
 
             player.UpdateBodyParts();
             player.SetMovementActive(true);
+
             return;
         }
+        player.SetMovementActive(false);
 
         CutsceneManager.Instance.PlayCutscene("Somewhere in a bar far, far away... (in HALIFAX, CANADA)",
             "",
