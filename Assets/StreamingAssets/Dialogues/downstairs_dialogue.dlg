@@ -7,5 +7,6 @@ The Right Eye (Katie): "Wow, they sure gave you a hard time, eh?" {IF NOT DOWNST
 
 DESCRIPTION: You see the staircase.
     <LEGS> Climb up the stairs. [SET UPSTAIRS TRUE]
+        {END}
     > Leave.
         {END}
