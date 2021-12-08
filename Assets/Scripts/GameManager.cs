@@ -25,6 +25,7 @@ public class GameManager : Singleton<GameManager>
         {
             GameManager.Instance.State.HAS_EYES = true;
             GameManager.Instance.State.HAS_NOSE = true;
+            GameManager.Instance.State.INTRO_FINISHED = true;
 
             player.UpdateBodyParts();
             player.SetMovementActive(true);
