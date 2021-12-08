@@ -846,7 +846,7 @@
 			<value>-80</value>
 		</property>
 		<property name="attackTime">
-			<value>8600</value>
+			<value>2400</value>
 		</property>
 		<property name="peakValue">
 			<value>-0.577777863</value>
@@ -859,6 +859,7 @@
 		<relationship name="effects">
 			<destination>{b1a7642f-af30-4eec-9be9-30580cbd2250}</destination>
 			<destination>{a947295d-890b-4934-9449-a916f7b47cc6}</destination>
+			<destination>{2145ea06-4d7d-46e8-b414-cb06ad7617d5}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e17a2876-740b-497e-b3a9-52746a711674}">
@@ -1215,6 +1216,15 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{a947295d-890b-4934-9449-a916f7b47cc6}" />
+	<object class="ThreeEQEffect" id="{2145ea06-4d7d-46e8-b414-cb06ad7617d5}">
+		<property name="highGain">
+			<value>-3</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{953fe487-b593-4168-a80f-4efa93e8f84b}</destination>
+			<destination>{8098b0c0-5c7a-4846-80f0-62e4c3416c0c}</destination>
+		</relationship>
+	</object>
 	<object class="AutomationCurve" id="{e520e605-09de-48f5-8e68-3f06810d6417}">
 		<relationship name="parameter">
 			<destination>{5fe31513-0dd8-48b2-86b3-88928ba7196d}</destination>
@@ -1793,6 +1803,37 @@
 		<relationship name="automationCurves">
 			<destination>{62df0a61-0908-49a1-92ba-68318733e029}</destination>
 		</relationship>
+	</object>
+	<object class="ADSRModulator" id="{953fe487-b593-4168-a80f-4efa93e8f84b}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>highGain</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>4200</value>
+		</property>
+		<property name="peakValue">
+			<value>-1.15555573</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
+	<object class="ADSRModulator" id="{8098b0c0-5c7a-4846-80f0-62e4c3416c0c}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>midGain</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>4200</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
 	</object>
 	<object class="AutomationPoint" id="{0dae54c6-f54c-4295-aa88-84005934cd72}">
 		<property name="position">

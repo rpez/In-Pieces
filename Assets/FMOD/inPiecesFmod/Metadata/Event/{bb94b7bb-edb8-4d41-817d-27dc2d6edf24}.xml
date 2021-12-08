@@ -111,9 +111,6 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{b3f30ec7-af82-420f-a4e3-334a3257f89f}">
-		<property name="triggerProbabilityEnabled">
-			<value>true</value>
-		</property>
 		<property name="triggerProbability">
 			<value>35</value>
 		</property>
@@ -174,7 +171,7 @@
 			<value>-42</value>
 		</property>
 		<property name="midGain">
-			<value>-20</value>
+			<value>-32</value>
 		</property>
 		<relationship name="automators">
 			<destination>{b25f7d75-7d5c-4af8-809c-2d80b50b88ea}</destination>
@@ -230,7 +227,7 @@
 			<value>0.032520325203252036</value>
 		</property>
 		<property name="value">
-			<value>3.81469727e-06</value>
+			<value>-24</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{f26ce339-59f3-4e23-9c5d-29dda0e65962}">
@@ -246,7 +243,7 @@
 			<value>0.0040650406504065045</value>
 		</property>
 		<property name="value">
-			<value>300</value>
+			<value>900</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{63c7244e-fa59-43f7-b448-67616404cc49}">

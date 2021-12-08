@@ -123,7 +123,7 @@ public class SoundManager : Singleton<SoundManager>
         }
         else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 3)
         {
-            UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
+            UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 3");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 3);
         }
     }
