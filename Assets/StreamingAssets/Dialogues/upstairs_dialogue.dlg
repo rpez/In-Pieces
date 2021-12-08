@@ -1,4 +1,4 @@
-DESCRIPTION: You recognize a familiar musty, wooden scent... {IF NOT STAIRCASE_TALKED_WITH} [SET STAIRCASE_TALKED_WITH TRUE]
+DESCRIPTION: You recognize a familiar musty, wooden scent... {IF STAIRCASE_TALKED_WITH == 0} [ADD STAIRCASE_TALKED_WITH +1]
     {CONTINUE}
         DESCRIPTION: It belongs to the gigantic staircase at your friend's parents' mansion.
             {CONTINUE}
@@ -31,7 +31,7 @@ DESCRIPTION: You recognize a familiar musty, wooden scent... {IF NOT STAIRCASE_T
                                                                             > I see.
                                                                                 The Right Eye (Katie): "No, see - you don't *see* things. On the other hand, WE can *see*..."
                                                                                     {CONTINUE}
-                                                                                        The Left Eye (Bob): "...yeah, whatever Katie. Well, what will you do then?" [SET STAIRCASE_FINISHED_EXPLANATION TRUE]
+                                                                                        The Left Eye (Bob): "...yeah, whatever, Katie. Well, what will you do then?" [SET STAIRCASE_FINISHED_EXPLANATION TRUE]
                                                                                             {LINE 45 CHILDREN}
                                                             > Roll down?
                                                                 The Right Eye (Katie): "Hahahah... COUNT ME IN! I wanna *see* this..."
@@ -39,7 +39,7 @@ DESCRIPTION: You recognize a familiar musty, wooden scent... {IF NOT STAIRCASE_T
 
 # Returning to the dialogue with no eyes
 DESCRIPTION: You approach the staircase, refreshing all those bad memories. {IF NOT HAS_EYES}
-    {LINE 9}
+    {LINE 8}
 
 # Returning to the dialogue with eyes
 DESCRIPTION: You see the staircase.
@@ -47,9 +47,9 @@ DESCRIPTION: You see the staircase.
         DESCRIPTION: Maybe if I just carefully roll... AAAAAAAAARRRGGGGGHH!!! [SET UPSTAIRS FALSE]
             {END}
     <NOSE> Hop down, step by step.
-        DESCRIPTION: Step by step, little by little... AAAAAAAAARRRGGGGGHH!!! [SET UPSTAIRS FALSE]
-            {LINE 46}
-    {LINE 16}
+        DESCRIPTION: Let's take it step by step, little by little... AAAAAAAAARRRGGGGGHH!!! [SET UPSTAIRS FALSE]
+            {END}
+    {LINE 18}
 
 # Note: This conversation could be a death trigger, if it seems funny enough. Although then the player shouldn't have to go through the intro again...
 

@@ -6,7 +6,7 @@ Best friend: "Aw come OOOOOONNNN maaan!! You're leaving tomorrow! We GOTTA celeb
                     > Celebrate.
                         Johnny: "Yeah, I'm a-... I'm a bit, uh... tipsy but..."
                             {CONTINUE}
-                                Best friend: "Yeah, man, fill yer boots!! Chug it up, buddy!" [ADD INTRO_DRUNKENNESS_LEVEL +1, SET HAS_LEGS TRUE]
+                                Best friend: "Yeah, man, fill yer boots!! Chug it up, buddy!" [ADD INTRO_DRUNKENNESS_LEVEL +1]
                                     {CONTINUE}
                                         {LINE 22}
                     > Don't celebrate.

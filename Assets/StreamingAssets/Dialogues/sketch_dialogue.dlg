@@ -1,7 +1,7 @@
 # Part 1
-DESCRIPTION: You feel a sudden twitch, an involuntary contraction. The sensation of falling...
+DESCRIPTION: You feel a sudden twitch, an involuntary contraction. The sensation of falling... [SET HAS_NOSE TRUE]
     {CONTINUE}
-        DESCRIPTION: Gravity is dragging you down, slamming you in an infinite loop, endless spirals in an impossible staircase... [SET HAS_NOSE TRUE]
+        DESCRIPTION: Gravity is dragging you down, slamming you in an infinite loop, endless spirals in an impossible staircase...
             > Wha-...
                 DESCRIPTION: The force feels very familiar to you. You've been here before. This time it seems like it knows of no boundaries, there is no reining it in.
                     {CONTINUE}
