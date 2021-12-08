@@ -5,7 +5,7 @@
 			<value>IntroAmbience</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{ad60cb83-96f0-4038-818c-bdbd07cc7a14}</destination>
@@ -219,6 +219,9 @@
 	<object class="EventMixerMaster" id="{f839d15c-59ea-4945-8d63-59d574026f96}">
 		<relationship name="automators">
 			<destination>{93cf7252-f6e1-4d38-be6e-35cc9c2f218e}</destination>
+		</relationship>
+		<relationship name="modulators">
+			<destination>{5cc8423c-fd49-4967-adc5-ea5b00175f47}</destination>
 		</relationship>
 		<relationship name="effectChain">
 			<destination>{f42c3328-c434-40f5-8858-fbf088090127}</destination>
@@ -835,14 +838,34 @@
 			<destination>{ff9fc52f-6000-4b8e-a7a5-c7c7eb60db55}</destination>
 		</relationship>
 	</object>
+	<object class="ADSRModulator" id="{5cc8423c-fd49-4967-adc5-ea5b00175f47}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>5442.30762</value>
+		</property>
+		<property name="peakValue">
+			<value>-0.577777863</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{f42c3328-c434-40f5-8858-fbf088090127}">
 		<relationship name="effects">
 			<destination>{b1a7642f-af30-4eec-9be9-30580cbd2250}</destination>
 			<destination>{a947295d-890b-4934-9449-a916f7b47cc6}</destination>
-			<destination>{60aef556-60c8-4461-bb63-3ca3428ebaf2}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{e17a2876-740b-497e-b3a9-52746a711674}" />
+	<object class="MixerBusPanner" id="{e17a2876-740b-497e-b3a9-52746a711674}">
+		<property name="disabledSpeakers">
+			<value>4</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{498d0c45-3195-4e93-a1cc-c0c9a4949b7b}" />
 	<object class="Automator" id="{75de31b0-35bc-47e1-8fa5-3d57100ec72a}">
 		<property name="nameOfPropertyBeingAutomated">
@@ -1189,7 +1212,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{a947295d-890b-4934-9449-a916f7b47cc6}" />
-	<object class="SpatialiserEffect" id="{60aef556-60c8-4461-bb63-3ca3428ebaf2}" />
 	<object class="AutomationCurve" id="{e520e605-09de-48f5-8e68-3f06810d6417}">
 		<relationship name="parameter">
 			<destination>{5fe31513-0dd8-48b2-86b3-88928ba7196d}</destination>
