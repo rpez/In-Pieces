@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
     {
         PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
 
-        bool DEBUG_SKIP_INTRO_CUTSCENE = true;
+        bool DEBUG_SKIP_INTRO_CUTSCENE = false;
 
         if (DEBUG_SKIP_INTRO_CUTSCENE)
         {
