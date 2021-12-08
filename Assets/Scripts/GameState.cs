@@ -43,10 +43,11 @@ public class GameState
     public int TUTORIAL_COUNT_QUESTIONS { get; set; } = 0;
 
     // Staircase
-    public bool STAIRCASE_TALKED_WITH { get; set; } = false;
     public bool STAIRCASE_NOSE_SNIFFED { get; set; } = false;
     public bool STAIRCASE_ATTEMPTED_DESCENT { get; set; } = false;
     public bool STAIRCASE_FINISHED_EXPLANATION { get; set; } = false;
+
+    public int STAIRCASE_TALKED_WITH { get; set; } = 0;
 
     // Ears Quest
     public bool EARS_TALKED_WITH { get; set; } = false;
