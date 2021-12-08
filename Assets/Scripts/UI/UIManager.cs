@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using System.Linq;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 
@@ -79,6 +80,15 @@ public class UIManager : MonoBehaviour
 
         if (dialogue is IConditionalDialogue condDialogue)
         {
+            m_rollResult = "";
+
+            foreach(IDialogueCondition condition in condDialogue.Conditions)
+            {
+                if (condition.Variable.Equals("ROLL_SUCCESS"))
+                    m_rollResult = condition.Negator ? string.Format("<color=red>FAILURE</color><color=white>: ")
+                                                     : string.Format("<color=green>SUCCESS</color><color=white>: ");
+            }
+
             dialogText.text = m_rollResult + condDialogue.Line;
             m_rollResult = "";
         }
@@ -86,14 +96,13 @@ public class UIManager : MonoBehaviour
 
     // Selects a conversation option with index x
     // Then updates the window
-    private void SelectConversationOption(int x, string extra = "")
+    private void SelectConversationOption(int x)
     {
         var selected = DialogueManager.Instance.SelectOption(x);  // Prints the next conversation node
 
         // need to check for null here, we might click on something that is out of bounds of this conversation
         if (selected != null)
         {
-            m_rollResult = extra;
             DisplayConversation(selected);
             DisplayConversationOptions();    // Prints options for the player to choose
             PlayClickingSound();
@@ -137,33 +146,8 @@ public class UIManager : MonoBehaviour
             {
                 text = string.Format("<color=white>{0}</color>", playerOption.Line);
                 int index = i - 1;
-                string extra = "";
 
-                if (option is IConditionalDialogue cOption)
-                {
-                    foreach (IDialogueAction action in cOption.Actions)
-                    {
-                        if (action is RollDialogueAction rollAction && cOption is PlayerDialogue playerDialogue)
-                        {
-                            int result = UnityEngine.Random.Range(1, rollAction.Denominator + 1); // roll the dice
-                            int attitude = GameManager.Instance.GetStateValue<int>(playerDialogue.BodyPart);
-                            int checkAgainst = rollAction.Denominator - rollAction.Numerator;
-
-                            if (result + attitude > checkAgainst)
-                            {
-                                GameManager.Instance.SetStateValue<bool>("ROLL_SUCCESS", true);
-                                extra = string.Format("<color=green>SUCCESS</color><color=white>: ");
-                            }
-                            else
-                            {
-                                GameManager.Instance.SetStateValue<bool>("ROLL_SUCCESS", false);
-                                extra = string.Format("<color=red>FAILURE</color><color=white>: ");
-                            }
-                        }
-                    }
-                }
-
-                callback = () => SelectConversationOption(index, extra);
+                callback = () => SelectConversationOption(index);
                 i++;
             }
             else
