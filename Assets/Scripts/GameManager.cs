@@ -36,6 +36,9 @@ public class GameManager : Singleton<GameManager>
 
         CutsceneManager.Instance.PlayCutscene("Somewhere in a bar far, far away... (in HALIFAX, CANADA)",
             "",
+            3f,
+            1f,
+            2f,
             "intro_dialogue",
             () => {
                 
