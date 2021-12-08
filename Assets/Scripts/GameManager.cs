@@ -19,11 +19,12 @@ public class GameManager : Singleton<GameManager>
         PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
         player.SetMovementActive(false);
 
-        bool DEBUG_SKIP_INTRO_CUTSCENE = true;
+        bool DEBUG_SKIP_INTRO_CUTSCENE = false;
 
         if (DEBUG_SKIP_INTRO_CUTSCENE)
         {
             GameManager.Instance.State.HAS_EYES = true;
+            GameManager.Instance.State.HAS_NOSE = true;
             player.UpdateBodyParts();
             player.SetMovementActive(true);
             return;
