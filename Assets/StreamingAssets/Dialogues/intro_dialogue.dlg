@@ -1,4 +1,4 @@
-Best friend: "Aw come OOOOOONNNN maaan!! You're leaving tomorrow! We GOTTA celebrate tonight, eh?"
+Best friend: "Aw come OOOOOONNNN maaan!! You're leaving tomorrow! We GOTTA celebrate tonight, eh?" [SET INTRO_START TRUE]
     {CONTINUE}
         Best friend: "I mean - you'll be stuck in that Northern piece of... err... whatever-it-was country for a full year!"
             {CONTINUE}
