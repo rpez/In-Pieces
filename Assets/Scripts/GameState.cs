@@ -72,6 +72,7 @@ public class GameState
     public bool STEREO_IS_PLAYING { get; set; } = false;
 
     public bool STEREO_TALKED_WITH { get; set; } = false;
+    public bool STEREO_EXAMINED { get; set; } = false;
     public bool STEREO_LEARNED_OF_BUTTONS { get; set; } = false;
     public bool STEREO_LEARNED_OF_DYSLEXIA { get; set; } = false;
 

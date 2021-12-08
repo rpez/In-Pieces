@@ -1,105 +1,114 @@
-DESCRIPTION: You see the stereo. {IF STEREO_TALKED_WITH}
-    {LINE 7 CHILDREN}
-DESCRIPTION: You see a stereo system.
-    <EYES> Examine the stereo. [SET STEREO_TALKED_WITH TRUE]
-        DESCRIPTION: You see two loudspeakers and a CD player masquerading as an old gramophone. The wooden enclosure of the speakers seems quite expensive, but the design overall seems to be of poor taste.
-            {CONTINUE}
-                The Right Eye (Katie): "A CD player? Wow, that's old school..."
-                    <EYES> Examine the big red button. {IF STEREO_LEARNED_OF_BUTTONS}
-                        The Left Eye (Bob): "Wow, it's a *big* *red* button! I wanna push it! You wanna push it! I WANNA PUSH IT! Can we push it? Pleeaaaase...?"
-                            <HAND> Push the big red button.
-                                DESCRIPTION: One more red nightmare? You push the big red button. [TGL STEREO_IS_ON]
-                                    {LINE 7 CHILDREN}
-                            <NOSE> Push the big red button. [ROLL 4/12]
-                                DESCRIPTION: You twist around, aim properly and hit the big red button with the tip of your nose. {IF ROLL_SUCCESS} [TGL STEREO_IS_ON]
-                                    {LINE 7 CHILDREN}
-                                DESCRIPTION: You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [TGL STEREO_BASS_BOOST]
-                                    {LINE 7 CHILDREN}
-                            <EYES> Read the label below the red button.
-                                DESCRIPTION: You try to squint as hard as possible. The text reads "FNUR FOT". {IF STEREO_LEARNED_OF_DYSLEXIA}
-                                    {LINE 9 CHILDREN}
-                                The Left Eye (Bob): "Ehrm..."
-                                    {CONTINUE}
-                                        The Right Eye (Katie): "This is a bit... perhaps... embarassing..."
-                                            {CONTINUE}
-                                                DESCRIPTION: You try to squint as hard as possible. The text reads "FNUR FOT".
-                                                    {CONTINUE}
-                                                        The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
-                                                            {CONTINUE}
-                                                                The Right Eye (Katie): "Erm... you know, it's super dark in here as well..."
-                                                                    {LINE 9 CHILDREN}
-                            > Do nothing.
-                                {LINE 1}
-                    <EYES> Examine the black button. {IF STEREO_LEARNED_OF_BUTTONS}
-                        The Right Eye (Katie): "Black is more to my liking!"
-                            <HAND> Push the black button.
-                                DESCRIPTION: Back in black is the new black! You push the black button. [TGL STEREO_BASS_BOOST]
-                                    {LINE 7 CHILDREN}
-                            <NOSE> Push the black button. [ROLL 4/12]
-                                DESCRIPTION: You take a slow approach, and successfully toggle the black button with your nose. {IF ROLL_SUCCESS} [TGL STEREO_BASS_BOOST]
-                                    {LINE 7 CHILDREN}
-                                DESCRIPTION: You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [TGL STEREO_IS_PLAYING]
-                                    {LINE 7 CHILDREN}
-                            <EYES> Read the label below the black button.
-                                DESCRIPTION: You try to squint as hard as possible. The text reads "TOSB SBOSA". {IF STEREO_LEARNED_OF_DYSLEXIA}
-                                    {LINE 34 CHILDREN}
-                                The Left Eye (Bob): "Ehrm..."
-                                    {CONTINUE}
-                                        The Right Eye (Katie): "This is a... perhaps... a bit embarassing..."
-                                            {CONTINUE}
-                                                DESCRIPTION: You try to squint as hard as possible. The text reads "TOSB SBOSA".
-                                                    {CONTINUE}
-                                                        The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
-                                                            {CONTINUE}
-                                                                The Right Eye (Katie): "Erm... you know, it's super dark in here as well..."
-                                                                    {LINE 34 CHILDREN}
-                            {LINE 31}
-                    <EYES> Examine the white button. {IF STEREO_LEARNED_OF_BUTTONS}
-                        The Right Eye (Katie): "Boooring!"
-                            <HAND> Push the white button.
-                                DESCRIPTION: Do I hear beetles singing? You push the white button. [TGL STEREO_IS_PLAYING]
-                                    {LINE 7 CHILDREN}
-                            <NOSE> Push the white button. [ROLL 4/12]
-                                DESCRIPTION: You first size your opponent, then strike it where it's going to hurt. You successfully push the white button. {IF ROLL_SUCCESS} [SET STEREO_IS_PLAYING TRUE]
-                                    {LINE 7 CHILDREN}
-                                DESCRIPTION: You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [TGL STEREO_BASS_BOOST]
-                                    {LINE 7 CHILDREN}
-                            <EYES> Read the label below the white button.
-                                DESCRIPTION: You try to squint as hard as possible. The text reads "POAY/PLST". {IF STEREO_LEARNED_OF_DYSLEXIA}
-                                    {LINE 58 CHILDREN}
-                                The Left Eye (Bob): "Ehrm..."
-                                    {CONTINUE}
-                                        The Right Eye (Katie): "This is a bit... perhaps... embarassing..."
-                                            {CONTINUE}
-                                                DESCRIPTION: You try to squint as hard as possible. The text reads "POAY/PLST".
-                                                    {CONTINUE}
-                                                        The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
-                                                            {CONTINUE}
-                                                                The Right Eye (Katie): "Erm... you know, it's super dark in here as well..."
-                                                                    {LINE 58 CHILDREN}
-                            {LINE 31}
-                    <NOSE> Sniff the buttons. {IF STEREO_LEARNED_OF_BUTTONS} [ROLL 7/12]
-                        DESCRIPTION: You sniff the buttons one by one to try to figure out which one of them is calling for you... {IF ROLL_SUCCESS}
-                            {CONTINUE}
-                                DESCRIPTION: The big red button smells like barbecue.
-                                    {LINE 7 CHILDREN}
-                        DESCRIPTION: You sniff the buttons to try to figure out which one of them is calling for you. All you can deduce is that whoever touched the buttons last *LOVES* all dressed potato chips. {IF NOT ROLL_SUCCESS}
-                            {LINE 7 CHILDREN}
-                    <EYES> Examine the speakers. {IF NOT SPEAKER_EYES_EXAMINED} [SET SPEAKER_EYES_EXAMINED TRUE]
-                        DESCRIPTION: Your eyes are immediately drawn to the large movement of the speaker cones. It seems like the whole table is rumbling beneath as well...
-                            {LINE 7 CHILDREN}
-                    <NOSE> Sniff the speakers. {IF NOT SPEAKER_NOSE_SNIFFED} [SET SPEAKER_NOSE_SNIFFED TRUE]
-                        DESCRIPTION: You bend forward and take a heavy snuffle...
-                            {CONTINUE}
-                                DESCRIPTION: While approaching the speaker cones to smell them, you are quickly startled by the heavy vibrations you feel in the air, pulling back. You manage to catch some mixture of freshly cut quality wood and lacquer.
-                                    {LINE 7 CHILDREN}
-                    <EYES> Examine the CD player. {IF NOT CD_PLAYER_EYES_EXAMINED} [SET CD_PLAYER_EYES_EXAMINED TRUE]
-                        DESCRIPTION: The CD player has a big red button, black button, white button and a knob. All of the buttons seem to have some kind of a text label beneath them. [SET STEREO_LEARNED_OF_BUTTONS TRUE]
-                            {LINE 7 CHILDREN}
-                    {LINE 100}
-    > Leave.
-        {END}
+DESCRIPTION: You see the stereo. {IF STEREO_TALKED_WITH AND STEREO_EXAMINED}
+    {LINE 8 CHILDREN}
 
+DESCRIPTION: You see the stereo. {IF STEREO_TALKED_WITH}
+    {LINE 10 CHILDREN}
+
+DESCRIPTION: You see a stereo system. [SET STEREO_TALKED_WITH TRUE]
+    {CONTINUE}
+        The Right Eye (Katie): "Hey, it's a stereo! AWESOME! Let's put on some music!"
+            {CONTINUE}
+                The Left Eye (Bob): "Huh... Wonder how The Ears would react to that..." {IF EARS_QUEST_MADE_CONTACT >= 1}
+                    <EYES> Examine the stereo.  [SET STEREO_EXAMINED TRUE]
+                        DESCRIPTION: You see two loudspeakers and a CD player masquerading as an old gramophone. The wooden enclosure of the speakers seems quite expensive, but the design overall seems to be of poor taste.
+                            {CONTINUE}
+                                The Right Eye (Katie): "A CD player? Wow, that's old school..."
+                                    <EYES> Examine the big red button. {IF STEREO_LEARNED_OF_BUTTONS}
+                                        The Left Eye (Bob): "Wow, it's a *big* *red* button! I wanna push it! You wanna push it! I WANNA PUSH IT! Can we push it? Pleeaaaase...?"
+                                            <HAND> Push the big red button.
+                                                DESCRIPTION: One more red nightmare? You push the big red button. [TGL STEREO_IS_ON]
+                                                    {LINE 14 CHILDREN}
+                                            <NOSE> Push the big red button. [ROLL 4/12]
+                                                DESCRIPTION: You twist around, aim properly and hit the big red button with the tip of your nose. {IF ROLL_SUCCESS} [TGL STEREO_IS_ON]
+                                                    {LINE 14 CHILDREN}
+                                                DESCRIPTION: You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [TGL STEREO_BASS_BOOST]
+                                                    {LINE 14 CHILDREN}
+                                            <EYES> Read the label below the red button.
+                                                DESCRIPTION: You try to squint as hard as possible. The text reads "FNUR FOT". {IF STEREO_LEARNED_OF_DYSLEXIA}
+                                                    {LINE 15 CHILDREN}
+                                                The Left Eye (Bob): "Ehrm..."
+                                                    {CONTINUE}
+                                                        The Right Eye (Katie): "This is a bit... perhaps... embarassing..."
+                                                            {CONTINUE}
+                                                                DESCRIPTION: You try to squint as hard as possible. The text reads "FNUR FOT".
+                                                                    {CONTINUE}
+                                                                        The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
+                                                                            {CONTINUE}
+                                                                                The Right Eye (Katie): "Erm... you know, it's super dark in here as well..."
+                                                                                    {LINE 15 CHILDREN}
+                                            > Do nothing.
+                                                {LINE 1}
+                                    <EYES> Examine the black button. {IF STEREO_LEARNED_OF_BUTTONS}
+                                        The Right Eye (Katie): "Black is more to my liking!"
+                                            <HAND> Push the black button.
+                                                DESCRIPTION: Back in black is the new black! You push the black button. [TGL STEREO_BASS_BOOST]
+                                                    {LINE 7 CHILDREN}
+                                            <NOSE> Push the black button. [ROLL 4/12]
+                                                DESCRIPTION: You take a slow approach, and successfully toggle the black button with your nose. {IF ROLL_SUCCESS} [TGL STEREO_BASS_BOOST]
+                                                    {LINE 7 CHILDREN}
+                                                DESCRIPTION: You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [TGL STEREO_IS_PLAYING]
+                                                    {LINE 7 CHILDREN}
+                                            <EYES> Read the label below the black button.
+                                                DESCRIPTION: You try to squint as hard as possible. The text reads "TOSB SBOSA". {IF STEREO_LEARNED_OF_DYSLEXIA}
+                                                    {LINE 34 CHILDREN}
+                                                The Left Eye (Bob): "Ehrm..."
+                                                    {CONTINUE}
+                                                        The Right Eye (Katie): "This is a... perhaps... a bit embarassing..."
+                                                            {CONTINUE}
+                                                                DESCRIPTION: You try to squint as hard as possible. The text reads "TOSB SBOSA".
+                                                                    {CONTINUE}
+                                                                        The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
+                                                                            {CONTINUE}
+                                                                                The Right Eye (Katie): "Erm... you know, it's super dark in here as well..."
+                                                                                    {LINE 34 CHILDREN}
+                                            {LINE 31}
+                                    <EYES> Examine the white button. {IF STEREO_LEARNED_OF_BUTTONS}
+                                        The Right Eye (Katie): "Boooring!"
+                                            <HAND> Push the white button.
+                                                DESCRIPTION: Do I hear beetles singing? You push the white button. [TGL STEREO_IS_PLAYING]
+                                                    {LINE 7 CHILDREN}
+                                            <NOSE> Push the white button. [ROLL 4/12]
+                                                DESCRIPTION: You first size your opponent, then strike it where it's going to hurt. You successfully push the white button. {IF ROLL_SUCCESS} [SET STEREO_IS_PLAYING TRUE]
+                                                    {LINE 7 CHILDREN}
+                                                DESCRIPTION: You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [TGL STEREO_BASS_BOOST]
+                                                    {LINE 7 CHILDREN}
+                                            <EYES> Read the label below the white button.
+                                                DESCRIPTION: You try to squint as hard as possible. The text reads "POAY/PLST". {IF STEREO_LEARNED_OF_DYSLEXIA}
+                                                    {LINE 58 CHILDREN}
+                                                The Left Eye (Bob): "Ehrm..."
+                                                    {CONTINUE}
+                                                        The Right Eye (Katie): "This is a bit... perhaps... embarassing..."
+                                                            {CONTINUE}
+                                                                DESCRIPTION: You try to squint as hard as possible. The text reads "POAY/PLST".
+                                                                    {CONTINUE}
+                                                                        The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
+                                                                            {CONTINUE}
+                                                                                The Right Eye (Katie): "Erm... you know, it's super dark in here as well..."
+                                                                                    {LINE 58 CHILDREN}
+                                            {LINE 31}
+                                    <NOSE> Sniff the buttons. {IF STEREO_LEARNED_OF_BUTTONS} [ROLL 7/12]
+                                        DESCRIPTION: You sniff the buttons one by one to try to figure out which one of them is calling for you... {IF ROLL_SUCCESS}
+                                            {CONTINUE}
+                                                DESCRIPTION: The big red button smells like barbecue.
+                                                    {LINE 7 CHILDREN}
+                                        DESCRIPTION: You sniff the buttons to try to figure out which one of them is calling for you. All you can deduce is that whoever touched the buttons last *LOVES* all dressed potato chips. {IF NOT ROLL_SUCCESS}
+                                            {LINE 7 CHILDREN}
+                                    <EYES> Examine the speakers. {IF NOT SPEAKER_EYES_EXAMINED} [SET SPEAKER_EYES_EXAMINED TRUE]
+                                        DESCRIPTION: Your eyes are immediately drawn to the large movement of the speaker cones. It seems like the whole table is rumbling beneath as well...
+                                            {LINE 7 CHILDREN}
+                                    <NOSE> Sniff the speakers. {IF NOT SPEAKER_NOSE_SNIFFED} [SET SPEAKER_NOSE_SNIFFED TRUE]
+                                        DESCRIPTION: You bend forward and take a heavy snuffle...
+                                            {CONTINUE}
+                                                DESCRIPTION: While approaching the speaker cones to smell them, you are quickly startled by the heavy vibrations you feel in the air, pulling back. You manage to catch some mixture of freshly cut quality wood and lacquer.
+                                                    {LINE 7 CHILDREN}
+                                    <EYES> Examine the CD player. {IF NOT CD_PLAYER_EYES_EXAMINED} [SET CD_PLAYER_EYES_EXAMINED TRUE]
+                                        DESCRIPTION: The CD player has three buttons and a knob. All of the buttons look like they have some kind of a text label beneath them. [SET STEREO_LEARNED_OF_BUTTONS TRUE]
+                                            {LINE 7 CHILDREN}
+                                    {LINE 104}
+                    > Leave.
+                        {END}
+                The Left Eye (Bob): "I don't know... I'm not really in the mood..."
+                    {LINE 7 CHILDREN}
 
 # The speakers themselves look like they are of excellent build quality.
 

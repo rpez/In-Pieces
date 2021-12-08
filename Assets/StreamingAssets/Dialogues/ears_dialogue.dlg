@@ -1,28 +1,28 @@
 DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {IF EARS_TALKED_WITH}
-    > Ask what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3}
+    > Ask what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 4}
         The Right Eye (Katie): "We still haven't tried the stereo, have we? We should try and interact with it!" {IF EARS_QUEST_LEARNED_OF_STEREO}
             {LINE 1 CHILDREN}
         The Nose: "SHHRRZZZLLLFF?"
             {CONTINUE}
                 The Ears: "...make it stop... please get it off... make it stop..."
                     {CONTINUE}
-                        The Right Eye (Katie): "I think they're suffering from some disease or something..."
+                        The Right Eye (Katie): "I think they look like they're suffering..."
                             {CONTINUE}
                                 The Left Eye (Bob): "Maybe there's something around here to help their pain?"
                                     {LINE 1 CHILDREN}
-    > Turn what off? {IF EARS_QUEST_MADE_CONTACT == 2}
+    > Turn what off? {IF EARS_QUEST_MADE_CONTACT == 3}
         DESCRIPTION: When asking yourself that question, you suddenly realize not everything is right with The Ears...
             {CONTINUE}
                 DESCRIPTION: You now *see* clearly the tremors, *feel* the whimpers... It seems like they're suffering from some kind of bout of insanity. [SET EARS_QUEST_LEARNED_OF_SHIVERS TRUE, ADD EARS_QUEST_MADE_CONTACT +1]
                     {LINE 1 CHILDREN}
-    > Move closer and try again. {IF EARS_QUEST_MADE_CONTACT == 1}
+    > Move closer and try again. {IF EARS_QUEST_MADE_CONTACT == 2}
         DESCRIPTION: You move closer and make a loud snorting sound.
             {CONTINUE}
                 DESCRIPTION: You pick out a faint whimper...
                     {CONTINUE}
                         The Ears: "...please make it stop... please get it off me... please make it stop..." [ADD EARS_QUEST_MADE_CONTACT +1]
                             {LINE 1 CHILDREN}
-    > Try calling for The Ears again. {IF EARS_QUEST_MADE_CONTACT == 0}
+    > Try calling for The Ears again. {IF EARS_QUEST_MADE_CONTACT == 1}
         The Nose: "SNNRRT? SNXFF SRRNNNF?"
             {CONTINUE}
                 DESCRIPTION: You're quite certain you notice a small response, a tiny shudder of movement. Maybe if you moved closer? [ADD EARS_QUEST_MADE_CONTACT +1]
@@ -30,7 +30,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
     > Shout at The Ears. {IF NOT EARS_QUEST_SHOUTED} [SET EARS_QUEST_SHOUTED TRUE]
         DESCRIPTION: You try shouting at the top of your lungs, but all you can feel is the warm air along with a small amount of discharge dripping out from your nostrils. Maybe it would help if you actually *HAD* lungs?
             {LINE 1 CHILDREN}
-    <NOSE> Sniff around, try deducing what's wrong. {IF EARS_QUEST_MADE_CONTACT == 3} [ADD EARS_QUEST_MADE_CONTACT +1]
+    <NOSE> Sniff around, deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT == 3} [ADD EARS_QUEST_MADE_CONTACT +1]
         DESCRIPTION: *SUCCESS* You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_WORM TRUE]
             {CONTINUE}
                 > There's a worm inside there!
@@ -54,7 +54,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                                             {CONTINUE}
                                                 The Left Eye (Bob): "Wow! What do we do with it?"
                                                     {END}
-    <HAND> Comfort The Ears. {IF EARS_QUEST_LEARNED_OF_SHIVERS} [SET EARS_QUEST_COMFORTED_EARS, ADD EARS +1]
+    <HAND> Comfort The Ears. {IF EARS_QUEST_LEARNED_OF_SHIVERS} [SET EARS_QUEST_COMFORTED_EARS TRUE, ADD EARS +1]
         DESCRIPTION: You gently stroke the earlobes. The shivering seems to stop for a moment. You're quite sure they like you more.
             {CONTINUE}
                 The Right Eye (Katie): "Aww... aren't you being SOO SWEEEET? What a loser!!"
@@ -86,9 +86,17 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
             {LINE 1 CHILDREN}
         DESCRIPTION: *FAILURE* You poke your nose in and sniffle, but it seems like your attempt is fizzled. [SET EARS_QUEST_NOSE_SNIFFED TRUE]
             {LINE 1 CHILDREN}
-    {LINE 102}
-DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the carpet. They look like they are curled up in an almost fetal position.
-    > Approach The Ears. [SET EARS_TALKED_WITH TRUE]
+    {LINE 110}
+
+# First contact
+DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the carpet. They look like they are curled up in an almost fetal position. {IF EARS_QUEST_MADE_CONTACT == 0} [SET EARS_TALKED_WITH TRUE]
+    {CONTINUE}
+        The Left Eye (Bob): "Hey, we found another one of us!"
+            {LINE 98 CHILDREN}
+
+# First contact but left the conversation
+DESCRIPTION: You see The Ears. They are curled up in an almost fetal position.
+    > Approach The Ears. [ADD EARS_QUEST_MADE_CONTACT +1]
         The Nose: "SNNNRRFFT?"
             {CONTINUE}
                 The Ears: .
