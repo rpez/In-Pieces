@@ -33,7 +33,7 @@ public class SoundManager : Singleton<SoundManager>
     // clicking sounds
     public void PlayIntroDialogueClickSound()
     {
-        if (RandomEvent(0.2f)) // 20 % chance to succeed
+        if (RandomEvent(0.4f)) // 40 % chance to succeed
             FMODUnity.RuntimeManager.PlayOneShot("event:/CheersClicking");
         else
             FMODUnity.RuntimeManager.PlayOneShot("event:/Clicking");
@@ -111,17 +111,17 @@ public class SoundManager : Singleton<SoundManager>
     // GamesState-INTS
     public void UpdateSoundsInteger(string parameterName, int intValue)
     {
-        if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 0)
+        if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 1");
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 1);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 2);
         }
         else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 2);
         }
-        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 2)
+        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 3)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 3);
