@@ -27,6 +27,8 @@ public class GameManager : Singleton<GameManager>
             GameManager.Instance.State.HAS_NOSE = true;
             GameManager.Instance.State.INTRO_FINISHED = true;
 
+            SoundManager.Instance.UpdateSoundsBoolean("HAS_NOSE", true);
+
             player.UpdateBodyParts();
             player.SetMovementActive(true);
             return;
