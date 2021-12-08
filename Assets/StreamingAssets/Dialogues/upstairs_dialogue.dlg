@@ -52,7 +52,8 @@ DESCRIPTION: You see the staircase.
     <NOSE> Hop down, step by step.
         DESCRIPTION: Let's take it step by step, little by little... AAAAAAAAARRRGGGGGHH!!! [SET UPSTAIRS FALSE]
             {END}
-    {LINE 18}
+    > Leave.
+        {END}
 
 # Note: This conversation could be a death trigger, if it seems funny enough. Although then the player shouldn't have to go through the intro again...
 

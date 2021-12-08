@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public Volume m_postProcessing;
     public VolumeProfile m_defaultPPP;
     public VolumeProfile m_nearSightedPPP;
+    public VolumeProfile m_blindPPP;
 
     public LayerMask m_layerMask;
 
@@ -173,7 +174,10 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.GetStateValue<bool>("HAS_EYES"))
             m_postProcessing.profile = m_defaultPPP;
         else
-            m_postProcessing.profile = m_nearSightedPPP;
+            if (GameManager.Instance.GetStateValue<bool>("NEAR_SIGHTED"))
+                m_postProcessing.profile = m_nearSightedPPP;
+            else
+                m_postProcessing.profile = m_blindPPP;
         if (GameManager.Instance.GetStateValue<bool>("HAS_LEGS"))
             m_noseMesh.transform.localPosition = m_nosePosition;
         else

@@ -344,6 +344,7 @@ MonoBehaviour:
   m_postProcessing: {fileID: 0}
   m_defaultPPP: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
   m_nearSightedPPP: {fileID: 11400000, guid: e171c2c597f9d43429e4baede7a30933, type: 2}
+  m_blindPPP: {fileID: 11400000, guid: 08a82df983f7842499d1be06fbec0d5a, type: 2}
   m_layerMask:
     serializedVersion: 2
     m_Bits: 115

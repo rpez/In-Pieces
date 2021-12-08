@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28085217, g: 0.3660272, b: 0.49832863, a: 1}
+  m_IndirectSpecularColor: {r: 0.28085276, g: 0.36602777, b: 0.49832976, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 134029400, guid: 276d92d25c831fe45b001cdb01457fe9, type: 3}
+      propertyPath: m_blindPPP
+      value: 
+      objectReference: {fileID: 11400000, guid: 08a82df983f7842499d1be06fbec0d5a, type: 2}
     - target: {fileID: 134029400, guid: 276d92d25c831fe45b001cdb01457fe9, type: 3}
       propertyPath: m_postProcessing
       value: 
@@ -2151,7 +2155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3276204653564966264, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.506
+      value: -5.442
       objectReference: {fileID: 0}
     - target: {fileID: 3276204653564966264, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2159,7 +2163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3276204653564966264, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.934
+      value: 1.395
       objectReference: {fileID: 0}
     - target: {fileID: 3276204653564966264, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2195,7 +2199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3276204653564966271, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0edc520d0245b8445aeb60f6961eb94a, type: 3}
