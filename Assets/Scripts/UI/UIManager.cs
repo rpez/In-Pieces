@@ -82,6 +82,8 @@ public class UIManager : MonoBehaviour
         {
             string line = condDialogue.Line;
 
+            Debug.Log(condDialogue.Line);
+
             if (condDialogue.Line.StartsWith("*SUCCESS*"))
                 line = line.Replace("*SUCCESS*", "<color=green>[SUCCESS]</color><color=white>");
             else if (condDialogue.Line.StartsWith("*FAILURE*"))
