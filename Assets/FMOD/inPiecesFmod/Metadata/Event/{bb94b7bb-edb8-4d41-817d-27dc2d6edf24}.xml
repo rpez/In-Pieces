@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{bb94b7bb-edb8-4d41-817d-27dc2d6edf24}">
 		<property name="name">
-			<value>Cheers</value>
+			<value>CheersClicking</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -64,6 +64,7 @@
 	<object class="GroupTrack" id="{062f1086-efa0-461b-8f62-4a346cb0313a}">
 		<relationship name="automationTracks">
 			<destination>{dc0fbea0-5128-49c8-bd9b-b12ba03d8181}</destination>
+			<destination>{0c86ca41-0724-414b-acff-5355be291618}</destination>
 		</relationship>
 		<relationship name="modules">
 			<destination>{b3f30ec7-af82-420f-a4e3-334a3257f89f}</destination>
@@ -102,6 +103,11 @@
 	<object class="AutomationTrack" id="{dc0fbea0-5128-49c8-bd9b-b12ba03d8181}">
 		<relationship name="automator">
 			<destination>{4b2c88bd-46b0-4518-a20e-a83c9c93f779}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationTrack" id="{0c86ca41-0724-414b-acff-5355be291618}">
+		<relationship name="automator">
+			<destination>{b25f7d75-7d5c-4af8-809c-2d80b50b88ea}</destination>
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{b3f30ec7-af82-420f-a4e3-334a3257f89f}">
@@ -168,8 +174,11 @@
 			<value>-42</value>
 		</property>
 		<property name="midGain">
-			<value>-12</value>
+			<value>-20</value>
 		</property>
+		<relationship name="automators">
+			<destination>{b25f7d75-7d5c-4af8-809c-2d80b50b88ea}</destination>
+		</relationship>
 	</object>
 	<object class="SFXReverbEffect" id="{f6c85274-19e0-4691-919c-dc3f243e5f8b}">
 		<property name="decayTime">
@@ -182,12 +191,29 @@
 			<destination>{4b2c88bd-46b0-4518-a20e-a83c9c93f779}</destination>
 		</relationship>
 	</object>
+	<object class="Automator" id="{b25f7d75-7d5c-4af8-809c-2d80b50b88ea}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>highGain</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{8fe11d95-a545-4754-9e17-e34b0c47a062}</destination>
+		</relationship>
+	</object>
 	<object class="Automator" id="{4b2c88bd-46b0-4518-a20e-a83c9c93f779}">
 		<property name="nameOfPropertyBeingAutomated">
 			<value>decayTime</value>
 		</property>
 		<relationship name="automationCurves">
 			<destination>{f5bdbbd3-8624-4c45-8593-55c986e3ae8e}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationCurve" id="{8fe11d95-a545-4754-9e17-e34b0c47a062}">
+		<relationship name="parameter">
+			<destination>{5fe31513-0dd8-48b2-86b3-88928ba7196d}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{a6452921-6043-4da4-b5c7-30048d1ad4da}</destination>
+			<destination>{f26ce339-59f3-4e23-9c5d-29dda0e65962}</destination>
 		</relationship>
 	</object>
 	<object class="AutomationCurve" id="{f5bdbbd3-8624-4c45-8593-55c986e3ae8e}">
@@ -198,6 +224,22 @@
 			<destination>{7b1e5923-4106-4b44-8221-dbf6d41500b7}</destination>
 			<destination>{63c7244e-fa59-43f7-b448-67616404cc49}</destination>
 		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{a6452921-6043-4da4-b5c7-30048d1ad4da}">
+		<property name="position">
+			<value>0.032520325203252036</value>
+		</property>
+		<property name="value">
+			<value>3.81469727e-06</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{f26ce339-59f3-4e23-9c5d-29dda0e65962}">
+		<property name="position">
+			<value>3</value>
+		</property>
+		<property name="value">
+			<value>-12</value>
+		</property>
 	</object>
 	<object class="AutomationPoint" id="{7b1e5923-4106-4b44-8221-dbf6d41500b7}">
 		<property name="position">
