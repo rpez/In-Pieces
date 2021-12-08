@@ -1,5 +1,5 @@
 DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {IF EARS_TALKED_WITH}
-    <NOSE> Sniff around, try to deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3 AND NOT EARS_QUEST_LEARNED_OF_STEREO}
+    <NOSE> Sniff around, deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3 AND NOT EARS_QUEST_LEARNED_OF_STEREO}
         DESCRIPTION: *SUCCESS* You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_WORM TRUE]
             {CONTINUE}
                 > There's a worm inside there!
