@@ -52,7 +52,7 @@ Best friend: "Ya know.. uh... my parents are out tonight... Come to *THE MANSION
             {CONTINUE}
                 Best friend: "It's called, uh... umm... LA SEPARATISTA! It's like, um... like... eh... THE SEPARATOR or what, eh? Such a COOL name!!!
                     {CONTINUE}
-                        Best friend: Come on man! Ya leaving tomorrow already, man! Let's celebrate!!"
+                        Best friend: Come on man! Ya leaving tomorrow already, man! Let's celebrate!!" [ADD INTRO_DRUNKENNESS_LEVEL +1]
                             > Celebrate.
                                 Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow... but..."
                                     {CONTINUE}

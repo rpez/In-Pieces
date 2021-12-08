@@ -1,4 +1,4 @@
-DESCRIPTION: You recognize a familiar musty, wooden scent... {IF STAIRCASE_TALKED_WITH == 0} [ADD STAIRCASE_TALKED_WITH +1]
+DESCRIPTION: You recognize a familiar musty, wooden scent... {IF NOT UPSTAIRCASE_TALKED_WITH} [SET UPSTAIRCASE_TALKED_WITH TRUE]
     {CONTINUE}
         DESCRIPTION: It belongs to the gigantic staircase at your friend's parents' mansion.
             {CONTINUE}
@@ -7,17 +7,17 @@ DESCRIPTION: You recognize a familiar musty, wooden scent... {IF STAIRCASE_TALKE
                         DESCRIPTION: The mere thought of the steepness is causing tingling all over your nasal cavities...
                             {CONTINUE}
                                 DESCRIPTION: In the darkness, it would be unwise to try descending the stairs without any vision. {IF NOT HAS_EYES}
-                                    <NOSE> Sniff: does it really smell that bad? {IF NOT STAIRCASE_NOSE_SNIFFED} [SET STAIRCASE_NOSE_SNIFFED TRUE]
+                                    <NOSE> Sniff: does it really smell that bad? {IF NOT UPSTAIRCASE_NOSE_SNIFFED} [SET UPSTAIRCASE_NOSE_SNIFFED TRUE]
                                         DESCRIPTION: Yes. The sense of danger is imminent. The staircase *IS* immensely steep. Don't try pushing your luck without help...
                                             {LINE 9 CHILDREN}
-                                    > Descend the stairs. {IF NOT STAIRCASE_ATTEMPTED_DESCENT} [SET STAIRCASE_ATTEMPTED_DESCENT TRUE]
+                                    > Descend the stairs. {IF NOT UPSTAIRCASE_ATTEMPTED_DESCENT} [SET UPSTAIRCASE_ATTEMPTED_DESCENT TRUE]
                                         DESCRIPTION: You approach the first step of what seems to be a humongous task ahead of you...
                                             {CONTINUE}
                                                 DESCRIPTION: ...but already, the thought of the attempt causes your nasal hair to stand on end. You're too afraid to continue alone.
                                                     {LINE 9 CHILDREN}
                                     > Leave.
                                         {END}
-                                The Right Eye (Katie): "Fuck... I've always hated these stairs." {IF NOT STAIRCASE_FINISHED_EXPLANATION}
+                                The Right Eye (Katie): "Fuck... I've always hated these stairs." {IF NOT UPSTAIRCASE_FINISHED_EXPLANATION}
                                     {CONTINUE}
                                         The Left Eye (Bob): "You know, it's gonna be an *uphill task* for you to descend the stairs."
                                             {CONTINUE}
@@ -31,7 +31,7 @@ DESCRIPTION: You recognize a familiar musty, wooden scent... {IF STAIRCASE_TALKE
                                                                             > I see.
                                                                                 The Right Eye (Katie): "No, see - you don't *see* things. On the other hand, WE can *see*..."
                                                                                     {CONTINUE}
-                                                                                        The Left Eye (Bob): "...yeah, whatever, Katie. Well, what will you do then?" [SET STAIRCASE_FINISHED_EXPLANATION TRUE]
+                                                                                        The Left Eye (Bob): "...yeah, whatever, Katie. Well, what will you do then?" [SET UPSTAIRCASE_FINISHED_EXPLANATION TRUE]
                                                                                             {LINE 45 CHILDREN}
                                                             > Roll down?
                                                                 The Right Eye (Katie): "Hahahah... COUNT ME IN! I wanna *see* this..."
@@ -43,6 +43,9 @@ DESCRIPTION: You approach the staircase, refreshing all those bad memories. {IF 
 
 # Returning to the dialogue with eyes
 DESCRIPTION: You see the staircase.
+    <LEGS> Climb down the stairs.
+        The Legs: "Hmph, easy enough." [SET UPSTAIRS FALSE]
+            {END}
     <NOSE> Roll down the stairs.
         DESCRIPTION: Maybe if I just carefully roll... AAAAAAAAARRRGGGGGHH!!! [SET UPSTAIRS FALSE]
             {END}
