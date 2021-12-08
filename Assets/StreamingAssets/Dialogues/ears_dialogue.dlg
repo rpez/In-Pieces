@@ -114,7 +114,7 @@ DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the
                             {CONTINUE}
                                 The Ears: ...
                                     {CONTINUE}
-                                        The Ears: It seems like there is no answer.
+                                        DESCRIPTION: It seems like there is no answer.
                                             {LINE 1 CHILDREN}
     > Leave.
         {END}
