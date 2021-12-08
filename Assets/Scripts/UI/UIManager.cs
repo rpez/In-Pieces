@@ -32,8 +32,6 @@ public class UIManager : MonoBehaviour
     private Action m_onTransitionMid;
     private Action m_onTransitionEnd;
 
-    private string m_rollResult;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -82,11 +80,12 @@ public class UIManager : MonoBehaviour
         {
             string line = condDialogue.Line;
 
-            line = line.Replace("*SUCCESS*", "<color=green>[SUCCESS]</color><color=white>");
-            line = line.Replace("*FAILURE*", "<color=red>[FAILURE]</color><color=white>");
+            if (condDialogue.Line.StartsWith("*SUCCESS*"))
+                line = line.Replace("*SUCCESS*", "<color=green>[SUCCESS]</color><color=white>");
+            else if (condDialogue.Line.StartsWith("*FAILURE*"))
+                line = line.Replace("*FAILURE*", "<color=red>[FAILURE]</color><color=white>");
 
-            dialogText.text = m_rollResult + condDialogue.Line;
-            m_rollResult = "";
+            dialogText.text = line;
         }
     }
 
