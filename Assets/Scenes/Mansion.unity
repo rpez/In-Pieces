@@ -2635,6 +2635,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 366438855, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 366438855, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d271f40538117944baee36502abc87e5, type: 3}
+    - target: {fileID: 366438855, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 366438855, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 366438855, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 210656010011986674, guid: 9f719a7b6f00ebd47874d80a98a224da, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2

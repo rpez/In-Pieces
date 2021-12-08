@@ -208,7 +208,7 @@ public class UIManager : MonoBehaviour
         AnimateFadeTransition(
             startText,
             () => {
-                m_introPanel.GetComponent<Image>().color = Color.red;
+                m_introPanel.GetComponent<Image>().color = Color.white;
             },
             () => {
                 StartConversation(
