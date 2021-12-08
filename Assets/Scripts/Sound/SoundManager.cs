@@ -23,11 +23,6 @@ public class SoundManager : Singleton<SoundManager>
         m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
         m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
-        // Start Intro Ambience
-        IntroAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/IntroAmbience");
-        IntroAmbience.start();
-
-
     }
 
     // clicking sounds
@@ -89,10 +84,20 @@ public class SoundManager : Singleton<SoundManager>
             UnityEngine.Debug.Log("Fmod: Got Ears");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("hasEars", 1);
         }
+
+        // Intro ambience starting
+        else if (parameterName.Equals("INTRO_START") && boolValue)
+        {
+          
+            IntroAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/IntroAmbience");
+            IntroAmbience.start();
+        }
         else if (parameterName.Equals("INTRO_FINISHED") && boolValue)
         {
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("IntroFinished", 1);
         }
+
+        
 
 
         else if (parameterName.Equals("HAS_NOSE") && boolValue)

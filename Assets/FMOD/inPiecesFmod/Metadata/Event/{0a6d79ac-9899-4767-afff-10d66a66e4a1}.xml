@@ -846,7 +846,7 @@
 			<value>-80</value>
 		</property>
 		<property name="attackTime">
-			<value>2400</value>
+			<value>0</value>
 		</property>
 		<property name="peakValue">
 			<value>-0.577777863</value>
