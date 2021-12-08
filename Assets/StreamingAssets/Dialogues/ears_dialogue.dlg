@@ -11,8 +11,10 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                                 The Right Eye (Katie): "Maybe there's something around here to help their pain?"
                                     {LINE 1 CHILDREN}
     > Turn what off? {IF EARS_QUEST_MADE_CONTACT == 2}
-        DESCRIPTION: When asking yourself that question, you suddenly realize not everything is right with The Ears. You now *see* clearly the tremors, *feel* the whimpers... It seems like they're suffering from some kind of bout of insanity. [ADD EARS_QUEST_LEARNED_OF_SHIVERS +1, ADD EARS_QUEST_MADE_CONTACT +1]
-            {LINE 1 CHILDREN}
+        DESCRIPTION: When asking yourself that question, you suddenly realize not everything is right with The Ears...
+            {CONTINUE}
+                DESCRIPTION: You now *see* clearly the tremors, *feel* the whimpers... It seems like they're suffering from some kind of bout of insanity. [ADD EARS_QUEST_LEARNED_OF_SHIVERS +1, ADD EARS_QUEST_MADE_CONTACT +1]
+                    {LINE 1 CHILDREN}
     > Move closer and try again. {IF EARS_QUEST_MADE_CONTACT == 1}
         DESCRIPTION: You move closer and make a loud snorting sound.
             {CONTINUE}
@@ -33,14 +35,14 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
             {CONTINUE}
                 > There's a worm inside there!
                     {CONTINUE}
-                        The Left Eye (Jon): "What are you on about? Are you kidding me?"
+                        The Left Eye (Bob): "What are you on about? Are you kidding me?"
                             {CONTINUE}
                                 DESCRIPTION: You are most definitely *not* joking around. Maybe you should take a peek inside?
                                     {LINE 1 CHILDREN}
         DESCRIPTION: *FAILURE* You try to sniffle extra hard, but can't think of any reason for the behavior. Maybe you could try asking them directly?
             {LINE 1 CHILDREN}
     <HAND> Pluck out the earworm. {IF EARS_QUEST_EYES_SAW_WORM}
-        The Hand: "Yo Jon, Katie! Gimme some light, I'm going in!"
+        The Hand: "Yo Bob, Katie! Gimme some light, I'm going in!"
             {CONTINUE}
                 DESCRIPTION: With the help of The Eyes, you carefully insert two fingers inside the ear canal...
                     {CONTINUE}
@@ -50,7 +52,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                                     {CONTINUE}
                                         DESCRIPTION: You successfully pull all of the worm out. It must measure almost close to your arm's length.
                                             {CONTINUE}
-                                                The Left Eye (Jon): "Wow! What do we do with it?"
+                                                The Left Eye (Bob): "Wow! What do we do with it?"
                                                     {END}
     <HAND> Comfort The Ears. {IF EARS_QUEST_LEARNED_OF_SHIVERS == 1} [ADD EARS_QUEST_LEARNED_OF_SHIVERS +1, ADD EARS +1]
         DESCRIPTION: You gently stroke The Ears. The shivering seems to stop for a moment. You're quite sure it likes you more.
@@ -60,9 +62,9 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
     <EYES> Examine The Ears. {IF NOT EARS_QUEST_EYES_EXAMINED} [ROLL 6/12]
         DESCRIPTION: *SUCCESS* On a closer inspection you see that The Ears are twitching and shivering ever so slightly. It reminds you of a wounded deer, slowly bleeding to death... {IF ROLL_SUCCESS} [SET EARS_QUEST_EYES_EXAMINED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
             {LINE 1 CHILDREN}
-        DESCRIPTION: *FAILURE* Jon lashes at you...
+        DESCRIPTION: *FAILURE* Katie lashes at you...
             {CONTINUE}
-                Jon (The Left Eye): "What are we doing, man? I don't wanna waste my time on this..." [SET EARS_QUEST_EYES_EXAMINED TRUE]
+                The Right Eye (Katie): "Dude... what are we doing here? I don't wanna waste my time on this..." [SET EARS_QUEST_EYES_EXAMINED TRUE]
                     {LINE 1 CHILDREN}
     <EYES> Look inside The Ears. {IF EARS_QUEST_LEARNED_OF_WORM}
         DESCRIPTION: You float as close as possible to one of the ear canals and take a peek inside...
@@ -76,15 +78,15 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                                 The Hand: "I could pluck it out!"
                                     {LINE 1 CHILDREN}
                         The Right Eye (Katie): "Wow... it looks like it's starving! I wonder why that is?" {IF NOT EARS_QUEST_LEARNED_OF_STEREO}
-                            {LINE 73}
+                            {LINE 75}
                         The Right Eye (Katie): "Wow... it looks like it's close to death! I think turning that stereo off almost killed it!" {IF NOT STEREO_IS_ON}
-                            {LINE 73}
+                            {LINE 75}
     <NOSE> Sniff The Ears. {IF NOT EARS_QUEST_NOSE_SNIFFED} [ROLL 5/12]
         DESCRIPTION: *SUCCESS* There is something wrong with the odour you sense from The Ears. It smells foul and alien, a smell you could imagine coming from a nasty, slimy rainforest slug. {IF ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
             {LINE 1 CHILDREN}
         DESCRIPTION: *FAILURE* You poke your nose in and sniffle, but it seems like your attempt is fizzled. [SET EARS_QUEST_NOSE_SNIFFED TRUE]
             {LINE 1 CHILDREN}
-    {LINE 100}
+    {LINE 102}
 DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the carpet. They look like they are curled up in an almost fetal position.
     > Approach The Ears. [SET EARS_TALKED_WITH TRUE]
         The Nose: "SNNNRRFFT?"

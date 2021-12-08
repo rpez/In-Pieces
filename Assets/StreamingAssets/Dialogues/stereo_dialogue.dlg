@@ -6,7 +6,7 @@ DESCRIPTION: You see a stereo system.
             {CONTINUE}
                 The Right Eye (Katie): "A CD player? Wow, that's old school..."
                     <EYES> Examine the big red button. {IF STEREO_LEARNED_OF_BUTTONS}
-                        The Left Eye (Jon): "Wow, it's a *big* *red* button! I wanna push it! You wanna push it! I WANNA PUSH IT! Can we push it? Pleeaaaase...?"
+                        The Left Eye (Bob): "Wow, it's a *big* *red* button! I wanna push it! You wanna push it! I WANNA PUSH IT! Can we push it? Pleeaaaase...?"
                             <HAND> Push the big red button.
                                 DESCRIPTION: One more red nightmare? You push the big red button. [TGL STEREO_IS_ON]
                                     {LINE 7 CHILDREN}
@@ -18,13 +18,13 @@ DESCRIPTION: You see a stereo system.
                             <EYES> Read the label below the red button.
                                 DESCRIPTION: You try to squint as hard as possible. The text reads "FNUR FOT". {IF STEREO_LEARNED_OF_DYSLEXIA}
                                     {LINE 9 CHILDREN}
-                                The Left Eye (Jon): "Ehrm..."
+                                The Left Eye (Bob): "Ehrm..."
                                     {CONTINUE}
                                         The Right Eye (Katie): "This is a bit... perhaps... embarassing..."
                                             {CONTINUE}
                                                 DESCRIPTION: You try to squint as hard as possible. The text reads "FNUR FOT".
                                                     {CONTINUE}
-                                                        The Left Eye (Jon): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
+                                                        The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
                                                             {CONTINUE}
                                                                 The Right Eye (Katie): "Erm... you know, it's super dark in here as well..."
                                                                     {LINE 9 CHILDREN}
@@ -43,13 +43,13 @@ DESCRIPTION: You see a stereo system.
                             <EYES> Read the label below the black button.
                                 DESCRIPTION: You try to squint as hard as possible. The text reads "TOSB SBOSA". {IF STEREO_LEARNED_OF_DYSLEXIA}
                                     {LINE 34 CHILDREN}
-                                The Left Eye (Jon): "Ehrm..."
+                                The Left Eye (Bob): "Ehrm..."
                                     {CONTINUE}
                                         The Right Eye (Katie): "This is a... perhaps... a bit embarassing..."
                                             {CONTINUE}
                                                 DESCRIPTION: You try to squint as hard as possible. The text reads "TOSB SBOSA".
                                                     {CONTINUE}
-                                                        The Left Eye (Jon): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
+                                                        The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
                                                             {CONTINUE}
                                                                 The Right Eye (Katie): "Erm... you know, it's super dark in here as well..."
                                                                     {LINE 34 CHILDREN}
@@ -67,13 +67,13 @@ DESCRIPTION: You see a stereo system.
                             <EYES> Read the label below the white button.
                                 DESCRIPTION: You try to squint as hard as possible. The text reads "POAY/PLST". {IF STEREO_LEARNED_OF_DYSLEXIA}
                                     {LINE 58 CHILDREN}
-                                The Left Eye (Jon): "Ehrm..."
+                                The Left Eye (Bob): "Ehrm..."
                                     {CONTINUE}
                                         The Right Eye (Katie): "This is a bit... perhaps... embarassing..."
                                             {CONTINUE}
                                                 DESCRIPTION: You try to squint as hard as possible. The text reads "POAY/PLST".
                                                     {CONTINUE}
-                                                        The Left Eye (Jon): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
+                                                        The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
                                                             {CONTINUE}
                                                                 The Right Eye (Katie): "Erm... you know, it's super dark in here as well..."
                                                                     {LINE 58 CHILDREN}
