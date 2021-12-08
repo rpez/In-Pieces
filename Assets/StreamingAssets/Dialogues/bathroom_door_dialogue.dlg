@@ -1,0 +1,34 @@
+DESCRIPTION: You see a wooden door.
+    > Open the door. {IF NOT HAS_HAND AND NOT HAS_LEGS}
+        DESCRIPTION: Wait... open the door... exactly how?
+            <HAND> Reach the door knob.
+                DESCRIPTION: You place your hand on the door knob. What next?
+                    <HAND> Pull on the door knob.
+                    <HAND> Twist the doorknob clockwise.
+                    <HAND> Twist the doorknob counter-clockwise.
+                    <HAND> Shake your hand.
+                        DESCRIPTION: You shake your hand uncontrollably.
+                            {END}
+            <LEGS> Jujutsu kick!
+                DESCRIPTION: Really?
+                    {END}
+            <LEGS> Reach the door knob.
+                Bob: "Uhh... will this work?"
+                    {CONTINUE}
+                        DESCRIPTION: You touch the door knob.
+                            {END}
+            <NOSE> Reach the door knob.
+                Katie: "What... are you attempting? Are you dumb?"
+                    {CONTINUE}
+                        DESCRIPTION: You approach the knob with your nostrils outstretched...
+                            {CONTINUE}
+                                DESCRIPTION: The door knob feels cold to the tip of your nose.
+                                    <NOSE> Open the door. [ROLL 0/12]
+                                        DESCRIPTION: You open your nostrils wide, and try to encircle the knob...
+                                            {CONTINUE}
+                                                Katie: "Oh god..."
+                                                    {CONTINUE}
+                                                        DESCRIPTION: Opening the door with your nostrils is impossible. What were you thinking about? {IF NOT ROLL_SUCCESS}
+                                                            {END}
+    > Leave.
+        {END}
