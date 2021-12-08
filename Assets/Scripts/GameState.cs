@@ -53,17 +53,18 @@ public class GameState
 
     // Ears Quest
     public bool EARS_TALKED_WITH { get; set; } = false;
+    public bool EARS_QUEST_COMFORTED_EARS { get; set; } = false;
     public bool EARS_QUEST_SHOUTED { get; set; } = false;
     public bool EARS_QUEST_EYES_EXAMINED { get; set; } = false;
     public bool EARS_QUEST_NOSE_SNIFFED { get; set; } = false;
     public bool EARS_QUEST_NOSE_PICKUP_ATTEMPT { get; set; } = false;
+    public bool EARS_QUEST_LEARNED_OF_SHIVERS { get; set; } = false;
     public bool EARS_QUEST_LEARNED_OF_STEREO { get; set; } = false;
     public bool EARS_QUEST_LEARNED_OF_WORM { get; set; } = false;
     public bool EARS_QUEST_EYES_SAW_WORM { get; set; } = false;
 
     public int EARS_QUEST_MADE_CONTACT { get; set; } = 0;
     public int EARS_QUEST_EXAMINATIONS { get; set; } = 0;
-    public int EARS_QUEST_LEARNED_OF_SHIVERS { get; set; } = 0;
 
     // Stereo scene
     public bool STEREO_IS_ON { get; set; } = false;
