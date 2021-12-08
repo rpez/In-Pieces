@@ -186,6 +186,18 @@ public class PlayerController : MonoBehaviour
         m_earsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_EARS"));
         m_handsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_HAND"));
         m_legsMesh.SetActive(GameManager.Instance.GetStateValue<bool>("HAS_LEGS"));
+
+        if (GameManager.Instance.GetStateValue<bool>("GAME_OVER"))
+            CutsceneManager.Instance.PlayCutscene(
+                "You slam the door shut.",
+                "",
+                1f,
+                1f,
+                1f,
+                "outro_dialogue",
+                () => { },
+                () => { },
+                false);
     }
 
     private void SpawnIndicator(Vector3 point, bool cancel = false)

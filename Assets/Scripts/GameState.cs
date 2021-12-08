@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class GameState
 {
+    public bool GAME_OVER { get; set; } = false;
+
     // ROLL_SUCCESS determines if the previous dice roll in conversation was successful or not
     public bool ROLL_SUCCESS { get; set; } = false;
 
