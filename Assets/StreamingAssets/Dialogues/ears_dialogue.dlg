@@ -30,7 +30,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
     > Shout at The Ears. {IF NOT EARS_QUEST_SHOUTED} [SET EARS_QUEST_SHOUTED TRUE]
         DESCRIPTION: You try shouting at the top of your lungs, but all you can feel is the warm air along with a small amount of discharge dripping out from your nostrils. Maybe it would help if you actually *HAD* lungs?
             {LINE 1 CHILDREN}
-    <NOSE> Sniff around, deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3}
+    <NOSE> Sniff around, deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT == 3} [ADD EARS_QUEST_MADE_CONTACT +1]
         DESCRIPTION: *SUCCESS* You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_WORM TRUE]
             {CONTINUE}
                 > There's a worm inside there!
