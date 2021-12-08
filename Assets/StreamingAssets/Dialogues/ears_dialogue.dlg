@@ -50,8 +50,10 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
     > Move closer and try again. {IF EARS_QUEST_MADE_CONTACT == 1}
         DESCRIPTION: You move closer and make a loud snorting sound.
             {CONTINUE}
-                The Ears: You pick out a faint whimper. "...please turn it off... please turn it off... please turn it off..." [ADD EARS_QUEST_MADE_CONTACT +1]
-                    {LINE 1 CHILDREN}
+                DESCRIPTION: You pick out a faint whimper...
+                    {CONTINUE}
+                        The Ears: "...please turn it off... please turn it off... please turn it off..." [ADD EARS_QUEST_MADE_CONTACT +1]
+                            {LINE 1 CHILDREN}
     > Try calling for The Ears again. {IF EARS_QUEST_MADE_CONTACT == 0}
         The Nose: "SNNRRT? SNXFF SRRNNNF?"
             {CONTINUE}
@@ -103,7 +105,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
             {LINE 1 CHILDREN}
         DESCRIPTION: You poke your nose in and sniffle, but it seems like your attempt is fizzled. {IF NOT ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE]
             {LINE 1 CHILDREN}
-    {LINE 119}
+    {LINE 122}
 DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the carpet. They look like they are curled up in an almost fetal position.
     > Approach The Ears. [SET EARS_TALKED_WITH TRUE]
         The Nose: "SNNNRRFFT?"
