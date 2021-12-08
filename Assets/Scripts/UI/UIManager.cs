@@ -82,9 +82,9 @@ public class UIManager : MonoBehaviour
         {
             string line = condDialogue.Line;
 
-            if (condDialogue.Line.StartsWith("[SUCCESS]"))
+            if (condDialogue.Line.StartsWith("*SUCCESS*"))
                 line = line.Replace("[SUCCESS]", "<color=green>[SUCCESS]</color><color=white>");
-            else if (condDialogue.Line.StartsWith("[FAILURE]"))
+            else if (condDialogue.Line.StartsWith("*FAILURE*"))
                 line = line.Replace("[FAILURE]", "<color=red>[FAILURE]</color><color=white>");
 
             dialogText.text = m_rollResult + condDialogue.Line;
