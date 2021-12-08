@@ -13,8 +13,6 @@ public class BedRoom : MonoBehaviour
         {
             //changing global parameter in fmod. you have to check global paramter in fmod edit paramter window
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("inBedroom", 1);
-
-            UnityEngine.Debug.Log("inBedroom");
         }
     }
 
@@ -23,7 +21,6 @@ public class BedRoom : MonoBehaviour
         if (other.tag == "Player")
         {
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("inBedroom", 0);
-            UnityEngine.Debug.Log("NotInBedroom");
         }
     }
 }

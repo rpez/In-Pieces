@@ -74,11 +74,13 @@ public class DialogueFileReader
         _hasEndKeyword = false;
         _dialogueTree = new DialogueTree();
         _currentNode = _dialogueTree.Root;
-        _lineNumber = 1;
+        _lineNumber = 0;
         _indentation = 0;
 
         foreach (string line in allLines)
         {
+            _lineNumber++;
+            
             if (string.IsNullOrWhiteSpace(line)) continue; // this line is empty, skip it
 
             string trimmed = line.Trim();
@@ -124,8 +126,6 @@ public class DialogueFileReader
 
             // Place the dialogue line in the correct place inside DialogueTree.
             AddNodeToDialogueTree(dialogue);
-
-            _lineNumber++;
         }
 
         if (!_hasEndKeyword)

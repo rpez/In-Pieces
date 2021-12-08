@@ -96,6 +96,7 @@ public class UIManager : MonoBehaviour
             m_rollResult = extra;
             DisplayConversation(selected);
             DisplayConversationOptions();    // Prints options for the player to choose
+            PlayClickingSound();
         }
         else
         {
@@ -245,5 +246,13 @@ public class UIManager : MonoBehaviour
     {
         if (m_onTransitionEnd != null) m_onTransitionEnd.Invoke();
         m_onTransitionEnd = null;
+    }
+
+    private void PlayClickingSound()
+    {
+        if (!GameManager.Instance.State.HAS_NOSE)
+            SoundManager.Instance.PlayIntroDialogueClickSound();
+        else
+            SoundManager.Instance.PlayDialogueClickSound();
     }
 }

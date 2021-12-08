@@ -6,7 +6,7 @@ Best friend: "Aw come OOOOOONNNN maaan!! You're leaving tomorrow! We GOTTA celeb
                     > Celebrate.
                         Johnny: "Yeah, I'm a-... I'm a bit, uh... tipsy but..."
                             {CONTINUE}
-                                Best friend: "Yeah, man, fill yer boots!! Chug it up, buddy!" [ADD INTRO_DRUNKENNESS_LEVEL +1]
+                                Best friend: "Yeah, man, fill yer boots!! Chug it up, buddy!" [ADD INTRO_DRUNKENNESS_LEVEL +1, SET HAS_LEGS TRUE]
                                     {CONTINUE}
                                         {LINE 22}
                     > Don't celebrate.
@@ -29,7 +29,7 @@ Best friend: "Who would've... uh... who'd have thunk it ya had the balls to go o
                             {CONTINUE}
                                 Best friend: Yeah, you're not heading 'er! Let's give'er, buddy! [ADD INTRO_DRUNKENNESS_LEVEL +1]
                                     {CONTINUE}
-                                        {LINE 51}
+                                        {LINE 49}
                     > Don't celebrate.
                         Johnny: "I uh... man... I feel like I'm about to *explode*..."
                             {CONTINUE}
@@ -40,14 +40,12 @@ Best friend: "Who would've... uh... who'd have thunk it ya had the balls to go o
                             {CONTINUE}
                                 DESCRIPTION: ...the BIGGEST, the MEANEST, the BADDEST, the FASTEST, the UNIQUE-EST...
                                     {CONTINUE}
-                                        DESCRIPTION: ...NUMBER ONE in the world. The key is to NEVER give up...
+                                        DESCRIPTION: You're going to be NUMBER ONE in the world. The key is to NEVER give up...
                                             {CONTINUE}
-                                                DESCRIPTION: ...
+                                                DESCRIPTION: ...for it is a 100% that your destiny is to become the BEST drummer in the world.
                                                     {CONTINUE}
-                                                        DESCRIPTION: ...you are destined to become the BEST drummer in the world.
-                                                            {CONTINUE}
-                                                                DESCRIPTION: Portnoy? Lombardo? Ulrich? Who are those no-names compared to YOU? This is your fate. You will take the world by storm - just first gotta finish that degree in COMMERCE...
-                                                                    {LINE 26 CHILDREN}
+                                                        DESCRIPTION: Portnoy? Lombardo? Ulrich? Who are those no-names compared to YOU? This is your fate. You will take the world by storm. Just first gotta finish up that uni degree in COMMERCE...
+                                                            {LINE 26 CHILDREN}
 Best friend: "Ya know.. uh... my parents are out tonight... Come to *THE MANSION*, eh?"
     {CONTINUE}
         Best friend: "I, uh... found this Cuban rum... 'magine! It's AGES OLD man! Uh... it's prolly my granddad's or somethin'..."
@@ -58,17 +56,19 @@ Best friend: "Ya know.. uh... my parents are out tonight... Come to *THE MANSION
                             > Celebrate.
                                 Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow... but..."
                                     {CONTINUE}
-                                        Best friend: "Maannn... your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?"
+                                        Best friend: "Maannn... your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?" [SET INTRO_FINISHED TRUE]
                                             {END}
                             > Don't celebrate.
                                 Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow...""
                                     {CONTINUE}
                                         Best friend: "Stop bein' a waste, man! Your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?"
-                                            {LINE 62}
+                                            {LINE 60}
                             > The Mansion? {IF NOT INTRO_THE_MANSION} [SET INTRO_THE_MANSION TRUE]
                                 DESCRIPTION: Your friend is the grandson of *the* rich Cuban immigrants. Monopoly on housekeeping business in the region, all that happy jazz.
                                     {CONTINUE}
-                                        DESCRIPTION: You've been to The Mansion a million times... mostly to partake in - *AHEM* - common interests...
+                                        DESCRIPTION: You've been to The Mansion a million times... mostly to partake in some - *AHEM* - common interests...
                                             {CONTINUE}
-                                                DESCRIPTION: ... like smoking some pot, listening to heavy metal, and playing vidya games.
-                                                    {LINE 57 CHILDREN}
+                                                DESCRIPTION: ... like smoking pot, listening to heavy metal, and playing vidya games...
+                                                    {CONTINUE}
+                                                        DESCRIPTION: What? You have a lot in common with your friend!
+                                                            {LINE 55 CHILDREN}

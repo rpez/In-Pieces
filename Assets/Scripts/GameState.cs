@@ -7,16 +7,16 @@ public class GameState
     public bool ROLL_SUCCESS { get; set; } = false;
 
     // BODY PART OWNERSHIP
-    public bool HAS_NOSE { get; set; } = true;
-    public bool HAS_EYES { get; set; } = true;
-    public bool HAS_EARS { get; set; } = true;
+    public bool HAS_NOSE { get; set; } = false;
+    public bool HAS_EYES { get; set; } = false;
+    public bool HAS_EARS { get; set; } = false;
     public bool HAS_HAND { get; set; } = false;
     public bool HAS_LEGS { get; set; } = false;
 
     // BODY PART ATTITUDES
     public int NOSE { get; set; } = 0;
     public int EYES { get; set; } = 0;
-    public int EARS { get; set; } = 1;
+    public int EARS { get; set; } = 0;
     public int HAND { get; set; } = 0;
     public int LEGS { get; set; } = 0;
 
@@ -27,15 +27,26 @@ public class GameState
     public bool INTRO_LOOKED_AROUND { get; set; } = false;
     public bool INTRO_HEAVY_METAL { get; set; } = false;
     public bool INTRO_THE_MANSION { get; set; } = false;
+    public bool INTRO_FINISHED { get; set; } = false;
 
     public int INTRO_DRUNKENNESS_LEVEL { get; set; } = 0;
 
     // Bedroom tutorial scene
     public bool TUTORIAL_OPEN_EYES { get; set; } = false;
     public bool TUTORIAL_GET_UP { get; set; } = false;
+    public bool TUTORIAL_ASKED_ABOUT_WHADUP { get; set; } = false;
+    public bool TUTORIAL_ASKED_ABOUT_FRIEND { get; set; } = false;
+    public bool TUTORIAL_ASKED_ABOUT_EXCHANGE { get; set; } = false;
 
     public int TUTORIAL_LISTEN { get; set; } = 0;
     public int TUTORIAL_COUNT_SENSES { get; set; } = 0;
+    public int TUTORIAL_COUNT_QUESTIONS { get; set; } = 0;
+
+    // Staircase
+    public bool STAIRCASE_TALKED_WITH { get; set; } = false;
+    public bool STAIRCASE_NOSE_SNIFFED { get; set; } = false;
+    public bool STAIRCASE_ATTEMPTED_DESCENT { get; set; } = false;
+    public bool STAIRCASE_FINISHED_EXPLANATION { get; set; } = false;
 
     // Ears Quest
     public bool EARS_TALKED_WITH { get; set; } = false;

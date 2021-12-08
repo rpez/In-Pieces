@@ -13,8 +13,6 @@ public class Hallway : MonoBehaviour
         {
             //changing global parameter in fmod. you have to check global paramter in fmod edit paramter window
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("inHallway", 1);
-
-            UnityEngine.Debug.Log("inHallway");
         }
     }
 
@@ -23,7 +21,6 @@ public class Hallway : MonoBehaviour
         if (other.tag == "Player")
         {
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("inHallway", 0);
-            UnityEngine.Debug.Log("NotInHallway");
         }
     }
 }

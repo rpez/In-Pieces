@@ -17,8 +17,9 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
-        CutsceneManager.Instance.PlayCutscene("The night before...",
-            "The morning after...",
+        player.SetMovementActive(false);
+        CutsceneManager.Instance.PlayCutscene("Somewhere in a bar far, far away... (in HALIFAX, CANADA)",
+            "",
             "intro_dialogue",
             () => {
                 

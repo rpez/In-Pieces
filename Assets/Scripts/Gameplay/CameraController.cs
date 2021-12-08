@@ -29,9 +29,17 @@ public class CameraController : MonoBehaviour
 
         Vector3 m_playerCenter = m_player.GetComponent<Collider>().bounds.center;
 
+        // Probably could refactor this if-else madness later somehow
         if (Physics.Raycast(transform.position, m_playerCenter - transform.position, out var hit, 3.1f, LayerMask.GetMask("HideWall")))
         {
+            if (m_hiddenWall != null && m_hiddenWall != hit.transform)
+            {
+                foreach (Transform child in m_hiddenWall)
+                    child.gameObject.SetActive(true);
+            }
+
             m_hiddenWall = hit.transform;
+
             foreach (Transform child in m_hiddenWall)
                 child.gameObject.SetActive(false);
         }
