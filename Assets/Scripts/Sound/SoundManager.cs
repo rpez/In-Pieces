@@ -84,20 +84,18 @@ public class SoundManager : Singleton<SoundManager>
             UnityEngine.Debug.Log("Fmod: Got Ears");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("hasEars", 1);
         }
-
-        // Intro ambience starting
-        else if (parameterName.Equals("INTRO_START") && boolValue)
-        {
-          
-            IntroAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/IntroAmbience");
-            IntroAmbience.start();
-        }
         else if (parameterName.Equals("INTRO_FINISHED") && boolValue)
         {
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("IntroFinished", 1);
         }
+        // Intro ambience starting
+        else if (parameterName.Equals("INTRO_START") && boolValue)
+        {
+            IntroAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/IntroAmbience");
+            IntroAmbience.start();
+        }
 
-        
+
 
 
         else if (parameterName.Equals("HAS_NOSE") && boolValue)
@@ -119,9 +117,9 @@ public class SoundManager : Singleton<SoundManager>
         if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 1");
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 2);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 1);
         }
-        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
+        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 2)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 2);

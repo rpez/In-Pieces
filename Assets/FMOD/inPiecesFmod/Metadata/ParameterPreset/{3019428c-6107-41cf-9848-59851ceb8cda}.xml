@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="ParameterPreset" id="{3019428c-6107-41cf-9848-59851ceb8cda}">
 		<property name="name">
-			<value>PlayerToWindowDist</value>
+			<value>PlayerToSoundSource</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d0367dc3-fef4-4b7f-bce9-bda6ec0f0bc5}</destination>

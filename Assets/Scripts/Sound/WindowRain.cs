@@ -24,6 +24,6 @@ public class WindowRain : MonoBehaviour
     {
         distance = Vector3.Distance(transform.position, Player.transform.position);
 
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("PlayerToWindowDist", distance);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("PlayerToSoundSource", distance);
     }
 }
