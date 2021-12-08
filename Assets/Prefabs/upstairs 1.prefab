@@ -246,7 +246,7 @@ MonoBehaviour:
   m_dialogueIdentifier: upstairs_dialogue
   m_trackedState: UPSTAIRS
   m_waypoint: {fileID: 2037434946682897}
-  m_transitionText: Going downstairs...
+  m_transitionText: 
 --- !u!65 &2037435519248868
 BoxCollider:
   m_ObjectHideFlags: 0

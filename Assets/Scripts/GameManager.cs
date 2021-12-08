@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
 
         bool DEBUG_SKIP_INTRO_CUTSCENE = false;
 
-         if (DEBUG_SKIP_INTRO_CUTSCENE)
+        if (DEBUG_SKIP_INTRO_CUTSCENE)
         {
             GameManager.Instance.State.HAS_EYES = true;
             GameManager.Instance.State.HAS_NOSE = true;
@@ -33,7 +33,6 @@ public class GameManager : Singleton<GameManager>
 
             return;
         }
-        player.SetMovementActive(false);
 
         CutsceneManager.Instance.PlayCutscene("Somewhere in a bar far, far away... (in HALIFAX, CANADA)",
             "",
