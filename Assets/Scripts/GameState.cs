@@ -24,6 +24,7 @@ public class GameState
     public bool UPSTAIRS { get; set; } = true;
 
     // Intro bar scene
+    public bool INTRO_START { get; set; } = false;
     public bool INTRO_LOOKED_AROUND { get; set; } = false;
     public bool INTRO_HEAVY_METAL { get; set; } = false;
     public bool INTRO_THE_MANSION { get; set; } = false;
