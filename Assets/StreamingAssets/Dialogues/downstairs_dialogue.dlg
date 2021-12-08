@@ -1,6 +1,11 @@
-The Stairs: *They rise up high, seemingly endless ascend as far as the eye see.*
-    > Climb up the stairs. {IF HAS_LEGS} [SET UPSTAIRS TRUE]
-        The Legs: Hmph, easy enough.
-            {END}
+The Right Eye (Katie): "Wow, they sure gave you a hard time, eh?" {IF NOT DOWNSTAIRCASE_TALKED_WITH} [SET DOWNSTAIRCASE_TALKED_WITH TRUE]
+    > SNFFFRTZ!
+        The Left Eye (Bob): "Yeah... I don't think there's any chance of you climbing back up..."
+            {CONTINUE}
+                DESCRIPTION: You see the staircase. It's *steep*, alright. From this angle it looks like a Mount Logan to climb.
+                    {LINE 8 CHILDREN}
+
+DESCRIPTION: You see the staircase.
+    <LEGS> Climb up the stairs. [SET UPSTAIRS TRUE]
     > Leave.
         {END}
