@@ -63,30 +63,30 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
     <HAND> Pluck out the earworm. {IF EARS_QUEST_EYES_SAW_WORM}
         The Hand: "Yo Jon, Katie! Gimme some light, I'm going in!"
             {CONTINUE}
-                The Hand: With the help of The Eyes, you carefully insert two fingers inside the ear canal...
+                DESCRIPTION: With the help of The Eyes, you carefully insert two fingers inside the ear canal...
                     {CONTINUE}
-                        The Hand: It's quite easy to reach the tip of the worm's tail. You pinch it and slowly pull back...
+                        DESCRIPTION: It's quite easy to reach the tip of the worm's tail. You pinch it and slowly pull back...
                             {CONTINUE}
                                 The Right Eye (Katie): "You got it! Wow, it's so long!"
                                     {CONTINUE}
-                                        The Hand: You successfully pull all of the worm out. It must measure almost close to your arm's length.
+                                        DESCRIPTION: You successfully pull all of the worm out. It must measure almost close to your arm's length.
                                             {CONTINUE}
                                                 The Left Eye (Jon): "Wow! What do we do with it?"
                                                     {END}
     <HAND> Comfort The Ears. {IF EARS_QUEST_LEARNED_OF_SHIVERS == 1} [ADD EARS_QUEST_LEARNED_OF_SHIVERS +1, ADD EARS +1]
-        The Ears: You gently stroke The Ears. The shivering seems to stop for a moment. You're quite sure it likes you more.
+        DESCRIPTION: You gently stroke The Ears. The shivering seems to stop for a moment. You're quite sure it likes you more.
             {CONTINUE}
                 The Right Eye (Katie): "Aww... aren't you being SOO SWEEEET? What a loser!!"
                     {LINE 1 CHILDREN}
     <EYES> Examine The Ears. {IF NOT EARS_QUEST_EYES_EXAMINED} [ROLL 6/12]
-        The Eyes: On a closer inspection you see that The Ears are twitching and shivering ever so slightly. It reminds you of a wounded deer, slowly bleeding to death... {IF ROLL_SUCCESS} [SET EARS_QUEST_EYES_EXAMINED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
+        DESCRIPTION: On a closer inspection you see that The Ears are twitching and shivering ever so slightly. It reminds you of a wounded deer, slowly bleeding to death... {IF ROLL_SUCCESS} [SET EARS_QUEST_EYES_EXAMINED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
             {LINE 1 CHILDREN}
         Jon (The Left Eye): Jon lashes at you. "What are we doing, man? I don't wanna waste my time on this..." {IF NOT ROLL_SUCCESS} [SET EARS_QUEST_EYES_EXAMINED TRUE]
             {LINE 1 CHILDREN}
     <EYES> Look inside The Ears. {IF EARS_QUEST_LEARNED_OF_WORM}
-        The Eyes: You float as close as possible to one of the ear canals and take a peek inside...
+        DESCRIPTION: You float as close as possible to one of the ear canals and take a peek inside...
             {CONTINUE}
-                The Eyes: To your amazement, you see a fully grown larva. It's an *earworm*! [SET EARS_QUEST_EYES_SAW_WORM TRUE]
+                DESCRIPTION: To your amazement, you see a fully grown larva. It's an *earworm*! [SET EARS_QUEST_EYES_SAW_WORM TRUE]
                     {CONTINUE}
                         The Right Eye (Katie): "Wow... it looks so healthy! It must have gained so much energy in a short time!" {IF STEREO_IS_ON}
                             {CONTINUE}
