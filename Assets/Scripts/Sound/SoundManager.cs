@@ -11,14 +11,16 @@ public class SoundManager : Singleton<SoundManager>
     private FMOD.Studio.EventInstance AmbienceMain;
     private FMOD.Studio.EventInstance IntroAmbience;
     private FMOD.Studio.EventInstance oldClock;
-
-
-   
+    private FMOD.Studio.EventInstance walkingFmod;
+    private FMOD.Studio.EventInstance idleFmod;
 
     private bool m_musicPlaying;
 
     void Start()
     {
+        walkingFmod = FMODUnity.RuntimeManager.CreateInstance("event:/walkingNose");
+        idleFmod = FMODUnity.RuntimeManager.CreateInstance("event:/idleNose");
+
         // create main ambience instance
         m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
         m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
@@ -37,6 +39,17 @@ public class SoundManager : Singleton<SoundManager>
     public void PlayDialogueClickSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Clicking");
+    }
+
+    public void PlayWalkingAnimationSound()
+    {
+        walkingFmod.start();
+    }
+
+    public void StopWalkingAnimationSound()
+    {
+        walkingFmod.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        idleFmod.start();
     }
 
     // GamesState-BOOLS

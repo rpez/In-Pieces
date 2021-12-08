@@ -3,15 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
-using FMOD;
-using FMODUnity;
 
 public class PlayerController : MonoBehaviour
 {
-    //fmod instance
-    private FMOD.Studio.EventInstance walkingFmod;
-    private FMOD.Studio.EventInstance idleFmod;
-
     // The meshes for different body parts, set in editor
     public GameObject m_noseMesh;
     public GameObject m_eyesMesh;
@@ -64,11 +58,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // FMOD instance
-        walkingFmod = FMODUnity.RuntimeManager.CreateInstance("event:/walkingNose");
-        idleFmod = FMODUnity.RuntimeManager.CreateInstance("event:/idleNose");
-
-
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<Animator>();
         m_collider = gameObject.GetComponent<Collider>();
@@ -162,18 +151,12 @@ public class PlayerController : MonoBehaviour
         if (active)
         {
             m_animator.Play("Walk");
-
-            //FMOD Walking sound
-            walkingFmod.start();
+            SoundManager.Instance.PlayWalkingAnimationSound();
         }
         else
         {
             m_animator.Play("Idle");
-
-            //FMOD idle sound
-            idleFmod.start();
-            walkingFmod.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
+            SoundManager.Instance.StopWalkingAnimationSound();
         }
     }
 
