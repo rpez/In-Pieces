@@ -2,42 +2,44 @@ DESCRIPTION: You recognize a familiar musty, wooden scent... {IF NOT STAIRCASE_T
     {CONTINUE}
         DESCRIPTION: It belongs to the gigantic staircase at your friend's parents' mansion.
             {CONTINUE}
-                DESCRIPTION: This time, the smell depicts of danger. You recall how scary the stairs have always seemed... the steps having always felt massive, the mere thought of the steepness causing tingling all over your body...
+                DESCRIPTION: This time, the smell depicts of danger. You recall how scary the stairs have always seemed... the steps having always felt massive...
                     {CONTINUE}
-                        DESCRIPTION: In the darkness, it would be unwise to try descending the stairs without any vision. {IF NOT HAS_EYES}
-                            <NOSE> Sniff: does it really smell that bad? {IF NOT STAIRCASE_NOSE_SNIFFED} [SET STAIRCASE_NOSE_SNIFFED TRUE]
-                                DESCRIPTION: Yes. The sense of danger is imminent. The staircase *IS* immensely steep. Don't try pushing your luck without help...
-                                    {LINE 5 CHILDREN}
-                            > Descend the stairs. {IF NOT STAIRCASE_ATTEMPTED_DESCENT} [SET STAIRCASE_ATTEMPTED_DESCENT TRUE]
-                                DESCRIPTION: You approach the first step of what seems to be a humongous task ahead of you...
-                                    {CONTINUE}
-                                        DESCRIPTION: ...but already the thought of the attempt makes your nasal hair stand on end. You're too afraid to continue alone.
-                                            {LINE 5 CHILDREN}
-                            > Leave.
-                                {END}
-                        The Right Eye (Katie): "Fuck... I've always hated these stairs." {IF NOT STAIRCASE_FINISHED_EXPLANATION}
+                        DESCRIPTION: The mere thought of the steepness is causing tingling all over your nasal cavities...
                             {CONTINUE}
-                                The Left Eye (Bob): "You know, it's gonna be an *uphill task* for you to descend the stairs."
-                                    {CONTINUE}
-                                        The Right Eye (Katie): "An *uphill task* you say..." *smirk*
+                                DESCRIPTION: In the darkness, it would be unwise to try descending the stairs without any vision. {IF NOT HAS_EYES}
+                                    <NOSE> Sniff: does it really smell that bad? {IF NOT STAIRCASE_NOSE_SNIFFED} [SET STAIRCASE_NOSE_SNIFFED TRUE]
+                                        DESCRIPTION: Yes. The sense of danger is imminent. The staircase *IS* immensely steep. Don't try pushing your luck without help...
+                                            {LINE 9 CHILDREN}
+                                    > Descend the stairs. {IF NOT STAIRCASE_ATTEMPTED_DESCENT} [SET STAIRCASE_ATTEMPTED_DESCENT TRUE]
+                                        DESCRIPTION: You approach the first step of what seems to be a humongous task ahead of you...
                                             {CONTINUE}
-                                                The Left Eye (Bob): "I mean, how are you gonna even approach this with no legs?"
-                                                    > Take it step by step?
-                                                        The Left Eye (Bob): "Yeah, step by step I guess... and you've got like a 1000 steps here..."
-                                                            {CONTINUE}
-                                                                The Left Eye (Bob): "Look, all I'm saying here is that with how you're moving around right now, there might not be a chance for you to make it back up here."
-                                                                    > I see.
-                                                                        The Right Eye (Katie): "No, see - you don't *see* things. On the other hand, WE can *see*..."
-                                                                            {CONTINUE}
-                                                                                The Left Eye (Bob): "...yeah, whatever Katie. Well, what will you do then?" [SET STAIRCASE_FINISHED_EXPLANATION TRUE]
-                                                                                    {LINE 43 CHILDREN}
-                                                    > Roll down?
-                                                        The Right Eye (Katie): "Hahahah... COUNT ME IN! I wanna *see* that..."
-                                                            {LINE 27}
+                                                DESCRIPTION: ...but already, the thought of the attempt causes your nasal hair to stand on end. You're too afraid to continue alone.
+                                                    {LINE 9 CHILDREN}
+                                    > Leave.
+                                        {END}
+                                The Right Eye (Katie): "Fuck... I've always hated these stairs." {IF NOT STAIRCASE_FINISHED_EXPLANATION}
+                                    {CONTINUE}
+                                        The Left Eye (Bob): "You know, it's gonna be an *uphill task* for you to descend the stairs."
+                                            {CONTINUE}
+                                                The Right Eye (Katie): "An *uphill task* you say..." *smirk*
+                                                    {CONTINUE}
+                                                        The Left Eye (Bob): "I mean, how are you gonna even approach this with no legs?"
+                                                            > Take it step by step?
+                                                                The Left Eye (Bob): "Yeah, step by step I guess... and you've got like a 1000 steps here..."
+                                                                    {CONTINUE}
+                                                                        The Left Eye (Bob): "Look, all I'm saying here is that... with how you're moving around right now, there might *not* be a chance for you to make it back up here."
+                                                                            > I see.
+                                                                                The Right Eye (Katie): "No, see - you don't *see* things. On the other hand, WE can *see*..."
+                                                                                    {CONTINUE}
+                                                                                        The Left Eye (Bob): "...yeah, whatever Katie. Well, what will you do then?" [SET STAIRCASE_FINISHED_EXPLANATION TRUE]
+                                                                                            {LINE 45 CHILDREN}
+                                                            > Roll down?
+                                                                The Right Eye (Katie): "Hahahah... COUNT ME IN! I wanna *see* this..."
+                                                                    {LINE 29}
 
 # Returning to the dialogue with no eyes
-DESCRIPTION: You approach the staircase, reliving some unpleasant memories of how it has always felt so immensely steep. {IF NOT HAS_EYES}
-    {LINE 4}
+DESCRIPTION: You approach the staircase, refreshing all those bad memories. {IF NOT HAS_EYES}
+    {LINE 9}
 
 # Returning to the dialogue with eyes
 DESCRIPTION: You see the staircase.
