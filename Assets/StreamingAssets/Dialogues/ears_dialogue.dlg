@@ -1,14 +1,14 @@
 DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {IF EARS_TALKED_WITH}
-    > Try to figure out what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3 AND NOT EARS_QUEST_LEARNED_OF_STEREO}
-        DESCRIPTION: You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_WORM TRUE]
+    <NOSE> Sniff around, try to deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3 AND NOT EARS_QUEST_LEARNED_OF_STEREO}
+        DESCRIPTION: [SUCCESS] You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_WORM TRUE]
             {CONTINUE}
                 > There's a worm inside there!
                     {CONTINUE}
                         The Left Eye (Jon): "What are you on about? Are you kidding me?"
                             {CONTINUE}
-                                DESCRIPTION: You are not joking around. Maybe you should take a peek inside?
+                                DESCRIPTION: You are most definitely *not* joking around. Maybe you should take a peek inside?
                                     {LINE 1 CHILDREN}
-        DESCRIPTION: You try to think hard, but can't think of any reason for the behavior. Maybe you could try asking them directly?
+        DESCRIPTION: [FAILURE] You try to sniffle extra hard, but can't think of any reason for the behavior. Maybe you could try asking them directly?
             {LINE 1 CHILDREN}
     > Ask what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3}
         The Right Eye (Katie): "We still haven't turned off that stereo, have we? Let's go and do it!" {IF EARS_QUEST_LEARNED_OF_STEREO}
@@ -34,7 +34,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                                     <NOSE> Pick up The Ears. [SET EARS_QUEST_NOSE_PICKUP_ATTEMPT TRUE, ROLL 0/12]
                                         DESCRIPTION: You try to wiggle with the tip of your nose in order to lever The Ears from underneath...
                                             {CONTINUE}
-                                                DESCRIPTION: As you stumble and fall spectacularly, you feel stupid having ever attempted this... {IF NOT ROLL_SUCCESS}
+                                                DESCRIPTION: [FAILURE] As you stumble and fall spectacularly, you feel stupid having ever attempted this...
                                                     {CONTINUE}
                                                         The Right Eye (Katie): "Are you totally *brainless*???? Obviously we need a *helping hand* for this..."
                                                             {CONTINUE}
@@ -81,9 +81,9 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                 The Right Eye (Katie): "Aww... aren't you being SOO SWEEEET? What a loser!!"
                     {LINE 1 CHILDREN}
     <EYES> Examine The Ears. {IF NOT EARS_QUEST_EYES_EXAMINED} [ROLL 6/12]
-        DESCRIPTION: On a closer inspection you see that The Ears are twitching and shivering ever so slightly. It reminds you of a wounded deer, slowly bleeding to death... {IF ROLL_SUCCESS} [SET EARS_QUEST_EYES_EXAMINED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
+        DESCRIPTION: [SUCCESS] On a closer inspection you see that The Ears are twitching and shivering ever so slightly. It reminds you of a wounded deer, slowly bleeding to death... {IF ROLL_SUCCESS} [SET EARS_QUEST_EYES_EXAMINED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
             {LINE 1 CHILDREN}
-        Jon (The Left Eye): Jon lashes at you. "What are we doing, man? I don't wanna waste my time on this..." {IF NOT ROLL_SUCCESS} [SET EARS_QUEST_EYES_EXAMINED TRUE]
+        Jon (The Left Eye): [FAILURE] Jon lashes at you. "What are we doing, man? I don't wanna waste my time on this..." [SET EARS_QUEST_EYES_EXAMINED TRUE]
             {LINE 1 CHILDREN}
     <EYES> Look inside The Ears. {IF EARS_QUEST_LEARNED_OF_WORM}
         DESCRIPTION: You float as close as possible to one of the ear canals and take a peek inside...
@@ -101,9 +101,9 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                         The Right Eye (Katie): "Wow... it looks like it's close to death! I think turning that stereo off almost killed it!" {IF NOT STEREO_IS_ON}
                             {LINE 94}
     <NOSE> Sniff The Ears. {IF NOT EARS_QUEST_NOSE_SNIFFED} [ROLL 5/12]
-        DESCRIPTION: There is something wrong with the odour you sense from The Ears. It smells foul and alien, a smell you could imagine coming from a nasty, slimy rainforest slug. {IF ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
+        DESCRIPTION: [SUCCESS] There is something wrong with the odour you sense from The Ears. It smells foul and alien, a smell you could imagine coming from a nasty, slimy rainforest slug. {IF ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
             {LINE 1 CHILDREN}
-        DESCRIPTION: You poke your nose in and sniffle, but it seems like your attempt is fizzled. {IF NOT ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE]
+        DESCRIPTION: [FAILURE] You poke your nose in and sniffle, but it seems like your attempt is fizzled. [SET EARS_QUEST_NOSE_SNIFFED TRUE]
             {LINE 1 CHILDREN}
     {LINE 121}
 DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the carpet. They look like they are curled up in an almost fetal position.
