@@ -18,32 +18,30 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                 The Ears: "...make it stop... please turn it off... make it stop..."
                     {CONTINUE}
                         The Right Eye (Katie): "You know... maybe you could try picking them up?"
-                            {CONTINUE}
-                                > What do you mean by that?
-                                    {CONTINUE}
-                                        The Right Eye (Katie): "Trust me! Just do it!!""
-                                            <HAND> Pick up The Ears.
-                                                The Hand: "Here we go... Lend me your ears..."
-                                                    {CONTINUE}
-                                                        The Hand: You pick up The Ears and hold them on the palm of your hand. Suddenly you start to hear noises... [SET HAS_EARS TRUE]
-                                                            {CONTINUE}
-                                                                The Right Eye (Katie): "Hear that? The stereo is blasting it full volume!" [SET EARS_QUEST_LEARNED_OF_STEREO TRUE, ADD EARS_QUEST_MADE_CONTACT +1]
-                                                                    {CONTINUE}
-                                                                        The Hand: The Ears twitch around, and before you notice they have already managed to jump back on the ground. It seems like they *really* don't want to be moving around with the music still on. [SET HAS_EARS FALSE]
-                                                                            {CONTINUE}
-                                                                                The Right Eye (Katie): "Alright! Let's go turn off that stereo, shall we?"
-                                                                                    {LINE 1 CHILDREN}
-                                            <NOSE> Pick up The Ears. [SET EARS_QUEST_NOSE_PICKUP_ATTEMPT TRUE, ROLL 0/12]
-                                                DESCRIPTION: You try to wiggle with the tip of your nose in order to lever The Ears from underneath. As you stumble and fall spectacularly, you feel stupid having ever tried to attempt this... {IF NOT ROLL_SUCCESS}
-                                                    {CONTINUE}
-                                                        The Right Eye (Katie): "Are you totally *brainless*???? Obviously we need a *helping hand* for this..."
-                                                            {CONTINUE}
-                                                                The Right Eye (Katie): "Come on, use The Hand instead!" {IF HAS_HAND}
-                                                                    {LINE 24 CHILDREN}
-                                                                The Left Eye (Jon): "Yeah, we desperately need *a hand-up*!"
-                                                                    {LINE 1 CHILDREN}
-                                            > Don't pick up The Ears.
-                                                {LINE 1}
+                            > What do you mean by that?
+                                    The Right Eye (Katie): "Trust me! Just do it!!""
+                                        <HAND> Pick up The Ears.
+                                            The Hand: "Here we go... Lend me your ears..."
+                                                {CONTINUE}
+                                                    The Hand: You pick up The Ears and hold them on the palm of your hand. Suddenly you start to hear noises... [SET HAS_EARS TRUE]
+                                                        {CONTINUE}
+                                                            The Right Eye (Katie): "Hear that? The stereo is blasting it full volume!" [SET EARS_QUEST_LEARNED_OF_STEREO TRUE, ADD EARS_QUEST_MADE_CONTACT +1]
+                                                                {CONTINUE}
+                                                                    The Hand: The Ears twitch around, and before you notice they have already managed to jump back on the ground. It seems like they *really* don't want to be moving around with the music still on. [SET HAS_EARS FALSE]
+                                                                        {CONTINUE}
+                                                                            The Right Eye (Katie): "Alright! Let's go turn off that stereo, shall we?"
+                                                                                {LINE 1 CHILDREN}
+                                        <NOSE> Pick up The Ears. [SET EARS_QUEST_NOSE_PICKUP_ATTEMPT TRUE, ROLL 0/12]
+                                            DESCRIPTION: You try to wiggle with the tip of your nose in order to lever The Ears from underneath. As you stumble and fall spectacularly, you feel stupid having ever tried to attempt this... {IF NOT ROLL_SUCCESS}
+                                                {CONTINUE}
+                                                    The Right Eye (Katie): "Are you totally *brainless*???? Obviously we need a *helping hand* for this..."
+                                                        {CONTINUE}
+                                                            The Right Eye (Katie): "Come on, use The Hand instead!" {IF HAS_HAND}
+                                                                {LINE 22 CHILDREN}
+                                                            The Left Eye (Jon): "Yeah, we desperately need *a hand-up*!"
+                                                                {LINE 1 CHILDREN}
+                                        > Don't pick up The Ears.
+                                            {LINE 1}
     > Turn what off? {IF EARS_QUEST_MADE_CONTACT == 2}
         DESCRIPTION: When asking yourself that question, you suddenly realize not everything is right with The Ears. You now *see* clearly the tremors, *feel* the whimpers... It seems like they're suffering from some kind of bout of insanity. [ADD EARS_QUEST_LEARNED_OF_SHIVERS +1, ADD EARS_QUEST_MADE_CONTACT +1]
             {LINE 1 CHILDREN}
@@ -105,7 +103,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
             {LINE 1 CHILDREN}
         DESCRIPTION: You poke your nose in and sniffle, but it seems like your attempt is fizzled. {IF NOT ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE]
             {LINE 1 CHILDREN}
-    {LINE 122}
+    {LINE 120}
 DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the carpet. They look like they are curled up in an almost fetal position.
     > Approach The Ears. [SET EARS_TALKED_WITH TRUE]
         The Nose: "SNNNRRFFT?"
