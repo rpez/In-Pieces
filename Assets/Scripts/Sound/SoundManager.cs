@@ -111,17 +111,17 @@ public class SoundManager : Singleton<SoundManager>
     // GamesState-INTS
     public void UpdateSoundsInteger(string parameterName, int intValue)
     {
-        if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
+        if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 0)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 1");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 1);
         }
-        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 2)
+        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 1)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 2);
         }
-        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 3)
+        else if (parameterName.Equals("INTRO_DRUNKENNESS_LEVEL") && intValue == 2)
         {
             UnityEngine.Debug.Log("Fmod: Intro Drunkenness Level 2");
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Chug", 3);
