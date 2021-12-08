@@ -85,8 +85,8 @@ public class UIManager : MonoBehaviour
             foreach(IDialogueCondition condition in condDialogue.Conditions)
             {
                 if (condition.Variable.Equals("ROLL_SUCCESS"))
-                    m_rollResult = condition.Negator ? string.Format("<color=red>FAILURE</color><color=white>: ")
-                                                     : string.Format("<color=green>SUCCESS</color><color=white>: ");
+                    m_rollResult = condition.Negator ? string.Format("<color=red>[FAILURE]</color><color=white> ")
+                                                     : string.Format("<color=green>[SUCCESS]</color><color=white> ");
             }
 
             dialogText.text = m_rollResult + condDialogue.Line;
