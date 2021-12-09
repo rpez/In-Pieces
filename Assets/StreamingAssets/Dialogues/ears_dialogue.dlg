@@ -10,7 +10,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                             {CONTINUE}
                                 The Left Eye (Bob): "Maybe there's something around here to help their pain?"
                                     {LINE 1 CHILDREN}
-    > Turn what off? {IF EARS_QUEST_MADE_CONTACT == 3}
+    > Make what stop? {IF EARS_QUEST_MADE_CONTACT == 3}
         DESCRIPTION: When asking yourself that question, you suddenly realize not everything is right with The Ears...
             {CONTINUE}
                 DESCRIPTION: You now *see* clearly the tremors, *feel* the whimpers... It seems like they're suffering from some kind of bout of insanity. [SET EARS_QUEST_LEARNED_OF_SHIVERS TRUE, ADD EARS_QUEST_MADE_CONTACT +1]
@@ -71,16 +71,16 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
             {CONTINUE}
                 DESCRIPTION: To your amazement, you see a fully grown larva. It's an *earworm*! [SET EARS_QUEST_EYES_SAW_WORM TRUE]
                     {CONTINUE}
+                        The Right Eye (Katie): "Wow... it looks like it's close to death! I think turning that stereo off almost killed it!" {IF EARS_QUEST_LEARNED_OF_STEREO AND STEREO_IS_ON AND STEREO_IS_PLAYING}
+                            {LINE 75}
+                        The Right Eye (Katie): "Wow... it looks like it's starving! I wonder why that is?" {IF STEREO_IS_ON AND STEREO_IS_PLAYING}
+                            {LINE 75}
                         The Right Eye (Katie): "Wow... it looks so healthy! It must have gained so much energy in a short time!" {IF STEREO_IS_ON}
                             {CONTINUE}
                                 The Right Eye (Katie): "If we had a hand, we could pluck it out!" {IF NOT HAS_HAND}
                                     {LINE 1 CHILDREN}
                                 The Hand: "I could pluck it out!"
                                     {LINE 1 CHILDREN}
-                        The Right Eye (Katie): "Wow... it looks like it's starving! I wonder why that is?" {IF NOT EARS_QUEST_LEARNED_OF_STEREO}
-                            {LINE 75}
-                        The Right Eye (Katie): "Wow... it looks like it's close to death! I think turning that stereo off almost killed it!" {IF NOT STEREO_IS_ON}
-                            {LINE 75}
     <NOSE> Sniff The Ears. {IF NOT EARS_QUEST_NOSE_SNIFFED} [ROLL 5/12]
         DESCRIPTION: *SUCCESS* There is something wrong with the odour you sense from The Ears. It smells foul and alien, a smell you could imagine coming from a nasty, slimy rainforest slug. {IF ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
             {LINE 1 CHILDREN}

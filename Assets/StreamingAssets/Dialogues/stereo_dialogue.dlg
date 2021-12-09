@@ -30,16 +30,16 @@ DESCRIPTION: You see the stereo.
             {LINE 31 CHILDREN}
         DESCRIPTION: You see the big red button. The label below reads "FNUR FOT".
             <HAND> Push the big red button.
-                DESCRIPTION: One more red nightmare? You push the big red button. [TGL STEREO_IS_ON]
+                DESCRIPTION: One more red nightmare? You push the big red button.
                     {CONTINUE}
-                        DESCRIPTION: The stereo whirrs. It seems to have come alive. {IF STEREO_IS_ON}
+                        DESCRIPTION: The stereo whirrs. It seems to have come alive. {IF NOT STEREO_IS_ON} [SET STEREO_IS_ON TRUE]
                             {LINE 23 CHILDREN}
-                        DESCRIPTION: The stereo winds down. It seems to be off now.
+                        DESCRIPTION: The stereo winds down. It seems to be off for now. [SET STEREO_IS_PLAYING FALSE, SET STEREO_IS_ON FALSE]
                             {LINE 23 CHILDREN}
             <NOSE> Push the big red button. [ROLL 4/12]
-                DESCRIPTION: *SUCCESS* RED ALERT! You successfully hit the big red button. {IF ROLL_SUCCESS} [TGL STEREO_IS_ON]
+                DESCRIPTION: *SUCCESS* RED ALERT! You successfully hit the big red button. {IF ROLL_SUCCESS}
                     {LINE 34}
-                DESCRIPTION: *FAILURE* You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [TGL STEREO_BASS_BOOST, ADD STEREO_COUNT_FAILURES +1]
+                DESCRIPTION: *FAILURE* You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [ADD STEREO_COUNT_FAILURES +1]
                     {LINE 68}
             <EYES> Read the label below the red button. {IF NOT STEREO_READ_RED_LABEL} [SET STEREO_READ_RED_LABEL TRUE]
                 DESCRIPTION: The Eyes squint as hard as possible. The text reads "FNUR FOT". {IF STEREO_LEARNED_OF_DYSLEXIA}
@@ -64,16 +64,16 @@ DESCRIPTION: You see the stereo.
             {LINE 65 CHILDREN}
         DESCRIPTION: You see the black button. The label below reads "FFOTCE EN".
             <HAND> Push the black button.
-                DESCRIPTION: Back in black is the new black! You push the black button. [TGL STEREO_BASS_BOOST]
+                DESCRIPTION: Back in black is the new black! You push the black button.
                     {CONTINUE}
-                        DESCRIPTION: There is a satisfying click. The music seems to slowly come back to normal again. {IF STEREO_IS_ON AND STEREO_IS_PLAYING AND NOT STEREO_BASS_BOOST}
+                        DESCRIPTION: There is a satisfying click. The music seems to slowly come back to normal again. {IF STEREO_IS_ON AND STEREO_IS_PLAYING AND STEREO_BASS_BOOST} [SET STEREO_BASS_BOOST FALSE]
                             {LINE 23 CHILDREN}
-                        DESCRIPTION: There is a satisfying click. There seems to be a weird effect on the sound now. {IF STEREO_IS_ON AND STEREO_IS_PLAYING}
+                        DESCRIPTION: There is a satisfying click. There seems to be a weird effect on the sound now. {IF STEREO_IS_ON AND STEREO_IS_PLAYING} [SET STEREO_BASS_BOOST TRUE]
                             {LINE 23 CHILDREN}
-                        DESCRIPTION: There is a satisfying click, but you have no idea what the effect was.
+                        DESCRIPTION: You seem to have hit some button, but have no idea of what the effect was. [TGL STEREO_BASS_BOOST]
                             {LINE 23 CHILDREN}
             <NOSE> Push the black button. [ROLL 4/12]
-                DESCRIPTION: *SUCCESS* You take a slow approach, and successfully toggle the black button. {IF ROLL_SUCCESS} [TGL STEREO_BASS_BOOST]
+                DESCRIPTION: *SUCCESS* You take a slow approach, and successfully toggle the black button... {IF ROLL_SUCCESS}
                     {LINE 68}
                 DESCRIPTION: *FAILURE* You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [ADD STEREO_COUNT_FAILURES +1]
                     {LINE 104}
@@ -102,14 +102,18 @@ DESCRIPTION: You see the stereo.
             <HAND> Push the white button.
                 DESCRIPTION: Do I hear beetles singing? You push the white button.
                     {CONTINUE}
-                        DESCRIPTION: There is a satisfying click, and the music starts playing. {IF STEREO_IS_ON AND NOT STEREO_IS_PLAYING} [TGL STEREO_IS_PLAYING]
+                        DESCRIPTION: There is a satisfying whirr, and the music starts playing. Although something seems off... {IF STEREO_IS_ON AND NOT STEREO_IS_PLAYING AND STEREO_BASS_BOOST} [SET STEREO_IS_PLAYING TRUE]
                             {LINE 23 CHILDREN}
-                        DESCRIPTION: There is a satisfying click, but for some reason nothing seems to have happened.
+                        DESCRIPTION: There is a satisfying whirr, and the music starts playing. {IF STEREO_IS_ON AND NOT STEREO_IS_PLAYING} [SET STEREO_IS_PLAYING TRUE]
+                            {LINE 23 CHILDREN}
+                        DESCRIPTION: There is a satisfying click, and the music stops. {IF STEREO_IS_ON AND STEREO_IS_PLAYING} [SET STEREO_IS_PLAYING FALSE]
+                            {LINE 23 CHILDREN}
+                        DESCRIPTION: You seem to have hit some button, but for some reason nothing seems to have happened.
                             {LINE 23 CHILDREN}
             <NOSE> Push the white button. [ROLL 4/12]
                 DESCRIPTION: *SUCCESS* You successfully push the white button. {IF ROLL_SUCCESS}
                     {LINE 104}
-                DESCRIPTION: *FAILURE* You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [TGL STEREO_IS_ON, ADD STEREO_COUNT_FAILURES +1]
+                DESCRIPTION: *FAILURE* You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [ADD STEREO_COUNT_FAILURES +1]
                     {LINE 34}
             <EYES> Read the label below the white button. {IF NOT STEREO_READ_WHITE_LABEL} [SET STEREO_READ_WHITE_LABEL TRUE]
                 DESCRIPTION: The Eyes squint as hard as possible. The text reads "POAY/PLST". {IF STEREO_LEARNED_OF_DYSLEXIA}
@@ -127,7 +131,7 @@ DESCRIPTION: You see the stereo.
                                                         {LINE 101}
             > Do nothing.
                 {LINE 23}
-    <NOSE> Sniff the buttons. {IF NOT STEREO_SNIFFED_BUTTONS}
+    <NOSE> Sniff the buttons. {IF NOT STEREO_SNIFFED_BUTTONS} [SET STEREO_SNIFFED_BUTTONS TRUE]
         DESCRIPTION: You sniff the buttons one by one to try to figure out which one of them is calling for you...
             {CONTINUE}
                 DESCRIPTION: The big red button smells like ketchup.
@@ -136,9 +140,9 @@ DESCRIPTION: You see the stereo.
                             {CONTINUE}
                                 DESCRIPTION: The white button has a slight scent of salt and vinegar.
                                     {CONTINUE}
-                                        The Left Eye (Bob): "Wow, someone around here must love all-dressed chips..."
+                                        The Left Eye (Bob): "Wow, someone around here must LOVE all-dressed chips..."
                                             {CONTINUE}
-                                                The Right Eye (Katie): *sigh* "I'm SOOOOO GLAD that we gained this knowledge..."
+                                                The Right Eye (Katie): *sigh* "I'm SOOOOO glad that we gained this knowledge..."
                                                     {LINE 23 CHILDREN}
     > Leave.
         {END}

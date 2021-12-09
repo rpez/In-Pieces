@@ -43,6 +43,7 @@ public class SoundManager : Singleton<SoundManager>
             if (GameManager.Instance.State.STEREO_IS_ON)
             {
                 UnityEngine.Debug.Log("Fmod: Stereo Music Stop");
+                FMODUnity.RuntimeManager.PlayOneShot("event:/StereoON");
                 m_stereoInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             }
         }
