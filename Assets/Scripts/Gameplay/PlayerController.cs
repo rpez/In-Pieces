@@ -189,14 +189,14 @@ public class PlayerController : MonoBehaviour
 
         if (GameManager.Instance.GetStateValue<bool>("GAME_OVER"))
             CutsceneManager.Instance.PlayCutscene(
-                "You slam the door shut.",
                 "",
-                1f,
-                1f,
-                1f,
+                "",
+                2f,
+                2f,
+                0f,
                 "outro_dialogue",
                 () => { },
-                () => { },
+                () => { Application.Quit(); },
                 false);
     }
 

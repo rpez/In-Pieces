@@ -1,3 +1,5 @@
-DESCRIPTION: You left the mansion, just in time. You barely made it to the taxi in one piece.
-    > Be in taxi.
-        {END}
+DESCRIPTION: You slam the door behind you, and just barely make it to the taxi outside...
+    {CONTINUE}
+        DESCRIPTION: In pieces.
+            > THE END.
+                {END}

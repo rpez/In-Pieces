@@ -113,7 +113,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                                     {CONTINUE}
                                         The Left Eye (Bob): "Maybe we should try to starve it somehow? Give its host better food?"
                                             {LINE 48 CHILDREN}
-    <HAND> Comfort The Ears. {IF EARS_QUEST_LEARNED_OF_SHIVERS} [SET EARS_QUEST_COMFORTED_EARS TRUE, ADD EARS +1]
+    <HAND> Comfort The Ears. {IF NOT EARS_QUEST_COMFORTED_EARS AND EARS_QUEST_LEARNED_OF_SHIVERS} [SET EARS_QUEST_COMFORTED_EARS TRUE, ADD EARS +1]
         DESCRIPTION: You gently stroke the earlobes. The shivering seems to stop for a moment. You're quite sure they like you more.
             {CONTINUE}
                 The Right Eye (Katie): "Aww... aren't you being SOO SWEEEET? What a loser!!"
