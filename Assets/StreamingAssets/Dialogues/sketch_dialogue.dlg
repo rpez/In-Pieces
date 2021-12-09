@@ -1,5 +1,5 @@
 # Part 1
-DESCRIPTION: You feel a sudden twitch, an involuntary contraction. The sensation of falling... [SET HAS_NOSE TRUE]
+DESCRIPTION: You feel a sudden twitch, an involuntary contraction. The sensation of falling... [SET INTRO_FINISHED TRUE, SET HAS_NOSE TRUE]
     {CONTINUE}
         DESCRIPTION: Gravity is dragging you down, slamming you in an infinite loop, endless spirals in an impossible staircase...
             > Wha-...

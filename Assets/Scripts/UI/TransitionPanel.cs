@@ -75,7 +75,7 @@ public class TransitionPanel : MonoBehaviour
             if (m_currentTime <= m_fadeOutLength)
             {
                 float t = m_currentTime / m_fadeOutLength;
-                float alpha = Mathf.Lerp(0f, 1f, t);
+                float alpha = Mathf.SmoothStep(0f, 1f, t);
                 ChangeImageAlpha(alpha);
             }
             else
@@ -101,7 +101,7 @@ public class TransitionPanel : MonoBehaviour
                 if (m_currentTime < m_textTime)
                 {
                     float t = m_currentTime / m_textTime;
-                    float alpha = Mathf.Lerp(0f, 1f, t);
+                    float alpha = Mathf.SmoothStep(0f, 1f, t);
                     ChangeTextAlpha(alpha);
                 }
                 else
@@ -115,7 +115,7 @@ public class TransitionPanel : MonoBehaviour
                 if (m_currentTime > m_length - m_textTime)
                 {
                     float t = m_currentTime / m_length;
-                    float alpha = Mathf.Lerp(1f, 0f, t);
+                    float alpha = Mathf.SmoothStep(1f, 0f, t);
                     ChangeTextAlpha(alpha);
                 }
             }
@@ -125,7 +125,7 @@ public class TransitionPanel : MonoBehaviour
             if (m_currentTime <= m_fadeInLength)
             {
                 float t = m_currentTime / m_fadeInLength;
-                float alpha = Mathf.Lerp(1f, 0f, t);
+                float alpha = Mathf.SmoothStep(1f, 0f, t);
                 ChangeImageAlpha(alpha);
             }
             else

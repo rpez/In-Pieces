@@ -1,5 +1,5 @@
-DESCRIPTION: The outdoor. If there only were a way to open it.
-    <HAND> Open the door and leave. {IF HAS_HAND} [SET GAME_OVER TRUE]
+DESCRIPTION: The way out! If there only were a way to open the door...
+    <HAND> Open the door and leave. [SET GAME_OVER TRUE]
         {END}
     > Do nothing.
         {END}

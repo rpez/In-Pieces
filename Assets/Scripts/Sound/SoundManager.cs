@@ -23,6 +23,11 @@ public class SoundManager : Singleton<SoundManager>
         m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
         m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
+        AmbienceMain = FMODUnity.RuntimeManager.CreateInstance("event:/AmbienceMain");
+
+        IntroAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/IntroAmbience");
+
+        oldClock = FMODUnity.RuntimeManager.CreateInstance("event:/tickingClock");
     }
 
     // clicking sounds
@@ -53,13 +58,14 @@ public class SoundManager : Singleton<SoundManager>
     // GamesState-BOOLS
     public void UpdateSoundsBoolean(string parameterName, bool boolValue)
     {
+        UnityEngine.Debug.Log(parameterName.Equals("INTRO_FINISHED"));
+        UnityEngine.Debug.Log(boolValue == true);
+
         if (parameterName.Equals("STEREO_IS_PLAYING") && boolValue)
         {
             if (GameManager.Instance.State.STEREO_IS_ON)
             {
                 UnityEngine.Debug.Log("Fmod: Stereo Music Start");
-                m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
-                m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
                 m_stereoInstance.start();
             }
         }
@@ -104,20 +110,13 @@ public class SoundManager : Singleton<SoundManager>
         // Intro ambience starting
         else if (parameterName.Equals("INTRO_START") && boolValue)
         {
-            IntroAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/IntroAmbience");
             IntroAmbience.start();
         }
-
-
-
-
         else if (parameterName.Equals("HAS_NOSE") && boolValue)
         {
             // The bedroom dialogue has started.
-            AmbienceMain = FMODUnity.RuntimeManager.CreateInstance("event:/AmbienceMain");
             AmbienceMain.start();
 
-            oldClock = FMODUnity.RuntimeManager.CreateInstance("event:/tickingClock");
             oldClock.start();
 
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("BedroomStarts", 1);

@@ -54,10 +54,10 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
         DESCRIPTION: You try shouting at the top of your lungs, but all you can feel is the warm air along with a small amount of discharge dripping out from your nostrils. Maybe it would help if you actually *HAD* lungs?
             {LINE 26 CHILDREN}
     <NOSE> Sniff around, deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3 AND NOT EARS_QUEST_SAW_EARWORM} [ADD EARS_QUEST_MADE_CONTACT +1]
-        DESCRIPTION: *SUCCESS* You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_EARWORM TRUE]
+        DESCRIPTION: *SUCCESS* You're certain you've seen this kind of behavior in some nature documentary a long time ago... {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_EARWORM TRUE]
             {CONTINUE}
-                > There's a parasite in there!
-                    {CONTINUE}
+                DESCRIPTION: It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal.
+                    > There's a parasite in there!
                         The Left Eye (Bob): "What are you on about? Are you kidding me?"
                             {CONTINUE}
                                 DESCRIPTION: You are most definitely *not* joking around. Maybe you should take a peek inside The Ears?

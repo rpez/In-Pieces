@@ -56,12 +56,12 @@ Best friend: "Ya know.. uh... my parents are out tonight... Come to *THE MANSION
                             > Celebrate. [ADD INTRO_DRUNKENNESS_LEVEL +1]
                                 Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow... but..."
                                     {CONTINUE}
-                                        Best friend: "Maannn... your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?" [SET INTRO_FINISHED TRUE]
+                                        Best friend: "Maannn... your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?"
                                             {END}
-                            > Don't celebrate.
+                            > Don't celebrate. [ADD INTRO_DRUNKENNESS_LEVEL +1]
                                 Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow...""
                                     {CONTINUE}
-                                        Best friend: "Stop bein' a waste, man! Your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?" [ADD INTRO_DRUNKENNESS_LEVEL +1]
+                                        Best friend: "Stop bein' a waste, man! Your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?"
                                             {LINE 60}
                             > The Mansion? {IF NOT INTRO_THE_MANSION} [SET INTRO_THE_MANSION TRUE]
                                 DESCRIPTION: Your friend is the grandson of *the* rich Cuban immigrants. Monopoly on housekeeping business in the region, all that happy jazz.

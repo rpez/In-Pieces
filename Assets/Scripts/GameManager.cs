@@ -36,14 +36,17 @@ public class GameManager : Singleton<GameManager>
 
         CutsceneManager.Instance.PlayCutscene("Somewhere in a bar far, far away...",
             "",
-            3f,
-            1f,
+            6f,
             2f,
+            4f,
             "intro_dialogue",
             () => {
                 
             },
             () => {
+                GameManager.Instance.State.INTRO_FINISHED = true;
+                SoundManager.Instance.UpdateSoundsBoolean("INTRO_FINISHED", true);
+
                 CutsceneManager.Instance.StartForcedDialogue("sketch_dialogue", () => {
                     player.SetMovementActive(true);
                 });
