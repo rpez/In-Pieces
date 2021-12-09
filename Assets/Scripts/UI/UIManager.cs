@@ -189,7 +189,8 @@ public class UIManager : MonoBehaviour
         string dialogueName, 
         Action onMidEnd, 
         Action onEndEnd,
-        bool startblack)
+        bool startblack,
+        bool stayBlack)
     {
         if (startblack)
         {
@@ -202,8 +203,16 @@ public class UIManager : MonoBehaviour
             fadeOutLength,
             fadeInLength,
             () => {
-                m_introPanel.SetActive(true);
-                m_introPanel.GetComponent<Image>().color = Color.white;
+                if (!stayBlack)
+                {
+                    m_introPanel.SetActive(true);
+                    m_introPanel.GetComponent<Image>().color = Color.white;
+                }
+                else
+                {
+                    m_introPanel.SetActive(true);
+                    m_introPanel.GetComponent<Image>().color = Color.black;
+                }
             },
             () => {
                 StartConversation(

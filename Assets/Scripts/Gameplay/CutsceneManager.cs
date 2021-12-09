@@ -16,7 +16,8 @@ public class CutsceneManager : Singleton<CutsceneManager>
         string dialoguename,
         Action midEndTransitionCallback,
         Action transitionEndEndCallback,
-        bool startblack)
+        bool startblack,
+        bool stayBlack)
     {
         m_UI.StartCutcene(startText, 
             endText,
@@ -26,7 +27,8 @@ public class CutsceneManager : Singleton<CutsceneManager>
             dialoguename, 
             midEndTransitionCallback, 
             transitionEndEndCallback,
-            startblack);
+            startblack,
+            stayBlack);
     }
 
     public void StartForcedDialogue(string dialogueName, Action onEnd)

@@ -195,9 +195,10 @@ public class PlayerController : MonoBehaviour
                 2f,
                 0f,
                 "outro_dialogue",
-                () => { },
                 () => { Application.Quit(); },
-                false);
+                () => { },
+                false,
+                true);
     }
 
     private void SpawnIndicator(Vector3 point, bool cancel = false)
