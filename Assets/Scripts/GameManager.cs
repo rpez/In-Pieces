@@ -48,7 +48,8 @@ public class GameManager : Singleton<GameManager>
                     player.SetMovementActive(true);
                 });
             },
-            true);
+            true,
+            false);
     }
 
     // Update is called once per frame

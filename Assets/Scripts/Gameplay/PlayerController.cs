@@ -197,7 +197,8 @@ public class PlayerController : MonoBehaviour
                 "outro_dialogue",
                 () => { },
                 () => { },
-                false);
+                false,
+                true);
     }
 
     private void SpawnIndicator(Vector3 point, bool cancel = false)
