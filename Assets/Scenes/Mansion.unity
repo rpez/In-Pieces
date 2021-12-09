@@ -1807,14 +1807,14 @@ MonoBehaviour:
   CollisionTag: Player
   EventReference:
     Guid:
-      Data1: 1219337374
-      Data2: 1255373231
-      Data3: -2049527627
-      Data4: -1359721990
-    Path: event:/TaxiArraving
+      Data1: 1441711718
+      Data2: 1129443727
+      Data3: 1633196222
+      Data4: 1020347517
+    Path: event:/rain_02
   Event: 
   PlayEvent: 3
-  StopEvent: 0
+  StopEvent: 4
   AllowFadeout: 1
   TriggerOnce: 1
   Preload: 0
