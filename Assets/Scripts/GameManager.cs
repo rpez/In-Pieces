@@ -47,8 +47,8 @@ public class GameManager : Singleton<GameManager>
                 CutsceneManager.Instance.StartForcedDialogue("sketch_dialogue", () => {
                     player.SetMovementActive(true);
                 });
-            }
-        );
+            },
+            true);
     }
 
     // Update is called once per frame

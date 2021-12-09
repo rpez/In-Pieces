@@ -188,16 +188,21 @@ public class UIManager : MonoBehaviour
         float fadeInLength,
         string dialogueName, 
         Action onMidEnd, 
-        Action onEndEnd)
+        Action onEndEnd,
+        bool startblack)
     {
-        m_introPanel.SetActive(true);
-        m_introPanel.GetComponent<Image>().color = Color.black;
+        if (startblack)
+        {
+            m_introPanel.SetActive(true);
+            m_introPanel.GetComponent<Image>().color = Color.black;
+        }
         AnimateFadeTransition(
             startText,
             length,
             fadeOutLength,
             fadeInLength,
             () => {
+                m_introPanel.SetActive(true);
                 m_introPanel.GetComponent<Image>().color = Color.white;
             },
             () => {
