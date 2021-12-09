@@ -58,9 +58,6 @@ public class SoundManager : Singleton<SoundManager>
     // GamesState-BOOLS
     public void UpdateSoundsBoolean(string parameterName, bool boolValue)
     {
-        UnityEngine.Debug.Log(parameterName.Equals("INTRO_FINISHED"));
-        UnityEngine.Debug.Log(boolValue == true);
-
         if (parameterName.Equals("STEREO_IS_PLAYING") && boolValue)
         {
             if (GameManager.Instance.State.STEREO_IS_ON)
