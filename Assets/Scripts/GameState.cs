@@ -75,8 +75,20 @@ public class GameState
     public bool STEREO_EXAMINED { get; set; } = false;
     public bool STEREO_LEARNED_OF_BUTTONS { get; set; } = false;
     public bool STEREO_LEARNED_OF_DYSLEXIA { get; set; } = false;
+    public bool STEREO_SNIFFED_BUTTONS { get; set; } = false;
+
+    public bool STEREO_SAW_RED_BUTTON { get; set; } = false;
+    public bool STEREO_READ_RED_LABEL { get; set; } = false;
+
+    public bool STEREO_SAW_BLACK_BUTTON { get; set; } = false;
+    public bool STEREO_READ_BLACK_LABEL { get; set; } = false;
+
+    public bool STEREO_SAW_WHITE_BUTTON { get; set; } = false;
+    public bool STEREO_READ_WHITE_LABEL { get; set; } = false;
 
     public bool SPEAKER_EYES_EXAMINED { get; set; } = false;
     public bool SPEAKER_NOSE_SNIFFED { get; set; } = false;
     public bool CD_PLAYER_EYES_EXAMINED { get; set; } = false;
+
+    public int STEREO_COUNT_FAILURES { get; set; } = 0;
 }

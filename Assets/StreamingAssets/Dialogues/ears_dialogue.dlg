@@ -91,7 +91,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
 # First contact
 DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the carpet. They look like they are curled up in an almost fetal position. {IF EARS_QUEST_MADE_CONTACT == 0} [SET EARS_TALKED_WITH TRUE]
     {CONTINUE}
-        The Left Eye (Bob): "Hey, we found another one of us!"
+        The Left Eye (Bob): "Hey, we found another body part!"
             {LINE 98 CHILDREN}
 
 # First contact but left the conversation

@@ -7,7 +7,6 @@ using FMODUnity;
 public class SoundManager : Singleton<SoundManager>
 {
     private FMOD.Studio.EventInstance m_stereoInstance;
-    private bool m_musicPlaying;
 
     void Start()
     {
@@ -29,23 +28,23 @@ public class SoundManager : Singleton<SoundManager>
     // BOOLS
     public void UpdateSoundsBoolean(string parameterName, bool boolValue)
     {
-        if (!m_musicPlaying &&
-            parameterName.Equals("STEREO_IS_PLAYING") &&
-            boolValue)
+        if (parameterName.Equals("STEREO_IS_PLAYING") && boolValue)
         {
-            UnityEngine.Debug.Log("Fmod: Stereo Music Start");
-            m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
-            m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-            m_stereoInstance.start();
-            m_musicPlaying = true;
+            if (GameManager.Instance.State.STEREO_IS_ON)
+            {
+                UnityEngine.Debug.Log("Fmod: Stereo Music Start");
+                m_stereoInstance = FMODUnity.RuntimeManager.CreateInstance("event:/StereoSpeakerMusic");
+                m_stereoInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+                m_stereoInstance.start();
+            }
         }
-        else if (m_musicPlaying &&
-                 parameterName.Equals("STEREO_IS_PLAYING") &&
-                 !boolValue)
+        else if (parameterName.Equals("STEREO_IS_PLAYING") && !boolValue)
         {
-            UnityEngine.Debug.Log("Fmod: Stereo Music Stop");
-            m_stereoInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            m_musicPlaying = false;
+            if (GameManager.Instance.State.STEREO_IS_ON)
+            {
+                UnityEngine.Debug.Log("Fmod: Stereo Music Stop");
+                m_stereoInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
         }
         else if (parameterName.Equals("STEREO_IS_ON") && boolValue)
         {
