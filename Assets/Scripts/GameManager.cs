@@ -34,7 +34,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
-        CutsceneManager.Instance.PlayCutscene("Somewhere in a bar far, far away... (in HALIFAX, CANADA)",
+        CutsceneManager.Instance.PlayCutscene("Somewhere in a bar far, far away...",
             "",
             3f,
             1f,
