@@ -1,7 +1,30 @@
+DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {IF EARS_TALKED_WITH AND STEREO_IS_ON AND STEREO_IS_PLAYING}
+    {CONTINUE}
+        DESCRIPTION: The Ears look a lot more vivid! The tremors have dissipated! [SET EARS_QUEST_EARWORM_WEAKENED TRUE]
+            {CONTINUE}
+                The Ears: "...unnnhhhh... pluck it out... make it stop..."
+                    {CONTINUE}
+                        The Right Eye (Katie): "Wow! The Ears are already looking a lot better!" {IF EARS_QUEST_SAW_EARWORM AND NOT HAS_HAND}
+                            {CONTINUE}
+                                The Left Eye (Bob): "I think all we need now is a *helping hand* in here!"
+                                    {LINE 26 CHILDREN}
+                        The Left Eye (Bob): "Let's get that wormie out then, eh?" {IF EARS_QUEST_SAW_EARWORM}
+                            {LINE 26 CHILDREN}
+                        The Left Eye (Bob): "Wow! What's going on in here?"
+                            {CONTINUE}
+                                The Right Eye (Katie): "I think something we did must've helped The Ears!"
+                                    {CONTINUE}
+                                        The Ears: "...pluck it out... get it out..." 
+                                            {CONTINUE}
+                                                The Left Eye (Bob): "What's this about getting something out?"
+                                                    {CONTINUE}
+                                                        The Right Eye (Katie): "Oooohh! Maybe there's something *inside* The Ears?"
+                                                            {CONTINUE}
+                                                                The Left Eye (Bob): "Wow... We should take a closer look!" [SET EARS_QUEST_LEARNED_OF_EARWORM TRUE]
+                                                                    {LINE 26 CHILDREN}
+
 DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {IF EARS_TALKED_WITH}
-    > Ask what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 4}
-        The Right Eye (Katie): "We still haven't tried the stereo, have we? We should try and interact with it!" {IF EARS_QUEST_LEARNED_OF_STEREO}
-            {LINE 1 CHILDREN}
+    > Ask what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 4 AND NOT EARS_QUEST_EARWORM_WEAKENED}
         The Nose: "SHHRRZZZLLLFF?"
             {CONTINUE}
                 The Ears: "...make it stop... please get it off... make it stop..."
@@ -9,90 +32,105 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position. {
                         The Right Eye (Katie): "I think they look like they're suffering..."
                             {CONTINUE}
                                 The Left Eye (Bob): "Maybe there's something around here to help their pain?"
-                                    {LINE 1 CHILDREN}
-    > Make what stop? {IF EARS_QUEST_MADE_CONTACT == 3}
+                                    {LINE 26 CHILDREN}
+    > Make what stop? {IF EARS_QUEST_MADE_CONTACT == 3 AND NOT EARS_QUEST_EARWORM_WEAKENED}
         DESCRIPTION: When asking yourself that question, you suddenly realize not everything is right with The Ears...
             {CONTINUE}
                 DESCRIPTION: You now *see* clearly the tremors, *feel* the whimpers... It seems like they're suffering from some kind of bout of insanity. [SET EARS_QUEST_LEARNED_OF_SHIVERS TRUE, ADD EARS_QUEST_MADE_CONTACT +1]
-                    {LINE 1 CHILDREN}
-    > Move closer and try again. {IF EARS_QUEST_MADE_CONTACT == 2}
+                    {LINE 26 CHILDREN}
+    > Move closer and try again. {IF EARS_QUEST_MADE_CONTACT == 2 AND NOT EARS_QUEST_EARWORM_WEAKENED}
         DESCRIPTION: You move closer and make a loud snorting sound.
             {CONTINUE}
                 DESCRIPTION: You pick out a faint whimper...
                     {CONTINUE}
                         The Ears: "...please make it stop... please get it off me... please make it stop..." [ADD EARS_QUEST_MADE_CONTACT +1]
-                            {LINE 1 CHILDREN}
-    > Try calling for The Ears again. {IF EARS_QUEST_MADE_CONTACT == 1}
+                            {LINE 26 CHILDREN}
+    > Try calling for The Ears again. {IF EARS_QUEST_MADE_CONTACT == 1 AND NOT EARS_QUEST_EARWORM_WEAKENED}
         The Nose: "SNNRRT? SNXFF SRRNNNF?"
             {CONTINUE}
                 DESCRIPTION: You're quite certain you notice a small response, a tiny shudder of movement. Maybe if you moved closer? [ADD EARS_QUEST_MADE_CONTACT +1]
-                    {LINE 1 CHILDREN}
-    > Shout at The Ears. {IF NOT EARS_QUEST_SHOUTED} [SET EARS_QUEST_SHOUTED TRUE]
+                    {LINE 26 CHILDREN}
+    > Shout at The Ears. {IF NOT EARS_QUEST_SHOUTED AND NOT EARS_QUEST_EARWORM_WEAKENED} [SET EARS_QUEST_SHOUTED TRUE]
         DESCRIPTION: You try shouting at the top of your lungs, but all you can feel is the warm air along with a small amount of discharge dripping out from your nostrils. Maybe it would help if you actually *HAD* lungs?
-            {LINE 1 CHILDREN}
-    <NOSE> Sniff around, deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT == 3} [ADD EARS_QUEST_MADE_CONTACT +1]
-        DESCRIPTION: *SUCCESS* You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_WORM TRUE]
+            {LINE 26 CHILDREN}
+    <NOSE> Sniff around, deduce what's wrong. {IF EARS_QUEST_MADE_CONTACT >= 3 AND NOT EARS_QUEST_SAW_EARWORM} [ADD EARS_QUEST_MADE_CONTACT +1]
+        DESCRIPTION: *SUCCESS* You're certain you've seen this kind of behavior in some nature documentary a long time ago. It was about some parasite invading an ant colony, causing the workers to become mad, and in the end even suicidal. {IF EARS_QUEST_EXAMINATIONS >= 2} [SET EARS_QUEST_LEARNED_OF_EARWORM TRUE]
             {CONTINUE}
-                > There's a worm inside there!
+                > There's a parasite in there!
                     {CONTINUE}
                         The Left Eye (Bob): "What are you on about? Are you kidding me?"
                             {CONTINUE}
-                                DESCRIPTION: You are most definitely *not* joking around. Maybe you should take a peek inside?
-                                    {LINE 1 CHILDREN}
+                                DESCRIPTION: You are most definitely *not* joking around. Maybe you should take a peek inside The Ears?
+                                    {LINE 26 CHILDREN}
         DESCRIPTION: *FAILURE* You try to sniffle extra hard, but can't think of any reason for the behavior. Maybe you could try asking them directly?
-            {LINE 1 CHILDREN}
-    <HAND> Pluck out the earworm. {IF EARS_QUEST_EYES_SAW_WORM}
-        The Hand: "Yo Bob, Katie! Gimme some light, I'm going in!"
+            {LINE 26 CHILDREN}
+    <HAND> Pluck out the earworm. {IF EARS_QUEST_SAW_EARWORM}
+        DESCRIPTION: You carefully insert two fingers inside the ear canal...
             {CONTINUE}
-                DESCRIPTION: With the help of The Eyes, you carefully insert two fingers inside the ear canal...
+                DESCRIPTION: It's quite easy to reach the tip of the worm's tail. You pinch it and try to slowly pull back...
                     {CONTINUE}
-                        DESCRIPTION: It's quite easy to reach the tip of the worm's tail. You pinch it and slowly pull back...
+                        DESCRIPTION: *SUCCESS* You successfully pull all of the worm out! {IF EARS_QUEST_EARWORM_WEAKENED} 
                             {CONTINUE}
                                 The Right Eye (Katie): "You got it! Wow, it's so long!"
                                     {CONTINUE}
-                                        DESCRIPTION: You successfully pull all of the worm out. It must measure almost close to your arm's length.
+                                        DESCRIPTION: The Legs seem to be disgusted by the worm... {IF HAS_LEGS}
                                             {CONTINUE}
-                                                The Left Eye (Bob): "Wow! What do we do with it?"
-                                                    {END}
+                                                DESCRIPTION: *SPLAT!*
+                                                    {CONTINUE}
+                                                        The Right Eye (Katie): "Ewww...."
+                                                            {LINE 83}
+                                        The Left Eye (Bob): "Wow! Throw it away, quick!"
+                                            {CONTINUE}
+                                                DESCRIPTION: With the earworm gone, The Ears appear quite normal again.
+                                                    {CONTINUE}
+                                                        DESCRIPTION: They make their best impression of a polite bow, and start silently following you. [SET HAS_EARS TRUE]
+                                                            {END}
+                        DESCRIPTION: *FAILURE* The earworm is simply too strong for you...
+                            {CONTINUE}
+                                The Right Eye (Katie): "Dude, we gotta find some way to weaken it first!"
+                                    {CONTINUE}
+                                        The Left Eye (Bob): "Maybe we should try to starve it somehow? Give its host better food?"
+                                            {LINE 26 CHILDREN}
     <HAND> Comfort The Ears. {IF EARS_QUEST_LEARNED_OF_SHIVERS} [SET EARS_QUEST_COMFORTED_EARS TRUE, ADD EARS +1]
         DESCRIPTION: You gently stroke the earlobes. The shivering seems to stop for a moment. You're quite sure they like you more.
             {CONTINUE}
                 The Right Eye (Katie): "Aww... aren't you being SOO SWEEEET? What a loser!!"
-                    {LINE 1 CHILDREN}
-    <EYES> Examine The Ears. {IF NOT EARS_QUEST_EYES_EXAMINED} [ROLL 6/12]
+                    {LINE 26 CHILDREN}
+    <EYES> Examine The Ears. {IF NOT EARS_QUEST_EYES_EXAMINED AND NOT EARS_QUEST_LEARNED_OF_EARWORM} [ROLL 6/12]
         DESCRIPTION: *SUCCESS* On a closer inspection you see that The Ears are twitching and shivering ever so slightly. It reminds you of a wounded deer, slowly bleeding to death... {IF ROLL_SUCCESS} [SET EARS_QUEST_EYES_EXAMINED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
-            {LINE 1 CHILDREN}
+            {LINE 26 CHILDREN}
         DESCRIPTION: *FAILURE* Katie lashes at you...
             {CONTINUE}
                 The Right Eye (Katie): "Dude... what are we doing here? I don't wanna waste my time on this..." [SET EARS_QUEST_EYES_EXAMINED TRUE]
-                    {LINE 1 CHILDREN}
-    <EYES> Look inside The Ears. {IF EARS_QUEST_LEARNED_OF_WORM}
-        DESCRIPTION: You float as close as possible to one of the ear canals and take a peek inside...
+                    {LINE 26 CHILDREN}
+    <EYES> Look inside The Ears. {IF EARS_QUEST_LEARNED_OF_EARWORM AND NOT EARS_QUEST_SAW_EARWORM}
+        DESCRIPTION: You float as close as possible to one of the ears and take a peek inside...
             {CONTINUE}
-                DESCRIPTION: To your amazement, you see a fully grown larva. It's an *earworm*! [SET EARS_QUEST_EYES_SAW_WORM TRUE]
+                DESCRIPTION: There seems to be something stuck in the ear canals...
                     {CONTINUE}
-                        The Right Eye (Katie): "Wow... it looks like it's close to death! I think turning that stereo off almost killed it!" {IF EARS_QUEST_LEARNED_OF_STEREO AND STEREO_IS_ON AND STEREO_IS_PLAYING}
-                            {LINE 75}
-                        The Right Eye (Katie): "Wow... it looks like it's starving! I wonder why that is?" {IF STEREO_IS_ON AND STEREO_IS_PLAYING}
-                            {LINE 75}
-                        The Right Eye (Katie): "Wow... it looks so healthy! It must have gained so much energy in a short time!" {IF STEREO_IS_ON}
+                        DESCRIPTION: To your amazement, you see a fully grown larva inside. [SET EARS_QUEST_SAW_EARWORM TRUE]
                             {CONTINUE}
-                                The Right Eye (Katie): "If we had a hand, we could pluck it out!" {IF NOT HAS_HAND}
-                                    {LINE 1 CHILDREN}
-                                The Hand: "I could pluck it out!"
-                                    {LINE 1 CHILDREN}
-    <NOSE> Sniff The Ears. {IF NOT EARS_QUEST_NOSE_SNIFFED} [ROLL 5/12]
+                                DESCRIPTION: It's an *earworm*!
+                                    {CONTINUE}
+                                        The Right Eye (Katie): "Wow... it looks like it's close to death! I wonder why that is?" {IF EARS_QUEST_EARWORM_WEAKENED}
+                                            {LINE 118}
+                                        The Right Eye (Katie): "Wow... it looks so bloated! It must have gained a lot of energy in a short time!"
+                                            {CONTINUE}
+                                                The Left Eye (Bob): "If we had a hand, we could pluck it out!"
+                                                    {LINE 26 CHILDREN}
+    <NOSE> Sniff The Ears. {IF NOT EARS_QUEST_NOSE_SNIFFED AND NOT EARS_QUEST_SAW_EARWORM} [ROLL 5/12]
         DESCRIPTION: *SUCCESS* There is something wrong with the odour you sense from The Ears. It smells foul and alien, a smell you could imagine coming from a nasty, slimy rainforest slug. {IF ROLL_SUCCESS} [SET EARS_QUEST_NOSE_SNIFFED TRUE, ADD EARS_QUEST_EXAMINATIONS +1]
-            {LINE 1 CHILDREN}
+            {LINE 26 CHILDREN}
         DESCRIPTION: *FAILURE* You poke your nose in and sniffle, but it seems like your attempt is fizzled. [SET EARS_QUEST_NOSE_SNIFFED TRUE]
-            {LINE 1 CHILDREN}
-    {LINE 110}
+            {LINE 26 CHILDREN}
+    > Leave.
+        {END}
 
 # First contact
 DESCRIPTION: You see a pair of small, curious, crescent-shaped ears lying on the carpet. They look like they are curled up in an almost fetal position. {IF EARS_QUEST_MADE_CONTACT == 0} [SET EARS_TALKED_WITH TRUE]
     {CONTINUE}
         The Left Eye (Bob): "Hey, we found another body part!"
-            {LINE 98 CHILDREN}
+            {LINE 136 CHILDREN}
 
 # First contact but left the conversation
 DESCRIPTION: You see The Ears. They are curled up in an almost fetal position.
@@ -106,7 +144,7 @@ DESCRIPTION: You see The Ears. They are curled up in an almost fetal position.
                                 The Ears: ...
                                     {CONTINUE}
                                         DESCRIPTION: It seems like there is no answer.
-                                            {LINE 1 CHILDREN}
+                                            {LINE 26 CHILDREN}
     > Leave.
         {END}
 

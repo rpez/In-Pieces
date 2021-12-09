@@ -60,8 +60,9 @@ public class GameState
     public bool EARS_QUEST_NOSE_PICKUP_ATTEMPT { get; set; } = false;
     public bool EARS_QUEST_LEARNED_OF_SHIVERS { get; set; } = false;
     public bool EARS_QUEST_LEARNED_OF_STEREO { get; set; } = false;
-    public bool EARS_QUEST_LEARNED_OF_WORM { get; set; } = false;
-    public bool EARS_QUEST_EYES_SAW_WORM { get; set; } = false;
+    public bool EARS_QUEST_LEARNED_OF_EARWORM { get; set; } = false;
+    public bool EARS_QUEST_SAW_EARWORM { get; set; } = false;
+    public bool EARS_QUEST_EARWORM_WEAKENED { get; set; } = false;
 
     public int EARS_QUEST_MADE_CONTACT { get; set; } = 0;
     public int EARS_QUEST_EXAMINATIONS { get; set; } = 0;

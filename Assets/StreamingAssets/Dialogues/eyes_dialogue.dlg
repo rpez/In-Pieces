@@ -1,6 +1,6 @@
-The Eyes: C'mon! Are you blind?
+The Eyes: "C'mon! Are you blind?"
     > Sorry, sorry! I'm just a bit near sighted. [SET HAS_EYES TRUE]
-        The Eyes: You got a keen eye.
+        The Eyes: "You got a keen eye."
             {END}
     > No.
         {END}

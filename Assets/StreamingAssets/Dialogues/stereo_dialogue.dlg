@@ -28,7 +28,7 @@ DESCRIPTION: You see the stereo.
                     {LINE 31 CHILDREN}
         DESCRIPTION: You see the big red button. {IF NOT STEREO_READ_RED_LABEL}
             {LINE 31 CHILDREN}
-        DESCRIPTION: You see the big red button. The label below reads "FNUR FOT".
+        DESCRIPTION: You see the big red button. The label below reads "REWPO".
             <HAND> Push the big red button.
                 DESCRIPTION: One more red nightmare? You push the big red button.
                     {CONTINUE}
@@ -42,13 +42,13 @@ DESCRIPTION: You see the stereo.
                 DESCRIPTION: *FAILURE* You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [ADD STEREO_COUNT_FAILURES +1]
                     {LINE 68}
             <EYES> Read the label below the red button. {IF NOT STEREO_READ_RED_LABEL} [SET STEREO_READ_RED_LABEL TRUE]
-                DESCRIPTION: The Eyes squint as hard as possible. The text reads "FNUR FOT". {IF STEREO_LEARNED_OF_DYSLEXIA}
+                DESCRIPTION: The Eyes squint as hard as possible. The text reads "REWPO". {IF STEREO_LEARNED_OF_DYSLEXIA}
                     {LINE 31 CHILDREN}
                 The Left Eye (Bob): "Ehrm..."
                     {CONTINUE}
                         The Right Eye (Katie): "This is a bit... perhaps... embarassing..."
                             {CONTINUE}
-                                DESCRIPTION: The Eyes squint as hard as possible. The text reads "FNUR FOT".
+                                DESCRIPTION: The Eyes squint as hard as possible. The text reads "REWPO".
                                     {CONTINUE}
                                         The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
                                             {CONTINUE}
@@ -62,7 +62,7 @@ DESCRIPTION: You see the stereo.
             {LINE 65 CHILDREN}
         DESCRIPTION: You see the black button. {IF NOT STEREO_READ_BLACK_LABEL}
             {LINE 65 CHILDREN}
-        DESCRIPTION: You see the black button. The label below reads "FFOTCE EN".
+        DESCRIPTION: You see the black button. The label below reads "ETFSFEC".
             <HAND> Push the black button.
                 DESCRIPTION: Back in black is the new black! You push the black button.
                     {CONTINUE}
@@ -78,13 +78,13 @@ DESCRIPTION: You see the stereo.
                 DESCRIPTION: *FAILURE* You approach the buttons, but hitting any of them with the nose is easier said than done. You twist and turn, and manage to hit *some* button... [ADD STEREO_COUNT_FAILURES +1]
                     {LINE 104}
             <EYES> Read the label below the black button. {IF NOT STEREO_READ_BLACK_LABEL} [SET STEREO_READ_BLACK_LABEL TRUE]
-                DESCRIPTION: The Eyes squint as hard as possible. The text reads "FFOTCE EN". {IF STEREO_LEARNED_OF_DYSLEXIA}
+                DESCRIPTION: The Eyes squint as hard as possible. The text reads "ETFSFEC". {IF STEREO_LEARNED_OF_DYSLEXIA}
                     {LINE 65 CHILDREN}
                 The Left Eye (Bob): "Ehrm..."
                     {CONTINUE}
                         The Right Eye (Katie): "This is a... perhaps... a bit embarassing..."
                             {CONTINUE}
-                                DESCRIPTION: The Eyes squint as hard as possible. The text reads "FFOTCE EN".
+                                DESCRIPTION: The Eyes squint as hard as possible. The text reads "ETFSFEC".
                                     {CONTINUE}
                                         The Left Eye (Bob): "OKAY, OKAY!! I have no clue where the contacts are, and the dyslexia is *definitely* NOT making it any easier..." [SET STEREO_LEARNED_OF_DYSLEXIA TRUE]
                                             {CONTINUE}

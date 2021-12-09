@@ -44,7 +44,7 @@ DESCRIPTION: You approach the staircase, refreshing all those bad memories. {IF 
 # Returning to the dialogue with eyes
 DESCRIPTION: You see the staircase.
     <LEGS> Climb down the stairs.
-        The Legs: "Hmph, easy enough." [SET UPSTAIRS FALSE]
+        DESCRIPTION: Hmph, easy enough. [SET UPSTAIRS FALSE]
             {END}
     <NOSE> Roll down the stairs.
         DESCRIPTION: Maybe if I just carefully roll... AAAAAAAAARRRGGGGGHH!!! [SET UPSTAIRS FALSE]

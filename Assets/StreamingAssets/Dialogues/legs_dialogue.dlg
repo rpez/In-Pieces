@@ -1,6 +1,6 @@
-The Legs: Leggo?
-    > Yea, let's go. [SET HAS_LEGS TRUE]
-        The Legs: My man!
+The Legs: "Leggo?"
+    > Yes, let's go. [SET HAS_LEGS TRUE]
+        The Legs: "My man!""
             {END}
     > No.
         {END}
