@@ -18,11 +18,11 @@ public class GameManager : Singleton<GameManager>
     {
         PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
 
-        bool DEBUG_SKIP_INTRO_CUTSCENE = false;
+        bool DEBUG_SKIP_INTRO_CUTSCENE = true;
 
         if (DEBUG_SKIP_INTRO_CUTSCENE)
         {
-            GameManager.Instance.State.HAS_EYES = true;
+            GameManager.Instance.State.NEAR_SIGHTED = true;
             GameManager.Instance.State.HAS_NOSE = true;
             GameManager.Instance.State.INTRO_FINISHED = true;
 
