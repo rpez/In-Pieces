@@ -453,7 +453,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{6e8845d7-888d-4e45-941e-560d347c7823}">
 		<property name="volume">
-			<value>-25</value>
+			<value>-14</value>
 		</property>
 		<property name="name">
 			<value>clockRefrig</value>
