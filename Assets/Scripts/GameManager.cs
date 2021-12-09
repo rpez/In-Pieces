@@ -34,6 +34,8 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
+        player.SetMovementActive(false);
+
         CutsceneManager.Instance.PlayCutscene("Somewhere in a bar far, far away...",
             "",
             6f,
