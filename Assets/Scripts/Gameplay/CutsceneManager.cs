@@ -10,11 +10,21 @@ public class CutsceneManager : Singleton<CutsceneManager>
     public void PlayCutscene(
         string startText,
         string endText,
+        float length,
+        float fadeOutLength,
+        float fadeInLength,
         string dialoguename,
         Action midEndTransitionCallback,
         Action transitionEndEndCallback)
     {
-        m_UI.StartCutcene(startText, endText, dialoguename, midEndTransitionCallback, transitionEndEndCallback);
+        m_UI.StartCutcene(startText, 
+            endText,
+            length,
+            fadeOutLength,
+            fadeInLength,
+            dialoguename, 
+            midEndTransitionCallback, 
+            transitionEndEndCallback);
     }
 
     public void StartForcedDialogue(string dialogueName, Action onEnd)
@@ -22,9 +32,20 @@ public class CutsceneManager : Singleton<CutsceneManager>
         m_UI.StartConversation(dialogueName, onEnd);
     }
 
-    public void InitiateTransition(string transitionText, Action midTransitionCallback, Action transitionEndCallback)
+    public void InitiateTransition(
+        string transitionText,
+        float length,
+        float fadeOutLength,
+        float fadeInLength,
+        Action midTransitionCallback,
+        Action transitionEndCallback)
     {
-        m_UI.AnimateFadeTransition(transitionText, midTransitionCallback, transitionEndCallback);
+        m_UI.AnimateFadeTransition(transitionText,
+            length,
+            fadeOutLength,
+            fadeInLength,
+            midTransitionCallback, 
+            transitionEndCallback);
     }
 
     // Start is called before the first frame update

@@ -18,8 +18,8 @@ public class UIManager : MonoBehaviour
     public TMP_Text m_actor;
     public GameObject m_dialogView;
     public GameObject m_descriptionView;
-    public TMP_Text m_transitionText;
     public GameObject m_introPanel;
+    public TransitionPanel m_transitionPanel;
 
     // Prefab for the dialogue options, set this in editor
     public GameObject m_dialogueOptionPrefab;
@@ -180,14 +180,25 @@ public class UIManager : MonoBehaviour
         m_dialogueWindow.SetActive(false);
     }
 
-    public void StartCutcene(string startText, string endText, string dialogueName, Action onMidEnd, Action onEndEnd)
+    public void StartCutcene(
+        string startText,
+        string endText,
+        float length,
+        float fadeOutLength,
+        float fadeInLength,
+        string dialogueName, 
+        Action onMidEnd, 
+        Action onEndEnd)
     {
         m_introPanel.SetActive(true);
         m_introPanel.GetComponent<Image>().color = Color.black;
         AnimateFadeTransition(
             startText,
+            length,
+            fadeOutLength,
+            fadeInLength,
             () => {
-                m_introPanel.GetComponent<Image>().color = Color.red;
+                m_introPanel.GetComponent<Image>().color = Color.white;
             },
             () => {
                 StartConversation(
@@ -195,6 +206,9 @@ public class UIManager : MonoBehaviour
                     () => {
                     AnimateFadeTransition(
                         endText,
+                        length,
+                        fadeOutLength,
+                        fadeInLength,
                         () => {
                             m_introPanel.SetActive(false);
                             onMidEnd.Invoke();
@@ -204,15 +218,22 @@ public class UIManager : MonoBehaviour
             });
     }
 
-    public void AnimateFadeTransition(string transitionText, Action onMid, Action onEnd)
+    public void AnimateFadeTransition(
+        string transitionText,
+        float length,
+        float fadeOutLength,
+        float fadeInLength,
+        Action onMid,
+        Action onEnd)
     {
-        m_transitionText.text = transitionText;
-
-        m_onTransitionMid = onMid;
-        m_onTransitionEnd = onEnd;
-
-        m_director.time = 0;
-        m_director.Play();
+        m_transitionPanel.gameObject.SetActive(true);
+        m_transitionPanel.StartTransition(
+            transitionText,
+            length,
+            fadeOutLength,
+            fadeInLength,
+            onMid,
+            onEnd);
     }
 
     public void TransitionMidwayTrigger()

@@ -38,6 +38,7 @@ public class GameState
     public bool TUTORIAL_ASKED_ABOUT_WHADUP { get; set; } = false;
     public bool TUTORIAL_ASKED_ABOUT_FRIEND { get; set; } = false;
     public bool TUTORIAL_ASKED_ABOUT_EXCHANGE { get; set; } = false;
+    public bool NEAR_SIGHTED { get; set; } = false;
 
     public int TUTORIAL_LISTEN { get; set; } = 0;
     public int TUTORIAL_COUNT_SENSES { get; set; } = 0;

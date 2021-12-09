@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{47b7b13b-d221-444f-a6e8-8a0b78d54892}">
+		<property name="name">
+			<value>BedroomStarts</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d0367dc3-fef4-4b7f-bce9-bda6ec0f0bc5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{2f5f5e81-7d1f-4fe8-be87-7c61f8360f3a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{2f5f5e81-7d1f-4fe8-be87-7c61f8360f3a}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.17999999225139618</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
