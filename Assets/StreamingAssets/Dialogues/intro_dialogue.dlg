@@ -57,7 +57,8 @@ Best friend: "Ya know.. uh... my parents are out tonight... Come to *THE MANSION
                                 Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow... but..."
                                     {CONTINUE}
                                         Best friend: "Maannn... your flight leaves at noon! Y'all have plenty of time to *collect yourself*... eh?"
-                                            {END}
+                                            > Celebrate... [SET INTRO_FINISHED TRUE]
+                                                {END}
                             > Don't celebrate. [ADD INTRO_DRUNKENNESS_LEVEL +1]
                                 Johnny: "It's such a long flight man... I'll probably feel like I've split into thousand pieces tomorrow...""
                                     {CONTINUE}

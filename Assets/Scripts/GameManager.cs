@@ -44,9 +44,6 @@ public class GameManager : Singleton<GameManager>
                 
             },
             () => {
-                GameManager.Instance.State.INTRO_FINISHED = true;
-                SoundManager.Instance.UpdateSoundsBoolean("INTRO_FINISHED", true);
-
                 CutsceneManager.Instance.StartForcedDialogue("sketch_dialogue", () => {
                     player.SetMovementActive(true);
                 });
